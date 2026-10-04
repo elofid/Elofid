@@ -37,12 +37,11 @@ We will keep you informed while we investigate. With your permission, we are hap
 
 ### In scope
 
-- **CYCX smart contract** on BNB Smart Chain: [`0xda63b65825AE30532a507B0C091B0bD9F8204F7E`](https://bscscan.com/address/0xda63b65825AE30532a507B0C091B0bD9F8204F7E)
 - The Elofid website and **Security Hub** (Quick Scan, Deep Intelligence, Tx Decoder, RPC Health Checker)
 - **Firewall**, including Wallet Watch and Wallet Passport
 - **Scanner Bot** on Telegram
-- **Developer API** and related public infrastructure
-- Reward claiming and eligibility services
+- **Developer API**, Continuous Monitoring and webhooks
+- Related public infrastructure on elofid.com and its subdomains
 
 ### Out of scope
 
@@ -58,7 +57,6 @@ We will keep you informed while we investigate. With your permission, we are hap
 - Test only against your own accounts, wallets and data.
 - Do not access, modify, delete or expose data that does not belong to you.
 - Do not degrade the service for other users.
-- Never interact with the CYCX contract in a way that could affect other holders or the treasury. Use a fork or a local simulation instead.
 - Give us reasonable time to investigate and fix an issue before any public disclosure.
 
 ## Safe harbor
