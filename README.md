@@ -96,21 +96,9 @@ curl https://api.elofid.com/v1/incidents \
 | Pro | 1,000,000 | 90 days |
 | Enterprise | Custom | Custom |
 
-Every plan, including Free, uses an API key. Keys start with `elo_live_` or `elo_test_`. Only authenticated customer calls count toward the monthly quota.
+Every plan, including Free, uses an API key. A workspace keeps one persistent key that starts with `elo_live_`, and changing plans keeps the same key. Only authenticated customer calls count toward the monthly quota.
 
 Webhooks are signed with HMAC-SHA256. The `Elofid-Signature` header is `v1=<hex>`, an HMAC of `<Elofid-Timestamp>.<raw body>` with your `whsec_` secret. Use `Elofid-Delivery-Id` to ignore duplicate deliveries.
-
-## CYCX token
-
-| | |
-| --- | --- |
-| Token | CYCX |
-| Network | BNB Smart Chain (BEP-20) |
-| Contract | [`0xda63b65825AE30532a507B0C091B0bD9F8204F7E`](https://bscscan.com/address/0xda63b65825AE30532a507B0C091B0bD9F8204F7E) |
-| Total supply | 99,000,000,000 (fixed, no mint) |
-| Status | **Not launched yet** |
-
-The launch date and the reward-cycle schedule will be announced only through the official Elofid channels. Anyone offering CYCX before an official announcement is not affiliated with the project.
 
 Read more in the **[Whitepaper](https://elofid.com/whitepaper.pdf)** and the **[FAQ](https://elofid.com/FAQ.pdf)**.
 
@@ -126,7 +114,7 @@ Read more in the **[Whitepaper](https://elofid.com/whitepaper.pdf)** and the **[
 | Community | [@elofidcommunity](https://t.me/elofidcommunity) |
 | X | [@ElofidNetwork](https://x.com/ElofidNetwork) |
 
-> **Admins will never message you first.** Elofid will never ask for a seed phrase, a private key or a "manual claim". Treat any such message as a scam.
+> **Admins will never message you first.** Elofid will never ask for a seed phrase or a private key. Treat any such message as a scam.
 
 ## Security
 

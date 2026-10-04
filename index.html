@@ -2340,7 +2340,9 @@ html, body { overflow-x: hidden; }
       </picture>
       <div class="brand-text">
         <div class="brand-title">Elofid</div>
-        <div class="brand-sub" data-i18n="brand_sub">On-Chain Security & Rewards</div>
+        <div class="brand-sub" data-i18n="brand_sub">
+          On-Chain Security
+        </div>
       </div>
     </div>
 
@@ -2508,99 +2510,20 @@ html, body { overflow-x: hidden; }
           Elofid is built on one principle: let code, cryptography, and math enforce the rules — not human promises.
         </p>
         <p data-i18n="vision_p2">
-          Security analysis — including approval scanning, threat detection, and exposure mapping — is built from verifiable on-chain data and Elofid security logic. Protocol reward, treasury, and claim mechanics are enforced by code and smart contracts. No hidden discretionary control over user funds.
+          Security analysis, including approval scanning, threat detection and exposure mapping, is built from verifiable on-chain data and Elofid security logic. Every figure is either verified on-chain or labeled by its source.
         </p>
         <p data-i18n="vision_p3">
-          Treasury funds are permanently locked inside the smart contract. The developer cannot withdraw, redirect, or override the treasury. Only reward distributions, burns, and Development &amp; Operations allocations are permitted by code.
+          Simulations are read-only and never touch real funds. Provider keys stay on the server, and no Elofid product will ever ask for a seed phrase or a private key.
         </p>
       </div>
     </section>
 
-    <!-- CYCX Access + Rewards -->
+    <!-- Ecosystem: coming soon -->
     <section class="section rewards-section section-centered" id="rewards">
-      <div class="section-kicker" data-i18n="rewards_kicker">CYCX: THE ACCESS LAYER</div>
-      <h2 class="section-title" data-i18n="rewards_title">CYCX: The Access Layer to Web3 Security.</h2>
-
-      <p class="rewards-intro" data-i18n="rewards_intro">
-        <strong>Security is the product. CYCX is the key.</strong><br>
-        CYCX unlocks deeper product access, advanced monitoring capabilities and eligibility for quarterly on-chain rewards.
-      </p>
-
-      <div class="rewards-grid">
-        <div class="reward-card highlight">
-          <h3 data-i18n="rewards_dist_title">Distribution Logic</h3>
-          <ul>
-            <li data-i18n="rewards_dist_li1">Eligible holders receive a <strong>target 9%</strong> cycle distribution.</li>
-            <li data-i18n="rewards_dist_li2">For each completed distribution, the treasury burns an equal amount on a <strong>1:1 basis</strong>.</li>
-            <li data-i18n="rewards_dist_li3">An additional <strong>20%</strong> of the distributed amount is allocated to <strong>Development &amp; Operations</strong>, sourced exclusively from the treasury.</li>
-          </ul>
-
-          <div class="reward-example" data-i18n="rewards_example">
-            Example:<br>
-            For every <strong>1 CYCX</strong> distributed as rewards, <strong>0.2 CYCX</strong> is allocated to Development &amp; Operations.<br>
-            <strong>Holders receive the full target reward for each cycle.</strong>
-          </div>
-
-          <div class="reward-footer" data-i18n="rewards_footer">Fully automated • On-chain enforced • Publicly verifiable</div>
-
-          <div class="reward-buttons-row" style="display:flex; gap:8px; width:100%; margin-top:14px;">
-            <button class="btn btn-primary" type="button" onclick="document.getElementById('btn-claim').click()" data-i18n="btn_claim" style="flex:1; font-size:11px; padding:12px 8px; white-space:nowrap;">Claim rewards</button>
-            <button class="btn btn-secondary" type="button" id="openCalculatorRewards" data-i18n="btn_calculator" style="flex:1; font-size:11px; padding:12px 8px; white-space:nowrap;">Calculator</button>
-            <button class="btn btn-secondary" type="button" onclick="document.getElementById('presale-link').click()" data-i18n="btn_presale" hidden>Pre-Sale</button>
-          </div>
-        </div>
-
-        <div class="rewards-side">
-          <div class="reward-card">
-            <h3 data-i18n="rewards_rules_title">Eligibility &amp; Claim Rules</h3>
-            <ul>
-              <li data-i18n="rewards_rules_li1">Tokens must be held for at least <strong>60 days</strong> in a self-custody Web3 wallet.</li>
-              <li data-i18n="rewards_rules_li2">Exchange balances do not qualify.</li>
-              <li data-i18n="rewards_rules_li3">Rewards must be claimed every cycle.<br><strong>Unclaimed rewards do not roll over.</strong></li>
-            </ul>
-          </div>
-
-          <div class="reward-card enforcement">
-            <h3 data-i18n="rewards_chain_title">On-Chain Enforcement</h3>
-            <p data-i18n="rewards_chain_p1">Rewards are claimed directly by users via a secure Merkle-proof system. There is <strong>no admin, no middleman, and no manual intervention</strong>.</p>
-            <p data-i18n="rewards_chain_p2">Each holder triggers their own on-chain claim using their own wallet and pays their own gas.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="reward-policy" data-i18n="rewards_policy">
-        <strong>Policy:</strong><br>
-        Reward cycles are executed quarterly — <strong>end of March, June, September, and December</strong>, at <strong>20:00 UK time</strong>.
-      </div>
-
-      <div class="rewards-transparency">
-        <div class="rewards-transparency-title" data-i18n="transparency_title">On-Chain Transparency</div>
-        <p data-i18n="transparency_p1">All core flows — rewards, burns, and treasury movements — are executed directly by the smart contract and remain publicly verifiable on-chain.</p>
-      </div>
-
-      <!-- Keep live on-chain metric nodes in the DOM, but hidden until there is meaningful distribution history. -->
-      <div class="stats-grid token-metrics-hidden" aria-hidden="true">
-        <div class="stat-card">
-          <div class="stat-label" data-i18n="stat_rewards_label">Total rewards distributed</div>
-          <div class="stat-value" id="stat-rewards">0 CYCX</div>
-          <div class="stat-tag" data-i18n="stat_onchain_tag">Live on-chain metric</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label" data-i18n="stat_burn_label">Total tokens burned</div>
-          <div class="stat-value" id="stat-burned">0 CYCX</div>
-          <div class="stat-tag" data-i18n="stat_onchain_tag2">Live on-chain metric</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label" data-i18n="stat_last_cycle_label">Last distribution</div>
-          <div class="stat-value" id="stat-last-cycle">—</div>
-          <div class="stat-caption" data-i18n="stat_last_cycle_caption">Updates after the first reward cycle is executed.</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label" data-i18n="stat_next_cycle_label">Next scheduled distribution</div>
-          <div class="stat-value" id="stat-next-cycle" style="display:none">31 March 2026</div>
-          <div class="stat-caption" style="display:none" id="countdown-text">Days remaining: —</div>
-        </div>
-      </div>
+      <div class="section-kicker" data-i18n="rewards_kicker">ECOSYSTEM</div>
+      <h2 class="section-title" data-i18n="rewards_title">Something new is on the way.</h2>
+      <p class="rewards-intro" data-i18n="rewards_intro">We are building the next layer of the Elofid ecosystem. Details will be announced only through the official Elofid channels.</p>
+      <div class="reward-policy" data-i18n="soon_note">Anyone offering anything in Elofid&#39;s name before an official announcement is not affiliated with Elofid.</div>
     </section>
 
     <!-- Product Future -->
@@ -2701,11 +2624,11 @@ html, body { overflow-x: hidden; }
   <!-- footer -->
   <footer class="footer">
     <div data-i18n="footer_left">
-      Elofid is a Web3 Security & Rewards platform. The CYCX token powers access and quarterly on-chain rewards.
-    </div>
+          Elofid is security infrastructure for Web3. Token scanning, wallet protection, continuous monitoring and a developer API.
+        </div>
     <div class="footer-tagline" data-i18n="footer_tagline">
-      Security is the product. CYCX is the key. The ecosystem does the rest.
-    </div>
+          Security that starts before the loss.
+        </div>
 
     <!-- Quick links -->
     <div class="footer-links">
@@ -2828,7 +2751,7 @@ html, body { overflow-x: hidden; }
    const translations = {
   en: {
     // ===== Brand + Hero (Security-first) =====
-    brand_sub: "On-Chain Security & Rewards",
+    brand_sub: "On-Chain Security",
 
     // (kept for backward compatibility)
     hero_kicker: "WALLET APPROVALS • CONTRACT RISK • MULTI-CHAIN",
@@ -2900,18 +2823,19 @@ html, body { overflow-x: hidden; }
     vision_p1:
       "Elofid is built on one principle: let code, cryptography, and math enforce the rules — not human promises.",
     vision_p2:
-      "Security analysis — including approval scanning, threat detection, and exposure mapping — is built from verifiable on-chain data and Elofid security logic. Protocol reward, treasury, and claim mechanics are enforced by code and smart contracts. No hidden discretionary control over user funds.",
+      "Security analysis, including approval scanning, threat detection and exposure mapping, is built from verifiable on-chain data and Elofid security logic. Every figure is either verified on-chain or labeled by its source.",
     vision_p3:
-      "Treasury funds are permanently locked inside the smart contract. The developer cannot withdraw, redirect, or override the treasury. Only reward distributions, burns, and Development &amp; Operations allocations are permitted by code.",
+      "Simulations are read-only and never touch real funds. Provider keys stay on the server, and no Elofid product will ever ask for a seed phrase or a private key.",
     // (kept if you ever use it)
     vision_p4:
       "Treasury assets are permanently controlled by the smart contract itself. There are no administrative withdrawals, overrides, or discretionary actions. Only predefined operations — reward distribution, token burns, and Development &amp; Operations allocations — can be executed by code.",
 
     /* ===== Rewards Model ===== */
-    rewards_kicker: "CYCX: THE ACCESS LAYER",
-    rewards_title: "CYCX: The Access Layer to Web3 Security.",
+    rewards_kicker: "ECOSYSTEM",
+    rewards_title: "Something new is on the way.",
+    soon_note: "Anyone offering anything in Elofid's name before an official announcement is not affiliated with Elofid.",
     rewards_intro:
-      "<strong>Security is the product. CYCX is the key.</strong><br>CYCX unlocks deeper product access, advanced monitoring capabilities and eligibility for quarterly on-chain rewards.",
+      "We are building the next layer of the Elofid ecosystem. Details will be announced only through the official Elofid channels.",
 
     rewards_dist_title: "Distribution Logic",
     rewards_dist_li1: "Eligible holders receive a <strong>target 9%</strong> cycle distribution.",
@@ -2959,8 +2883,8 @@ html, body { overflow-x: hidden; }
 
     // ===== Footer =====
     footer_left:
-      "Elofid is a Web3 Security & Rewards platform. The CYCX token powers access and quarterly on-chain rewards.",
-    footer_tagline: "Security is the product. CYCX is the key. The ecosystem does the rest.",
+      "Elofid is security infrastructure for Web3. Token scanning, wallet protection, continuous monitoring and a developer API.",
+    footer_tagline: "Security that starts before the loss.",
     footer_security: "Security Hub",
     footer_firewall: "Firewall",
     footer_bot: "Bot",
@@ -3071,7 +2995,7 @@ html, body { overflow-x: hidden; }
   },
 
   zh: {
-    brand_sub: "链上安全与奖励",
+    brand_sub: "链上安全",
 
     // backward + new keys
     hero_kicker: "钱包授权 • 合约风险 • 多链",
@@ -3137,16 +3061,17 @@ html, body { overflow-x: hidden; }
     vision_p1:
       "Elofid 建立在一个原则之上：让代码、密码学和数学来执行规则——而非人类承诺。",
     vision_p2:
-      "安全分析——包括授权扫描、威胁检测和暴露映射——基于可验证的链上数据与 Elofid 安全逻辑。协议的奖励、金库和领取机制由代码和智能合约执行。不存在对用户资金的隐藏自由裁量控制。",
+      "安全分析（包括授权扫描、威胁检测和风险敞口映射）基于可验证的链上数据和 Elofid 安全逻辑。每个数据要么经过链上验证，要么标注其来源。",
     vision_p3:
-      "金库资金永久锁定在智能合约中。开发者无法提取、重定向或覆盖金库。只有奖励分发、销毁以及开发与运营分配可由代码执行。",
+      "模拟交易为只读，绝不动用真实资金。服务商密钥保存在服务器端，Elofid 的任何产品都不会索要助记词或私钥。",
     vision_p4:
       "金库资产永久由智能合约本身控制。不存在管理提取、覆盖或自由裁量行为。只有预定义的操作——奖励分配、代币销毁以及开发与运营分配——才能由代码执行。",
 
-    rewards_kicker: "CYCX：访问层",
-    rewards_title: "CYCX：Web3 安全的访问层。",
+    rewards_kicker: "生态系统",
+    rewards_title: "新内容即将推出。",
+    soon_note: "在官方公告之前，任何以 Elofid 名义提供任何东西的人都与 Elofid 无关。",
     rewards_intro:
-      "<strong>安全是产品，CYCX 是钥匙。</strong><br>CYCX 可解锁更深层的产品访问、高级监控能力，以及季度链上奖励资格。",
+      "我们正在构建 Elofid 生态系统的下一层。详情只会通过 Elofid 官方渠道公布。",
 
     rewards_dist_title: "分配逻辑",
     rewards_dist_li1: "符合条件的持有者将获得 <strong>目标 9%</strong> 的周期分配。",
@@ -3189,8 +3114,8 @@ html, body { overflow-x: hidden; }
       "预售期间募集的资金将按照预先定义的规则用于流动性创建、生态系统扩展以及协议的长期稳定性。目标是从第一天起建立深度且具韧性的市场流动性——不对用户资金进行自由裁量控制。",
 
     footer_left:
-      "Elofid 是一个 Web3 安全与奖励平台。CYCX 代币用于提供平台访问权限和季度链上奖励。",
-    footer_tagline: "安全是产品，CYCX 是密鑰，生态系统完成剩下的一切。",
+      "Elofid 是 Web3 安全基础设施。代币扫描、钱包保护、持续监控和开发者 API。",
+    footer_tagline: "安全，始于损失之前。",
     footer_security: "安全中心",
     footer_firewall: "防火墙",
     footer_bot: "机器人",
@@ -3297,7 +3222,7 @@ html, body { overflow-x: hidden; }
   },
 
   ar: {
-    brand_sub: "الأمان والمكافآت على البلوكشين",
+    brand_sub: "الأمان على البلوكشين",
 
     hero_kicker: "أذونات المحافظ • مخاطر العقود • متعدد السلاسل",
     hero_title: "طبقة الأمان لـ Web3.",
@@ -3361,16 +3286,17 @@ html, body { overflow-x: hidden; }
     vision_p1:
       "تم بناء Elofid على مبدأ واحد: دع الكود والتشفير والرياضيات تفرض القواعد — لا الوعود البشرية.",
     vision_p2:
-      "يعتمد التحليل الأمني — بما في ذلك فحص الموافقات، وكشف التهديدات، ورسم خريطة التعرض — على بيانات قابلة للتحقق على السلسلة ومنطق أمان Elofid. يتم تنفيذ آليات المكافآت والخزينة والمطالبات في البروتوكول عبر الكود والعقود الذكية. لا توجد سيطرة تقديرية خفية على أموال المستخدمين.",
+      "يعتمد التحليل الأمني، بما في ذلك فحص الموافقات واكتشاف التهديدات وتحديد نطاق التعرض، على بيانات قابلة للتحقق على البلوكشين وعلى منطق Elofid الأمني. كل رقم إما موثق على البلوكشين أو موسوم بمصدره.",
     vision_p3:
-      "أموال الخزينة مقفلة بشكل دائم داخل العقد الذكي. لا يمكن للمطور سحب الخزينة أو إعادة توجيهها أو تجاوزها. فقط توزيع المكافآت والحرق وتخصيصات التطوير والتشغيل مسموح بها عبر الكود.",
+      "عمليات المحاكاة للقراءة فقط ولا تلمس أي أموال حقيقية. تبقى مفاتيح المزودين على الخادم، ولن يطلب أي منتج من Elofid عبارة الاسترداد أو المفتاح الخاص أبدًا.",
     vision_p4:
       "تخضع أصول الخزينة لسيطرة دائمة من قبل العقد الذكي نفسه. لا توجد عمليات سحب إدارية أو تجاوزات أو صلاحيات تقديرية. لا يمكن تنفيذ سوى العمليات المحددة مسبقاً — توزيع المكافآت، الحرق، وتخصيصات التطوير والتشغيل — عبر الكود.",
 
-    rewards_kicker: "CYCX: طبقة الوصول",
-    rewards_title: "CYCX: طبقة الوصول إلى أمان Web3.",
+    rewards_kicker: "النظام البيئي",
+    rewards_title: "شيء جديد في الطريق.",
+    soon_note: "أي شخص يعرض أي شيء باسم Elofid قبل الإعلان الرسمي لا علاقة له بـ Elofid.",
     rewards_intro:
-      "<strong>الأمان هو المنتج. CYCX هو المفتاح.</strong><br>يفتح CYCX وصولًا أعمق للمنتج، وقدرات مراقبة متقدمة، وأهلية للمكافآت الفصلية على السلسلة.",
+      "نحن نبني الطبقة التالية من منظومة Elofid. سيتم الإعلان عن التفاصيل فقط عبر قنوات Elofid الرسمية.",
 
     rewards_dist_title: "منطق التوزيع",
     rewards_dist_li1: "يحصل الحاملون المؤهلون على توزيع دوري بنسبة مستهدفة تبلغ <strong>9٪</strong>.",
@@ -3414,8 +3340,8 @@ html, body { overflow-x: hidden; }
       "تُخصَّص الأموال التي يتم جمعها خلال الطرح المسبق وفق قواعد محددة مسبقاً لإنشاء السيولة، وتوسيع النظام البيئي، ودعم استقرار البروتوكول على المدى الطويل. والهدف هو إنشاء سيولة سوقية عميقة ومرنة منذ اليوم الأول — دون سيطرة تقديرية على أموال المستخدمين.",
 
     footer_left:
-      "Elofid هي منصة Web3 للأمان والمكافآت. يتيح رمز CYCX الوصول إلى المنصة ويدعم المكافآت الفصلية على السلسلة.",
-    footer_tagline: "الأمان هو المنتج. CYCX هو المفتاح. النظام البيئي يتولى الباقي.",
+      "Elofid هي بنية تحتية للأمان في Web3. فحص التوكنات وحماية المحافظ والمراقبة المستمرة وواجهة برمجة للمطورين.",
+    footer_tagline: "أمان يبدأ قبل الخسارة.",
     footer_security: "مركز الأمان",
     footer_firewall: "الجدار الناري",
     footer_bot: "البوت",
@@ -3523,7 +3449,7 @@ html, body { overflow-x: hidden; }
   },
 
   ru: {
-    brand_sub: "Ончейн-безопасность и награды",
+    brand_sub: "Ончейн-безопасность",
 
     hero_kicker: "РАЗРЕШЕНИЯ КОШЕЛЬКА • РИСК КОНТРАКТА • МУЛЬТИСЕТЬ",
     hero_title: "Уровень безопасности для Web3.",
@@ -3588,16 +3514,17 @@ html, body { overflow-x: hidden; }
     vision_p1:
       "Elofid построен на одном принципе: правила должны обеспечиваться кодом, криптографией и математикой, а не человеческими обещаниями.",
     vision_p2:
-      "Анализ безопасности — включая сканирование approvals, обнаружение угроз и карту экспозиции — основан на проверяемых ончейн-данных и логике безопасности Elofid. Механики наград, казны и claim протокола исполняются кодом и смарт-контрактами. Скрытого дискреционного контроля над средствами пользователей нет.",
+      "Анализ безопасности, включая проверку разрешений, обнаружение угроз и оценку зоны риска, строится на проверяемых ончейн-данных и логике безопасности Elofid. Каждая цифра либо проверена ончейн, либо помечена источником.",
     vision_p3:
-      "Средства казны навсегда заблокированы в смарт-контракте. Разработчик не может выводить, перенаправлять или переопределять казну. Разрешены только распределение наград, сжигания и аллокации на Development & Operations по коду.",
+      "Симуляции работают только на чтение и никогда не затрагивают реальные средства. Ключи провайдеров хранятся на сервере, и ни один продукт Elofid никогда не попросит сид-фразу или приватный ключ.",
     vision_p4:
       "Активы казны постоянно контролируются самим смарт-контрактом. Административные выводы, переопределения или дискреционные действия отсутствуют. Только заранее определённые операции — распределение вознаграждений, сжигание токенов и аллокации на разработку и операционную деятельность — могут выполняться кодом.",
 
-    rewards_kicker: "CYCX: УРОВЕНЬ ДОСТУПА",
-    rewards_title: "CYCX: уровень доступа к безопасности Web3.",
+    rewards_kicker: "ЭКОСИСТЕМА",
+    rewards_title: "Скоро появится что-то новое.",
+    soon_note: "Любой, кто предлагает что-либо от имени Elofid до официального объявления, не связан с Elofid.",
     rewards_intro:
-      "<strong>Безопасность — это продукт. CYCX — это ключ.</strong><br>CYCX открывает более глубокий доступ к продукту, расширенные возможности мониторинга и право на ежеквартальные ончейн-награды.",
+      "Мы создаём следующий уровень экосистемы Elofid. Подробности будут объявлены только через официальные каналы Elofid.",
 
     rewards_dist_title: "Логика распределения",
     rewards_dist_li1: "Квалифицированные держатели получают цикловое распределение в размере целевых <strong>9%</strong>.",
@@ -3641,8 +3568,8 @@ html, body { overflow-x: hidden; }
       "Средства, собранные в ходе предпродажи, распределяются по заранее определённым правилам на создание ликвидности, расширение экосистемы и долгосрочную стабильность протокола. Цель — сформировать глубокую и устойчивую рыночную ликвидность с первого дня без дискреционного контроля над средствами пользователей.",
 
     footer_left:
-      "Elofid — это платформа Web3 для безопасности и вознаграждений. Токен CYCX предоставляет доступ к функциям платформы и ежеквартальным ончейн-вознаграждениям.",
-    footer_tagline: "Безопасность — это продукт. CYCX — это ключ. Экосистема делает всё остальное.",
+      "Elofid является инфраструктурой безопасности для Web3. Сканирование токенов, защита кошельков, непрерывный мониторинг и API для разработчиков.",
+    footer_tagline: "Безопасность, которая начинается до потери.",
     footer_security: "Security Hub",
     footer_firewall: "Файервол",
     footer_bot: "Бот",
@@ -4470,6 +4397,7 @@ function cxUpdateModalState() {
     const FIRST_DISTRIBUTION_UTC = Date.UTC(2026, 2, 31, 0, 0, 0); // 2026-03-31
 
     function updateCountdown() {
+      if (!countdownEl) return;
       const now = Date.now();
       const diff = FIRST_DISTRIBUTION_UTC - now;
       if (diff <= 0) {
