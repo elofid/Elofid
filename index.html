@@ -27,7 +27,7 @@ twq('config','r4v6v');
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
   <title>Elofid – Web3 Security Platform</title>
-  <meta name="description" content="Elofid is a Web3 security platform — wallet firewall, approval visibility, blast-radius analysis, and smart contract risk tools. No seed phrases. No deposits. Full control." />
+  <meta name="description" content="Elofid is security infrastructure for Web3. Scan tokens and contracts across 12 chains, protect wallets from risky approvals and monitor assets with a developer API. No seed phrases, ever." />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <link rel="canonical" href="https://elofid.com/" />
@@ -206,7 +206,7 @@ body::after{
     opacity:.55;
   }
 
-  .brand{display:flex; align-items:center; gap:10px; position:relative; z-index:1;}
+  .brand{display:flex; align-items:center; gap:10px; position:relative; z-index:1; flex:0 0 auto;}
   .brand-logo{
     width:42px; height:42px;
     border-radius:14px;
@@ -231,6 +231,19 @@ body::after{
     white-space:nowrap;
   }
 
+@media (min-width:901px) and (max-width:1240px){
+  .top-link{padding:7px 7px; letter-spacing:.08em;}
+  .brand-sub{letter-spacing:.12em;}
+}
+/* Narrow desktop: the hero already has the same call to action, so the header one goes first */
+@media (min-width:901px) and (max-width:1180px){
+  .top-cta{display:none !important;}
+}
+@media (min-width:901px) and (max-width:1020px){
+  .brand-sub{display:none;}
+  .top-link{padding:7px 5px; letter-spacing:.05em; font-size:10.5px;}
+  .lang-btn{padding-left:6px !important; padding-right:6px !important;}
+}
 /* Center nav — copied from reference (.nav) */
 .top-nav{
   position:relative; z-index:1;
@@ -2260,7 +2273,7 @@ html, body { overflow-x: hidden; }
 .token-metrics-hidden,
 .presale-section-hidden{display:none !important;}
 
-/* Community: five compact cards in one row on wide desktop, fluid below. */
+/* Community: four compact cards in one row on wide desktop, fluid below. */
 #social .section-title{
   font-size:clamp(32px,3.4vw,48px);
 }
@@ -2273,12 +2286,23 @@ html, body { overflow-x: hidden; }
 .social-card{flex:0 1 calc(33.333% - 10px);}
 #social .social-meta{width:100%;}
 #social .social-cta{margin-top:auto;}
+#products .social-meta{width:100%;display:flex;flex-direction:column;flex:1;}
+#products .social-cta{margin-top:auto;}
+#products .social-desc{margin-bottom:14px;}
+@media (min-width:1180px){
+  #products .social-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px;
+  }
+  #products .social-card{min-width:0;padding:22px 16px;}
+}
 .social-icon.x-brand svg{fill:currentColor;stroke:none;}
 
 @media (min-width:1180px){
   #social .social-grid{
     display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:12px;
   }
   #social .social-card{
@@ -2350,7 +2374,7 @@ html, body { overflow-x: hidden; }
     <nav class="top-nav" aria-label="Primary navigation">
       <a class="top-link" href="/security" data-i18n="nav_security">Security Hub</a>
       <a class="top-link" href="/firewall" data-i18n="nav_firewall">Firewall</a>
-      <a class="top-link" href="#rewards" data-i18n="nav_rewards">Ecosystem</a>
+      <a class="top-link" href="/developers" data-i18n="nav_developers">Developers</a>
       <a class="top-link" href="#social" data-i18n="nav_community">Community</a>
     </nav>
 
@@ -2398,9 +2422,7 @@ html, body { overflow-x: hidden; }
       </div>
 
       <div class="hero-primary-cta">
-        <a class="btn btn-firewall" href="/firewall" id="btn-firewall-tools" data-i18n="btn_firewall_tools" style="width:min(560px,100%);">
-          SCAN MY WALLET — FREE
-        </a>
+        <a class="btn btn-firewall" href="/firewall" id="btn-firewall-tools" data-i18n="btn_firewall_tools" style="width:min(560px,100%);">SCAN MY WALLET FOR FREE</a>
         <div class="hero-primary-sub" data-i18n="btn_firewall_tools_note">
           Scan without connecting. Connect only to revoke.
         </div>
@@ -2429,9 +2451,7 @@ html, body { overflow-x: hidden; }
     <section class="section section-centered" id="security-activity">
       <div class="section-kicker" data-i18n="security_activity_kicker">Live Security Activity</div>
 
-      <h2 class="section-title" data-i18n="security_activity_title">
-        Elofid Security Network — Live Activity
-      </h2>
+      <h2 class="section-title" data-i18n="security_activity_title">Real scans. Real numbers.</h2>
 
       <p class="section-body" data-i18n="security_activity_desc">
         Every number below reflects real Elofid security scan activity.
@@ -2493,9 +2513,56 @@ html, body { overflow-x: hidden; }
           <li data-i18n="why_li2"><strong>No Real-Time Awareness:</strong> most wallets don't tell users when risk is building.</li>
           <li data-i18n="why_li3"><strong>Unknown Blast Radius:</strong> users rarely know how much a malicious spender can actually reach.</li>
         </ul>
-        <p style="margin-top: 12px;" data-i18n="why_p2">
-          Elofid Firewall was built to close these gaps before they become losses. Advanced monitoring and deeper ecosystem capabilities expand through the Elofid access layer.
-        </p>
+        <p style="margin-top: 12px;" data-i18n="why_p2">Elofid Firewall was built to close these gaps before they become losses.</p>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section section-centered" id="products">
+      <div class="section-kicker" data-i18n="products_kicker">PRODUCTS</div>
+      <h2 class="section-title" data-i18n="products_title">One security engine. Four ways to use it.</h2>
+      <p class="section-body" data-i18n="products_subtitle">Every product runs on the same Elofid engine and follows the same evidence rules.</p>
+      <div class="social-grid">
+      <a class="social-card" id="product-hub" href="/security">
+        <div class="social-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="social-meta">
+          <div class="social-title" data-i18n="products_hub_title">Security Hub</div>
+          <div class="social-desc" data-i18n="products_hub_desc">Scan any token or contract across 12 chains. Contract controls, liquidity, holders and a live buy and sell simulation.</div>
+          <div class="social-cta" data-i18n="products_hub_btn">Check a token</div>
+        </div>
+      </a>
+      <a class="social-card" id="product-firewall" href="/firewall">
+        <div class="social-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/></svg>
+        </div>
+        <div class="social-meta">
+          <div class="social-title" data-i18n="products_fw_title">Firewall</div>
+          <div class="social-desc" data-i18n="products_fw_desc">See every wallet approval and what it could cost you. Revoke risky permissions and get alerts on new ones.</div>
+          <div class="social-cta" data-i18n="products_fw_btn">Scan a wallet</div>
+        </div>
+      </a>
+      <a class="social-card" id="product-bot" href="https://t.me/ElofidBot" target="_blank" rel="noopener">
+        <div class="social-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 8V5h3M16 5h3v3M19 16v3h-3M8 19H5v-3"/><rect x="8" y="8" width="8" height="8" rx="2"/><path d="M10 12h4"/></svg>
+        </div>
+        <div class="social-meta">
+          <div class="social-title" data-i18n="products_bot_title">Scanner Bot</div>
+          <div class="social-desc" data-i18n="products_bot_desc">The full Elofid report inside Telegram. Works in private chats, in groups and inline in any chat.</div>
+          <div class="social-cta" data-i18n="products_bot_btn">Open in Telegram</div>
+        </div>
+      </a>
+      <a class="social-card" id="product-api" href="/developers">
+        <div class="social-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M14 5l-4 14"/></svg>
+        </div>
+        <div class="social-meta">
+          <div class="social-title" data-i18n="products_api_title">Monitoring and API</div>
+          <div class="social-desc" data-i18n="products_api_desc">Continuous monitoring for teams. Meaningful changes become Events, Risk Incidents and signed webhooks.</div>
+          <div class="social-cta" data-i18n="products_api_btn">For developers</div>
+        </div>
+      </a>
       </div>
     </section>
 
@@ -2503,12 +2570,10 @@ html, body { overflow-x: hidden; }
     <section class="section">
       <div class="section-head">
         <div class="section-kicker" data-i18n="vision_kicker">Security Infrastructure</div>
-        <h2 class="section-title" style="font-size: 38px;" data-i18n="vision_title">Built Like a Security Company, Not a Token</h2>
+        <h2 class="section-title" style="font-size: 38px;" data-i18n="vision_title">Built like a security company.</h2>
       </div>
       <div class="section-body">
-        <p data-i18n="vision_p1">
-          Elofid is built on one principle: let code, cryptography, and math enforce the rules — not human promises.
-        </p>
+        <p data-i18n="vision_p1">Elofid is built on one principle: evidence over promises. A result is only as strong as the evidence behind it.</p>
         <p data-i18n="vision_p2">
           Security analysis, including approval scanning, threat detection and exposure mapping, is built from verifiable on-chain data and Elofid security logic. Every figure is either verified on-chain or labeled by its source.
         </p>
@@ -2553,23 +2618,10 @@ html, body { overflow-x: hidden; }
   <!-- Social / Community -->
   <section class="section section-centered" id="social">
     <div class="section-kicker" data-i18n="social_kicker">Community</div>
-    <h2 class="section-title" data-i18n="social_title">Explore the Network</h2>
-    <p class="section-body" data-i18n="social_subtitle">
-      Scan from Telegram, follow security findings on X, and explore the full Elofid system.
-    </p>
+    <h2 class="section-title" data-i18n="social_title">Stay connected</h2>
+    <p class="section-body" data-i18n="social_subtitle">Follow product updates on X, join the community on Telegram and read how Elofid works.</p>
 
     <div class="social-grid">
-      <!-- Telegram Scanner -->
-      <a class="social-card" id="social-bot" href="https://t.me/ElofidBot" target="_blank" rel="noopener" aria-label="Open Elofid Telegram Scanner">
-        <div class="social-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M5 8V5h3M16 5h3v3M19 16v3h-3M8 19H5v-3"/><rect x="8" y="8" width="8" height="8" rx="2"/><path d="M10 12h4"/></svg>
-        </div>
-        <div class="social-meta">
-          <div class="social-title" data-i18n="social_bot_title">Telegram Scanner</div>
-          <div class="social-desc" data-i18n="social_bot_desc">Scan tokens directly from Telegram</div>
-          <div class="social-cta" data-i18n="social_bot_btn">Open Bot</div>
-        </div>
-      </a>
 
       <!-- X -->
       <a class="social-card" id="social-x" href="https://x.com/ElofidNetwork" target="_blank" rel="noopener" aria-label="Open X">
@@ -2577,7 +2629,7 @@ html, body { overflow-x: hidden; }
           <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </div>
         <div class="social-meta">
-          <div class="social-title" data-i18n="social_x_title">X / Twitter</div>
+          <div class="social-title" data-i18n="social_x_title">X</div>
           <div class="social-desc" data-i18n="social_x_desc">Security findings &amp; product updates</div>
           <div class="social-cta" data-i18n="social_x_btn">Follow</div>
         </div>
@@ -2590,7 +2642,7 @@ html, body { overflow-x: hidden; }
         </div>
         <div class="social-meta">
           <div class="social-title" data-i18n="social_wp_title">Whitepaper</div>
-          <div class="social-desc" data-i18n="social_wp_desc">Full system design &amp; protocol rules</div>
+          <div class="social-desc" data-i18n="social_wp_desc">Product overview and how Elofid works</div>
           <div class="social-cta" data-i18n="social_wp_btn">Read</div>
         </div>
       </a>
@@ -2634,7 +2686,8 @@ html, body { overflow-x: hidden; }
     <div class="footer-links">
       <a href="/security" data-i18n="footer_security">Security Hub</a>
       <a href="/firewall" data-i18n="footer_firewall">Firewall</a>
-      <a href="https://t.me/ElofidBot" target="_blank" rel="noopener" data-i18n="footer_bot">Bot</a>
+      <a href="/developers" data-i18n="footer_developers">Developers</a>
+      <a href="https://t.me/ElofidBot" target="_blank" rel="noopener" data-i18n="footer_bot">Scanner Bot</a>
       <a href="https://x.com/ElofidNetwork" target="_blank" rel="noopener" data-i18n="footer_x">X</a>
       <a href="https://t.me/elofid_official" target="_blank" rel="noopener" data-i18n="footer_telegram">Telegram</a>
       <a href="https://elofid.com/whitepaper.pdf" target="_blank" rel="noopener" data-i18n="footer_docs">Docs</a>
@@ -2765,12 +2818,12 @@ html, body { overflow-x: hidden; }
     // ===== Primary Security CTA =====
     btn_security_tools: "CHECK A TOKEN OR CONTRACT",
     btn_security_tools_note: "Honeypot, liquidity & holder checks across 12 chains.",
-    btn_firewall_tools: "SCAN MY WALLET — FREE",
+    btn_firewall_tools: "SCAN MY WALLET FOR FREE",
     btn_firewall_tools_note: "Scan without connecting. Connect only to revoke.",
 
     // ===== Live Security Activity (updated DIV keys) =====
     security_activity_kicker: "Live Security Activity",
-    security_activity_title: "Elofid Security Network — Live Activity",
+    security_activity_title: "Real scans. Real numbers.",
     security_activity_desc: "Every number below reflects real Elofid security scan activity.",
     security_network_status: "NETWORK STATUS",
     security_live_counter: "Live counter",
@@ -2788,6 +2841,23 @@ html, body { overflow-x: hidden; }
     btn_presale: "Pre-Sale Access",
     nav_security: "Security Hub",
     nav_firewall: "Firewall",
+    nav_developers: "Developers",
+    footer_developers: "Developers",
+    products_kicker: "PRODUCTS",
+    products_title: "One security engine. Four ways to use it.",
+    products_subtitle: "Every product runs on the same Elofid engine and follows the same evidence rules.",
+    products_hub_title: "Security Hub",
+    products_hub_desc: "Scan any token or contract across 12 chains. Contract controls, liquidity, holders and a live buy and sell simulation.",
+    products_hub_btn: "Check a token",
+    products_fw_title: "Firewall",
+    products_fw_desc: "See every wallet approval and what it could cost you. Revoke risky permissions and get alerts on new ones.",
+    products_fw_btn: "Scan a wallet",
+    products_bot_title: "Scanner Bot",
+    products_bot_desc: "The full Elofid report inside Telegram. Works in private chats, in groups and inline in any chat.",
+    products_bot_btn: "Open in Telegram",
+    products_api_title: "Monitoring and API",
+    products_api_desc: "Continuous monitoring for teams. Meaningful changes become Events, Risk Incidents and signed webhooks.",
+    products_api_btn: "For developers",
     nav_rewards: "Ecosystem",
     nav_community: "Community",
     nav_open_tools: "Scan Wallet",
@@ -2815,13 +2885,13 @@ html, body { overflow-x: hidden; }
     why_li1: "<strong>Invisible Permissions:</strong> forgotten approvals can leave assets exposed long after a transaction is complete.",
     why_li2: "<strong>No Real-Time Awareness:</strong> most wallets don't tell users when risk is building.",
     why_li3: "<strong>Unknown Blast Radius:</strong> users rarely know how much a malicious spender can actually reach.",
-    why_p2: "Elofid Firewall was built to close these gaps before they become losses. Advanced monitoring and deeper ecosystem capabilities expand through the Elofid access layer.",
+    why_p2: "Elofid Firewall was built to close these gaps before they become losses.",
 
     // ===== Vision =====
     vision_kicker: "Security Infrastructure",
-    vision_title: "Built Like a Security Company, Not a Token",
+    vision_title: "Built like a security company.",
     vision_p1:
-      "Elofid is built on one principle: let code, cryptography, and math enforce the rules — not human promises.",
+      "Elofid is built on one principle: evidence over promises. A result is only as strong as the evidence behind it.",
     vision_p2:
       "Security analysis, including approval scanning, threat detection and exposure mapping, is built from verifiable on-chain data and Elofid security logic. Every figure is either verified on-chain or labeled by its source.",
     vision_p3:
@@ -2887,7 +2957,7 @@ html, body { overflow-x: hidden; }
     footer_tagline: "Security that starts before the loss.",
     footer_security: "Security Hub",
     footer_firewall: "Firewall",
-    footer_bot: "Bot",
+    footer_bot: "Scanner Bot",
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "Docs",
@@ -2953,20 +3023,20 @@ html, body { overflow-x: hidden; }
 
     // ===== Social =====
     social_kicker: "Community",
-    social_title: "Explore the Network",
+    social_title: "Stay connected",
     social_subtitle:
-      "Scan from Telegram, follow security findings on X, and explore the full Elofid system.",
+      "Follow product updates on X, join the community on Telegram and read how Elofid works.",
     social_bot_title: "Telegram Scanner",
     social_bot_desc: "Scan tokens directly from Telegram",
     social_bot_btn: "Open Bot",
-    social_x_title: "X / Twitter",
+    social_x_title: "X",
     social_x_desc: "Security findings & product updates",
     social_x_btn: "Follow",
     social_tg_title: "Telegram Community",
     social_tg_desc: "Join the Elofid community",
     social_tg_btn: "Join",
     social_wp_title: "Whitepaper",
-    social_wp_desc: "Full system design & protocol rules",
+    social_wp_desc: "Product overview and how Elofid works",
     social_wp_btn: "Read",
     social_faq_title: "FAQ",
     social_faq_desc: "Quick answers about Elofid",
@@ -3012,7 +3082,7 @@ html, body { overflow-x: hidden; }
     btn_firewall_tools_note: "无需连接即可扫描。仅在撤销授权时连接钱包。",
 
     security_activity_kicker: "实时安全活动",
-    security_activity_title: "Elofid 安全网络 — 实时活动",
+    security_activity_title: "真实扫描，真实数据。",
     security_activity_desc: "下方每个数字都反映真实的 Elofid 安全扫描活动。",
     security_network_status: "网络状态",
     security_live_counter: "实时计数",
@@ -3028,6 +3098,23 @@ html, body { overflow-x: hidden; }
     btn_presale: "预售通道",
     nav_rewards: "生态系统",
     nav_firewall: "防火墙",
+    nav_developers: "开发者",
+    footer_developers: "开发者",
+    products_kicker: "产品",
+    products_title: "一个安全引擎，四种使用方式。",
+    products_subtitle: "每个产品都运行在同一个 Elofid 引擎上，并遵循相同的证据规则。",
+    products_hub_title: "Security Hub",
+    products_hub_desc: "扫描 12 条链上的任意代币或合约。合约权限、流动性、持有人分布以及实时买卖模拟。",
+    products_hub_btn: "检查代币",
+    products_fw_title: "Firewall",
+    products_fw_desc: "查看钱包的每一项授权及其潜在损失。撤销高风险授权，并在出现新授权时收到提醒。",
+    products_fw_btn: "扫描钱包",
+    products_bot_title: "Scanner Bot",
+    products_bot_desc: "在 Telegram 中获取完整的 Elofid 报告。支持私聊、群组，以及在任意聊天中使用内联模式。",
+    products_bot_btn: "在 Telegram 中打开",
+    products_api_title: "监控与 API",
+    products_api_desc: "为团队提供持续监控。重要变化会生成事件、风险事件和带签名的 Webhook。",
+    products_api_btn: "面向开发者",
     nav_security: "安全中心",
     nav_community: "社区",
     nav_open_tools: "扫描钱包",
@@ -3053,13 +3140,13 @@ html, body { overflow-x: hidden; }
     why_li1: "<strong>隐形权限：</strong>被遗忘的授权可能在交易完成很久后仍使资产处于风险之中。",
     why_li2: "<strong>缺乏实时感知：</strong>大多数钱包不会在风险积累时告知用户。",
     why_li3: "<strong>未知爆炸半径：</strong>用户很少知道恶意支出方实际上能够触及多少资产。",
-    why_p2: "Elofid 防火墙专为在损失发生前封堵这些漏洞而构建。更深层的监控能力和生态系统访问权限通过 Elofid 访问层逐步开放。",
+    why_p2: "Elofid Firewall 的诞生，就是为了在这些漏洞造成损失之前将其堵住。",
 
 
     vision_kicker: "安全基础设施",
-    vision_title: "以安全公司的方式构建，而非什么代币项目",
+    vision_title: "以安全公司的标准打造。",
     vision_p1:
-      "Elofid 建立在一个原则之上：让代码、密码学和数学来执行规则——而非人类承诺。",
+      "Elofid 只遵循一个原则：证据胜于承诺。结论的可靠程度取决于其背后的证据。",
     vision_p2:
       "安全分析（包括授权扫描、威胁检测和风险敞口映射）基于可验证的链上数据和 Elofid 安全逻辑。每个数据要么经过链上验证，要么标注其来源。",
     vision_p3:
@@ -3118,7 +3205,7 @@ html, body { overflow-x: hidden; }
     footer_tagline: "安全，始于损失之前。",
     footer_security: "安全中心",
     footer_firewall: "防火墙",
-    footer_bot: "机器人",
+    footer_bot: "扫描机器人",
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "文档",
@@ -3182,19 +3269,19 @@ html, body { overflow-x: hidden; }
       "复利仅在已领取奖励持续持有至未来周期时适用。",
 
     social_kicker: "社区",
-    social_title: "探索网络",
-    social_subtitle: "在 Telegram 中直接扫描，在 X 上关注安全发现，并探索完整的 Elofid 系统。",
+    social_title: "保持联系",
+    social_subtitle: "在 X 上关注产品动态，加入 Telegram 社区，了解 Elofid 的工作原理。",
     social_bot_title: "Telegram 扫描器",
     social_bot_desc: "直接在 Telegram 中扫描代币",
     social_bot_btn: "打开机器人",
-    social_x_title: "X / Twitter",
+    social_x_title: "X",
     social_x_desc: "安全发现与产品更新",
     social_x_btn: "关注",
     social_tg_title: "Telegram 社区",
     social_tg_desc: "加入 Elofid 社区",
     social_tg_btn: "加入",
     social_wp_title: "白皮书",
-    social_wp_desc: "完整系统设计与协议规则",
+    social_wp_desc: "产品概览与 Elofid 工作原理",
     social_wp_btn: "阅读",
     social_faq_title: "常见问题",
     social_faq_desc: "关于 Elofid 的快速解答",
@@ -3234,11 +3321,11 @@ html, body { overflow-x: hidden; }
 
     btn_security_tools: "افحص رمزًا أو عقدًا",
     btn_security_tools_note: "فحوصات honeypot والسيولة وتوزيع الحيازة عبر 12 شبكة.",
-    btn_firewall_tools: "افحص محفظتي — مجانًا",
+    btn_firewall_tools: "افحص محفظتي مجانًا",
     btn_firewall_tools_note: "افحص دون اتصال. اتصل بالمحفظة فقط لإلغاء الموافقات.",
 
     security_activity_kicker: "نشاط أمان مباشر",
-    security_activity_title: "شبكة أمان Elofid — نشاط مباشر",
+    security_activity_title: "فحوصات حقيقية. أرقام حقيقية.",
     security_activity_desc: "كل رقم أدناه يعكس نشاط فحص أمني حقيقي داخل Elofid.",
     security_network_status: "حالة الشبكة",
     security_live_counter: "عداد مباشر",
@@ -3254,6 +3341,23 @@ html, body { overflow-x: hidden; }
     btn_presale: "الوصول للبيع المسبق",
     nav_rewards: "النظام البيئي",
     nav_firewall: "الجدار الناري",
+    nav_developers: "المطورون",
+    footer_developers: "المطورون",
+    products_kicker: "المنتجات",
+    products_title: "محرك أمان واحد. أربع طرق لاستخدامه.",
+    products_subtitle: "كل منتج يعمل على محرك Elofid نفسه ويتبع قواعد الأدلة نفسها.",
+    products_hub_title: "Security Hub",
+    products_hub_desc: "افحص أي توكن أو عقد عبر 12 شبكة. صلاحيات العقد والسيولة والمالكين ومحاكاة حية للشراء والبيع.",
+    products_hub_btn: "افحص توكن",
+    products_fw_title: "Firewall",
+    products_fw_desc: "اطّلع على كل موافقة في محفظتك وما قد تكلّفك. ألغِ الصلاحيات الخطرة واحصل على تنبيهات عند ظهور موافقات جديدة.",
+    products_fw_btn: "افحص محفظة",
+    products_bot_title: "Scanner Bot",
+    products_bot_desc: "تقرير Elofid الكامل داخل Telegram. يعمل في المحادثات الخاصة والمجموعات وفي أي محادثة عبر الوضع المضمّن.",
+    products_bot_btn: "افتح في Telegram",
+    products_api_title: "المراقبة وواجهة API",
+    products_api_desc: "مراقبة مستمرة للفرق. تتحول التغييرات المهمة إلى أحداث وحوادث مخاطر وإشعارات webhook موقّعة.",
+    products_api_btn: "للمطورين",
     nav_security: "مركز الأمان",
     nav_community: "المجتمع",
     nav_open_tools: "فحص المحفظة",
@@ -3279,12 +3383,12 @@ html, body { overflow-x: hidden; }
     why_li1: "<strong>أذونات غير مرئية:</strong> الموافقات المنسية يمكن أن تترك الأصول مكشوفة لفترة طويلة بعد اكتمال المعاملة.",
     why_li2: "<strong>لا وعي فوري:</strong> معظم المحافظ لا تُعلم المستخدمين عند تزايد المخاطر.",
     why_li3: "<strong>نطاق ضرر مجهول:</strong> نادرًا ما يعرف المستخدمون مقدار ما يمكن أن يصل إليه المنفق الخبيث.",
-    why_p2: "تم بناء Elofid Firewall لسد هذه الثغرات قبل أن تتحول إلى خسائر. تتوسع قدرات المراقبة المتقدمة والوصول إلى النظام البيئي من خلال طبقة وصول Elofid.",
+    why_p2: "تم بناء Elofid Firewall لسد هذه الثغرات قبل أن تتحول إلى خسائر.",
 
     vision_kicker: "بنية تحتية أمنية",
-    vision_title: "مبني كشركة أمنية، ليس كعملة فحسب",
+    vision_title: "مبني كشركة أمنية.",
     vision_p1:
-      "تم بناء Elofid على مبدأ واحد: دع الكود والتشفير والرياضيات تفرض القواعد — لا الوعود البشرية.",
+      "تقوم Elofid على مبدأ واحد: الدليل قبل الوعود. أي نتيجة تكون قوية بقدر قوة الدليل الذي يدعمها.",
     vision_p2:
       "يعتمد التحليل الأمني، بما في ذلك فحص الموافقات واكتشاف التهديدات وتحديد نطاق التعرض، على بيانات قابلة للتحقق على البلوكشين وعلى منطق Elofid الأمني. كل رقم إما موثق على البلوكشين أو موسوم بمصدره.",
     vision_p3:
@@ -3344,7 +3448,7 @@ html, body { overflow-x: hidden; }
     footer_tagline: "أمان يبدأ قبل الخسارة.",
     footer_security: "مركز الأمان",
     footer_firewall: "الجدار الناري",
-    footer_bot: "البوت",
+    footer_bot: "بوت الفحص",
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "المستندات",
@@ -3408,20 +3512,20 @@ html, body { overflow-x: hidden; }
       "يسري التراكم فقط إذا ظلت المكافآت المُطالب بها محتفظاً بها خلال الدورات المستقبلية.",
 
     social_kicker: "المجتمع",
-    social_title: "استكشف الشبكة",
+    social_title: "ابقَ على تواصل",
     social_subtitle:
-      "افحص من Telegram، وتابع نتائج الأمان على X، واستكشف نظام Elofid الكامل.",
+      "تابع تحديثات المنتج على X، وانضم إلى المجتمع على Telegram، واقرأ كيف تعمل Elofid.",
     social_bot_title: "ماسح Telegram",
     social_bot_desc: "افحص الرموز مباشرة من Telegram",
     social_bot_btn: "فتح البوت",
-    social_x_title: "X / Twitter",
+    social_x_title: "X",
     social_x_desc: "نتائج الأمان وتحديثات المنتج",
     social_x_btn: "متابعة",
     social_tg_title: "مجتمع Telegram",
     social_tg_desc: "انضم إلى مجتمع Elofid",
     social_tg_btn: "انضم",
     social_wp_title: "الورقة البيضاء",
-    social_wp_desc: "تصميم النظام الكامل وقواعد البروتوكول",
+    social_wp_desc: "نظرة عامة على المنتج وكيف تعمل Elofid",
     social_wp_btn: "اقرأ",
     social_faq_title: "الأسئلة الشائعة",
     social_faq_desc: "إجابات سريعة حول Elofid",
@@ -3461,11 +3565,11 @@ html, body { overflow-x: hidden; }
 
     btn_security_tools: "ПРОВЕРИТЬ ТОКЕН ИЛИ КОНТРАКТ",
     btn_security_tools_note: "Проверка honeypot, ликвидности и держателей в 12 сетях.",
-    btn_firewall_tools: "ПРОВЕРИТЬ МОЙ КОШЕЛЁК — БЕСПЛАТНО",
+    btn_firewall_tools: "ПРОВЕРИТЬ МОЙ КОШЕЛЁК БЕСПЛАТНО",
     btn_firewall_tools_note: "Сканирование без подключения. Подключайте кошелёк только для отзыва разрешений.",
 
     security_activity_kicker: "Активность безопасности",
-    security_activity_title: "Сеть безопасности Elofid — активность в реальном времени",
+    security_activity_title: "Реальные проверки. Реальные цифры.",
     security_activity_desc: "Каждое число ниже отражает реальную активность сканирования безопасности Elofid.",
     security_network_status: "СТАТУС СЕТИ",
     security_live_counter: "Живой счётчик",
@@ -3481,6 +3585,23 @@ html, body { overflow-x: hidden; }
     btn_presale: "Предпродажный доступ",
     nav_rewards: "Экосистема",
     nav_firewall: "Файервол",
+    nav_developers: "Разработчикам",
+    footer_developers: "Разработчикам",
+    products_kicker: "ПРОДУКТЫ",
+    products_title: "Один движок безопасности. Четыре способа его использовать.",
+    products_subtitle: "Все продукты работают на одном движке Elofid и следуют одним и тем же правилам доказательности.",
+    products_hub_title: "Security Hub",
+    products_hub_desc: "Проверяйте любой токен или контракт в 12 сетях. Права контракта, ликвидность, держатели и живая симуляция покупки и продажи.",
+    products_hub_btn: "Проверить токен",
+    products_fw_title: "Firewall",
+    products_fw_desc: "Смотрите все разрешения кошелька и то, чего они могут стоить. Отзывайте опасные разрешения и получайте оповещения о новых.",
+    products_fw_btn: "Проверить кошелёк",
+    products_bot_title: "Scanner Bot",
+    products_bot_desc: "Полный отчёт Elofid прямо в Telegram. Работает в личных чатах, в группах и в любом чате через inline-режим.",
+    products_bot_btn: "Открыть в Telegram",
+    products_api_title: "Мониторинг и API",
+    products_api_desc: "Непрерывный мониторинг для команд. Значимые изменения превращаются в события, инциденты риска и подписанные вебхуки.",
+    products_api_btn: "Для разработчиков",
     nav_security: "Security Hub",
     nav_community: "Сообщество",
     nav_open_tools: "Сканировать кошелёк",
@@ -3506,13 +3627,13 @@ html, body { overflow-x: hidden; }
     why_li1: "<strong>Невидимые разрешения:</strong> забытые одобрения могут оставить активы уязвимыми ещё долго после завершения транзакции.",
     why_li2: "<strong>Нет мониторинга в реальном времени:</strong> большинство кошельков не сообщают пользователям о нарастающих рисках.",
     why_li3: "<strong>Неизвестный радиус поражения:</strong> пользователи редко знают, сколько активов может захватить злоумышленник.",
-    why_p2: "Elofid Firewall создан для устранения этих уязвимостей до того, как они станут убытками. Расширенные возможности мониторинга и доступ к экосистеме открываются через уровень доступа Elofid.",
+    why_p2: "Elofid Firewall создан, чтобы закрыть эти бреши до того, как они приведут к потерям.",
 
 
     vision_kicker: "Безопасная инфраструктура",
-    vision_title: "Построен как безопасная компания, а не просто токен",
+    vision_title: "Построено как компания в сфере безопасности.",
     vision_p1:
-      "Elofid построен на одном принципе: правила должны обеспечиваться кодом, криптографией и математикой, а не человеческими обещаниями.",
+      "Elofid построен на одном принципе: доказательства важнее обещаний. Результат надёжен ровно настолько, насколько надёжны данные, на которых он основан.",
     vision_p2:
       "Анализ безопасности, включая проверку разрешений, обнаружение угроз и оценку зоны риска, строится на проверяемых ончейн-данных и логике безопасности Elofid. Каждая цифра либо проверена ончейн, либо помечена источником.",
     vision_p3:
@@ -3572,7 +3693,7 @@ html, body { overflow-x: hidden; }
     footer_tagline: "Безопасность, которая начинается до потери.",
     footer_security: "Security Hub",
     footer_firewall: "Файервол",
-    footer_bot: "Бот",
+    footer_bot: "Бот-сканер",
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "Документация",
@@ -3637,20 +3758,20 @@ html, body { overflow-x: hidden; }
       "Компаундирование применяется только в случае, если заявленные вознаграждения остаются в кошельке в течение будущих циклов.",
 
     social_kicker: "Сообщество",
-    social_title: "Исследуйте сеть",
+    social_title: "Оставайтесь на связи",
     social_subtitle:
-      "Сканируйте через Telegram, следите за находками безопасности в X и изучайте всю систему Elofid.",
+      "Следите за обновлениями в X, присоединяйтесь к сообществу в Telegram и узнайте, как работает Elofid.",
     social_bot_title: "Telegram-сканер",
     social_bot_desc: "Сканируйте токены прямо из Telegram",
     social_bot_btn: "Открыть бота",
-    social_x_title: "X / Twitter",
+    social_x_title: "X",
     social_x_desc: "Находки безопасности и обновления продукта",
     social_x_btn: "Подписаться",
     social_tg_title: "Telegram-сообщество",
     social_tg_desc: "Присоединяйтесь к сообществу Elofid",
     social_tg_btn: "Вступить",
     social_wp_title: "Whitepaper",
-    social_wp_desc: "Полная архитектура системы и правила протокола",
+    social_wp_desc: "Обзор продуктов и принципы работы Elofid",
     social_wp_btn: "Читать",
     social_faq_title: "FAQ",
     social_faq_desc: "Короткие ответы о Elofid",
@@ -4689,10 +4810,12 @@ function ensureMetricsDot(){
   if (dot) return dot;
 
   // try to attach near the "On-Chain Transparency" title first
+  // Only shown next to the on-chain transparency title. Without that section
+  // there is no metric to report, so no dot is drawn anywhere else.
   const title =
     document.querySelector('[data-i18n="transparency_title"]') ||
-    document.querySelector('[data-i18n="home_transparency_title"]') ||
-    document.querySelector("h2, h1");
+    document.querySelector('[data-i18n="home_transparency_title"]');
+  if (!title) return null;
 
   dot = document.createElement("span");
   dot.id = "cx-metrics-dot";
@@ -4759,6 +4882,9 @@ function setMetricsDot(ok){
   }
 
   async function refreshMetrics() {
+  // The on-chain token metrics are not on the page while the ecosystem section
+  // is "coming soon". Skip the RPC calls entirely.
+  if (!$("stat-rewards")) return;
   if (_metricsInFlight) return; 
   _metricsInFlight = true;
   ensureMetricsDot();
