@@ -280,6 +280,38 @@ twq('config','r4v6v');
 
   /* ── TOOLS GRID ─────────────────────────────── */
   .tools-section{margin-bottom:20px}
+  /* Monitoring and API strip (links to /developers/) */
+  .hub-api-strip{
+    display:flex;align-items:center;gap:16px;margin-top:14px;
+    padding:16px 18px;border-radius:18px;text-decoration:none;color:var(--text);
+    background:linear-gradient(100deg,rgba(0,229,255,.07),rgba(124,92,255,.08));
+    border:1px solid rgba(124,92,255,.22);
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
+    transition:border-color .22s ease,transform .22s ease
+  }
+  .hub-api-strip:hover{border-color:rgba(0,229,255,.38);transform:translateY(-2px)}
+  .hub-api-icon{
+    width:38px;height:38px;border-radius:12px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+    background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.25)
+  }
+  .hub-api-text{flex:1;min-width:0}
+  .hub-api-kicker,.hub-api-title,.hub-api-desc{display:block}
+  .hub-api-kicker{font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#7fdcff;margin-bottom:3px}
+  .hub-api-title{font-size:14px;font-weight:800;letter-spacing:-.01em;line-height:1.3}
+  .hub-api-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-top:2px}
+  .hub-api-cta{
+    flex-shrink:0;padding:9px 14px;border-radius:12px;white-space:nowrap;
+    font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;
+    color:#e9e4ff;background:rgba(124,92,255,.16);border:1px solid rgba(124,92,255,.35)
+  }
+  .hub-api-cta::after{content:" \2192"}
+  html[dir="rtl"] .hub-api-cta::after{content:" \2190"}
+  @media (max-width:640px){
+    .hub-api-strip{flex-wrap:wrap;gap:12px;padding:14px}
+    .hub-api-text{flex-basis:calc(100% - 54px)}
+    .hub-api-cta{width:100%;text-align:center}
+  }
   .section-label{
     font-size:11px;letter-spacing:.22em;text-transform:uppercase;
     color:var(--muted);margin-bottom:16px;
@@ -4443,7 +4475,7 @@ twq('config','r4v6v');
       <img src="/elofid-mark.svg" alt="Elofid" class="brand-logo" width="50" height="50" />
       <div class="brand-text">
         <div class="brand-title">Elofid</div>
-        <div class="brand-sub" data-i18n="brand_sub">On-Chain Security &amp; Rewards</div>
+        <div class="brand-sub" data-i18n="brand_sub">On-Chain Security</div>
       </div>
     </a>
     <div class="top-right">
@@ -4551,6 +4583,15 @@ twq('config','r4v6v');
         </div>
 
       </div>
+      <a class="hub-api-strip" href="/developers/">
+        <span class="hub-api-icon">🧩</span>
+        <span class="hub-api-text">
+          <span class="hub-api-kicker" data-i18n="api_strip_kicker">Monitoring and API</span>
+          <span class="hub-api-title" data-i18n="api_strip_title">Keep watching after the scan.</span>
+          <span class="hub-api-desc" data-i18n="api_strip_desc">Track tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.</span>
+        </span>
+        <span class="hub-api-cta" data-i18n="api_strip_cta">For developers</span>
+      </a>
     </div>
 
     <!-- MODAL BACKDROP (shared) -->
@@ -5024,7 +5065,7 @@ async function loadAppKit() {
 // =========================
 const translations = {
   en: {
-    brand_sub: "On-Chain Security & Rewards",
+    brand_sub: "On-Chain Security",
     hero_kicker: "Elofid Security Hub",
     tx_sum_action_k: "Action",
     tx_sum_risk_k: "Risk",
@@ -5106,6 +5147,10 @@ const translations = {
     cube_tx_desc: "Decode inputs + common events (Transfer/Approval) from a tx hash.",
     cube_dev_title: "Dev Tools",
     cube_dev_desc: "Bookmarklet generator + local contract monitor (no server).",
+    api_strip_kicker: "Monitoring and API",
+    api_strip_title: "Keep watching after the scan.",
+    api_strip_desc: "Track tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.",
+    api_strip_cta: "For developers",
     cube_walletdna_title: "Wallet Security DNA",
     cube_walletdna_desc: "Approval & Permission Risk Snapshot - Export",
     badge_fast: "Fast",
@@ -5723,7 +5768,7 @@ const translations = {
     ph_rpc_dev_topic: "0xddf252ad... (Transfer) or leave empty"
   },
   zh: {
-    brand_sub: "链上安全与奖励",
+    brand_sub: "链上安全",
     hero_kicker: "Elofid 安全中心",
     tx_sum_action_k: "操作",
     tx_sum_risk_k: "风险",
@@ -5805,6 +5850,10 @@ const translations = {
     cube_tx_desc: "从交易哈希解码输入与常见事件（Transfer/Approval）。",
     cube_dev_title: "开发工具",
     cube_dev_desc: "书签脚本生成器 + 本地合约监控（无服务器）。",
+    api_strip_kicker: "监控与 API",
+    api_strip_title: "扫描之后，持续监控。",
+    api_strip_desc: "使用 Elofid API 持续追踪代币和合约。风险事件会通过签名 Webhook 推送。",
+    api_strip_cta: "开发者",
     cube_walletdna_title: "钱包安全 DNA",
     cube_walletdna_desc: "审批与权限风险快照 - 导出",
     badge_fast: "快速",
@@ -6422,7 +6471,7 @@ const translations = {
     ph_rpc_dev_topic: "0xddf252ad...（Transfer）或留空"
   },
   ar: {
-    brand_sub: "أمان ومكافآت على السلسلة",
+    brand_sub: "الأمان على البلوكشين",
     hero_kicker: "مركز أمان Elofid",
     tx_sum_action_k: "الإجراء",
     tx_sum_risk_k: "المخاطر",
@@ -6504,6 +6553,10 @@ const translations = {
     cube_tx_desc: "فك تشفير المدخلات + أحداث شائعة (Transfer/Approval) من tx hash.",
     cube_dev_title: "أدوات المطوّر",
     cube_dev_desc: "مولّد Bookmarklet + مراقبة عقد محلية (بدون سيرفر).",
+    api_strip_kicker: "المراقبة وواجهة API",
+    api_strip_title: "استمر في المراقبة بعد الفحص.",
+    api_strip_desc: "تابع الرموز والعقود عبر Elofid API. تصلك حوادث المخاطر عبر Webhooks موقّعة.",
+    api_strip_cta: "للمطورين",
     cube_walletdna_title: "بصمة أمان المحفظة (DNA)",
     cube_walletdna_desc: "لقطة مخاطر الموافقات والأذونات - تصدير",
     badge_fast: "سريع",
@@ -7121,7 +7174,7 @@ const translations = {
     ph_rpc_dev_topic: "0xddf252ad... (Transfer) أو اتركه فارغاً"
   },
   ru: {
-    brand_sub: "Ончейн безопасность и награды",
+    brand_sub: "Ончейн-безопасность",
     hero_kicker: "Центр безопасности Elofid",
     tx_sum_action_k: "Действие",
     tx_sum_risk_k: "Риск",
@@ -7203,6 +7256,10 @@ const translations = {
     cube_tx_desc: "Декодирует input и события (Transfer/Approval) по tx hash.",
     cube_dev_title: "Dev Tools",
     cube_dev_desc: "Генератор bookmarklet + локальный монитор контрактов (без сервера).",
+    api_strip_kicker: "Мониторинг и API",
+    api_strip_title: "Наблюдение не заканчивается после скана.",
+    api_strip_desc: "Отслеживайте токены и контракты через Elofid API. Риск-инциденты приходят подписанными вебхуками.",
+    api_strip_cta: "Разработчикам",
     cube_walletdna_title: "Security DNA кошелька",
     cube_walletdna_desc: "Снимок рисков одобрений и разрешений — экспорт",
     badge_fast: "Быстро",
