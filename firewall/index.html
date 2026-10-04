@@ -3667,9 +3667,9 @@ async function fwLoadAppKit() {
   if (_appkitLoadPromise) return _appkitLoadPromise;
   _appkitLoadPromise = (async () => {
     const [{ createAppKit }, { EthersAdapter }, { bsc, mainnet }] = await Promise.all([
-      import("https://esm.sh/@reown/appkit@1.8.15"),
-      import("https://esm.sh/@reown/appkit-adapter-ethers@1.8.15"),
-      import("https://esm.sh/@reown/appkit/networks"),
+      import("https://esm.sh/@reown/appkit@1.8.24"),
+      import("https://esm.sh/@reown/appkit-adapter-ethers@1.8.24"),
+      import("https://esm.sh/@reown/appkit@1.8.24/networks"),
     ]);
     const appkit = createAppKit({
       adapters: [new EthersAdapter()],

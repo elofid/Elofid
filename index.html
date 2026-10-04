@@ -4971,9 +4971,9 @@ setMetricsDot(true);
     _appKitPromise = (async () => {
       cxlog("🟢 [Elofid] Lazy-loading AppKit...");
       const [{ createAppKit }, { EthersAdapter }, { bsc }] = await Promise.all([
-        import("https://esm.sh/@reown/appkit@1.8.15"),
-        import("https://esm.sh/@reown/appkit-adapter-ethers@1.8.15"),
-        import("https://esm.sh/@reown/appkit/networks"),
+        import("https://esm.sh/@reown/appkit@1.8.24"),
+        import("https://esm.sh/@reown/appkit-adapter-ethers@1.8.24"),
+        import("https://esm.sh/@reown/appkit@1.8.24/networks"),
       ]);
       cxlog("🟢 [Elofid] AppKit imports OK");
       const projectId = "7886bcb95105e9e47337cec481d5de75";
