@@ -2175,15 +2175,6 @@ body{background:#05060a!important}
             <button class="fw-notif-btn" id="fwOnchainBtn" onclick="fwMonitorToggle()" style="border-color:rgba(0,229,255,.3);color:var(--cyan);display:none">Start</button>
             <button class="fw-notif-btn" id="fwOnchainLockBtn" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.3);color:#a87eff">🔒 Full Access</button>
           </div>
-          <!-- Monitoring and API row: links to the developer platform -->
-          <div class="fw-notif-row" id="fwDevApiRow" style="margin-top:8px;border-color:rgba(59,130,246,.22);background:rgba(59,130,246,.05)">
-            <span class="fw-notif-icon">🧩</span>
-            <div class="fw-notif-text">
-              <strong style="color:#7fb0ff" data-i18n="devrow_title">Monitoring and API</strong>
-              <span style="display:block;margin-top:2px" data-i18n="devrow_desc">Building a wallet, exchange or bot? Monitor tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.</span>
-            </div>
-            <a class="fw-notif-btn" id="fwDevApiBtn" href="/developers/" style="text-decoration:none;border-color:rgba(59,130,246,.35);color:#7fb0ff;background:rgba(59,130,246,.10)" data-i18n="devrow_btn">For developers</a>
-          </div>
         </div>
       </div>
 
@@ -7014,9 +7005,6 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"{token} was approved for spender {spender}{unl}. If you didn't do this, review and revoke it now.",
     monitor_unlimited:" (unlimited)",
     monitor_rescan:"Rescan now",
-    devrow_title:"Monitoring and API",
-    devrow_desc:"Building a wallet, exchange or bot? Monitor tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.",
-    devrow_btn:"For developers",
     tier_badge:"✓ FULL ACCESS",
   },
   zh: {
@@ -7081,9 +7069,6 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"{token} 已授权给 {spender}{unl}。如果不是你本人操作，请立即检查并撤销。",
     monitor_unlimited:"（无限授权）",
     monitor_rescan:"立即重新扫描",
-    devrow_title:"监控与 API",
-    devrow_desc:"正在开发钱包、交易所或机器人？使用 Elofid API 监控代币和合约。风险事件会通过签名 Webhook 推送给你。",
-    devrow_btn:"开发者",
     tier_badge:"✓ 完整访问",
   },
   ar: {
@@ -7149,9 +7134,6 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"تمت الموافقة على {token} للمفوَّض {spender}{unl}. إذا لم تقم بذلك، راجعها وألغها الآن.",
     monitor_unlimited:" (غير محدودة)",
     monitor_rescan:"أعد الفحص الآن",
-    devrow_title:"المراقبة وواجهة API",
-    devrow_desc:"هل تبني محفظة أو منصة تداول أو بوت؟ راقب الرموز والعقود عبر Elofid API. تصلك حوادث المخاطر عبر Webhooks موقّعة.",
-    devrow_btn:"للمطورين",
     tier_badge:"✓ وصول كامل",
   },
   ru: {
@@ -7218,9 +7200,6 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"{token} одобрен для {spender}{unl}. Если это был не ты — проверь и отзови его сейчас.",
     monitor_unlimited:" (безлимитный)",
     monitor_rescan:"Пересканировать",
-    devrow_title:"Мониторинг и API",
-    devrow_desc:"Создаёте кошелёк, биржу или бота? Отслеживайте токены и контракты через Elofid API. Риск-инциденты приходят подписанными вебхуками.",
-    devrow_btn:"Разработчикам",
     tier_badge:"✓ ПОЛНЫЙ ДОСТУП",
   }
 };
