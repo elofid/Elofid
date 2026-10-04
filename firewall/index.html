@@ -1680,7 +1680,7 @@ body{background:#05060a!important}
       </picture>
       <div class="brand-text">
         <div class="brand-title">Elofid</div>
-        <div class="brand-sub" data-i18n="brand_sub">On-Chain Security &amp; Rewards</div>
+        <div class="brand-sub" data-i18n="brand_sub">On-Chain Security</div>
       </div>
     </a>
     <div class="top-right">
@@ -1979,7 +1979,7 @@ body{background:#05060a!important}
                     <div class="pp-logo-sub">Wallet Security Report</div>
                   </div>
                 </div>
-                <div class="pp-issue-badge">CYCX SCAN</div>
+                <div class="pp-issue-badge">SECURITY SCAN</div>
               </div>
               <div class="pp-sig-chip" id="ppSigChip">✅ Verified by Elofid</div>
               <div class="pp-wallet" id="ppWallet">0x...</div>
@@ -2175,17 +2175,14 @@ body{background:#05060a!important}
             <button class="fw-notif-btn" id="fwOnchainBtn" onclick="fwMonitorToggle()" style="border-color:rgba(0,229,255,.3);color:var(--cyan);display:none">Start</button>
             <button class="fw-notif-btn" id="fwOnchainLockBtn" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.3);color:#a87eff">🔒 Full Access</button>
           </div>
-          <!-- Telegram Alerts row — teaser free / active full -->
-          <div class="fw-notif-row" id="fwTelegramNotifRow" style="margin-top:8px;border-color:rgba(255,193,7,.18);background:rgba(255,193,7,.04)">
-            <span class="fw-notif-icon">📣</span>
+          <!-- Monitoring and API row: links to the developer platform -->
+          <div class="fw-notif-row" id="fwDevApiRow" style="margin-top:8px;border-color:rgba(59,130,246,.22);background:rgba(59,130,246,.05)">
+            <span class="fw-notif-icon">🧩</span>
             <div class="fw-notif-text">
-              <strong style="color:#ffd166">Telegram Alerts</strong> —
-              <span data-i18n="telegram_desc">Get instant Telegram messages when a watched wallet's score drops or a new risky approval appears.</span>
-              <span id="fwTelegramStatus" style="display:block;margin-top:3px;font-size:10px;color:var(--muted)" data-i18n="coming_soon">Coming soon</span>
+              <strong style="color:#7fb0ff" data-i18n="devrow_title">Monitoring and API</strong>
+              <span style="display:block;margin-top:2px" data-i18n="devrow_desc">Building a wallet, exchange or bot? Monitor tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.</span>
             </div>
-            <button class="fw-notif-btn" id="fwTelegramBtn" onclick="fwOpenTelegramAlerts()" style="border-color:rgba(255,193,7,.3);color:#ffd166;display:none">Enable</button>
-            <button class="fw-notif-btn" id="fwTelegramLockBtn" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.3);color:#a87eff;display:none">🔒 Unlock</button>
-            <!-- COMING SOON --><span class="coming-soon-badge" id="fwTelegramComingSoon">🔜 Coming Soon</span>
+            <a class="fw-notif-btn" id="fwDevApiBtn" href="/developers/" style="text-decoration:none;border-color:rgba(59,130,246,.35);color:#7fb0ff;background:rgba(59,130,246,.10)" data-i18n="devrow_btn">For developers</a>
           </div>
         </div>
       </div>
@@ -3172,8 +3169,6 @@ function _doUnlockUI() {
   // Hide post-revoke upsell (now user has full access)
   const upsellEl = document.getElementById("fwPostRevokeUpsell");
   if (upsellEl) upsellEl.style.display = "none";
-
-  // Telegram alerts: not launched yet — keep "Coming soon" for every tier.
 
   // Add full-tier class to body for CSS-driven detail in history banner
   document.body.classList.add("fw-tier-full");
@@ -5998,14 +5993,14 @@ function fwDownloadShareCard() {
   x.fillStyle = "rgba(255,255,255,0.32)";
   x.fillText("WALLET SECURITY REPORT", pad+31, y+20);
 
-  // CYCX SCAN badge
+  // SECURITY SCAN badge
   x.fillStyle = "rgba(0,229,255,0.06)";
   x.strokeStyle = "rgba(0,229,255,0.18)"; x.lineWidth = 1;
-  rr(pw-pad-64,y+3,64,16,4); x.fill(); x.stroke();
+  rr(pw-pad-80,y+3,80,16,4); x.fill(); x.stroke();
   x.font = "bold 8px system-ui,sans-serif";
   x.fillStyle = "rgba(0,229,255,0.6)";
   x.textAlign = "center";
-  x.fillText("CYCX SCAN", pw-pad-32, y+14);
+  x.fillText("SECURITY SCAN", pw-pad-40, y+14);
   x.textAlign = "left";
 
   y += 30;
@@ -6942,7 +6937,7 @@ window.fwApiCopy             = fwApiCopy;
 const FW_TRANSLATIONS = {
   en: {
     // topbar
-    brand_sub:"On-Chain Security & Rewards", fw_badge:"FIREWALL", btn_full_access:"Full Access", btn_back:"Security Hub",
+    brand_sub:"On-Chain Security", fw_badge:"FIREWALL", btn_full_access:"Full Access", btn_back:"Security Hub",
     // hero
     hero_kicker:"WALLET FIREWALL",
     hero_title:"Turn any wallet into<br>a protected wallet.",
@@ -7019,12 +7014,13 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"{token} was approved for spender {spender}{unl}. If you didn't do this, review and revoke it now.",
     monitor_unlimited:" (unlimited)",
     monitor_rescan:"Rescan now",
-    telegram_desc:"Get instant Telegram messages when a watched wallet's score drops or a new risky approval appears.",
-    coming_soon:"Coming soon",
+    devrow_title:"Monitoring and API",
+    devrow_desc:"Building a wallet, exchange or bot? Monitor tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.",
+    devrow_btn:"For developers",
     tier_badge:"✓ FULL ACCESS",
   },
   zh: {
-    brand_sub:"链上安全与奖励", fw_badge:"防火墙", btn_full_access:"完整访问", btn_back:"安全中心",
+    brand_sub:"链上安全", fw_badge:"防火墙", btn_full_access:"完整访问", btn_back:"安全中心",
     hero_kicker:"钱包防火墙", hero_title:"让每个钱包都安全。",
     hero_sub:"扫描钱包授权、查看风险暴露、识别高风险授权方并获得修复计划 — 扫描无需连接钱包。",
     scan_placeholder:"0x... 钱包地址", btn_run:"扫描钱包",
@@ -7085,12 +7081,13 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"{token} 已授权给 {spender}{unl}。如果不是你本人操作，请立即检查并撤销。",
     monitor_unlimited:"（无限授权）",
     monitor_rescan:"立即重新扫描",
-    telegram_desc:"当监控钱包评分下降或出现新的高风险授权时，立即通过 Telegram 通知你。",
-    coming_soon:"即将推出",
+    devrow_title:"监控与 API",
+    devrow_desc:"正在开发钱包、交易所或机器人？使用 Elofid API 监控代币和合约。风险事件会通过签名 Webhook 推送给你。",
+    devrow_btn:"开发者",
     tier_badge:"✓ 完整访问",
   },
   ar: {
-    brand_sub:"الأمان والمكافآت على السلسلة", fw_badge:"جدار الحماية", btn_full_access:"وصول كامل", btn_back:"مركز الأمان",
+    brand_sub:"الأمان على البلوكشين", fw_badge:"جدار الحماية", btn_full_access:"وصول كامل", btn_back:"مركز الأمان",
     hero_kicker:"جدار حماية المحفظة", hero_title:"حوّل أي محفظة إلى محفظة محمية.",
     hero_sub:"افحص موافقات المحفظة، اكشف نطاق الضرر، حدّد الجهات عالية المخاطر واحصل على خطة إصلاح — من دون ربط المحفظة للفحص.",
     scan_placeholder:"عنوان المحفظة 0x...", btn_run:"فحص المحفظة",
@@ -7152,12 +7149,13 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"تمت الموافقة على {token} للمفوَّض {spender}{unl}. إذا لم تقم بذلك، راجعها وألغها الآن.",
     monitor_unlimited:" (غير محدودة)",
     monitor_rescan:"أعد الفحص الآن",
-    telegram_desc:"احصل على رسائل فورية عبر Telegram عندما تنخفض درجة محفظة مراقَبة أو تظهر موافقة خطرة جديدة.",
-    coming_soon:"قريباً",
+    devrow_title:"المراقبة وواجهة API",
+    devrow_desc:"هل تبني محفظة أو منصة تداول أو بوت؟ راقب الرموز والعقود عبر Elofid API. تصلك حوادث المخاطر عبر Webhooks موقّعة.",
+    devrow_btn:"للمطورين",
     tier_badge:"✓ وصول كامل",
   },
   ru: {
-    brand_sub:"Ончейн-безопасность и награды", fw_badge:"ФАЙРВОЛ", btn_full_access:"Полный Доступ", btn_back:"Security Hub",
+    brand_sub:"Ончейн-безопасность", fw_badge:"ФАЙРВОЛ", btn_full_access:"Полный Доступ", btn_back:"Security Hub",
     hero_kicker:"ФАЙРВОЛ КОШЕЛЬКА", hero_title:"Защити любой кошелёк за секунды.",
     hero_sub:"Проверь разрешения кошелька, оцени зону риска, найди опасных получателей и получи план исправления — без подключения кошелька для сканирования.",
     scan_placeholder:"0x... адрес кошелька", btn_run:"Сканировать",
@@ -7220,8 +7218,9 @@ const FW_TRANSLATIONS = {
     monitor_alert_desc:"{token} одобрен для {spender}{unl}. Если это был не ты — проверь и отзови его сейчас.",
     monitor_unlimited:" (безлимитный)",
     monitor_rescan:"Пересканировать",
-    telegram_desc:"Мгновенные сообщения в Telegram, когда оценка отслеживаемого кошелька падает или появляется новый рискованный approval.",
-    coming_soon:"Скоро",
+    devrow_title:"Мониторинг и API",
+    devrow_desc:"Создаёте кошелёк, биржу или бота? Отслеживайте токены и контракты через Elofid API. Риск-инциденты приходят подписанными вебхуками.",
+    devrow_btn:"Разработчикам",
     tier_badge:"✓ ПОЛНЫЙ ДОСТУП",
   }
 };
@@ -7365,21 +7364,6 @@ Scan yours → ${url}
 
 document.getElementById("btnQuickShare")?.addEventListener("click", fwQuickShare);
 
-// ── TELEGRAM ALERTS ──────────────────────────────────────────────
-function fwOpenTelegramAlerts() {
-  // Alerts bot is not live yet; the button is hidden. Guard against stale callers.
-  return;
-  if (fwAccessTier !== "full" || !_fwAccessVerified) { requestFullAccess(); return; }
-  const wallet  = fwWallet || "";
-  const net     = fwNet || "bsc";
-  // Deep-link: opens bot and passes wallet address as start parameter
-  const encoded = encodeURIComponent(`${wallet}_${net}`);
-  const botUrl  = `https://t.me/CycleXAlertsBot?start=${encoded}`;
-  window.open(botUrl, "_blank", "noopener");
-  const status = document.getElementById("fwTelegramStatus");
-  if (status) status.textContent = "✅ Telegram opened — follow the bot setup steps";
-}
-window.fwOpenTelegramAlerts = fwOpenTelegramAlerts;
 window.fwFetchTopSpenderAndRevoke = fwFetchTopSpenderAndRevoke;
 
 // Button bindings
