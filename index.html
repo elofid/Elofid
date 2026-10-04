@@ -4689,10 +4689,12 @@ function ensureMetricsDot(){
   if (dot) return dot;
 
   // try to attach near the "On-Chain Transparency" title first
+  // Only shown next to the on-chain transparency title. Without that section
+  // there is no metric to report, so no dot is drawn anywhere else.
   const title =
     document.querySelector('[data-i18n="transparency_title"]') ||
-    document.querySelector('[data-i18n="home_transparency_title"]') ||
-    document.querySelector("h2, h1");
+    document.querySelector('[data-i18n="home_transparency_title"]');
+  if (!title) return null;
 
   dot = document.createElement("span");
   dot.id = "cx-metrics-dot";
@@ -4759,6 +4761,9 @@ function setMetricsDot(ok){
   }
 
   async function refreshMetrics() {
+  // The on-chain token metrics are not on the page while the ecosystem section
+  // is "coming soon". Skip the RPC calls entirely.
+  if (!$("stat-rewards")) return;
   if (_metricsInFlight) return; 
   _metricsInFlight = true;
   ensureMetricsDot();
