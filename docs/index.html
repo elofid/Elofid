@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>Developer Docs | Elofid</title>
+  <link rel="canonical" href="https://elofid.com/docs/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <meta name="description" content="Elofid developer documentation for monitored assets, Global Feed, Events, Incidents, signed webhooks and usage." />
+  <style>:root{--bg:#070a0f;--panel:#0b1017;--panel2:#0e141d;--line:#202a38;--muted:#8d9aab;--text:#f5f7fb;--accent:#55dcff;--good:#62f6b5;--warn:#ffd36a;--danger:#ff6f86;--code:#080c12;--max:1240px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif}*{box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);margin:0;line-height:1.6}a{color:inherit;text-decoration:none}code,pre,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,monospace}.topbar{z-index:20;border-bottom:1px solid var(--line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);background:#070a0ff0;position:sticky;top:0}.topbar-inner{max-width:var(--max);align-items:center;gap:24px;margin:auto;padding:14px 24px;display:flex}.brand{white-space:nowrap;align-items:center;gap:11px;font-weight:800;display:flex}.brand img{object-fit:contain;width:30px;height:30px}.brand small{color:var(--muted);font-weight:700}.top-links{align-items:center;gap:8px;margin-left:auto;display:flex}.top-links a{color:#c7d0dd;border-radius:8px;padding:8px 11px;font-size:13px}.top-links a:hover{color:#fff;background:#111823}.top-links .primary{background:#101722;border:1px solid #2d3b4e}.layout{max-width:var(--max);grid-template-columns:248px minmax(0,1fr);gap:42px;margin:auto;padding:40px 24px 100px;display:grid}aside{height:calc(100vh - 110px);padding-right:12px;position:sticky;top:86px;overflow:auto}.nav-title{color:#627083;letter-spacing:.16em;margin:24px 0 7px;font-size:10px;font-weight:900}.nav-title:first-child{margin-top:0}aside a{color:#9eabba;border-radius:7px;padding:7px 9px;font-size:13px;display:block}aside a:hover{color:#fff;background:#0f1620}main{min-width:0}.hero{border-bottom:1px solid var(--line);margin-bottom:44px;padding:24px 0 46px}.eyebrow{letter-spacing:.18em;color:var(--accent);text-transform:uppercase;font-size:11px;font-weight:900}.hero h1{letter-spacing:-.045em;margin:12px 0 14px;font-size:48px;line-height:1.06}.hero p{color:#aab5c4;max-width:780px;margin:0;font-size:17px}.status-row{flex-wrap:wrap;gap:8px;margin-top:22px;display:flex}.pill{border:1px solid var(--line);color:#b7c2d0;background:#0b1119;border-radius:999px;padding:6px 10px;font-size:11px}.pill.good{color:var(--good)}section{margin:0 0 52px;scroll-margin-top:88px}section h2{letter-spacing:-.025em;margin:0 0 10px;font-size:28px}section h3{margin:28px 0 8px;font-size:17px}section p{color:#aab5c4;margin:8px 0 14px}.note{border-left:3px solid var(--accent);color:#b9c5d3;background:#0a111a;border-radius:0 8px 8px 0;padding:13px 15px;font-size:13px}.note.warn{border-color:var(--warn)}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;display:grid}.card{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:18px}.card strong{margin-bottom:5px;display:block}.card p{margin:0;font-size:13px}.metric{letter-spacing:-.03em;font-size:24px;font-weight:850}.metric small{color:var(--muted);letter-spacing:0;margin-top:2px;font-size:11px;font-weight:700;display:block}.endpoint{border:1px solid var(--line);background:var(--panel);border-radius:10px;margin:10px 0;overflow:hidden}.endpoint-head{grid-template-columns:72px 1fr auto;align-items:center;gap:12px;padding:13px 15px;display:grid}.method{color:var(--good);font-size:11px;font-weight:900}.method.post{color:var(--accent)}.method.delete{color:var(--danger)}.path{overflow-wrap:anywhere;font-size:13px}.meta{color:#708095;font-size:11px}.endpoint p{border-top:1px solid var(--line);margin:0;padding:12px 15px;font-size:12px}pre{background:var(--code);border:1px solid var(--line);color:#c9d5e3;border-radius:10px;padding:16px;font-size:12px;line-height:1.65;overflow:auto}code.inline{color:#d8e4f3;background:#101720;border:1px solid #1e2937;border-radius:5px;padding:2px 6px;font-size:.92em}table{border-collapse:separate;border-spacing:0;border:1px solid var(--line);background:var(--panel);border-radius:10px;width:100%;font-size:12px;overflow:hidden}th,td{border-bottom:1px solid var(--line);text-align:left;vertical-align:top;padding:11px 12px}th{color:#cbd5e2;background:#0d141d;font-size:11px}td{color:#aeb9c7}tr:last-child td{border-bottom:0}.footer{border-top:1px solid var(--line);color:#718096;text-align:center;padding:28px 24px;font-size:12px}@media (max-width:880px){.layout{grid-template-columns:1fr;padding-top:24px}aside{display:none}.hero h1{font-size:38px}.grid{grid-template-columns:1fr}.topbar-inner{padding:12px 16px}.top-links a:first-child{display:none}.layout{padding-left:16px;padding-right:16px}.endpoint-head{grid-template-columns:62px 1fr}.endpoint-head .meta{display:none}}@media (max-width:700px){html,body{max-width:100%;overflow-x:hidden}.topbar-inner{gap:12px;min-width:0;padding:11px 14px}.brand{flex:auto;gap:9px;min-width:0}.brand img{flex:none;width:28px;height:28px}.brand span{white-space:nowrap;min-width:0;font-size:14px}.brand small{display:none}.top-links{flex:none;gap:4px;margin-left:0}.top-links a{padding:7px 8px;font-size:12px}.top-links a:first-child{display:inline-flex}.top-links .primary{display:none}.layout{width:100%;max-width:100%;padding:24px 14px 64px;display:block}main{width:100%;min-width:0;max-width:100%}.hero{margin-bottom:34px;padding:12px 0 32px}.eyebrow{letter-spacing:.14em;font-size:9.5px;line-height:1.45}.hero h1{letter-spacing:-.04em;overflow-wrap:anywhere;margin:10px 0 14px;font-size:36px;line-height:1.08}.hero p{font-size:16px;line-height:1.55}.status-row{gap:7px;margin-top:18px}.pill{white-space:normal;max-width:100%;line-height:1.35}section{min-width:0;margin-bottom:42px;scroll-margin-top:72px}section h2{font-size:26px;line-height:1.15}section h3{font-size:16px}section p,.card p,.endpoint p{overflow-wrap:anywhere}pre{-webkit-overflow-scrolling:touch;width:100%;min-width:0;max-width:100%;margin:12px 0;padding:14px;font-size:11px;line-height:1.6;overflow-x:auto}pre code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}code.inline,.mono{overflow-wrap:anywhere;word-break:break-word}.grid{grid-template-columns:minmax(0,1fr)}.card,.endpoint,.note{min-width:0;max-width:100%}.endpoint-head{grid-template-columns:52px minmax(0,1fr);gap:9px;padding:12px}.endpoint-head .meta{display:none}.path{overflow-wrap:anywhere;word-break:break-word;min-width:0}table{-webkit-overflow-scrolling:touch;white-space:nowrap;width:100%;max-width:100%;display:block;overflow-x:auto}th,td{min-width:110px}.footer{overflow-wrap:anywhere;padding:24px 14px}}@media (max-width:390px){.brand span{font-size:13px}.top-links a{padding:6px 7px;font-size:11px}.hero h1{font-size:33px}}</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/developers"><img src="/logo.png" alt="Elofid"><span>Elofid</span><small>Docs</small></a>
+      <nav class="top-links"><a href="/developers">API</a><a href="/dashboard/">Dashboard</a><a class="primary" href="/dashboard/#api-keys">API Keys</a></nav>
+    </div>
+  </header>
+  <div class="layout">
+    <aside>
+      <div class="nav-title">Start</div>
+      <a href="#quickstart">Quickstart</a><a href="#auth">Authentication</a><a href="#plans">Plans & entitlements</a>
+      <div class="nav-title">API</div>
+      <a href="#global-feed">Global Feed</a><a href="#monitoring">Monitored assets</a><a href="#watchlists">Watchlists</a><a href="#usage">Usage</a>
+      <div class="nav-title">Webhooks</div>
+      <a href="#webhooks">Management</a><a href="#signatures">Verify signatures</a><a href="#delivery">Delivery semantics</a>
+      <div class="nav-title">Model</div>
+      <a href="#events-incidents">Events vs Incidents</a><a href="#errors">Errors & limits</a><a href="#exit-intelligence">Exit Intelligence</a>
+    </aside>
+    <main>
+      <div class="hero">
+        <div class="eyebrow">Developer documentation</div>
+        <h1>Continuous on-chain risk intelligence, as an API.</h1>
+        <p>Monitor assets over time, read meaningful Events and correlated Risk Incidents, explore Global Intelligence, and receive signed lifecycle webhooks.</p>
+        <div class="status-row"><span class="pill good">Free: full My Monitoring intelligence</span><span class="pill">Global Intelligence Preview on Free</span><span class="pill">12 supported chains</span><span class="pill">Signed HMAC-SHA256 webhooks</span><span class="pill">Fail-closed intelligence</span></div>
+      </div>
+
+      <section id="quickstart">
+        <h2>Quickstart</h2>
+        <p>Create an API key in the authenticated Dashboard. The full key is shown once. Store it server-side and send it as a Bearer token.</p>
+        <pre><code>export ELOFID_API_KEY="YOUR_API_KEY"
+export ELOFID_API_BASE="https://api.elofid.com"
+
+curl "$ELOFID_API_BASE/v1/watchlists" \
+  -H "Authorization: Bearer $ELOFID_API_KEY"</code></pre>
+        <div class="note">Use the API key shown once in the Dashboard. Treat the key value as opaque, keep it server-side, and never commit it to source control.</div>
+      </section>
+
+      <section id="auth">
+        <h2>Authentication</h2>
+        <p>Customer API routes use <code class="inline">Authorization: Bearer &lt;API_KEY&gt;</code>. API keys are generated server-side, stored as hashes, and the plaintext value is only returned on create or rotate.</p>
+        <div class="grid">
+          <div class="card"><strong>Lost a key?</strong><p>Rotate in the Dashboard, update your application, then revoke the old key. Saved keys are masked and cannot be revealed again.</p></div>
+          <div class="card"><strong>Keep keys server-side</strong><p>Do not ship Elofid API keys in browser bundles, mobile apps, public repositories, or client-side logs.</p></div>
+        </div>
+      </section>
+
+      <section id="plans">
+        <h2>Plans & entitlements</h2>
+        <p><strong>Free includes full intelligence for the assets you monitor. Paid plans unlock Elofid Global Intelligence.</strong> Monitoring priority is adaptive/risk-aware and is not a fixed scan-frequency SLA.</p>
+        <table><thead><tr><th>Plan</th><th>Price</th><th>Monitored Assets</th><th>API Calls / Month</th><th>History</th><th>Webhook Destinations</th><th>Global Intelligence</th><th>Priority</th></tr></thead><tbody>
+          <tr><td>Free</td><td>$0</td><td>10</td><td>10,000</td><td>7 days</td><td>1</td><td>Preview</td><td>Standard</td></tr>
+          <tr><td>Starter</td><td>$49/mo · $490/yr</td><td>250</td><td>50,000</td><td>30 days</td><td>3</td><td>Full + Global Feed API</td><td>Standard</td></tr>
+          <tr><td>Growth</td><td>$149/mo · $1,490/yr</td><td>1,000</td><td>250,000</td><td>60 days</td><td>10</td><td>Full + Global Feed API</td><td>Increased</td></tr>
+          <tr><td>Pro</td><td>$299/mo · $2,990/yr</td><td>5,000</td><td>1,000,000</td><td>90 days</td><td>25</td><td>Full + Global Feed API</td><td>High</td></tr>
+          <tr><td>Enterprise</td><td>Custom</td><td>Custom</td><td>Custom</td><td>Custom</td><td>Custom</td><td>Full / Custom</td><td>Custom policy + SLA</td></tr>
+        </tbody></table>
+        <div class="note" style="margin-top:14px">Annual billing for Starter, Growth and Pro is priced at approximately 2 months free / ~17% savings.</div>
+        <h3>Free plan behavior</h3>
+        <p>Free includes full Events and Risk Incidents for the assets the workspace monitors, bounded by the 7-day My Monitoring history window. Global Intelligence is a real, sanitized preview only. Full Global Feed API access requires Starter or higher.</p>
+        <p>Removing an asset is a soft pause: history is preserved. A replacement is consumed only when a unique workspace <span class="mono">chain+token</span> monitoring slot is actually released. Re-adding the same paused row reactivates it.</p>
+      </section>
+
+      <section id="global-feed">
+        <h2>Global Intelligence / Global Feed</h2>
+        <p>Global Intelligence is network-wide intelligence detected by Elofid across monitored assets. Free workspaces receive a bounded real preview in the Dashboard. Customer API-key access to the full global routes requires <span class="mono">global_feed_access=full</span> (Starter+).</p>
+        <div class="note warn">Free API keys do not receive Full Global Feed. Paid-only global requests fail before API metering, so a denied Free request does not consume monthly API quota.</div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/events</code><span class="meta">Starter+ · metered</span></div><p>List canonical Production Events with filters, pagination and plan-history enforcement.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/events/:id</code><span class="meta">Starter+ · metered</span></div><p>Read full Event detail including baseline, current, change, evidence and market context where present.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/incidents</code><span class="meta">Starter+ · metered</span></div><p>List canonical Risk Incidents.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/incidents/:id</code><span class="meta">Starter+ · metered</span></div><p>Read full Risk Incident detail and correlation evidence.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/assets/:chain/:token/timeline</code><span class="meta">Starter+ · metered</span></div><p>Read global timeline intelligence for one asset, bounded by the plan history entitlement.</p></div>
+        <pre><code>const response = await fetch(`${base}/v1/events?limit=25`, {
+  headers: { Authorization: `Bearer ${process.env.ELOFID_API_KEY}` }
+});
+const body = await response.json();</code></pre>
+      </section>
+
+      <section id="monitoring">
+        <h2>Monitored asset intelligence</h2>
+        <p>These routes are scoped to an asset that the authenticated workspace actively monitors in at least one active Watchlist. They never grant access across workspaces.</p>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/monitoring/assets/:chain/:token/events</code><span class="meta">metered</span></div><p>Canonical Events for one monitored asset.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/monitoring/assets/:chain/:token/incidents</code><span class="meta">metered</span></div><p>Canonical Risk Incidents for one monitored asset.</p></div>
+        <div class="note">History is clamped server-side. Supplying an older <span class="mono">since</span> value cannot extend a Free workspace beyond its 7-day entitlement.</div>
+      </section>
+
+      <section id="watchlists">
+        <h2>Watchlists & monitored assets</h2>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/watchlists</code><span class="meta">metered</span></div><p>List Watchlists owned by the authenticated workspace.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method post">POST</span><code class="path">/v1/watchlists</code><span class="meta">metered</span></div><p>Create a Watchlist.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/watchlists/:id</code><span class="meta">metered</span></div><p>Read one workspace-owned Watchlist.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method post">POST</span><code class="path">/v1/watchlists/:id/assets</code><span class="meta">metered</span></div><p>Add or reactivate an asset. Unique workspace asset limits are enforced server-side.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method delete">DELETE</span><code class="path">/v1/watchlists/:id/assets/:chain/:token</code><span class="meta">metered</span></div><p>Soft-pause an asset row. Archive/history stay intact. Replacement usage increases only when a unique workspace monitoring slot is truly released.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method delete">DELETE</span><code class="path">/v1/watchlists/:id</code><span class="meta">metered</span></div><p>Soft-archive a Watchlist. The operation cannot bypass replacement quotas and must fail without partial mutation when the quota blocks it.</p></div>
+      </section>
+
+      <section id="usage">
+        <h2>Usage</h2>
+        <p>Developer API quota measures customer API consumption. It is not a blockchain scan quota. Dashboard Control Plane requests, webhook deliveries, Scanner, Feeder, Tracker, Correlator and internal service-to-service calls are not counted as customer Developer API usage.</p>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/usage</code><span class="meta">unmetered</span></div><p>Read API usage plus current plan entitlements, monitored-asset capacity, Webhook Destination capacity, Global Intelligence access and replacement usage.</p></div>
+        <pre><code>{
+  "data": {
+    "plan_code": "growth",
+    "used": 36420,
+    "limit": 250000,
+    "remaining": 213580,
+    "entitlements": {
+      "max_monitored_assets": 1000,
+      "history_days": 60,
+      "max_webhooks": 10,
+      "global_feed_access": "full"
+    },
+    "monitored_assets": { "used": 426, "limit": 1000, "remaining": 574 },
+    "webhooks": { "used": 7, "limit": 10, "remaining": 3 }
+  }
+}</code></pre>
+      </section>
+
+      <section id="webhooks">
+        <h2>Webhook Destinations</h2>
+        <p>A Webhook Destination is one configured endpoint. It is not a delivery/message quota. One destination may receive many Event and Incident deliveries. These destinations cover the monitored lifecycle delivery model. Global Webhooks are not currently a separate product. Destinations must be public HTTPS URLs. Registration blocks credentials, fragments, literal IPs and local/internal hostnames. Delivery-time validation also rejects private/reserved resolved addresses.</p>
+        <div class="endpoint"><div class="endpoint-head"><span class="method">GET</span><code class="path">/v1/webhooks</code><span class="meta">metered</span></div><p>List configured Webhook Destinations and operational state.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method post">POST</span><code class="path">/v1/webhooks</code><span class="meta">metered</span></div><p>Register a Webhook Destination. Final limits are Free 1 · Starter 3 · Growth 10 · Pro 25 · Enterprise Custom, enforced server-side.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method post">POST</span><code class="path">/v1/webhooks/:id/rotate-secret</code><span class="meta">metered</span></div><p>Rotate only the signing secret. The destination URL does not change. The new <span class="mono">whsec_...</span> value is returned once.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method post">POST</span><code class="path">/v1/webhooks/:id/test</code><span class="meta">metered</span></div><p>Send a real signed test POST to the registered endpoint without creating an Archive Event or Incident.</p></div>
+        <div class="endpoint"><div class="endpoint-head"><span class="method delete">DELETE</span><code class="path">/v1/webhooks/:id</code><span class="meta">metered</span></div><p>Soft-revoke the endpoint. Delivery audit history is preserved and the plan slot is released.</p></div>
+      </section>
+
+      <section id="signatures">
+        <h2>Verify webhook signatures</h2>
+        <p>Elofid signs the exact raw request body with HMAC-SHA256. Do not parse and reserialize JSON before verification.</p>
+        <table><thead><tr><th>Header</th><th>Purpose</th></tr></thead><tbody>
+          <tr><td><code>Elofid-Signature</code></td><td><code>v1=&lt;hex HMAC&gt;</code></td></tr>
+          <tr><td><code>Elofid-Timestamp</code></td><td>Unix timestamp used in the signed message.</td></tr>
+          <tr><td><code>Elofid-Delivery-Id</code></td><td>Stable delivery identifier for deduplication.</td></tr>
+          <tr><td><code>Elofid-Webhook-Id</code></td><td>Elofid webhook ID.</td></tr>
+          <tr><td><code>Elofid-Signing-Version</code></td><td>Signature contract version.</td></tr>
+          <tr><td><code>Elofid-Secret-Version</code></td><td>Signing-secret version used for this delivery.</td></tr>
+        </tbody></table>
+        <pre><code>import crypto from 'node:crypto';
+
+function verifyElofidWebhook({ rawBody, timestamp, signature, secret }) {
+  const signed = `${timestamp}.${rawBody}`;
+  const expected = 'v1=' + crypto.createHmac('sha256', secret)
+    .update(signed)
+    .digest('hex');
+
+  const a = Buffer.from(expected);
+  const b = Buffer.from(signature || '');
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}</code></pre>
+      </section>
+
+      <section id="delivery">
+        <h2>Delivery semantics</h2>
+        <div class="grid">
+          <div class="card"><strong>At least once</strong><p>Consumers must be idempotent and deduplicate using <span class="mono">Elofid-Delivery-Id</span>.</p></div>
+          <div class="card"><strong>Retries</strong><p>Transport/DNS failures, 408, 409, 425, 429 and 5xx are retryable. Other 3xx/4xx outcomes are dead-lettered immediately.</p></div>
+          <div class="card"><strong>Maximum attempts</strong><p>Delivery processing allows up to 6 attempts before the row is dead-lettered.</p></div>
+          <div class="card"><strong>Test is not production health</strong><p>A successful <span class="mono">/test</span> proves connectivity/signing but does not pretend that a Production Event or Incident has been delivered.</p></div>
+        </div>
+      </section>
+
+      <section id="events-incidents">
+        <h2>Events vs Incidents</h2>
+        <p><strong>Event</strong> means one meaningful atomic change. <strong>Risk Incident</strong> is the correlated higher-level story and lifecycle built from related canonical Events. Several changes should become one coherent Incident when the correlation policy supports it, rather than a burst of unrelated alerts.</p>
+        <h3>Canonical Production Event families</h3>
+        <table><thead><tr><th>Market / execution</th><th>Stateful security</th></tr></thead><tbody><tr><td><code>price_collapse</code><br><code>liquidity_collapse</code><br><code>exit_depth_collapse</code><br><code>score_deterioration</code></td><td><code>mint_authority_risk</code><br><code>freeze_authority_risk</code><br><code>pause_risk</code><br><code>honeypot_risk</code></td></tr></tbody></table>
+      </section>
+
+      <section id="errors">
+        <h2>Errors & limits</h2>
+        <p>API errors use a stable shape. Quota responses may also include a usage object and <code class="inline">Retry-After</code>.</p>
+        <pre><code>{
+  "ok": false,
+  "error": "asset_replacement_limit_reached",
+  "message": "Asset replacement limit reached.",
+  "detail": "...",
+  "usage": {
+    "used": 5,
+    "limit": 5,
+    "remaining": 0
+  }
+}</code></pre>
+        <div class="note">Elofid fails closed where required evidence, entitlement configuration, destination safety, or exact intelligence support cannot be verified. Free requests for full Global Feed API access return <span class="mono">global_feed_requires_paid_plan</span>.</div>
+      </section>
+
+      <section id="exit-intelligence">
+        <h2>Exit Intelligence</h2>
+        <p>Exit Depth is execution intelligence, not TVL and not gross pool liquidity. Where Exit Intelligence appears in Elofid data, unsupported or unverifiable coverage must remain explicit as null, partial, or unsupported rather than being invented or converted into token risk.</p>
+        <div class="note warn">The current Developer API documentation does not invent a standalone Exit Depth endpoint that the deployed customer API does not expose. Endpoint-level Exit Intelligence documentation will be expanded only when that public contract is frozen.</div>
+      </section>
+    </main>
+  </div>
+  <footer class="footer">Elofid · Continuous On-Chain Risk Intelligence · Developer documentation · Support: <a href="mailto:support@elofid.com?subject=Elofid%20Developer%20Support" style="color:var(--accent);font-weight:800">support@elofid.com</a></footer>
+</body>
+</html>
