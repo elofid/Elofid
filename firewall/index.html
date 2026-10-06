@@ -634,7 +634,6 @@ twq('config','r4v6v');
     .access-gate-title { font-size: 18px !important; }
     #fwPassportSection .passport-inner > div { padding: 16px; }
     #ppWallet { font-size: 11px; }
-    #passPopup > div { padding: 18px 16px !important; border-radius: 18px !important; }
     .tfd-item { flex-direction: column; gap: 8px; }
     #fwTimelineModal > div { width: calc(100% - 16px) !important; max-height: 85vh !important; }
   }
@@ -1781,18 +1780,14 @@ body{background:#05060a!important}
           text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 30px rgba(124,92,255,.12)
         ">
           <div style="font-size:32px;margin-bottom:12px">🔒</div>
-          <div style="font-size:18px;font-weight:900;margin-bottom:8px">Full Access Required</div>
+          <div style="font-size:18px;font-weight:900;margin-bottom:8px">Unlock Full Access</div>
           <div style="font-size:13px;color:var(--muted);line-height:1.7;max-width:52ch;margin:0 auto 20px">
             <span data-i18n="gate_msg">Free: remove your biggest threat. <strong style="color:var(--cyan)">Full Access:</strong> clean the rest — bulk revoke, full Blast Radius, Wallet Passport, exports, and advanced protection.</span>
           </div>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-            <!-- Connect & Check — triggers AppKit modal -->
+            <!-- Connect and sign in — triggers AppKit modal -->
             <button class="btn btn-full-access" id="btnCheckAccess">
-              Connect &amp; Check Access
-            </button>
-            <!-- PASS: opens purchase popup -->
-            <button class="btn btn-ghost" id="btnBuyPass" style="font-size:12px">
-              Get PASS
+              Connect &amp; Sign In
             </button>
           </div>
           <div id="gateStatus" style="margin-top:14px;font-size:12px;color:var(--muted);min-height:18px"></div>
@@ -2114,7 +2109,7 @@ body{background:#05060a!important}
           <!-- CTA shown when locked -->
           <div class="fw-export-unlock-cta" id="fwExportCTA">
             <div style="font-size:12px;color:var(--muted);margin-bottom:10px">
-              🔒 Export requires <strong style="color:var(--cyan)">Full Access</strong> — hold 1 PASS or at least 100 CYCX to unlock CSV, JSON &amp; report export.
+              🔒 Export requires <strong style="color:var(--cyan)">Full Access</strong>. Connect your wallet and sign in to unlock CSV, JSON &amp; report export.
             </div>
             <button class="btn-full-access" style="font-size:11px;padding:9px 20px" onclick="requestFullAccess()">
               🔑 Unlock Export
@@ -2229,10 +2224,6 @@ body{background:#05060a!important}
 
 // ── CONSTANTS ────────────────────────────────────────────────────
 const DEMO_WALLET = "0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD";
-const CYCX_BSC    = "0xda63b65825AE30532a507B0C091B0bD9F8204F7E";
-const PASS_BSC    = "0x718bc4E915fF66249C1eB86Eb566Ce4fefCA801e";
-const CYCX_MIN    = 100n;   // minimum CYCX
-const PASS_MIN    = 1n;     // minimum PASS
 const API_BASE    = window.ELOFID_API_BASE || location.origin;
 
 // ── Activity Counter — reports scan events to homepage dashboard ──────
@@ -3062,10 +3053,6 @@ ${fixRows ? `<h2>Recommended Fix Plan</h2>
 };
 
 
-const GATE_ABI = [
-  "function balanceOf(address) view returns (uint256)",
-  "function decimals() view returns (uint8)"
-];
 const ERC20_APPROVE_ABI = ["function approve(address spender, uint256 amount) returns (bool)"];
 
 // ── STATE ────────────────────────────────────────────────────────
@@ -3073,7 +3060,7 @@ let fwAccessTier   = "free";      // "free" | "full"
 
 // ══════════════════════════════════════════════════════════════
 // ANTI-TAMPER SECURITY ENGINE
-// Prevents console-based bypass of access gate (PASS check)
+// Prevents console-based bypass of the Full Access gate
 // ══════════════════════════════════════════════════════════════
 
 // 1. One-time nonce — required by unlockFull() to prove call came
@@ -3088,8 +3075,6 @@ const _fwNonce = (() => {
 let _fwAccessVerified = false;
 let _fwValidatedWallet = null;
 let _fwAccessToken = null;
-let _fwAccessHasPass = false;
-let _fwAccessHasCycx = false;
 let _fwAccessExpiresAt = 0;
 
 // 3. Protect fwAccessTier via Object.defineProperty — block direct assignment
@@ -3101,7 +3086,7 @@ let _fwAccessExpiresAt = 0;
       set: (v) => {
         // Only allow setting to "full" if internal verification passed
         if (v === "full" && !_fwAccessVerified) {
-          console.warn("[Elofid] Access tier change blocked. Verify an eligible wallet (1 PASS or 100 CYCX) to unlock.");
+          console.warn("[Elofid] Access tier change blocked. Connect your wallet and sign in to unlock Full Access.");
           return;
         }
         _tier = v;
@@ -3805,14 +3790,10 @@ async function fwCreateServerAccessSession() {
     }
 
     _fwAccessToken = session.token;
-    _fwAccessHasPass = session.hasPass === true;
-    _fwAccessHasCycx = session.hasCycx === true;
     _fwAccessExpiresAt = Number(session.expiresAt || 0);
 
     return {
       ok:true,
-      hasPass:_fwAccessHasPass,
-      hasCycx:_fwAccessHasCycx,
       expiresAt:_fwAccessExpiresAt
     };
   } catch (e) {
@@ -3824,51 +3805,12 @@ async function fwCreateServerAccessSession() {
   }
 }
 
-async function checkCycxPass() {
-  const Eth = getE() || window.ethers;
-  if (!Eth?.Contract) return { eligible:false, reason:"ethers_missing" };
-  const addr = window.wallet?.address;
-  if (!addr) return { eligible:false, reason:"no_wallet" };
-
-  try {
-    const runCheck = async (provider) => {
-      const cycxC = new Eth.Contract(CYCX_BSC, GATE_ABI, provider);
-      const passC = new Eth.Contract(PASS_BSC, GATE_ABI, provider);
-      let cycxDec = 18n;
-      try { cycxDec = BigInt(await cycxC.decimals()); } catch {}
-      const [cycxBal, passBal] = await Promise.all([
-        cycxC.balanceOf(addr).catch(()=>0n),
-        passC.balanceOf(addr).catch(()=>0n)
-      ]);
-      const cycxMin = CYCX_MIN * (10n ** cycxDec);
-      return {
-        eligible: BigInt(passBal) >= PASS_MIN || BigInt(cycxBal) >= cycxMin,
-        hasPass:  BigInt(passBal) >= PASS_MIN,
-        hasCycx:  BigInt(cycxBal) >= cycxMin
-      };
-    };
-
-    if (typeof withRpcFallback === "function") {
-      const r = await withRpcFallback("bsc", runCheck, { timeoutMs:9000 });
-      if (!r.ok) return { eligible:false, reason:"rpc_failed" };
-      return { ok:true, ...r.res };
-    }
-    const provider = getRPC("bsc");
-    if (!provider) return { eligible:false, reason:"no_rpc" };
-    return { ok:true, ...(await runCheck(provider)) };
-  } catch(e) {
-    return { eligible:false, reason: e.message };
-  }
-}
-
 async function requestFullAccess() {
   if (fwAccessTier === "full" && _fwAccessVerified && _fwAccessToken && Date.now() < _fwAccessExpiresAt) return;
 
   // Reset any stale access state before a new verification attempt.
   _fwAccessVerified = false;
   _fwAccessToken = null;
-  _fwAccessHasPass = false;
-  _fwAccessHasCycx = false;
   _fwAccessExpiresAt = 0;
 
   setGateStatus("Loading wallet module…", "#a87eff");
@@ -3886,53 +3828,20 @@ async function requestFullAccess() {
     } catch { setGateStatus("Connect cancelled.", "#ff9a6b"); return; }
   }
 
-  setGateStatus("Checking 100 CYCX / PASS on BSC…", "#a87eff");
-  const local = await checkCycxPassRobust();
-  const locallyEligible = local.eligible === true || (local.ok && local.eligible);
-
-  if (!locallyEligible) {
-    const msg =
-      local.reason === "no_wallet"      ? "Wallet not detected." :
-      local.reason === "ethers_missing" ? "Ethers.js not loaded. Refresh and try again." :
-      local.reason === "rpc_failed"     ? "BSC RPC unavailable. Try again in a moment." :
-      `Not eligible. You need ≥${Number(CYCX_MIN)} CYCX or 1 PASS on BSC.`;
-    setGateStatus(msg, "#ff7a8a");
-    return;
-  }
-
-  setGateStatus("Confirm secure Full Access in your wallet…", "#a87eff");
+  setGateStatus("Confirm the sign-in in your wallet. It is free and is not a transaction.", "#a87eff");
   const auth = await fwCreateServerAccessSession();
 
   if (!auth.ok) {
-    // Safe rollout bridge: if the new Worker auth routes are not deployed yet
-    // (404 only), keep the current local entitlement flow working. As soon as
-    // the hardened Worker is live, this branch is no longer reachable.
-    if (auth.reason === "AUTH_ROUTE_MISSING") {
-      _fwAccessHasPass = local.hasPass === true;
-      _fwAccessHasCycx = local.hasCycx === true;
-      _fwAccessVerified = true;
-      _fwValidatedWallet = window.wallet?.address || null;
-      const whyLegacy = _fwAccessHasPass ? "PASS ✓" : `${Number(CYCX_MIN)} CYCX ✓`;
-      setGateStatus(`Eligible (${whyLegacy}) — unlocking!`, "#5dffb2");
-      unlockFull();
-      if (fwWallet && fwWallet !== DEMO_WALLET && fwNet) {
-        await fwRescanFull();
-      } else if (fwScanData) {
-        renderDashboard(fwWallet, fwScanData, "full");
-      }
-      return;
-    }
-
     const msg =
-      auth.reason === "sign_cancelled" ? "Signature cancelled. Full Access was not unlocked." :
-      auth.reason === "NOT_ELIGIBLE"   ? `Not eligible. You need ≥${Number(CYCX_MIN)} CYCX or 1 PASS on BSC.` :
-      auth.message || "Secure Full Access verification failed.";
+      auth.reason === "sign_cancelled"     ? "Sign-in cancelled. Full Access was not unlocked." :
+      auth.reason === "AUTH_ROUTE_MISSING" ? "Full Access sign-in is not available right now. Please try again later." :
+      auth.reason === "NOT_ELIGIBLE"       ? "Full Access is not available for this wallet." :
+      auth.message || "Full Access sign-in failed.";
     setGateStatus(msg, "#ff7a8a");
     return;
   }
 
-  const why = auth.hasPass ? "PASS ✓" : `${Number(CYCX_MIN)} CYCX ✓`;
-  setGateStatus(`Eligible (${why}) — unlocking!`, "#5dffb2");
+  setGateStatus("Signed in. Unlocking Full Access…", "#5dffb2");
   await new Promise(r => setTimeout(r, 500));
 
   _fwAccessVerified = true;
@@ -3947,10 +3856,6 @@ async function requestFullAccess() {
     renderDashboard(fwWallet, fwScanData, "full");
   }
 }
-
-// ── PASS POPUP ────────────────────────────────────────────────────
-function openPassPopup()  { const el = document.getElementById("passPopup"); if(el) el.style.display="flex"; }
-function closePassPopup() { const el = document.getElementById("passPopup"); if(el) el.style.display="none"; }
 
 function unlockFull() {
   // Must go through nonce-protected path
@@ -4652,7 +4557,7 @@ async function fwVerifyPassport(encoded) {
       document.getElementById("fvIcon").textContent  = "🔒";
       document.getElementById("fvTitle").textContent = "Full Access Verification Failed";
       document.getElementById("fvSub").textContent   =
-        "The wallet signature is valid, but this wallet does not currently meet Full Access eligibility (1 PASS or at least 100 CYCX on BSC).";
+        "The wallet signature is valid, but Full Access could not be confirmed for this wallet.";
     } else if (state === "invalid") {
       modal.classList.add("fv-invalid");
       document.getElementById("fvIcon").textContent  = "❌";
@@ -4752,9 +4657,7 @@ async function fwVerifyPassport(encoded) {
       const passRes = await fetch(passUrl.toString(), { method:"GET" });
       const passData = await passRes.json().catch(() => null);
       if (!passRes.ok) throw new Error("Could not verify Full Access status");
-      hasFullAccess = passData?.eligible === true ||
-                      passData?.hasPass === true ||
-                      passData?.hasCycx === true;
+      hasFullAccess = passData?.eligible === true;
     }
 
     _fvPopulate(
@@ -5778,8 +5681,7 @@ function renderPassport(wallet, d, tier) {
     statusEl.style.cssText = "border-color:rgba(93,255,178,.35);color:var(--green);background:rgba(93,255,178,.08)";
   }
 
-  // Passport policy: Full Access is identical whether unlocked by
-  // 1 PASS or at least 100 CYCX. Both remove the watermark and enable signing.
+  // Passport policy: Full Access removes the watermark and enables signing.
   const isFullAccess = tier === "full" && _fwAccessVerified;
   const wm = document.getElementById("ppWatermark");
   if (wm) wm.style.display = isFullAccess ? "none" : "flex";
@@ -5850,7 +5752,7 @@ async function fwGetWorkerPassport() {
     const data = await res.json().catch(() => null);
     if (!res.ok) {
       showPassportMsg(data?.error === "NOT_ELIGIBLE"
-        ? "❌ Full Access requires 1 PASS or at least 100 CYCX on BSC."
+        ? "❌ Full Access is required. Connect your wallet and sign in."
         : `⚠ ${data?.message || data?.error || "Failed."}`);
       return;
     }
@@ -5885,7 +5787,7 @@ function fwDownloadShareCard() {
   const chain     = document.getElementById("ppChain")?.textContent    || fwNet.toUpperCase();
   const dateStr   = document.getElementById("ppDateText")?.textContent || ("Scanned: " + today());
   const walletStr = fwShort(fwWallet) + " · " + chain;
-  const isFree    = !_fwAccessHasPass;
+  const isFree    = !(fwAccessTier === "full" && _fwAccessVerified);
   const isSigned  = document.getElementById("ppSigChip")?.style.display === "flex";
 
   const sCol = score < 45 ? "#ff4757" : score < 70 ? "#ffd166" : "#3cffb0";
@@ -6955,13 +6857,13 @@ const FW_TRANSLATIONS = {
     title_map:"Exposure Map", map_sub:"Wallet → Spenders → Tokens. Node size = risk weight.",
     title_threats:"Top Threats",
     // fix mode
-    fix_lock_msg:"Bulk revoke &amp; full cleanup require Full Access<br>(hold 1 PASS or at least 100 CYCX)",
+    fix_lock_msg:"Bulk revoke &amp; full cleanup require Full Access<br>(connect your wallet and sign in)",
     btn_unlock_fix:"Unlock Full Cleanup",
     fix_title:"3-Step Fix Plan",
     fix_sub:"Complete these actions to improve your Firewall Score.",
     fix1_title:"Revoke Top Spender", fix2_title:"Revoke All Unlimited", fix3_title:"Lock Risky dApp",
     // passport
-    passport_lock_msg:"Verified Wallet Passport requires Full Access (1 PASS or at least 100 CYCX)",
+    passport_lock_msg:"Verified Wallet Passport requires Full Access (connect your wallet and sign in)",
     passport_share_title:"Share your Wallet Passport",
     passport_proof_title:"Proof Passport", passport_proof_sub:"A shareable, verifiable snapshot of your wallet's security state.", passport_verify_sub:"Sign a cryptographic proof of your wallet's security state — verifiable by anyone, no KYC, no gas.",
     // watch
@@ -6972,7 +6874,7 @@ const FW_TRANSLATIONS = {
     // Scan notice
     scan_running:"Scanning wallet…",
     // access gate
-    gate_msg:'Free: remove your biggest threat. <strong style="color:var(--cyan)">Full Access:</strong> clean the rest — bulk revoke, full Blast Radius, Verified Passport, exports, and advanced protection. <strong style="color:var(--green)">Unlock with 1 PASS or at least 100 CYCX.</strong>',
+    gate_msg:'Free: remove your biggest threat. <strong style="color:var(--cyan)">Full Access:</strong> clean the rest — bulk revoke, full Blast Radius, Verified Passport, exports, and advanced protection. <strong style="color:var(--green)">Connect your wallet and sign in to unlock. It is free.</strong>',
     btn_rescan:"Scan another wallet",
     fix_impact:"The 3 most impactful actions to secure your wallet.",
     passport_copy_sub:"Your cryptographic proof of security. Share to prove you've secured your wallet.",
@@ -7026,17 +6928,17 @@ const FW_TRANSLATIONS = {
     drain_sub:"暴露资产的预估清空时间",
     title_map:"风险地图", map_sub:"钱包 → 授权方 → 代币。节点大小 = 风险权重。",
     title_threats:"主要威胁",
-    fix_lock_msg:"批量撤销和完整清理需要完整访问权限<br>（持有1个PASS或至少100个CYCX）",
+    fix_lock_msg:"批量撤销和完整清理需要完整访问权限<br>（连接钱包并登录）",
     btn_unlock_fix:"解锁完整清理",
     fix_title:"三步修复计划",
     fix_sub:"完成以下操作以提升您的防火墙评分。",
     fix1_title:"撤销顶级授权方", fix2_title:"撤销所有无限授权", fix3_title:"锁定高风险DApp",
-    passport_lock_msg:"验证钱包护照需要完整访问权限（持有1个 PASS 或至少100个 CYCX）",
+    passport_lock_msg:"验证钱包护照需要完整访问权限（连接钱包并登录）",
     passport_share_title:"分享您的钱包护照",
     passport_proof_title:"安全护照", passport_proof_sub:"可分享、可验证的钱包安全状态快照。", passport_verify_sub:"为钱包安全状态签署加密证明 — 任何人都可验证，无需KYC，无需Gas。",
     watch_title:"追踪多个钱包",
     score_protected:"受保护", score_exposed:"已暴露", score_vulnerable:"存在漏洞", score_critical:"危急",
-    gate_msg:'免费：撤销最高风险授权。<strong style="color:var(--cyan)">完整访问：</strong>批量撤销、完整爆炸半径、验证钱包护照、导出及高级保护工具。<strong style="color:var(--green)">持有1个 PASS 或至少100个 CYCX 即可解锁。</strong>',
+    gate_msg:'免费：撤销最高风险授权。<strong style="color:var(--cyan)">完整访问：</strong>批量撤销、完整爆炸半径、验证钱包护照、导出及高级保护工具。<strong style="color:var(--green)">连接钱包并登录即可免费解锁。</strong>',
     btn_rescan:"扫描其他钱包",
     fix_impact:"以下3项操作将显著提升您的安全评分。",
     passport_copy_sub:"您的安全加密证明。分享以证明您已保护好钱包。",
@@ -7091,17 +6993,17 @@ const FW_TRANSLATIONS = {
     drain_sub:"الوقت المقدر لتصفية الأصول المكشوفة",
     title_map:"خريطة التعرض", map_sub:"المحفظة ← المفوَّضون ← الرموز. حجم العقدة = وزن المخاطر.",
     title_threats:"أبرز التهديدات",
-    fix_lock_msg:"الإلغاء الجماعي والتنظيف الكامل يتطلبان وصولاً كاملاً<br>(امتلك PASS واحداً أو 100 CYCX على الأقل)",
+    fix_lock_msg:"الإلغاء الجماعي والتنظيف الكامل يتطلبان وصولاً كاملاً<br>(اربط محفظتك وسجّل الدخول)",
     btn_unlock_fix:"فتح التنظيف الكامل",
     fix_title:"خطة إصلاح من 3 خطوات",
     fix_sub:"أكمل هذه الإجراءات لتحسين نقاط الجدار.",
     fix1_title:"إلغاء أكبر مفوَّض", fix2_title:"إلغاء كل الموافقات غير المحدودة", fix3_title:"حظر DApp عالي الخطورة",
-    passport_lock_msg:"جواز المحفظة الموثق يتطلب وصولاً كاملاً (PASS واحد أو 100 CYCX على الأقل)",
+    passport_lock_msg:"جواز المحفظة الموثق يتطلب وصولاً كاملاً (اربط محفظتك وسجّل الدخول)",
     passport_share_title:"شارك جواز محفظتك",
     passport_proof_title:"جواز الأمان", passport_proof_sub:"لقطة قابلة للمشاركة والتحقق من حالة أمان محفظتك.", passport_verify_sub:"وقّع إثباتاً تشفيرياً لحالة أمان المحفظة — قابل للتحقق من أي شخص، بلا KYC وبلا رسوم Gas.",
     watch_title:"تتبع محافظ متعددة",
     score_protected:"محمي", score_exposed:"مكشوف", score_vulnerable:"ضعيف", score_critical:"حرج",
-    gate_msg:'مجاناً: إلغاء أكبر تهديد. <strong style="color:var(--cyan)">الوصول الكامل:</strong> التنظيف الشامل — الإلغاء الجماعي ونطاق الضرر الكامل وجواز المحفظة الموثق والتصدير وأدوات الحماية المتقدمة. <strong style="color:var(--green)">يُفتح بامتلاك PASS واحد أو 100 CYCX على الأقل.</strong>',
+    gate_msg:'مجاناً: إلغاء أكبر تهديد. <strong style="color:var(--cyan)">الوصول الكامل:</strong> التنظيف الشامل — الإلغاء الجماعي ونطاق الضرر الكامل وجواز المحفظة الموثق والتصدير وأدوات الحماية المتقدمة. <strong style="color:var(--green)">اربط محفظتك وسجّل الدخول لفتحه مجاناً.</strong>',
     btn_rescan:"فحص محفظة أخرى",
     fix_impact:"الإجراءات الثلاثة الأكثر تأثيراً لتأمين محفظتك.",
     passport_copy_sub:"إثباتك التشفيري على الأمان. شاركه لإثبات أنك أمّنت محفظتك.",
@@ -7157,17 +7059,17 @@ const FW_TRANSLATIONS = {
     drain_sub:"расчётное время опустошения открытых активов",
     title_map:"Карта Рисков", map_sub:"Кошелёк → Получатели → Токены. Размер узла = вес риска.",
     title_threats:"Топ Угроз",
-    fix_lock_msg:"Массовый отзыв и полная очистка требуют полного доступа<br>(нужен 1 PASS или минимум 100 CYCX)",
+    fix_lock_msg:"Массовый отзыв и полная очистка требуют полного доступа<br>(подключите кошелёк и войдите)",
     btn_unlock_fix:"Полная очистка",
     fix_title:"3-шаговый план защиты",
     fix_sub:"Выполни эти действия, чтобы улучшить оценку файрвола.",
     fix1_title:"Отозвать главный доступ", fix2_title:"Отозвать все безлимитные доступы", fix3_title:"Заблокировать опасный dApp",
-    passport_lock_msg:"Верифицированный Паспорт кошелька требует полного доступа (1 PASS или минимум 100 CYCX)",
+    passport_lock_msg:"Верифицированный Паспорт кошелька требует полного доступа (подключите кошелёк и войдите)",
     passport_share_title:"Поделиться паспортом кошелька",
     passport_proof_title:"Паспорт Безопасности", passport_proof_sub:"Проверяемый снимок состояния безопасности кошелька, которым можно поделиться.", passport_verify_sub:"Подпиши криптографическое подтверждение состояния безопасности — проверяемое любым пользователем, без KYC и без газа.",
     watch_title:"Отслеживать несколько кошельков",
     score_protected:"Защищён", score_exposed:"Уязвим", score_vulnerable:"Критический", score_critical:"Опасность",
-    gate_msg:'Бесплатно: удали главную угрозу. <strong style="color:var(--cyan)">Полный доступ:</strong> полная очистка — массовый отзыв, полная зона риска, Верифицированный Паспорт, экспорт и расширенные инструменты защиты. <strong style="color:var(--green)">Открывается при наличии 1 PASS или минимум 100 CYCX.</strong>',
+    gate_msg:'Бесплатно: удали главную угрозу. <strong style="color:var(--cyan)">Полный доступ:</strong> полная очистка — массовый отзыв, полная зона риска, Верифицированный Паспорт, экспорт и расширенные инструменты защиты. <strong style="color:var(--green)">Подключите кошелёк и войдите, чтобы открыть бесплатно.</strong>',
     btn_rescan:"Сканировать другой кошелёк",
     fix_impact:"3 наиболее важных действия для защиты кошелька.",
     passport_copy_sub:"Твоё криптографическое доказательство безопасности. Поделись, чтобы подтвердить, что кошелёк защищён.",
@@ -7408,9 +7310,6 @@ document.getElementById("demoHint").addEventListener("click", () => {
 document.getElementById("btnTopAccess")?.addEventListener("click", () => window.requestFullAccess());
 document.getElementById("btnCheckAccess")?.addEventListener("click", () => window.requestFullAccess());
 
-// PASS popup
-document.getElementById("btnBuyPass")?.addEventListener("click", openPassPopup);
-// closePassPopup, passPopup click, btnCopyPassAddr, btnGetCycx handled in footer script
 
 // Init Wallet Watch on page load
 fwWatchInit();
@@ -7438,113 +7337,9 @@ window.fwVerifyPassport  = fwVerifyPassport;
 window.applyRule         = applyRule;
 window.applyFix          = applyFix;
 </script>
-<!-- ── PASS PURCHASE MODAL (fixed, centered, outside page flow) ── -->
-<div id="passPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center">
-  <div style="
-    background:linear-gradient(135deg,rgba(12,14,28,.98),rgba(18,10,40,.98));
-    border:1px solid rgba(0,229,255,.3);border-radius:22px;padding:24px 22px;
-    max-width:440px;width:calc(100% - 24px);position:relative;
-    box-shadow:0 24px 80px rgba(0,0,0,.8),0 0 50px rgba(0,229,255,.12);
-    animation:dashIn .3s ease-out
-  ">
-    <button id="closePassPopup" style="position:absolute;top:12px;right:14px;background:none;border:none;color:rgba(244,246,255,.55);font-size:20px;cursor:pointer;line-height:1;z-index:1" aria-label="Close">✕</button>
-
-    <!-- Header -->
-    <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin-bottom:7px;font-weight:800">🎫 Elofid Access Pass</div>
-    <div style="font-size:19px;font-weight:950;margin-bottom:5px;line-height:1.2">Unlock full firewall in seconds.</div>
-    <div style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.5">
-      Pass is <strong style="color:var(--cyan)">non-tradable (soulbound)</strong> · convertible to CYCX at public sale.
-    </div>
-
-    <!-- Features grid — compact 2 columns -->
-    <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:12px;margin-bottom:14px">
-      <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;font-weight:700">What's included</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px 10px">
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>Bulk revoke + complete cleanup</span></div>
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>Full Blast Radius details</span></div>
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>Passport (no watermark)</span></div>
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>CSV/JSON export</span></div>
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>Wallet Relations + txs</span></div>
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>Watch up to 10 wallets</span></div>
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>On-chain alert monitor</span></div>
-        <div style="font-size:11px;display:flex;align-items:flex-start;gap:6px"><span style="color:var(--green);flex:0 0 auto;margin-top:1px">✓</span><span>All future premium features</span></div>
-      </div>
-    </div>
-
-    <!-- Price row -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:10px 14px;border-radius:12px;background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.18)">
-      <span style="font-size:12px;color:var(--muted)">One-time price</span>
-      <span style="font-size:17px;font-weight:950;color:var(--cyan)">$9 <span style="font-size:11px;font-weight:600;opacity:.75">USDT or ~BNB</span></span>
-    </div>
-
-    <!-- Payment buttons row -->
-    <div style="display:flex;gap:8px;margin-bottom:10px">
-      <button id="passBtnBnb" style="
-        flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
-        padding:12px;border-radius:999px;
-        background:linear-gradient(135deg,#f3a01a,#f0c040);color:#0a0500;
-        font-weight:900;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-        border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;
-        box-shadow:0 8px 28px rgba(243,160,26,.35)
-      ">🟡 BNB</button>
-      <button id="passBtnUsdt" style="
-        flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
-        padding:12px;border-radius:999px;
-        background:rgba(255,255,255,.06);color:var(--text);
-        font-weight:900;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-        border:1px solid rgba(255,255,255,.18);cursor:pointer;transition:all .2s ease
-      ">💲 USDT</button>
-    </div>
-
-    <!-- Status -->
-    <div id="passPayStatus" style="font-size:12px;color:var(--muted);text-align:center;min-height:16px;margin-bottom:8px;line-height:1.5"></div>
-
-    <!-- Contract info compact -->
-    <div style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:8px 12px">
-      <span style="font-size:10px;color:var(--muted);white-space:nowrap;flex:0 0 auto">PASS:</span>
-      <span style="font-family:var(--mono);font-size:9px;color:var(--cyan);flex:1;word-break:break-all;letter-spacing:0">0x718bc4E915fF66249C1eB86Eb566Ce4fefCA801e</span>
-      <button id="btnCopyPassAddr" style="background:none;border:1px solid rgba(255,255,255,.12);color:var(--muted);font-size:10px;cursor:pointer;flex:0 0 auto;padding:2px 7px;border-radius:6px">Copy</button>
-    </div>
-    <div style="font-size:9px;color:var(--muted);text-align:center;margin-top:7px;opacity:.55">BSC network only · Verify on BscScan before buying</div>
-  </div>
-</div>
-
 <script>
-// ── PASS PAYMENT CONFIG ───────────────────────────────────────────
-const PASS_SALE_RECEIVER = "0x1993b2D333713cdA3C6166bb02F71E304A14471f";
-const PASS_USDT_BSC      = "0x55d398326f99059fF775485246999027B3197955";
-const PASS_USD_PRICE     = 9;
-const PASS_CONTRACT_ADDR = "0x718bc4E915fF66249C1eB86Eb566Ce4fefCA801e";
+// ── SHARED WALLET HELPERS (revoke flows) ──────────────────────────
 const BSC_CHAIN_ID       = "0x38";
-const BSC_READ_RPCS = [
-  "https://bsc-rpc.publicnode.com",
-  "https://bsc-dataseed.binance.org/",
-  "https://bsc-dataseed1.binance.org/",
-  "https://bsc-dataseed2.binance.org/",
-  "https://rpc.ankr.com/bsc",
-  "https://bsc-dataseed1.defibit.io/",
-  "https://bsc-dataseed1.ninicoin.io/",
-  "https://1rpc.io/bnb"
-];
-
-// ── PASS POPUP HELPERS ────────────────────────────────────────────
-function openPassPopup()  {
-  const el = document.getElementById("passPopup");
-  if (el) { el.style.display = "flex"; setPassStatus(""); }
-}
-function closePassPopup() {
-  const el = document.getElementById("passPopup");
-  if (el) el.style.display = "none";
-}
-function setPassStatus(msg, color) {
-  const el = document.getElementById("passPayStatus");
-  if (!el) return;
-  el.textContent = msg || "";
-  el.style.color = color || "var(--muted)";
-}
-
-window.openPassPopup  = openPassPopup;
-window.closePassPopup = closePassPopup;
 
 // ── RPC JSON-RPC HELPER ───────────────────────────────────────────
 async function fwRpcRequest(url, method, params, timeoutMs = 8000) {
@@ -7563,103 +7358,6 @@ async function fwRpcRequest(url, method, params, timeoutMs = 8000) {
   } finally {
     clearTimeout(timer);
   }
-}
-
-// ── BSC PROVIDER WITH FALLBACK ────────────────────────────────────
-let _cachedBscProvider = null; // cache to avoid creating new provider on every call
-async function fwGetBscProvider() {
-  if (_cachedBscProvider) {
-    try { await _cachedBscProvider.getBlockNumber(); return _cachedBscProvider; } catch { _cachedBscProvider = null; }
-  }
-  const Eth = window.E || window.ethers;
-  if (!Eth) return null;
-  for (const rpc of BSC_READ_RPCS) {
-    try {
-      const p = new Eth.JsonRpcProvider(rpc);
-      await Promise.race([
-        p.getBlockNumber(),
-        new Promise((_, r) => setTimeout(() => r(new Error("timeout")), 6000))
-      ]);
-      _cachedBscProvider = p; // cache the working provider
-      return p;
-    } catch { /* try next */ }
-  }
-  return null;
-}
-
-// Override checkCycxPass to use local BSC provider
-async function checkCycxPassRobust() {
-  const Eth = window.E || window.ethers;
-  if (!Eth?.Contract) return { eligible: false, reason: "ethers_missing" };
-  const addr = window.wallet?.address;
-  if (!addr) return { eligible: false, reason: "no_wallet" };
-
-  const provider = await fwGetBscProvider();
-  if (!provider) return { eligible: false, reason: "rpc_failed" };
-
-  try {
-    const GATE_ABI_MIN = [
-      "function balanceOf(address) view returns (uint256)",
-      "function decimals() view returns (uint8)"
-    ];
-    const cycxC = new Eth.Contract(CYCX_BSC, GATE_ABI_MIN, provider);
-    const passC = new Eth.Contract(PASS_BSC, GATE_ABI_MIN, provider);
-
-    let cycxDec = 18n;
-    try { cycxDec = BigInt(await cycxC.decimals()); } catch {}
-
-    const [cycxBal, passBal] = await Promise.all([
-      cycxC.balanceOf(addr).catch(() => 0n),
-      passC.balanceOf(addr).catch(() => 0n)
-    ]);
-
-    const cycxMin = CYCX_MIN * (10n ** cycxDec);
-    const eligible = BigInt(passBal) >= PASS_MIN || BigInt(cycxBal) >= cycxMin;
-    return {
-      ok: true,
-      eligible,
-      hasPass:  BigInt(passBal) >= PASS_MIN,
-      hasCycx:  BigInt(cycxBal) >= cycxMin
-    };
-  } catch (e) {
-    return { eligible: false, reason: e.message };
-  }
-}
-
-// ── BNB PRICE QUOTE ───────────────────────────────────────────────
-async function fwQuoteBnbWei(usdPrice) {
-  // Try to get BNB/USD from BSC oracle (WBNB/USDT PancakeSwap pair)
-  const WBNB  = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
-  const USDT  = "0x55d398326f99059fF775485246999027B3197955";
-  const PAIR_FACTORY = "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73";
-
-  const Eth = window.E || window.ethers;
-  if (!Eth) throw new Error("ethers not loaded");
-
-  const provider = await fwGetBscProvider();
-  if (!provider) throw new Error("No BSC RPC");
-
-  const factoryAbi = ["function getPair(address,address) view returns (address)"];
-  const pairAbi    = [
-    "function token0() view returns (address)",
-    "function getReserves() view returns (uint112,uint112,uint32)"
-  ];
-
-  const factory = new Eth.Contract(PAIR_FACTORY, factoryAbi, provider);
-  const pairAddr = await factory.getPair(WBNB, USDT);
-  const pair = new Eth.Contract(pairAddr, pairAbi, provider);
-  const [t0, [r0, r1]] = await Promise.all([pair.token0(), pair.getReserves()]);
-
-  const isWbnbT0 = t0.toLowerCase() === WBNB.toLowerCase();
-  const wbnbR = isWbnbT0 ? BigInt(r0) : BigInt(r1);
-  const usdtR = isWbnbT0 ? BigInt(r1) : BigInt(r0);
-
-  // USDT has 18 decimals on BSC, WBNB 18 decimals
-  // bnbPriceUSD = usdtR / wbnbR
-  // weiNeeded = usdPrice / bnbPriceUSD * 1e18
-  const weiNeeded = (BigInt(usdPrice) * wbnbR * 10n**18n) / (usdtR);
-  // Add 2% slippage
-  return (weiNeeded * 102n) / 100n;
 }
 
 // ── ENSURE BSC CHAIN ──────────────────────────────────────────────
@@ -7686,194 +7384,6 @@ async function fwEnsureBsc(provider) {
     return false;
   }
 }
-
-// ── WAIT FOR TX CONFIRM ───────────────────────────────────────────
-async function fwWaitTxConfirm(rawProvider, txHash, maxMs = 120000) {
-  const start = Date.now();
-  while (Date.now() - start < maxMs) {
-    try {
-      const r = await rawProvider.request({
-        method: "eth_getTransactionReceipt",
-        params: [txHash]
-      });
-      if (r?.status != null) {
-        return r.status === "0x1" || r.status === 1 || r.status === true;
-      }
-    } catch {}
-    await new Promise(res => setTimeout(res, 2000));
-  }
-  return false;
-}
-
-// ── PASS BUY FLOW ─────────────────────────────────────────────────
-let _passBuyRunning = false;
-
-async function passBuyFlow(kind) {
-  if (_passBuyRunning) return;
-  _passBuyRunning = true;
-
-  const bnbBtn  = document.getElementById("passBtnBnb");
-  const usdtBtn = document.getElementById("passBtnUsdt");
-  if (bnbBtn)  bnbBtn.disabled  = true;
-  if (usdtBtn) usdtBtn.disabled = true;
-
-  try {
-    setPassStatus("Loading wallet module…", "#a87eff");
-
-    // Connect wallet via AppKit
-    let appkit;
-    try { appkit = await fwLoadAppKit(); }
-    catch { setPassStatus("Could not load wallet module. Check connection.", "#ff7a8a"); return; }
-
-    if (!window.wallet?.address) {
-      setPassStatus("Opening wallet connect…", "#a87eff");
-      try {
-        // Temporarily hide passPopup backdrop — backdrop-filter creates stacking context
-        // that blocks AppKit modal even at higher z-index values
-        const popup = document.getElementById("passPopup");
-        if (popup) { popup.style.opacity = "0"; popup.style.pointerEvents = "none"; }
-        setPassStatus("Choose your wallet and approve the connection…", "#a87eff");
-        const c = await fwConnectViaModal(appkit);
-        if (popup) { popup.style.opacity = "1"; popup.style.pointerEvents = ""; }
-        if (c.cancelled) { setPassStatus("Connect cancelled.", "#ff9a6b"); return; }
-        if (!c.address) { setPassStatus("Wallet connection timed out. Try again.", "#ff9a6b"); return; }
-      } catch {
-        const popup = document.getElementById("passPopup");
-        if (popup) { popup.style.opacity = "1"; popup.style.pointerEvents = ""; }
-        setPassStatus("Connect cancelled.", "#ff9a6b"); return;
-      }
-    }
-
-    // Get raw provider
-    const rawProvider =
-      window.wallet?.providerRaw?.request  && window.wallet.providerRaw ||
-      appkit.getWalletProvider?.()?.request && appkit.getWalletProvider() ||
-      window.ethereum;
-
-    if (!rawProvider?.request) {
-      setPassStatus("Provider not available. Try reconnecting wallet.", "#ff7a8a");
-      return;
-    }
-
-    const from = window.wallet.address;
-    setPassStatus("Switching to BSC…", "#a87eff");
-    // PASS sale is always on BNB Smart Chain, regardless of the network scanned in Firewall.
-    // Use the generic chain switcher directly so other multi-chain revoke flows remain untouched.
-    const chainOk = await fwEnsureChain("bsc", rawProvider);
-    if (!chainOk) { setPassStatus("Please switch to BNB Chain.", "#ff9a6b"); return; }
-
-    // ── BNB payment ──────────────────────────────────────────────
-    if (kind === "bnb") {
-      setPassStatus("Fetching BNB price…", "#a87eff");
-      let valueWei;
-      try {
-        valueWei = await fwQuoteBnbWei(PASS_USD_PRICE);
-      } catch {
-        // Fallback: assume $300/BNB
-        valueWei = (BigInt(PASS_USD_PRICE) * 10n**18n) / 300n;
-        valueWei = (valueWei * 105n) / 100n;
-      }
-
-      const BUY_BNB_SELECTOR = "0x20f1fc61";
-      setPassStatus("Confirm in your wallet…", "#a87eff");
-      let txHash;
-      try {
-        txHash = await rawProvider.request({
-          method: "eth_sendTransaction",
-          params: [{ from, to: PASS_SALE_RECEIVER, value: "0x" + valueWei.toString(16), data: BUY_BNB_SELECTOR }]
-        });
-      } catch (e) {
-        const msg = String(e?.message || "");
-        if (/reject|cancel|denied|4001/i.test(msg)) {
-          setPassStatus("Transaction cancelled.", "#ff9a6b");
-        } else {
-          setPassStatus("Transaction failed: " + msg.slice(0, 80), "#ff7a8a");
-        }
-        return;
-      }
-
-      setPassStatus("⏳ Waiting for confirmation…", "#ffd166");
-      const ok = await fwWaitTxConfirm(rawProvider, txHash);
-      if (ok) {
-        setPassStatus("✅ Purchase confirmed! Reloading access…", "#5dffb2");
-        setTimeout(() => { closePassPopup(); requestFullAccess(); }, 1500);
-      } else {
-        setPassStatus("Pending on-chain. Close and try 'Check Access' in a moment.", "#ffd166");
-      }
-      return;
-    }
-
-    // ── USDT payment ─────────────────────────────────────────────
-    if (kind === "usdt") {
-      const Eth = window.E || window.ethers;
-      if (!Eth) { setPassStatus("Ethers.js not loaded.", "#ff7a8a"); return; }
-
-      const web3Provider = new Eth.BrowserProvider(rawProvider);
-      const signer = await web3Provider.getSigner();
-
-      const usdtAbi = [
-        "function decimals() view returns (uint8)",
-        "function approve(address,uint256) returns (bool)"
-      ];
-      const saleAbi = ["function buyWithUSDT() external"];
-
-      const usdtC = new Eth.Contract(PASS_USDT_BSC, usdtAbi, signer);
-      const saleC = new Eth.Contract(PASS_SALE_RECEIVER, saleAbi, signer);
-
-      const dec = Number(await usdtC.decimals());
-      const amount = Eth.parseUnits(String(PASS_USD_PRICE), dec);
-
-      setPassStatus("Step 1/2: Approve USDT in wallet…", "#a87eff");
-      try {
-        const tx1 = await usdtC.approve(PASS_SALE_RECEIVER, amount);
-        await tx1.wait();
-      } catch (e) {
-        setPassStatus("USDT approval cancelled or failed.", "#ff9a6b");
-        return;
-      }
-
-      setPassStatus("Step 2/2: Confirm purchase…", "#a87eff");
-      try {
-        const tx2 = await saleC.buyWithUSDT();
-        setPassStatus("⏳ Waiting for confirmation…", "#ffd166");
-        const receipt = await tx2.wait();
-        if (receipt?.status === 1) {
-          setPassStatus("✅ Purchase confirmed! Reloading access…", "#5dffb2");
-          setTimeout(() => { closePassPopup(); requestFullAccess(); }, 1500);
-        } else {
-          setPassStatus("Tx failed on-chain. Try again.", "#ff7a8a");
-        }
-      } catch (e) {
-        setPassStatus("Purchase cancelled or failed.", "#ff9a6b");
-      }
-      return;
-    }
-
-  } catch (e) {
-    setPassStatus("Error: " + String(e?.message || e).slice(0, 100), "#ff7a8a");
-  } finally {
-    if (bnbBtn)  bnbBtn.disabled  = false;
-    if (usdtBtn) usdtBtn.disabled = false;
-    _passBuyRunning = false;
-  }
-}
-
-// ── BIND MODAL EVENTS ─────────────────────────────────────────────
-document.getElementById("closePassPopup")?.addEventListener("click", closePassPopup);
-document.getElementById("passPopup")?.addEventListener("click", e => {
-  if (e.target.id === "passPopup") closePassPopup();
-});
-document.getElementById("passBtnBnb")?.addEventListener("click", () => passBuyFlow("bnb"));
-document.getElementById("passBtnUsdt")?.addEventListener("click", () => passBuyFlow("usdt"));
-document.getElementById("btnCopyPassAddr")?.addEventListener("click", () => {
-  navigator.clipboard.writeText(PASS_CONTRACT_ADDR).then(() => {
-    const btn = document.getElementById("btnCopyPassAddr");
-    if (btn) { const prev = btn.textContent; btn.textContent = "Copied!"; setTimeout(() => btn.textContent = prev, 1500); }
-  }).catch(() => {});
-});
-
-// Remove old CYCX disabled tooltip listener if any
-// (btnGetCycx was removed from HTML)
 </script>
 <!-- ── TIMELINE MODAL ── -->
 <div id="fwTimelineModal" style="display:none">
