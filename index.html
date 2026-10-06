@@ -89,7 +89,7 @@ twq('config','r4v6v');
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
   button,a{-webkit-tap-highlight-color:transparent}
-:where(p,li,.stat-label,.stat-caption,.social-desc,.section-body,.reward-card){
+:where(p,li,.social-desc,.section-body){
   hyphens: none;
   word-break: normal;
   overflow-wrap: break-word;
@@ -100,7 +100,6 @@ twq('config','r4v6v');
   word-break: break-word;
   hyphens: none;
 }
-
 
   :where(.brand-title,.section-title,.hero-title){text-wrap:balance}
 
@@ -151,7 +150,6 @@ body::after{
   transform: scale(1.12);
   transform-origin:center;
 }
-
 
   body.lang-switching{ animation: langFade .28s var(--ease); }
   @keyframes langFade{from{opacity:.45; transform:translateY(4px)}to{opacity:1; transform:translateY(0)}}
@@ -303,7 +301,6 @@ body::after{
   opacity: 1;
 }
 
-
   .lang-switch{
     position:relative; z-index:1;
     display:inline-flex; align-items:center;
@@ -364,7 +361,6 @@ body::after{
     0 0 24px rgba(0,229,255,.16);
 }
 
-
 .top-cta:focus-visible{
   outline:none;
   box-shadow: 0 0 0 3px rgba(0,229,255,.22), 0 26px 110px rgba(0,229,255,.34);
@@ -409,7 +405,6 @@ body::after{
   filter: blur(18px);
   pointer-events:none;
 }
-
 
   .hero-kicker{
     font-size: 12px;
@@ -461,7 +456,6 @@ body::after{
   }
   .hero-title br{ display:none; }
 }
-
 
   .hero-subtitle{
     max-width: 78ch;
@@ -578,7 +572,6 @@ body::after{
   margin: 0 auto;
 }
 
-
   .hero-primary-sub{
     margin-top: 10px;
     font-size: 13px;
@@ -601,11 +594,6 @@ body::after{
 
   flex-wrap: nowrap; 
 }
-  /* Rewards: make LEFT big card slightly shorter to match right column */
-.rewards-grid > .reward-card.highlight .hero-actions{
-  margin-top: 13px !important; 
-}
-
 
 .hero-actions .btn{
   flex: 1 1 0;      
@@ -827,12 +815,7 @@ body::after{
     margin-top: 4px;
   }
 
-  .section > .stats-grid,
-  .section > .social-grid,
-  .section > .rewards-grid,
-  .section > .rewards-intro,
-  .section > .reward-policy,
-  .section > .reward-actions-inline{
+  .section > .stats-grid,.section > .social-grid{
     grid-column: 1 / -1;
     justify-self: stretch;
   }
@@ -876,7 +859,6 @@ body::after{
   word-break: break-word;
 }
 
-
   .section.section-centered .section-body{
     margin-top: 2px;           
     max-width: 68ch;
@@ -885,10 +867,8 @@ body::after{
   .section.section-centered > .stats-grid{
     margin-top: 14px;        
   }
-  
 
 }
-
 
   /* Why list */
   #why-elofid ul{ margin: 16px 0 0; padding-left: 18px; }
@@ -906,70 +886,10 @@ body::after{
     border-top: 1px solid rgba(255,255,255,.08);
     border-bottom: 1px solid rgba(255,255,255,.08);
   }
-  .stat-card{
-    background: transparent;
-    border: none;
-    border-left: 1px solid rgba(255,255,255,.08);
-    padding: 18px 18px 16px;
-    box-shadow: none;
-    transition: background .28s var(--ease), transform .28s var(--ease);
-    min-width: 0;
-    
-  }
-  .stat-card:first-child{ border-left:none; }
-  .stat-card:hover{ background: rgba(255,255,255,.03); transform: translateY(-1px); }
-
-  .stat-label{
-    font-size: 11px;
-    font-weight: 950;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: rgba(244,246,255,.9);
-    margin-bottom: 10px;
-    line-height: 1.35;
-  }
-  .stat-value{
-    font-size: 26px;
-    font-weight: 950;
-    letter-spacing: -0.02em;
-    line-height: 1.06;
-  }
-  .stat-tag{
-    display:inline-block;
-    margin-top: 10px;
-    font-size: 11px;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: rgba(0,229,255,.92);
-    
-  }
-  .stat-caption{
-    margin-top: 6px;
-    font-size: 11px;
-    color: var(--dim);
-    line-height: 1.5;
-  }
-.stat-card > *{
-  width: 100%;
-  text-align: left;
-}
-
-.stat-label{
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-  gap: 8px;
-}
-
 
   @media (max-width: 980px){
     .stats-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; border: none; }
-    .stat-card{
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--r-lg);
-      background: rgba(255,255,255,.035);
-      box-shadow: var(--sh1);
-    }
+    
   }
   @media (max-width: 560px){ .stats-grid{ grid-template-columns: 1fr; } }
 
@@ -990,18 +910,6 @@ body::after{
   .social-grid{ grid-template-columns: 1fr; }
 }
 
-@media (max-width: 600px){
-  /* Stack the 3 reward buttons (Claim / Calculator / Pre-Sale) vertically */
-  .reward-card.highlight .reward-buttons-row{
-    flex-direction: column !important;
-  }
-  .reward-card.highlight .reward-buttons-row .btn{
-    width: 100% !important;
-    flex: unset !important;
-  }
-}
-
-  
   .social-card{
     display:flex;
     align-items:center;
@@ -1108,111 +1016,6 @@ body::after{
   }
 }
 
-
-  /* =========================
-     REWARDS
-     ========================= */
-  .rewards-section{ text-align:center; }
-  .rewards-intro{
-    max-width: 68ch;
-    margin: 10px auto 26px;
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--muted);
-  }
-
-  .rewards-grid{
-    display:grid;
-    grid-template-columns: 1.2fr .9fr;
-    gap: 18px;
-    align-items:stretch;
-  }
-  .rewards-side{
-    display:flex;
-    flex-direction:column;
-    gap: 16px;
-    align-items:stretch;
-  }
-
-  .reward-card{
-    background: rgba(255,255,255,.035);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 22px;
-    padding: 22px 20px;
-    text-align:left;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 16px 60px rgba(0,0,0,.34);
-    transition: transform .28s var(--ease), border-color .28s var(--ease), background .28s var(--ease);
-    min-width:0;
-  }
-  .reward-card:hover{ transform: translateY(-2px); border-color: rgba(0,229,255,.18); background: rgba(255,255,255,.04); }
-  .reward-card.enforcement{ background: rgba(255,255,255,.028); }
-
-  .reward-card h3{
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: rgba(0,229,255,.92);
-    font-weight: 950;
-    letter-spacing: -0.01em;
-  }
-  .reward-card p{ font-size: 14px; line-height: 1.75; color: var(--muted); }
-  .reward-card ul{ padding-left: 18px; margin: 10px 0; }
-  .reward-card li{ font-size: 14px; line-height: 1.75; margin-bottom: 8px; color: var(--muted); }
-  .reward-card strong{ color: var(--text); }
-
-  .reward-card.highlight{
-    border-color: rgba(0,229,255,.26);
-    background:
-      radial-gradient(circle at 30% 10%, rgba(0,229,255,.10), transparent 62%),
-      rgba(255,255,255,.035);
-    display:flex;
-    flex-direction:column;
-  }
-  .reward-card.highlight .reward-footer{
-    margin-top: auto;
-    padding-top: 14px;
-  }
-  .reward-footer{
-    margin-top: 14px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-top: 1px solid rgba(255,255,255,.10);
-    font-size: 12px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: rgba(0,229,255,.92);
-    opacity: .92;
-  }
-  .reward-example{
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,.10);
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--muted);
-  }
-  .reward-policy{
-    margin-top: 18px;
-    font-size: 12px;
-    color: var(--dim);
-    text-align:center;
-    opacity: .92;
-  }
-.reward-actions-inline{
-  display:flex;
-  justify-content:center;
-  align-items:stretch;
-  gap: 12px;
-  margin-top: 18px;
-  flex-wrap: nowrap;       
-  width: 100%;
-}
-
-.reward-actions-inline .btn{
-  flex: 1 1 0;
-  min-width: 0;
-}
-  
   /* =========================
      FOOTER
      ========================= */
@@ -1318,33 +1121,6 @@ body::after{
     letter-spacing: .02em;
   }
 
-  /* ── Claim status card ───────────────────────── */
-  #claim-status{
-    display:none;
-    margin: 14px 0;
-    padding: 16px 18px;
-    border-radius: 16px;
-    font-size: 14px;
-    line-height: 1.55;
-    text-align:center;
-    animation: claimSlideUp .35s cubic-bezier(.16,1,.3,1) both;
-  }
-  @keyframes claimSlideUp{
-    from{ opacity:0; transform:translateY(10px); }
-    to{   opacity:1; transform:translateY(0); }
-  }
-  /* eligible — green glow card */
-  #claim-status.success{
-    background: rgba(0,230,118,.07);
-    border: 1px solid rgba(0,230,118,.3);
-    color: #00e676;
-    box-shadow: 0 0 28px rgba(0,230,118,.08), inset 0 1px 0 rgba(0,230,118,.12);
-  }
-  #claim-status.pending{ background:rgba(255,193,7,.1); border:1px solid rgba(255,193,7,.4); color:#ffc107; }
-  #claim-status.success{ background:rgba(0,230,118,.1); border:1px solid rgba(0,230,118,.4); color:#00e676;
-    box-shadow: 0 0 32px rgba(0,230,118,.12); }
-  #claim-status.error{   background:rgba(220,53,69,.1);  border:1px solid rgba(220,53,69,.4);  color:#dc3545; }
-
   /* ── Connected chip (replaces big btn-wallet) ─ */
   .btn-wallet-chip{
     display:inline-flex;align-items:center;gap:7px;
@@ -1362,8 +1138,6 @@ body::after{
     animation:socPulse 2s ease-in-out infinite;
   }
 
-  #cx-claim-now-btn[disabled]{ opacity:.5; cursor:not-allowed; }
-
   .modal-actions{ display:flex; gap: 10px; margin-bottom: 6px; align-items:center; flex-wrap:wrap; }
   .btn-wallet{
     flex:1;
@@ -1380,29 +1154,6 @@ body::after{
   }
   .btn-wallet:hover{ transform: translateY(-1px); box-shadow: 0 26px 90px rgba(0,0,0,.72); }
   .btn-wallet:focus-visible{ outline:none; box-shadow: 0 0 0 3px rgba(0,229,255,.22); }
-
-  /* Claim Now — pulsing CTA */
-  #cx-claim-now-btn{
-    width:100%;margin-top:12px;
-    border-radius:999px;border:none;
-    padding:14px 18px;
-    cursor:pointer;font-weight:950;font-size:16px;
-    background:linear-gradient(135deg,#00c853,#00e676);
-    color:#021b10;
-    box-shadow:0 0 32px rgba(0,230,118,.25),0 12px 40px rgba(0,0,0,.5);
-    animation:claimPulse 2.4s ease-in-out infinite;
-    transition:transform .2s ease,box-shadow .2s ease;
-  }
-  #cx-claim-now-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 0 48px rgba(0,230,118,.4),0 18px 50px rgba(0,0,0,.6);
-    animation:none;
-  }
-  #cx-claim-now-btn:disabled{ animation:none;opacity:.5;cursor:not-allowed; }
-  @keyframes claimPulse{
-    0%,100%{ box-shadow:0 0 28px rgba(0,230,118,.2),0 10px 36px rgba(0,0,0,.5); }
-    50%{     box-shadow:0 0 52px rgba(0,230,118,.45),0 14px 44px rgba(0,0,0,.55); }
-  }
 
   .btn-close{
     border-radius:999px;
@@ -1428,21 +1179,6 @@ body::after{
   }
   .modal-close-x:hover{ transform: scale(1.06); color: rgba(244,246,255,.92); }
 
-  .eligibility-body{
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--muted);
-    margin-bottom: 16px;
-    max-height: 55vh;
-    overflow-y: auto;
-    padding-right: 6px;
-  }
-  .eligibility-body ol{ padding-left: 18px; margin:0; }
-  .eligibility-body li + li{ margin-top: 8px; }
-  .eligibility-body ul{ margin-top: 6px; padding-left: 16px; list-style-type: disc; }
-
-
-  /* Reward portal v4 — private R2 gateway, no wallet signature */
   .modal{ max-height:min(88vh,760px); overflow-y:auto; }
   .modal > *{ position:relative; z-index:1; }
   .modal-tagline{
@@ -1452,21 +1188,7 @@ body::after{
     letter-spacing:.04em;
     margin:2px 0 10px;
   }
-  .claim-cycle-meta{
-    display:none;
-    width:max-content;
-    max-width:100%;
-    margin:0 0 10px;
-    padding:5px 9px;
-    border-radius:999px;
-    border:1px solid rgba(0,229,255,.18);
-    background:rgba(0,229,255,.06);
-    color:rgba(244,246,255,.72);
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-  }
+  
   .btn-wallet.is-connected{
     background:rgba(0,230,118,.07);
     color:#00e676;
@@ -1476,18 +1198,6 @@ body::after{
     transform:none;
   }
   .btn-wallet:disabled{ opacity:.56; cursor:not-allowed; transform:none; }
-  #claim-status.neutral{
-    background:rgba(0,229,255,.07);
-    border:1px solid rgba(0,229,255,.22);
-    color:rgba(230,250,255,.92);
-    box-shadow:0 0 28px rgba(0,229,255,.06);
-  }
-  #claim-status.muted{
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.10);
-    color:rgba(244,246,255,.72);
-    box-shadow:none;
-  }
 
   @media (max-width:600px){
     .modal-backdrop{ padding:12px; align-items:center; }
@@ -1501,130 +1211,16 @@ body::after{
     .modal-title{ font-size:21px; line-height:1.12; padding-right:24px; }
     html[dir="rtl"] .modal-title{ padding-right:0; padding-left:24px; }
     .modal-subtitle{ font-size:12.5px; line-height:1.55; }
-    .eligibility-body{ max-height:50dvh; font-size:12.5px; line-height:1.58; padding-right:4px; }
+    
     .modal-actions{ gap:8px; }
     .modal-actions .btn-wallet{ flex:1 1 100%; min-height:48px; }
     .modal-actions .btn-close{ margin-inline:auto; }
-    #cx-claim-now-btn{ min-height:50px; font-size:15px; }
+    
     .modal-close-x{ top:8px; right:9px; font-size:17px; }
     html[dir="rtl"] .modal-close-x{ right:auto; left:9px; }
   }
 
-
-  /* =========================
-     REWARD MODALS — PREMIUM V6
-     ========================= */
-  .reward-rules-modal{
-    width:min(940px,96vw);
-    max-height:calc(100dvh - 24px);
-    padding:20px 30px 18px;
-    overflow-y:auto;
-    overscroll-behavior:contain;
-    scrollbar-width:thin;
-  }
-  .reward-portal-modal{
-    width:min(540px,94vw);
-    max-height:calc(100dvh - 24px);
-    padding:20px 26px 20px;
-    overflow:visible;
-  }
-
   /* The close button floats above the layout and never consumes a row. */
-  .reward-rules-modal > .modal-close-x,
-  .reward-portal-modal > .modal-close-x,
-  html[dir="rtl"] .reward-rules-modal > .modal-close-x,
-  html[dir="rtl"] .reward-portal-modal > .modal-close-x{
-    position:absolute !important;
-    z-index:20 !important;
-    top:10px !important;
-    right:12px !important;
-    left:auto !important;
-    bottom:auto !important;
-    margin:0 !important;
-    width:30px;
-    height:30px;
-    display:grid;
-    place-items:center;
-    padding:0;
-    border-radius:999px;
-    font-size:18px;
-    line-height:1;
-    color:rgba(244,246,255,.62);
-    transform:none;
-  }
-  .reward-rules-modal > .modal-close-x:hover,
-  .reward-portal-modal > .modal-close-x:hover{
-    background:rgba(255,255,255,.055);
-    color:rgba(244,246,255,.96);
-    transform:none;
-  }
-
-  .reward-rules-modal .modal-badge,
-  .reward-portal-modal .modal-badge{
-    margin-top:0;
-    margin-bottom:5px;
-  }
-  .reward-rules-modal .modal-title,
-  .reward-portal-modal .modal-title{
-    padding:0 !important;
-    margin-right:0 !important;
-    margin-left:0 !important;
-  }
-  .reward-rules-modal .modal-title{
-    font-size:26px;
-    line-height:1.08;
-    margin-bottom:7px;
-  }
-  .reward-rules-modal .modal-subtitle{
-    max-width:790px;
-    font-size:13px;
-    line-height:1.45;
-    margin-bottom:11px;
-  }
-  .reward-rules-modal .eligibility-body{
-    max-height:none;
-    overflow:visible;
-    padding:0;
-    margin:0 0 12px;
-    font-size:12.6px;
-    line-height:1.45;
-  }
-  .reward-rules-modal .eligibility-body ol{
-    margin:0;
-    padding-inline-start:22px;
-  }
-  .reward-rules-modal .eligibility-body li{
-    padding:5px 0 7px;
-    color:rgba(244,246,255,.70);
-  }
-  .reward-rules-modal .eligibility-body li + li{
-    margin-top:0;
-    border-top:1px solid rgba(255,255,255,.065);
-  }
-  .reward-rules-modal .eligibility-body li strong{
-    color:rgba(249,251,255,.95);
-    font-weight:850;
-  }
-  .eligibility-warning{
-    margin-top:7px;
-    padding:8px 11px;
-    border-radius:10px;
-    border:1px solid rgba(255,92,116,.22);
-    background:rgba(255,92,116,.07);
-    color:rgba(255,226,231,.92);
-    line-height:1.42;
-  }
-  .eligibility-warning strong{ color:#ff9dad !important; }
-  .eligibility-rate-note{
-    margin-top:9px;
-    padding:8px 10px;
-    border-radius:10px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.08);
-    color:rgba(244,246,255,.62);
-    font-size:11.2px;
-    line-height:1.42;
-  }
 
   /* Center the agreement CTA and the text below it. */
   .rules-actions{
@@ -1647,32 +1243,6 @@ body::after{
     line-height:1.45;
   }
 
-  .reward-portal-modal .modal-title{
-    font-size:25px;
-    line-height:1.08;
-    margin-bottom:8px;
-  }
-  .reward-portal-modal .modal-subtitle{
-    font-size:13px;
-    line-height:1.5;
-    margin-bottom:12px;
-    color:rgba(244,246,255,.68);
-  }
-  .claim-primary-actions{
-    margin-top:12px;
-    flex-wrap:nowrap;
-  }
-  .claim-primary-actions .btn-wallet{ min-height:48px; }
-  .claim-primary-actions .btn-close{
-    flex:0 0 auto;
-    min-height:38px;
-    padding-inline:16px;
-  }
-  .claim-caption{
-    color:rgba(244,246,255,.48);
-    line-height:1.45;
-  }
-
   .verified-cycle-note{
     display:inline-flex;
     align-items:center;
@@ -1687,31 +1257,7 @@ body::after{
     font-weight:800;
     letter-spacing:.02em;
   }
-  .future-eligibility-card{
-    margin-top:12px;
-    padding:12px 13px;
-    border-radius:14px;
-    border:1px solid rgba(255,193,7,.30);
-    background:linear-gradient(180deg,rgba(255,193,7,.10),rgba(255,153,0,.055));
-    color:rgba(255,229,150,.94);
-    text-align:center;
-  }
-  .future-eligibility-card strong{
-    display:block;
-    color:#ffd75e;
-    margin-bottom:4px;
-    font-size:13px;
-  }
-  .future-eligibility-card span{
-    font-size:11.5px;
-    line-height:1.45;
-  }
-  #claim-status.claimed{
-    background:rgba(0,229,255,.065);
-    border:1px solid rgba(0,229,255,.22);
-    color:rgba(225,250,255,.94);
-    box-shadow:0 0 26px rgba(0,229,255,.06);
-  }
+
   .btn-wallet.is-loading{ cursor:wait; opacity:.88; }
   .btn-wallet.is-loading::before{
     content:"";
@@ -1728,66 +1274,16 @@ body::after{
   @keyframes cxSpin{ to{ transform:rotate(360deg); } }
 
   /* Arabic stays RTL, but the close control remains consistently top-right. */
-  html[dir="rtl"] .reward-rules-modal,
-  html[dir="rtl"] .reward-portal-modal{
-    text-align:right;
-  }
-  html[dir="rtl"] .reward-rules-modal .modal-badge,
-  html[dir="rtl"] .reward-portal-modal .modal-badge{
-    padding-right:34px;
-  }
 
   @media (min-width:701px) and (max-height:760px){
-    .reward-rules-modal{
-      width:min(980px,97vw);
-      padding:17px 26px 15px;
-    }
-    .reward-rules-modal .modal-title{ font-size:23px; }
-    .reward-rules-modal .modal-subtitle{ margin-bottom:7px; font-size:12.2px; }
-    .reward-rules-modal .eligibility-body{
-      font-size:11.7px;
-      line-height:1.36;
-      margin-bottom:8px;
-    }
-    .reward-rules-modal .eligibility-body li{ padding:3px 0 5px; }
-    .eligibility-warning{ margin-top:5px; padding:6px 9px; }
-    .eligibility-rate-note{ margin-top:6px; padding:6px 9px; }
+
     .rules-actions{ margin-top:5px; }
     .rules-actions .btn-wallet{ padding-block:10px; min-height:44px; }
     .rules-caption{ font-size:10.2px; margin-top:4px; }
   }
 
   @media (max-width:700px){
-    .reward-rules-modal,
-    .reward-portal-modal{
-      width:100%;
-      max-height:calc(100dvh - 16px);
-      border-radius:20px;
-      padding:18px 16px 16px;
-      overflow-y:auto;
-      overscroll-behavior:contain;
-    }
-    .reward-rules-modal .modal-title,
-    .reward-portal-modal .modal-title{
-      padding:0 !important;
-      font-size:21px;
-      line-height:1.12;
-    }
-    .reward-rules-modal .modal-subtitle,
-    .reward-portal-modal .modal-subtitle{
-      font-size:12.4px;
-      line-height:1.5;
-      padding:0;
-    }
-    .reward-rules-modal .eligibility-body{
-      max-height:none;
-      overflow:visible;
-      font-size:12px;
-      line-height:1.46;
-      padding:0;
-    }
-    .reward-rules-modal .eligibility-body ol{ padding-inline-start:20px; }
-    .reward-rules-modal .eligibility-body li{ padding:6px 0 7px; }
+
     .rules-actions{
       justify-content:center;
       width:100%;
@@ -1805,142 +1301,7 @@ body::after{
       padding-inline:4px;
       font-size:10.4px;
     }
-    .claim-primary-actions{ flex-wrap:wrap; }
-    .claim-primary-actions .btn-wallet{ flex:1 1 100%; }
-    .claim-primary-actions .btn-close{ margin-inline:auto; }
-    .reward-rules-modal > .modal-close-x,
-    .reward-portal-modal > .modal-close-x,
-    html[dir="rtl"] .reward-rules-modal > .modal-close-x,
-    html[dir="rtl"] .reward-portal-modal > .modal-close-x{
-      top:7px !important;
-      right:7px !important;
-      left:auto !important;
-      width:30px;
-      height:30px;
-    }
-  }
 
-  /* =========================
-     CALCULATOR MODAL
-     ========================= */
-  .calculator-modal{
-    position:fixed; inset:0;
-    display:none;
-    align-items:center; justify-content:center;
-    background: rgba(0,0,0,.74);
-    backdrop-filter: blur(10px);
-    z-index:6000;
-  }
-  .calculator-modal.active{ display:flex; }
-
-  .calculator-content{
-    width: min(420px, 92vw);
-    border-radius: 24px;
-    padding: 22px;
-    position:relative;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at top left, rgba(124,92,255,.18), transparent 55%),
-      radial-gradient(circle at top right, rgba(0,229,255,.16), transparent 55%),
-      rgba(10,12,24,.88);
-    border: 1px solid rgba(255,255,255,.18);
-    box-shadow: var(--sh2), inset 0 1px 0 rgba(255,255,255,.06);
-    backdrop-filter: blur(22px);
-  }
-  .calculator-content h2{
-    font-size: 20px;
-    font-weight: 950;
-    letter-spacing: -0.01em;
-    margin-bottom: 6px;
-  }
-  .calc-desc{ font-size: 13px; color: var(--muted); margin-bottom: 12px; }
-
-  .calculator-content label{
-    display:block;
-    font-size: 13px;
-    margin-top: 8px;
-    margin-bottom: 5px;
-    text-align:left;
-    color: rgba(244,246,255,.86);
-  }
-  .calculator-content input,
-  .calculator-content select{
-    width:100%;
-    padding: 9px 12px;
-    border-radius:999px;
-    border: 1px solid rgba(255,255,255,.16);
-    background: rgba(5,7,18,.92);
-    color: var(--text);
-    font-size: 13px;
-    outline:none;
-    transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
-  }
-  .calculator-content input:focus,
-  .calculator-content select:focus{
-    border-color: rgba(0,229,255,.72);
-    box-shadow: 0 0 0 3px rgba(0,229,255,.18);
-  }
-  .calculator-content select{
-    appearance:none;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    padding-right: 35px;
-    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='14' viewBox='0 0 20 20' width='14' xmlns='http://www.w3.org/2000/svg'><path d='M5.516 7.548l4.484 4.482 4.484-4.482L16 8.548l-6 6-6-6z'/></svg>");
-    background-repeat:no-repeat;
-    background-position:right 14px center;
-    background-size:14px;
-  }
-
-  .closeCalc{
-    position:absolute;
-    top: 18px; right: 18px;
-    font-size: 26px;
-    color: rgba(244,246,255,.60);
-    cursor:pointer;
-    z-index:10;
-    line-height:1;
-    transition: color .18s var(--ease), transform .18s var(--ease);
-  }
-  .closeCalc:hover{ color: rgba(244,246,255,.92); transform: scale(1.03); }
-
-  #calcRun{
-    width:100%;
-    margin-top: 12px;
-    border-radius:999px;
-    border:none;
-    padding: 11px 16px;
-    font-size: 13px;
-    font-weight: 950;
-    letter-spacing: .10em;
-    text-transform: uppercase;
-    cursor:pointer;
-    background: linear-gradient(135deg, rgba(93,255,178,1), rgba(185,255,207,1));
-    color:#05060a;
-    box-shadow: 0 18px 60px rgba(0,230,118,.28);
-    transition: transform .28s var(--ease), box-shadow .28s var(--ease);
-  }
-  #calcRun:hover{ transform: translateY(-1px); box-shadow: 0 26px 90px rgba(0,230,118,.46); }
-  #calcResult{ margin-top: 10px; font-size: 13px; line-height: 1.65; }
-  .calc-note{ margin-top: 10px; font-size: 11px; color: var(--dim); }
-
-  .calc-disclaimer{
-    margin-top: 10px;
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--muted);
-    text-align:left;
-    max-width: 92%;
-  }
-  .calc-disclaimer strong{
-    display:block;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    transform: translateY(-6px);
-    font-size: 18px;
-    line-height: 1.25;
-    color: #ffcc80;
-    letter-spacing: .02em;
-    font-weight: 900;
   }
 
 /* =========================
@@ -2102,71 +1463,16 @@ body::after{
 /* Hide top bar while modal open */
 body.modal-open .top-bar{ display:none !important; }
 
-/* =========================
-   REWARDS MOBILE LAYOUT
-   ========================= */
-
 /* Stack the grid nicely on mobile */
-@media (max-width: 900px){
-  .rewards-grid{
-    grid-template-columns: 1fr !important;
-    gap: 14px;
-    align-items: stretch;
-  }
-
-  .rewards-side{
-    width: 100%;
-    gap: 12px;
-  }
-
-  .reward-card{
-    padding: 18px 16px;
-    border-radius: 20px;
-  }
-
-  .reward-card h3{
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-
-  .reward-card p,
-  .reward-card li{
-    font-size: 14px;
-    line-height: 1.65;
-  }
-}
 
 /* Keep bottom buttons closer + premium; 2 buttons stay in one row until very small */
-@media (max-width: 900px){
-  .reward-actions-inline{
-    gap: 10px;            /* ✅ closer */
-    margin-top: 14px;     /* ✅ closer */
-    flex-wrap: nowrap;
-  }
-
-  .reward-actions-inline .btn{
-    min-height: 48px;
-    padding: 12px 16px;
-    font-size: 12px;
-    letter-spacing: .10em;
-  }
-}
 
 /* Very small screens: stack buttons but still close */
-@media (max-width: 420px){
-  .reward-actions-inline{
-    flex-direction: column;
-    gap: 8px;
-  }
-  .reward-actions-inline .btn{
-    width: 100%;
-  }
-}
+
 html, body { overflow-x: hidden; }
 @media (min-width: 901px){
   html{ zoom: 1.10; }
 }
-
 
   .btn-firewall{
     display:inline-flex;align-items:center;justify-content:center;
@@ -2188,8 +1494,6 @@ html, body { overflow-x: hidden; }
     box-shadow: 0 22px 70px rgba(255,71,87,.52);
     filter: saturate(1.08);
   }
-
-
 
 /* =========================
    2026 HOME REFRESH — SAFE OVERRIDES
@@ -2246,32 +1550,6 @@ html, body { overflow-x: hidden; }
 }
 .soc-insight strong{color:rgba(0,229,255,.96)}
 
-.rewards-intro strong{
-  color:var(--text);
-  font-weight:900;
-}
-.rewards-transparency{
-  width:min(820px,100%);
-  margin:24px auto 0;
-  padding:18px 20px;
-  border-top:1px solid rgba(255,255,255,.10);
-  text-align:center;
-}
-.rewards-transparency-title{
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:rgba(0,229,255,.92);
-  margin-bottom:8px;
-}
-.rewards-transparency p{
-  font-size:13px;
-  line-height:1.7;
-  color:var(--muted);
-}
-.token-metrics-hidden,
-.presale-section-hidden{display:none !important;}
 
 /* Community: four compact cards in one row on wide desktop, fluid below. */
 #social .section-title{
@@ -2337,14 +1615,10 @@ html, body { overflow-x: hidden; }
   .hero-primary-cta .btn{width:100% !important;min-height:48px;padding:12px 16px;font-size:12px;}
   .hero-primary-sub{font-size:12px;line-height:1.5;max-width:92%;}
   .soc-insight{font-size:12px;padding:0 8px;}
-  .rewards-transparency{padding:16px 4px 0;}
+  
 }
 
 </style>
- 
-  <!-- Elofid Reward Claims — Cloudflare Turnstile -->
-  <link rel="preconnect" href="https://challenges.cloudflare.com">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
 
 <style id="elofid-logo-style">
   /* Elofid logo: round header mark (elofid-mark.svg), no tile frame */
@@ -2435,16 +1709,6 @@ html, body { overflow-x: hidden; }
         </div>
       </div>
 
-      <!-- Utility actions kept in the DOM for existing reward/calculator logic. -->
-      <div class="hero-actions hero-actions-secondary" style="display:none">
-        <button class="btn btn-secondary" id="btn-claim" data-i18n="btn_claim">Claim rewards</button>
-        <button class="btn btn-secondary" id="openCalculator" data-i18n="calc_title">Reward Calculator</button>
-        <a class="btn btn-secondary" href="#" id="presale-link" data-i18n="btn_presale" role="button">Pre-Sale Access</a>
-      </div>
-
-      <p class="hero-note" data-i18n="hero_note" style="display:none">
-        First reward cycle: <span>31 March 2026</span>. Eligibility: hold at least 60 days before the cycle date.
-      </p>
     </section>
 
     <!-- Live Security Activity -->
@@ -2583,14 +1847,6 @@ html, body { overflow-x: hidden; }
       </div>
     </section>
 
-    <!-- Ecosystem: coming soon -->
-    <section class="section rewards-section section-centered" id="rewards">
-      <div class="section-kicker" data-i18n="rewards_kicker">ECOSYSTEM</div>
-      <h2 class="section-title" data-i18n="rewards_title">Something new is on the way.</h2>
-      <p class="rewards-intro" data-i18n="rewards_intro">We are building the next layer of the Elofid ecosystem. Details will be announced only through the official Elofid channels.</p>
-      <div class="reward-policy" data-i18n="soon_note">Anyone offering anything in Elofid&#39;s name before an official announcement is not affiliated with Elofid.</div>
-    </section>
-
     <!-- Product Future -->
     <section class="section">
       <div class="section-head">
@@ -2599,17 +1855,6 @@ html, body { overflow-x: hidden; }
       </div>
       <div class="section-body">
         <p data-i18n="future_p1">12 chains today. Elofid is built to expand coverage, deepen threat intelligence, and strengthen monitoring and alerts as on-chain risk evolves.</p>
-      </div>
-    </section>
-
-    <!-- Pre-Sale section intentionally hidden until an official live destination exists. -->
-    <section class="section presale-section-hidden" aria-hidden="true">
-      <div class="section-head">
-        <div class="section-kicker" data-i18n="presale_kicker">Pre-Sale &amp; Liquidity Plan</div>
-        <h2 class="section-title" data-i18n="presale_title">Pre-Sale &amp; Liquidity Strategy</h2>
-      </div>
-      <div class="section-body">
-        <p data-i18n="presale_p1">Funds raised during the pre-sale are allocated by predefined rules toward liquidity creation, ecosystem expansion, and long-term protocol stability.</p>
       </div>
     </section>
 
@@ -2698,100 +1943,6 @@ html, body { overflow-x: hidden; }
   </footer>
 </div>
 
-<!-- Reward rules gate (shown before every Claim attempt) -->
-<div class="modal-backdrop" id="eligibility-modal-backdrop" aria-hidden="true">
-  <div class="modal reward-rules-modal" role="dialog" aria-modal="true" aria-labelledby="eligibility-modal-title">
-    <button class="modal-close-x" id="eligibility-modal-close-x" type="button" aria-label="Close">&times;</button>
-    <div class="modal-badge" data-i18n="elig_badge">ELOFID</div>
-    <h2 class="modal-title" id="eligibility-modal-title" data-i18n="elig_title">Reward Eligibility Rules</h2>
-    <p class="modal-subtitle" data-i18n="elig_subtitle">
-      A few simple rules decide which CYCX earns a reward in each cycle. Please read them before you continue.
-    </p>
-    <div class="eligibility-body" data-i18n="elig_body">
-      <ol>
-        <li><strong>Keep CYCX in your own Web3 wallet for 60 full days.</strong><br>MetaMask, Trust Wallet, Ledger and similar self-custody wallets qualify. <strong>CYCX held on an exchange — Binance, Coinbase, KuCoin or any other — does NOT count</strong>, because those tokens are not in your wallet.</li>
-        <li><strong>Every amount you receive starts its own 60-day count.</strong><br>New CYCX begins counting from the moment it arrives in your wallet. Older CYCX keeps the age it already earned.</li>
-        <li><strong>If you move part of your CYCX out, the oldest portion is counted as leaving first.</strong><br>This is a FIFO calculation used for eligibility only. The CYCX that remains keeps its recorded holding age — a partial sale or transfer does not reset the rest of your balance.</li>
-        <li><strong>Your eligible balance is fixed at the cycle snapshot.</strong><br>Only CYCX that completed the full 60 days by the moment of the snapshot can earn a reward in that cycle.</li>
-        <li><strong>Rewards must be claimed for each cycle.</strong><div class="eligibility-warning"><strong>Unclaimed rewards do not roll over and are not added to the next cycle.</strong> Each reward cycle is calculated separately.</div></li>
-        <li><strong>Only the wallet that held the CYCX can claim.</strong><br>Each allocation is secured by a Merkle proof, and the smart contract only allows that wallet to claim its own allocation.</li>
-        <li><strong>Claimed rewards can qualify in future cycles.</strong><br>Once claimed, they sit in your wallet like any other CYCX and start their own 60-day count.</li>
-      </ol>
-      <div class="eligibility-rate-note">The reward rate is a per-cycle target calculated off-chain, not a fixed or guaranteed return.</div>
-    </div>
-    <div class="modal-actions rules-actions">
-      <button class="btn-wallet" id="eligibility-continue-btn" data-i18n="elig_continue">I understand — continue</button>
-    </div>
-    <p class="modal-caption rules-caption" data-i18n="elig_caption">
-      By continuing, you confirm that you have read and understood how Elofid reward eligibility is calculated.
-    </p>
-  </div>
-</div>
-
-<!-- Claim modal -->
-<div class="modal-backdrop" id="claim-modal-backdrop" aria-hidden="true">
-  <div class="modal reward-portal-modal" role="dialog" aria-modal="true" aria-labelledby="claim-modal-title">
-    <button class="modal-close-x" id="modal-close-x" type="button" aria-label="Close">&times;</button>
-    <div class="modal-badge" data-i18n="claim_badge">Reward Portal</div>
-    <h2 class="modal-title" id="claim-modal-title" data-i18n="claim_title">Check your reward</h2>
-    <p class="modal-subtitle" data-i18n="claim_subtitle">
-      Connect the wallet that held CYCX at the snapshot. Elofid checks only the active reward cycle and never asks for your seed phrase or private key.
-    </p>
-    <div class="claim-cycle-meta" id="claim-cycle-meta"></div>
-    <div id="claim-status"></div>
-    <div class="modal-actions claim-primary-actions">
-      <button class="btn-wallet" id="btn-connect-wallet" data-i18n="claim_btn_connect">Connect wallet &amp; check</button>
-      <button class="btn-close" id="btn-close-modal" data-i18n="claim_btn_close">Close</button>
-    </div>
-    <p class="modal-caption claim-caption" data-i18n="claim_caption">
-      Checking eligibility is free. BNB gas is paid only when you submit the final claim transaction.
-    </p>
-  </div>
-</div>
-
-<!-- Reward Calculator Modal -->
-<div id="calculatorModal" class="calculator-modal" aria-hidden="true">
-  <div class="calculator-content" style="max-height:90vh; overflow-y:auto; width:min(500px,94vw);">
-    <span class="closeCalc" id="closeCalc">&times;</span>
-
-    <h2 data-i18n="calc_title">Reward Calculator</h2>
-
-    <p class="calc-desc" data-i18n="calc_desc">
-      Estimate projected Elofid distributions across multiple reward cycles.
-    </p>
-
-    <label for="calcTokens" data-i18n="calc_label_tokens">Tokens you hold:</label>
-    <input
-      id="calcTokens"
-      type="number"
-      placeholder="Enter amount..."
-      data-i18n-placeholder="calc_placeholder_tokens"
-      min="1"
-    />
-
-    <label for="calcCycles" data-i18n="calc_label_cycles">Number of cycles:</label>
-    <select id="calcCycles">
-      <option value="4"  data-i18n="calc_cycle_4" >4 cycles (≈ 1 year)</option>
-      <option value="8"  data-i18n="calc_cycle_8" >8 cycles (≈ 2 years)</option>
-      <option value="12" data-i18n="calc_cycle_12">12 cycles (≈ 3 years)</option>
-      <option value="20" data-i18n="calc_cycle_20">20 cycles (≈ 5 years)</option>
-    </select>
-
-    <button id="calcRun" data-i18n="calc_btn">Calculate</button>
-
-    <div id="calcResult"></div>
-
-    <p class="calc-note" data-i18n="calc_note" style="margin-top:12px;">
-      Compounding applies only if claimed rewards remain held through future cycles.
-    </p>
-  </div>
-</div>
-
-
-
-  <!-- Load ethers.js -->
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js"></script>
-
   <script>
   const CX_DEBUG = false; 
 
@@ -2836,9 +1987,6 @@ html, body { overflow-x: hidden; }
     security_activity_updated: "Numbers updated daily",
 
     // ===== Existing CTAs / Notes =====
-    btn_claim: "Claim rewards",
-    btn_calculator: "Calculator",
-    btn_presale: "Pre-Sale Access",
     nav_security: "Security Hub",
     nav_firewall: "Firewall",
     nav_developers: "Developers",
@@ -2858,25 +2006,8 @@ html, body { overflow-x: hidden; }
     products_api_title: "Monitoring and API",
     products_api_desc: "Continuous monitoring for teams. Meaningful changes become Events, Risk Incidents and signed webhooks.",
     products_api_btn: "For developers",
-    nav_rewards: "Ecosystem",
     nav_community: "Community",
     nav_open_tools: "Scan Wallet",
-    hero_note:
-      "First reward cycle: <span>31 March 2026</span>. Eligibility: hold at least 60 days before the cycle date.",
-
-    // ===== Transparency =====
-    transparency_kicker: "Transparency",
-    transparency_title: "On-Chain Transparency",
-    transparency_p1:
-      "All core flows — rewards, burns, and treasury movements — are executed directly by the smart contract and remain publicly verifiable on-chain.",
-
-    stat_rewards_label: "Total rewards distributed",
-    stat_burn_label: "Total tokens burned",
-    stat_onchain_tag: "Live on-chain metric",
-    stat_onchain_tag2: "Live on-chain metric",
-    stat_last_cycle_label: "Last distribution",
-    stat_last_cycle_caption: "Updates after the first reward cycle is executed.",
-    stat_next_cycle_label: "Next scheduled distribution",
 
     // ===== Why Elofid (NEW) =====
     why_kicker: "The Problem",
@@ -2896,60 +2027,12 @@ html, body { overflow-x: hidden; }
       "Security analysis, including approval scanning, threat detection and exposure mapping, is built from verifiable on-chain data and Elofid security logic. Every figure is either verified on-chain or labeled by its source.",
     vision_p3:
       "Simulations are read-only and never touch real funds. Provider keys stay on the server, and no Elofid product will ever ask for a seed phrase or a private key.",
-    // (kept if you ever use it)
-    vision_p4:
-      "Treasury assets are permanently controlled by the smart contract itself. There are no administrative withdrawals, overrides, or discretionary actions. Only predefined operations — reward distribution, token burns, and Development &amp; Operations allocations — can be executed by code.",
-
-    /* ===== Rewards Model ===== */
-    rewards_kicker: "ECOSYSTEM",
-    rewards_title: "Something new is on the way.",
-    soon_note: "Anyone offering anything in Elofid's name before an official announcement is not affiliated with Elofid.",
-    rewards_intro:
-      "We are building the next layer of the Elofid ecosystem. Details will be announced only through the official Elofid channels.",
-
-    rewards_dist_title: "Distribution Logic",
-    rewards_dist_li1: "Eligible holders receive a <strong>target 9%</strong> cycle distribution.",
-    rewards_dist_li2:
-      "For each completed distribution, the treasury burns an equal amount on a <strong>1:1 basis</strong>.",
-    rewards_dist_li3:
-      "An additional <strong>20%</strong> of the distributed amount is allocated to <strong>Development &amp; Operations</strong>, sourced exclusively from the treasury.",
-
-    rewards_example:
-      "Example:<br>For every <strong>1 CYCX</strong> distributed as rewards, <strong>0.2 CYCX</strong> is allocated to Development &amp; Operations.<br><strong>Holders receive the full target reward for each cycle.</strong>",
-
-    rewards_footer: "Fully automated • On-chain enforced • Publicly verifiable",
-
-    rewards_rules_title: "Eligibility & Claim Rules",
-    rewards_rules_li1:
-      "Tokens must be held for at least <strong>60 days</strong> in a self-custody Web3 wallet.",
-    rewards_rules_li2: "Exchange balances do not qualify.",
-    rewards_rules_li3:
-      "Rewards must be claimed every cycle.<br><strong>Unclaimed rewards do not roll over.</strong>",
-
-    rewards_chain_title: "On-Chain Enforcement",
-    rewards_chain_p1:
-      "Rewards are claimed directly by users via a secure Merkle-proof system. There is <strong>no admin, no middleman, and no manual intervention</strong>.",
-    rewards_chain_p2:
-      "Each holder triggers their own on-chain claim using their own wallet and pays their own gas.",
-
-    rewards_policy:
-      "<strong>Policy:</strong><br>Reward cycles are executed quarterly — <strong>end of March, June, September, and December</strong>, at <strong>20:00 UK time</strong>.",
 
     // ===== Future =====
     future_kicker: "What's Next",
     future_title: "Security That Keeps Expanding.",
     future_p1:
       "12 chains today. Elofid is built to expand coverage, deepen threat intelligence, and strengthen monitoring and alerts as on-chain risk evolves.",
-    future_p2:
-      "If the main treasury is ever reduced over many reward cycles after many years of reward cycles, the protocol may evolve only through a community-approved upgrade or a successor contract that preserves the same core principles: transparent execution, no surprise minting, and no hidden control over user funds.",
-    future_p3:
-      "Any future evolution will be structured to avoid unfair dilution and to maintain the long-term integrity, scarcity, and transparency upon which Elofid is built.",
-
-    // ===== Presale =====
-    presale_kicker: "Pre-Sale & Liquidity Plan",
-    presale_title: "Pre-Sale & Liquidity Strategy",
-    presale_p1:
-      "Funds raised during the pre-sale are allocated by predefined rules toward liquidity creation, ecosystem expansion, and long-term protocol stability. The objective is to establish deep, resilient market liquidity from day one — without discretionary control over user funds.",
 
     // ===== Footer =====
     footer_left:
@@ -2961,65 +2044,6 @@ html, body { overflow-x: hidden; }
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "Docs",
-
-    // ===== Claim Modal =====
-    claim_badge: "Reward Portal",
-    claim_title: "Check your reward",
-    claim_subtitle:
-      "Connect the wallet that held CYCX at the snapshot. Elofid checks only the active reward cycle and never asks for your seed phrase or private key.",
-    claim_btn_connect: "Connect wallet & check",
-    claim_connecting_wallet: "Connecting wallet…",
-    claim_connected: "Connected",
-    claim_connection_timeout: "Connection timed out. Please try again.",
-    claim_connection_failed: "Wallet connection failed. Please try again.",
-    claim_verified_cycle: "Verified against Cycle #{cycle} on-chain.",
-    claim_btn_close: "Close",
-    claim_caption:
-      "Checking is free. You only pay BNB gas on the final claim transaction.",
-    claim_checking_status: "Checking the reward cycle…",
-    claim_no_active_cycle: "No reward cycle is currently open. The next Elofid reward window will be announced through official channels.",
-    claim_portal_closed: "Claims are not open yet. Please follow the official Elofid announcement for the opening time.",
-    claim_cycle_not_ready: "The reward cycle is still being prepared. Please try again shortly.",
-    claim_cycle_mismatch: "The reward portal is being prepared for the current cycle. Please try again after the official announcement.",
-    claim_service_unavailable: "The reward service is temporarily unavailable. No transaction was sent. Please try again.",
-    claim_wrong_network: "Please switch your wallet to BNB Chain and try again.",
-    claim_checking_eligibility: "Checking this wallet’s eligibility…",
-    claim_now: "CLAIM REWARD",
-    claim_already_claimed: "Reward already claimed",
-    claim_already_claimed_text: "This wallet has already claimed its reward for the current cycle.",
-    claim_claimed_amount: "Claimed allocation",
-    claim_preparing_proof: "Preparing and verifying your claim…",
-    claim_pending: "Confirm the claim transaction in your wallet. BNB gas is paid by you.",
-    claim_success: "Claim successful. Your CYCX reward was transferred on-chain.",
-    claim_cancelled: "Transaction cancelled. Nothing was claimed.",
-    claim_failed: "The claim could not be completed. No reward was marked as claimed unless the transaction confirmed on-chain.",
-    claim_no_allocation: "No allocation was found for this wallet in the active cycle.",
-    claim_proof_invalid: "The reward proof could not be verified. No transaction was sent.",
-
-    not_eligible_title: "Not eligible for this reward cycle",
-    not_eligible_text: "This wallet has no eligible CYCX allocation in the active cycle.",
-    future_eligible_title: "Become eligible for future cycles",
-    future_eligible_text: "Hold CYCX in a self-custody wallet and complete the 60-day holding period before a future snapshot.",
-    eligible_title: "Eligible for this reward cycle",
-    eligible_wallet: "Wallet",
-    eligible_amount: "Reward allocation",
-
-    /* ===== Reward Calculator ===== */
-    calc_title: "Reward Calculator",
-    calc_desc: "Estimate projected Elofid distributions across multiple reward cycles.",
-    calc_label_tokens: "Tokens you hold:",
-    calc_placeholder_tokens: "Enter amount...",
-    calc_label_cycles: "Number of cycles:",
-    calc_cycle_1: "1 cycle",
-    calc_cycle_2: "2 cycles",
-    calc_cycle_4: "4 cycles (≈ 1 year)",
-    calc_cycle_8: "8 cycles (≈ 2 years)",
-    calc_cycle_12: "12 cycles (≈ 3 years)",
-    calc_cycle_20: "20 cycles (≈ 5 years)",
-    calc_btn: "Calculate",
-    calc_disclaimer:
-      "Elofid targets a 9% reward rate every cycle, calculated to sustain rewards long-term.<br>If you hold your tokens (including the rewards you claim) without selling or moving them,<br>you earn compound rewards — meaning each cycle is calculated on top of the previous one.<br><br><strong>Claim is required every cycle to receive your rewards.<br>Unclaimed rewards do not roll over.</strong>",
-    calc_note: "Compounding applies only if claimed rewards remain held through future cycles.",
 
     // ===== Social =====
     social_kicker: "Community",
@@ -3042,26 +2066,6 @@ html, body { overflow-x: hidden; }
     social_faq_desc: "Quick answers about Elofid",
     social_faq_btn: "Open",
 
-    // ===== Eligibility popup =====
-    elig_badge: "ELOFID",
-    elig_title: "Reward Eligibility Rules",
-    elig_subtitle:
-      "A few simple rules decide which CYCX earns a reward in each cycle. Please read them before you continue.",
-    elig_body: `
-<ol>
-  <li><strong>Keep CYCX in your own Web3 wallet for 60 full days.</strong><br>MetaMask, Trust Wallet, Ledger and similar self-custody wallets qualify. <strong>CYCX held on an exchange — Binance, Coinbase, KuCoin or any other — does NOT count</strong>, because those tokens are not in your wallet.</li>
-  <li><strong>Every amount you receive starts its own 60-day count.</strong><br>New CYCX begins counting from the moment it arrives in your wallet. Older CYCX keeps the age it already earned.</li>
-  <li><strong>If you move part of your CYCX out, the oldest portion is counted as leaving first.</strong><br>This is a FIFO calculation used for eligibility only. The CYCX that remains keeps its recorded holding age — a partial sale or transfer does not reset the rest of your balance.</li>
-  <li><strong>Your eligible balance is fixed at the cycle snapshot.</strong><br>Only CYCX that completed the full 60 days by the moment of the snapshot can earn a reward in that cycle.</li>
-  <li><strong>Rewards must be claimed for each cycle.</strong><div class="eligibility-warning"><strong>Unclaimed rewards do not roll over and are not added to the next cycle.</strong> Each reward cycle is calculated separately.</div></li>
-  <li><strong>Only the wallet that held the CYCX can claim.</strong><br>Each allocation is secured by a Merkle proof, and the smart contract only allows that wallet to claim its own allocation.</li>
-  <li><strong>Claimed rewards can qualify in future cycles.</strong><br>Once claimed, they sit in your wallet like any other CYCX and start their own 60-day count.</li>
-</ol>
-<div class="eligibility-rate-note">The reward rate is a per-cycle target calculated off-chain, not a fixed or guaranteed return.</div>
-`,
-    elig_continue: "I understand — continue",
-    elig_caption:
-      "By continuing, you confirm that you have read and understood how Elofid reward eligibility is calculated.",
   },
 
   zh: {
@@ -3093,10 +2097,6 @@ html, body { overflow-x: hidden; }
     security_activity_tag: "活动计数",
     security_activity_updated: "数据每日更新",
 
-    btn_claim: "领取奖励",
-    btn_calculator: "计算器",
-    btn_presale: "预售通道",
-    nav_rewards: "生态系统",
     nav_firewall: "防火墙",
     nav_developers: "开发者",
     footer_developers: "开发者",
@@ -3118,21 +2118,6 @@ html, body { overflow-x: hidden; }
     nav_security: "安全中心",
     nav_community: "社区",
     nav_open_tools: "扫描钱包",
-    hero_note:
-      "首个分红周期：<span>2026 年 3 月 31 日</span>。资格：至少在周期日期前 60 天开始持有代币。",
-
-    transparency_kicker: "透明性",
-    transparency_title: "链上透明",
-    transparency_p1:
-      "所有核心流程——奖励、销毁以及金库资金流动——均由智能合约直接执行，并可在链上公开验证。",
-
-    stat_rewards_label: "累计发放奖励总量",
-    stat_burn_label: "累计销毁代币总量",
-    stat_onchain_tag: "链上实时数据",
-    stat_onchain_tag2: "链上实时数据",
-    stat_last_cycle_label: "上一次分发",
-    stat_last_cycle_caption: "首个奖励周期执行后将自动更新。",
-    stat_next_cycle_label: "下一次计划分发",
 
     why_kicker: "问题所在",
     why_title: "你不是被黑了，是你自己把门留开了。",
@@ -3142,7 +2127,6 @@ html, body { overflow-x: hidden; }
     why_li3: "<strong>未知爆炸半径：</strong>用户很少知道恶意支出方实际上能够触及多少资产。",
     why_p2: "Elofid Firewall 的诞生，就是为了在这些漏洞造成损失之前将其堵住。",
 
-
     vision_kicker: "安全基础设施",
     vision_title: "以安全公司的标准打造。",
     vision_p1:
@@ -3151,54 +2135,11 @@ html, body { overflow-x: hidden; }
       "安全分析（包括授权扫描、威胁检测和风险敞口映射）基于可验证的链上数据和 Elofid 安全逻辑。每个数据要么经过链上验证，要么标注其来源。",
     vision_p3:
       "模拟交易为只读，绝不动用真实资金。服务商密钥保存在服务器端，Elofid 的任何产品都不会索要助记词或私钥。",
-    vision_p4:
-      "金库资产永久由智能合约本身控制。不存在管理提取、覆盖或自由裁量行为。只有预定义的操作——奖励分配、代币销毁以及开发与运营分配——才能由代码执行。",
-
-    rewards_kicker: "生态系统",
-    rewards_title: "新内容即将推出。",
-    soon_note: "在官方公告之前，任何以 Elofid 名义提供任何东西的人都与 Elofid 无关。",
-    rewards_intro:
-      "我们正在构建 Elofid 生态系统的下一层。详情只会通过 Elofid 官方渠道公布。",
-
-    rewards_dist_title: "分配逻辑",
-    rewards_dist_li1: "符合条件的持有者将获得 <strong>目标 9%</strong> 的周期分配。",
-    rewards_dist_li2:
-      "每次完成分配后，金库按 <strong>1:1</strong> 的比例销毁等量代币。",
-    rewards_dist_li3:
-      "已分配金额的额外 <strong>20%</strong> 将分配给<strong>开发与运营</strong>，仅来源于金库。",
-
-    rewards_example:
-      "示例：<br>每分配 <strong>1 CYCX</strong> 奖励，<strong>0.2 CYCX</strong> 将分配至开发与运营。<br><strong>持有者可获得每个周期的完整目标奖励。</strong>",
-    rewards_footer: "完全自动化 • 链上强制执行 • 公开可验证",
-
-    rewards_rules_title: "资格与领取规则",
-    rewards_rules_li1:
-      "代币必须在自托管 Web3 钱包中持有至少 <strong>60 天</strong>。",
-    rewards_rules_li2: "交易所账户余额不符合资格。",
-    rewards_rules_li3:
-      "每个周期都必须领取奖励。<br><strong>未领取的奖励不会累积。</strong>",
-
-    rewards_chain_title: "链上执行",
-    rewards_chain_p1:
-      "用户通过安全的 Merkle 证明系统直接领取奖励。<strong>无管理员、无中介、无人工干预</strong>。",
-    rewards_chain_p2: "每位持有者使用自己的钱包发起链上领取并自行支付 Gas。",
-
-    rewards_policy:
-      "<strong>政策：</strong><br>奖励周期按季度执行 — <strong>3 月、6 月、9 月和 12 月末</strong>，时间为 <strong>英国时间 20:00</strong>。",
 
     future_kicker: "下一步",
     future_title: "不断扩展的安全能力。",
     future_p1:
       "目前覆盖 12 条链。随着链上风险演变，Elofid 将持续扩展覆盖范围、深化威胁情报，并增强监控与告警能力。",
-    future_p2:
-      "如果在多年奖励周期之后主金库最终被耗尽，协议仅可通过社区批准的升级或继任合约进行演进，且必须保持相同的核心原则：执行透明、无意外增发、无对用户资金的隐藏控制。",
-    future_p3:
-      "任何未来的演进都将被结构化设计，以避免对早期持有者造成不公平的稀释，并维护 Elofid 所建立的长期完整性、稀缺性与透明性。",
-
-    presale_kicker: "预售与流动性计划",
-    presale_title: "预售与流动性策略",
-    presale_p1:
-      "预售期间募集的资金将按照预先定义的规则用于流动性创建、生态系统扩展以及协议的长期稳定性。目标是从第一天起建立深度且具韧性的市场流动性——不对用户资金进行自由裁量控制。",
 
     footer_left:
       "Elofid 是 Web3 安全基础设施。代币扫描、钱包保护、持续监控和开发者 API。",
@@ -3209,64 +2150,6 @@ html, body { overflow-x: hidden; }
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "文档",
-
-    claim_badge: "奖励门户",
-    claim_title: "查看您的奖励",
-    claim_subtitle:
-      "连接在快照时持有 CYCX 的钱包。Elofid 只检查当前有效的奖励周期，并且绝不会要求您的助记词或私钥。",
-    claim_btn_connect: "连接钱包并检查",
-    claim_connecting_wallet: "正在连接钱包…",
-    claim_connected: "已连接",
-    claim_connection_timeout: "连接超时，请重试。",
-    claim_connection_failed: "钱包连接失败，请重试。",
-    claim_verified_cycle: "已根据链上第 #{cycle} 个奖励周期完成验证。",
-    claim_btn_close: "关闭",
-    claim_caption:
-      "检查免费。只有在最终领取交易时才需要支付 BNB Gas。",
-    claim_checking_status: "正在检查奖励周期…",
-    claim_no_active_cycle: "当前没有开放的奖励周期。下一次 Elofid 奖励窗口将通过官方渠道公布。",
-    claim_portal_closed: "奖励领取尚未开放。请以 Elofid 官方公告的开放时间为准。",
-    claim_cycle_not_ready: "奖励周期仍在准备中，请稍后再试。",
-    claim_cycle_mismatch: "奖励门户正在为当前周期准备中。请在官方公告后再试。",
-    claim_service_unavailable: "奖励服务暂时不可用。未发送任何交易，请稍后再试。",
-    claim_wrong_network: "请将钱包切换到 BNB Chain 后再试。",
-    claim_checking_eligibility: "正在检查此钱包的资格…",
-    claim_now: "领取奖励",
-    claim_already_claimed: "奖励已领取",
-    claim_already_claimed_text: "此钱包已经领取了当前周期的奖励。",
-    claim_claimed_amount: "已领取额度",
-    claim_preparing_proof: "正在准备并验证您的领取信息…",
-    claim_pending: "请在钱包中确认领取交易。BNB Gas 由您支付。",
-    claim_success: "领取成功。您的 CYCX 奖励已在链上转入钱包。",
-    claim_cancelled: "交易已取消，没有领取任何奖励。",
-    claim_failed: "领取未能完成。除非交易已在链上确认，否则奖励不会被标记为已领取。",
-    claim_no_allocation: "当前周期中未找到此钱包的奖励额度。",
-    claim_proof_invalid: "奖励证明验证失败。未发送任何交易。",
-
-    not_eligible_title: "本奖励周期暂无资格",
-    not_eligible_text: "此钱包在当前周期中没有符合条件的 CYCX 奖励额度。",
-    future_eligible_title: "为未来周期获得资格",
-    future_eligible_text: "将 CYCX 存放在自托管钱包中，并在未来快照前完成 60 天持有期。",
-    eligible_title: "符合本奖励周期资格",
-    eligible_wallet: "钱包",
-    eligible_amount: "奖励额度",
-
-    calc_title: "奖励计算器",
-    calc_desc: "估算多个奖励周期内的 Elofid 预期分配额。",
-    calc_label_tokens: "您持有的代币数量：",
-    calc_placeholder_tokens: "请输入数量…",
-    calc_label_cycles: "周期数量：",
-    calc_cycle_1: "1 个周期",
-    calc_cycle_2: "2 个周期",
-    calc_cycle_4: "4 个周期（≈ 1 年）",
-    calc_cycle_8: "8 个周期（≈ 2 年）",
-    calc_cycle_12: "12 个周期（≈ 3 年）",
-    calc_cycle_20: "20 个周期（≈ 5 年）",
-    calc_btn: "计算",
-    calc_disclaimer:
-      "Elofid 的目标是每个奖励周期支付 9%，以维持长期可持续性。<br>如果您持续持有代币（包括领取的奖励）且不出售或转移，<br>您将获得复利奖励 —— 每个周期都基于前一个周期计算。<br><br><strong>必须在每个周期领取奖励。<br>未领取的奖励不会累积。</strong>",
-    calc_note:
-      "复利仅在已领取奖励持续持有至未来周期时适用。",
 
     social_kicker: "社区",
     social_title: "保持联系",
@@ -3287,25 +2170,6 @@ html, body { overflow-x: hidden; }
     social_faq_desc: "关于 Elofid 的快速解答",
     social_faq_btn: "打开",
 
-    elig_badge: "ELOFID",
-    elig_title: "奖励资格规则",
-    elig_subtitle:
-      "以下几个简单规则决定每个周期中哪些 CYCX 可以获得奖励。继续前请先阅读。",
-    elig_body: `
-<ol>
-  <li><strong>将 CYCX 存放在您自己的 Web3 钱包中满 60 天。</strong><br>MetaMask、Trust Wallet、Ledger 等自托管钱包符合条件。<strong>存放在 Binance、Coinbase、KuCoin 或任何其他交易所中的 CYCX 不计入资格</strong>，因为这些代币并不在您的个人钱包中。</li>
-  <li><strong>您收到的每一笔 CYCX 都会单独开始自己的 60 天计时。</strong><br>新收到的 CYCX 从进入钱包的那一刻开始计算；更早收到的 CYCX 会保留已经累积的持有时间。</li>
-  <li><strong>如果您转出部分 CYCX，在奖励资格计算中会先计为最早持有的部分离开。</strong><br>这只是用于资格计算的 FIFO（先进先出）规则。留在钱包中的 CYCX 会保留其已记录的持有时间；部分出售或转账不会重置其余余额的持有时间。</li>
-  <li><strong>您的合格余额会在奖励周期快照时固定。</strong><br>只有在快照时已经完成完整 60 天持有期的 CYCX 才能获得该周期奖励。</li>
-  <li><strong>每个周期的奖励都需要单独领取。</strong><div class="eligibility-warning"><strong>未领取的奖励不会滚入或加入下一个周期。</strong> 每个奖励周期都会单独计算。</div></li>
-  <li><strong>只有实际持有 CYCX 的钱包才能领取。</strong><br>每个分配都由 Merkle proof 保护，智能合约只允许该钱包领取属于自己的额度。</li>
-  <li><strong>已领取的奖励也可以在未来周期获得资格。</strong><br>领取后，它们与其他 CYCX 一样留在您的钱包中，并开始自己的 60 天计时。</li>
-</ol>
-<div class="eligibility-rate-note">奖励率是每个周期在链下计算的目标值，并不是固定或保证的回报。</div>
-`,
-    elig_continue: "我已了解 — 继续",
-    elig_caption:
-      "继续即表示您确认已经阅读并理解 Elofid 奖励资格的计算方式。",
   },
 
   ar: {
@@ -3336,10 +2200,6 @@ html, body { overflow-x: hidden; }
     security_activity_tag: "عداد نشاط",
     security_activity_updated: "يتم تحديث الأرقام يوميًا",
 
-    btn_claim: "استعلام عن المكافآت",
-    btn_calculator: "الحاسبة",
-    btn_presale: "الوصول للبيع المسبق",
-    nav_rewards: "النظام البيئي",
     nav_firewall: "الجدار الناري",
     nav_developers: "المطورون",
     footer_developers: "المطورون",
@@ -3361,21 +2221,6 @@ html, body { overflow-x: hidden; }
     nav_security: "مركز الأمان",
     nav_community: "المجتمع",
     nav_open_tools: "فحص المحفظة",
-    hero_note:
-      "أول دورة مكافآت: <span>31 مارس 2026</span>. الأهلية: يجب البدء في الاحتفاظ قبل موعد الدورة بـ 60 يومًا على الأقل.",
-
-    transparency_kicker: "الشفافية",
-    transparency_title: "شفافية على السلسلة",
-    transparency_p1:
-      "تُنفَّذ جميع التدفقات الأساسية — المكافآت والحرق وحركات الخزينة — مباشرة بواسطة العقد الذكي وتظل قابلة للتحقق علنًا على السلسلة.",
-
-    stat_rewards_label: "إجمالي المكافآت الموزعة",
-    stat_burn_label: "إجمالي الرموز المحروقة",
-    stat_onchain_tag: "مؤشر حي على السلسلة",
-    stat_onchain_tag2: "مؤشر حي على السلسلة",
-    stat_last_cycle_label: "آخر توزيع",
-    stat_last_cycle_caption: "سيتم التحديث بعد تنفيذ أول دورة مكافآت.",
-    stat_next_cycle_label: "موعد التوزيع القادم",
 
     why_kicker: "المشكلة",
     why_title: "لم تُخترق. لقد تركت الأبواب مفتوحة.",
@@ -3393,55 +2238,11 @@ html, body { overflow-x: hidden; }
       "يعتمد التحليل الأمني، بما في ذلك فحص الموافقات واكتشاف التهديدات وتحديد نطاق التعرض، على بيانات قابلة للتحقق على البلوكشين وعلى منطق Elofid الأمني. كل رقم إما موثق على البلوكشين أو موسوم بمصدره.",
     vision_p3:
       "عمليات المحاكاة للقراءة فقط ولا تلمس أي أموال حقيقية. تبقى مفاتيح المزودين على الخادم، ولن يطلب أي منتج من Elofid عبارة الاسترداد أو المفتاح الخاص أبدًا.",
-    vision_p4:
-      "تخضع أصول الخزينة لسيطرة دائمة من قبل العقد الذكي نفسه. لا توجد عمليات سحب إدارية أو تجاوزات أو صلاحيات تقديرية. لا يمكن تنفيذ سوى العمليات المحددة مسبقاً — توزيع المكافآت، الحرق، وتخصيصات التطوير والتشغيل — عبر الكود.",
-
-    rewards_kicker: "النظام البيئي",
-    rewards_title: "شيء جديد في الطريق.",
-    soon_note: "أي شخص يعرض أي شيء باسم Elofid قبل الإعلان الرسمي لا علاقة له بـ Elofid.",
-    rewards_intro:
-      "نحن نبني الطبقة التالية من منظومة Elofid. سيتم الإعلان عن التفاصيل فقط عبر قنوات Elofid الرسمية.",
-
-    rewards_dist_title: "منطق التوزيع",
-    rewards_dist_li1: "يحصل الحاملون المؤهلون على توزيع دوري بنسبة مستهدفة تبلغ <strong>9٪</strong>.",
-    rewards_dist_li2:
-      "عند اكتمال كل توزيع، تحرق الخزينة كمية مساوية على أساس <strong>1:1</strong>.",
-    rewards_dist_li3:
-      "يُخصص <strong>20٪</strong> إضافي من المبلغ الموزع لـ<strong>التطوير والتشغيل</strong>، مصدره الخزينة حصراً.",
-
-    rewards_example:
-      "مثال:<br>مقابل كل <strong>1 CYCX</strong> يتم توزيعه كمكافأة، يتم تخصيص <strong>0.2 CYCX</strong> للتطوير والتشغيل.<br><strong>يحصل الحاملون على كامل المكافأة المستهدفة في كل دورة.</strong>",
-    rewards_footer: "تنفيذ آلي بالكامل • مفروض على السلسلة • قابل للتحقق علنًا",
-
-    rewards_rules_title: "شروط الأهلية وقواعد المطالبة",
-    rewards_rules_li1:
-      "يجب الاحتفاظ بالرموز لمدة <strong>60 يومًا</strong> على الأقل في محفظة Web3 ذاتية الحفظ.",
-    rewards_rules_li2: "الأرصدة الموجودة في البورصات غير مؤهلة.",
-    rewards_rules_li3:
-      "يجب المطالبة بالمكافآت في كل دورة.<br><strong>المكافآت غير المطالب بها لا تنتقل.</strong>",
-
-    rewards_chain_title: "التنفيذ على السلسلة",
-    rewards_chain_p1:
-      "يتم المطالبة بالمكافآت مباشرة عبر نظام Merkle-proof آمن. <strong>لا يوجد مسؤول ولا وسيط ولا تدخل يدوي</strong>.",
-    rewards_chain_p2:
-      "كل حامل يطلق عملية المطالبة بنفسه من محفظته ويدفع رسوم الغاز الخاصة به.",
-
-    rewards_policy:
-      "<strong>السياسة:</strong><br>تُنفذ دورات المكافآت ربع سنويًا — <strong>نهاية مارس ويونيو وسبتمبر وديسمبر</strong>، في <strong>الساعة 20:00 بتوقيت المملكة المتحدة</strong>.",
 
     future_kicker: "ما القادم",
     future_title: "أمان يواصل التوسع.",
     future_p1:
       "12 شبكة اليوم. تم تصميم Elofid لتوسيع التغطية، وتعميق معلومات التهديدات، وتعزيز المراقبة والتنبيهات مع تطور مخاطر السلسلة.",
-    future_p2:
-      "في حال استنفاد الخزينة الرئيسية بعد سنوات طويلة من دورات المكافآت، لا يمكن أن يتطور البروتوكول إلا من خلال ترقية يوافق عليها المجتمع أو عقد بديل يحافظ على نفس المبادئ الأساسية: تنفيذ شفاف، عدم وجود سك مفاجئ، وعدم وجود سيطرة خفية على أموال المستخدمين.",
-    future_p3:
-      "سيتم تنظيم أي تطور مستقبلي بطريقة تمنع التخفيف غير العادل لحصص الحاملين الأوائل، وتحافظ على النزاهة طويلة الأمد والندرة والشفافية التي بُني عليها Elofid.",
-
-    presale_kicker: "الطرح المسبق وخطة السيولة",
-    presale_title: "استراتيجية الطرح المسبق والسيولة",
-    presale_p1:
-      "تُخصَّص الأموال التي يتم جمعها خلال الطرح المسبق وفق قواعد محددة مسبقاً لإنشاء السيولة، وتوسيع النظام البيئي، ودعم استقرار البروتوكول على المدى الطويل. والهدف هو إنشاء سيولة سوقية عميقة ومرنة منذ اليوم الأول — دون سيطرة تقديرية على أموال المستخدمين.",
 
     footer_left:
       "Elofid هي بنية تحتية للأمان في Web3. فحص التوكنات وحماية المحافظ والمراقبة المستمرة وواجهة برمجة للمطورين.",
@@ -3452,64 +2253,6 @@ html, body { overflow-x: hidden; }
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "المستندات",
-
-    claim_badge: "بوابة المكافآت",
-    claim_title: "تحقق من مكافأتك",
-    claim_subtitle:
-      "قم بتوصيل المحفظة التي كانت تحتفظ بـ CYCX وقت اللقطة. يتحقق Elofid فقط من دورة المكافآت النشطة ولن يطلب منك أبدًا العبارة السرية أو المفتاح الخاص.",
-    claim_btn_connect: "توصيل المحفظة والتحقق",
-    claim_connecting_wallet: "جارٍ توصيل المحفظة…",
-    claim_connected: "متصلة",
-    claim_connection_timeout: "انتهت مهلة الاتصال. حاول مرة أخرى.",
-    claim_connection_failed: "فشل اتصال المحفظة. حاول مرة أخرى.",
-    claim_verified_cycle: "تم التحقق مقابل دورة المكافآت رقم #{cycle} على السلسلة.",
-    claim_btn_close: "إغلاق",
-    claim_caption:
-      "التحقق مجاني. تدفع رسوم BNB فقط عند تنفيذ معاملة المطالبة النهائية.",
-    claim_checking_status: "جارٍ التحقق من دورة المكافآت…",
-    claim_no_active_cycle: "لا توجد دورة مكافآت مفتوحة حاليًا. سيتم الإعلان عن نافذة مكافآت Elofid التالية عبر القنوات الرسمية.",
-    claim_portal_closed: "المطالبة بالمكافآت لم تُفتح بعد. يرجى متابعة إعلان Elofid الرسمي لمعرفة وقت الفتح.",
-    claim_cycle_not_ready: "دورة المكافآت ما زالت قيد التجهيز. حاول مرة أخرى بعد قليل.",
-    claim_cycle_mismatch: "بوابة المكافآت قيد التجهيز للدورة الحالية. حاول مجددًا بعد الإعلان الرسمي.",
-    claim_service_unavailable: "خدمة المكافآت غير متاحة مؤقتًا. لم يتم إرسال أي معاملة. حاول مرة أخرى.",
-    claim_wrong_network: "يرجى تبديل محفظتك إلى شبكة BNB Chain ثم المحاولة مرة أخرى.",
-    claim_checking_eligibility: "جارٍ التحقق من أهلية هذه المحفظة…",
-    claim_now: "المطالبة بالمكافأة",
-    claim_already_claimed: "تمت المطالبة بالمكافأة",
-    claim_already_claimed_text: "هذه المحفظة طالبت بالفعل بمكافأتها في الدورة الحالية.",
-    claim_claimed_amount: "التخصيص المطالب به",
-    claim_preparing_proof: "جارٍ إعداد مطالبتك والتحقق منها…",
-    claim_pending: "أكد معاملة المطالبة في محفظتك. رسوم BNB تدفعها أنت.",
-    claim_success: "تمت المطالبة بنجاح. تم تحويل مكافأة CYCX إلى محفظتك على السلسلة.",
-    claim_cancelled: "تم إلغاء المعاملة. لم تتم المطالبة بأي مكافأة.",
-    claim_failed: "تعذر إكمال المطالبة. لن تُعتبر المكافأة مطالَبًا بها ما لم يتم تأكيد المعاملة على السلسلة.",
-    claim_no_allocation: "لم يتم العثور على تخصيص لهذه المحفظة في الدورة النشطة.",
-    claim_proof_invalid: "تعذر التحقق من إثبات المكافأة. لم يتم إرسال أي معاملة.",
-
-    not_eligible_title: "غير مؤهل لهذه الدورة",
-    not_eligible_text: "لا يوجد لهذه المحفظة تخصيص CYCX مؤهل في الدورة النشطة.",
-    future_eligible_title: "تأهل للدورات المستقبلية",
-    future_eligible_text: "احتفظ بـ CYCX في محفظة ذاتية الحفظ وأكمل فترة الـ 60 يومًا قبل لقطة مستقبلية.",
-    eligible_title: "مؤهل لهذه الدورة من المكافآت",
-    eligible_wallet: "المحفظة",
-    eligible_amount: "تخصيص المكافأة",
-
-    calc_title: "حاسبة المكافآت",
-    calc_desc: "قدّر التوزيعات المتوقعة لـ Elofid عبر دورات مكافآت متعددة.",
-    calc_label_tokens: "عدد الرموز التي تمتلكها:",
-    calc_placeholder_tokens: "أدخل الكمية…",
-    calc_label_cycles: "عدد الدورات:",
-    calc_cycle_1: "دورة واحدة",
-    calc_cycle_2: "دورتان",
-    calc_cycle_4: "4 دورات (≈ سنة واحدة)",
-    calc_cycle_8: "8 دورات (≈ سنتان)",
-    calc_cycle_12: "12 دورة (≈ 3 سنوات)",
-    calc_cycle_20: "20 دورة (≈ 5 سنوات)",
-    calc_btn: "احسب",
-    calc_disclaimer:
-      "يستهدف Elofid دفع نسبة 9٪ في كل دورة مكافآت، بما يضمن استدامة طويلة الأمد.<br>إذا احتفظت برموزك (بما في ذلك المكافآت التي تطالب بها) دون بيع أو نقل،<br>فإنك تحصل على مكافآت تراكمية — أي أن كل دورة تُحسب فوق السابقة.<br><br><strong>يجب المطالبة بالمكافآت في كل دورة.<br>المكافآت غير المطالب بها لا تنتقل.</strong>",
-    calc_note:
-      "يسري التراكم فقط إذا ظلت المكافآت المُطالب بها محتفظاً بها خلال الدورات المستقبلية.",
 
     social_kicker: "المجتمع",
     social_title: "ابقَ على تواصل",
@@ -3531,25 +2274,6 @@ html, body { overflow-x: hidden; }
     social_faq_desc: "إجابات سريعة حول Elofid",
     social_faq_btn: "افتح",
 
-    elig_badge: "ELOFID",
-    elig_title: "قواعد أهلية المكافآت",
-    elig_subtitle:
-      "تحدد بعض القواعد البسيطة أي CYCX يمكنه الحصول على مكافأة في كل دورة. يرجى قراءتها قبل المتابعة.",
-    elig_body: `
-<ol>
-  <li><strong>احتفظ بـ CYCX في محفظة Web3 الخاصة بك لمدة 60 يومًا كاملة.</strong><br>تتأهل محافظ الحفظ الذاتي مثل MetaMask وTrust Wallet وLedger. <strong>أما CYCX الموجود في Binance أو Coinbase أو KuCoin أو أي منصة أخرى فلا يُحتسب</strong> لأن هذه الرموز ليست داخل محفظتك الشخصية.</li>
-  <li><strong>كل كمية تستلمها تبدأ عدّاد 60 يومًا خاصًا بها.</strong><br>يبدأ عدّ CYCX الجديد من لحظة وصوله إلى محفظتك، بينما يحتفظ CYCX الأقدم بالعمر الذي اكتسبه بالفعل.</li>
-  <li><strong>إذا أخرجت جزءًا من CYCX من محفظتك، يُحتسب أقدم جزء مسجل على أنه غادر أولًا.</strong><br>هذه قاعدة FIFO للحساب الخاص بالأهلية فقط. يحتفظ CYCX المتبقي بعمر الاحتفاظ المسجل — البيع أو التحويل الجزئي لا يعيد ضبط مدة الاحتفاظ لبقية الرصيد.</li>
-  <li><strong>يتم تثبيت رصيدك المؤهل عند لقطة الدورة.</strong><br>فقط CYCX الذي أكمل 60 يومًا كاملة بحلول لحظة اللقطة يمكنه الحصول على مكافأة في تلك الدورة.</li>
-  <li><strong>يجب المطالبة بالمكافآت في كل دورة.</strong><div class="eligibility-warning"><strong>المكافآت غير المطالب بها لا تنتقل ولا تُضاف إلى الدورة التالية.</strong> يتم احتساب كل دورة مكافآت بشكل مستقل.</div></li>
-  <li><strong>فقط المحفظة التي احتفظت بـ CYCX يمكنها المطالبة.</strong><br>كل تخصيص محمي بإثبات Merkle، والعقد الذكي يسمح فقط لتلك المحفظة بالمطالبة بتخصيصها الخاص.</li>
-  <li><strong>يمكن للمكافآت المطالب بها أن تتأهل في دورات مستقبلية.</strong><br>بعد المطالبة بها، تبقى في محفظتك مثل أي CYCX آخر وتبدأ عدّاد 60 يومًا خاصًا بها.</li>
-</ol>
-<div class="eligibility-rate-note">معدل المكافأة هو هدف لكل دورة يتم احتسابه خارج السلسلة، وليس عائدًا ثابتًا أو مضمونًا.</div>
-`,
-    elig_continue: "أفهم — متابعة",
-    elig_caption:
-      "بالمتابعة، تؤكد أنك قرأت وفهمت كيفية احتساب أهلية مكافآت Elofid.",
   },
 
   ru: {
@@ -3580,10 +2304,6 @@ html, body { overflow-x: hidden; }
     security_activity_tag: "Счётчик активности",
     security_activity_updated: "Данные обновляются ежедневно",
 
-    btn_claim: "Получить награды",
-    btn_calculator: "Калькулятор",
-    btn_presale: "Предпродажный доступ",
-    nav_rewards: "Экосистема",
     nav_firewall: "Файервол",
     nav_developers: "Разработчикам",
     footer_developers: "Разработчикам",
@@ -3605,21 +2325,6 @@ html, body { overflow-x: hidden; }
     nav_security: "Security Hub",
     nav_community: "Сообщество",
     nav_open_tools: "Сканировать кошелёк",
-    hero_note:
-      "Первый цикл наград: <span>31 марта 2026</span>. Условие: держать токены не менее 60 дней до даты цикла.",
-
-    transparency_kicker: "Прозрачность",
-    transparency_title: "Прозрачность на блокчейне",
-    transparency_p1:
-      "Все ключевые процессы — награды, сжигания и движения казны — выполняются напрямую смарт-контрактом и остаются публично проверяемыми ончейн.",
-
-    stat_rewards_label: "Всего распределено наград",
-    stat_burn_label: "Всего токенов сожжено",
-    stat_onchain_tag: "Ончейн-метрика в реальном времени",
-    stat_onchain_tag2: "Ончейн-метрика в реальном времени",
-    stat_last_cycle_label: "Последнее распределение",
-    stat_last_cycle_caption: "Обновится после выполнения первого наградного цикла.",
-    stat_next_cycle_label: "Следующее запланированное распределение",
 
     why_kicker: "Проблема",
     why_title: "Вас не взламывают. Вы оставляете двери открытыми.",
@@ -3629,7 +2334,6 @@ html, body { overflow-x: hidden; }
     why_li3: "<strong>Неизвестный радиус поражения:</strong> пользователи редко знают, сколько активов может захватить злоумышленник.",
     why_p2: "Elofid Firewall создан, чтобы закрыть эти бреши до того, как они приведут к потерям.",
 
-
     vision_kicker: "Безопасная инфраструктура",
     vision_title: "Построено как компания в сфере безопасности.",
     vision_p1:
@@ -3638,55 +2342,11 @@ html, body { overflow-x: hidden; }
       "Анализ безопасности, включая проверку разрешений, обнаружение угроз и оценку зоны риска, строится на проверяемых ончейн-данных и логике безопасности Elofid. Каждая цифра либо проверена ончейн, либо помечена источником.",
     vision_p3:
       "Симуляции работают только на чтение и никогда не затрагивают реальные средства. Ключи провайдеров хранятся на сервере, и ни один продукт Elofid никогда не попросит сид-фразу или приватный ключ.",
-    vision_p4:
-      "Активы казны постоянно контролируются самим смарт-контрактом. Административные выводы, переопределения или дискреционные действия отсутствуют. Только заранее определённые операции — распределение вознаграждений, сжигание токенов и аллокации на разработку и операционную деятельность — могут выполняться кодом.",
-
-    rewards_kicker: "ЭКОСИСТЕМА",
-    rewards_title: "Скоро появится что-то новое.",
-    soon_note: "Любой, кто предлагает что-либо от имени Elofid до официального объявления, не связан с Elofid.",
-    rewards_intro:
-      "Мы создаём следующий уровень экосистемы Elofid. Подробности будут объявлены только через официальные каналы Elofid.",
-
-    rewards_dist_title: "Логика распределения",
-    rewards_dist_li1: "Квалифицированные держатели получают цикловое распределение в размере целевых <strong>9%</strong>.",
-    rewards_dist_li2:
-      "После каждого завершённого распределения казна сжигает равное количество токенов в соотношении <strong>1:1</strong>.",
-    rewards_dist_li3:
-      "Дополнительные <strong>20%</strong> от распределённой суммы направляются на <strong>разработку и операционную деятельность</strong>, исключительно из казны.",
-
-    rewards_example:
-      "Пример:<br>За каждый <strong>1 CYCX</strong>, распределённый как награда, <strong>0.2 CYCX</strong> направляется на разработку и операции.<br><strong>Держатели получают полное целевое вознаграждение за каждый цикл.</strong>",
-    rewards_footer: "Полностью автоматизировано • Ончейн-исполнение • Публичная проверяемость",
-
-    rewards_rules_title: "Условия участия и получения",
-    rewards_rules_li1:
-      "Токены должны храниться не менее <strong>60 дней</strong> в самостоятельном Web3-кошельке.",
-    rewards_rules_li2: "Баланс на биржах не учитывается.",
-    rewards_rules_li3:
-      "Получение требуется в каждом цикле.<br><strong>Невостребованные награды не переносятся.</strong>",
-
-    rewards_chain_title: "Ончейн-исполнение",
-    rewards_chain_p1:
-      "Награды получаются пользователями напрямую через безопасную систему Merkle-proof. <strong>Без администратора, посредников и ручных действий</strong>.",
-    rewards_chain_p2:
-      "Каждый держатель самостоятельно инициирует on-chain claim со своего кошелька и оплачивает газ.",
-
-    rewards_policy:
-      "<strong>Политика:</strong><br>Циклы вознаграждений выполняются ежеквартально — <strong>в конце марта, июня, сентября и декабря</strong>, в <strong>20:00 по времени Великобритании</strong>.",
 
     future_kicker: "Что дальше",
     future_title: "Безопасность, которая продолжает расширяться.",
     future_p1:
       "Сегодня — 12 сетей. Elofid создан для расширения покрытия, углубления аналитики угроз и усиления мониторинга и оповещений по мере развития ончейн-рисков.",
-    future_p2:
-      "Если после многих лет наградных циклов основная казна в конечном итоге будет исчерпана, протокол может эволюционировать только через обновление, одобренное сообществом, или через контракт-преемник, сохраняющий те же ключевые принципы: прозрачное исполнение, отсутствие неожиданной эмиссии и отсутствие скрытого контроля над средствами пользователей.",
-    future_p3:
-      "Любая будущая эволюция будет структурирована таким образом, чтобы избежать несправедливого размывания долей и сохранить долгосрочную целостность, дефицит и прозрачность, на которых построен Elofid.",
-
-    presale_kicker: "Pre-Sale и план ликвидности",
-    presale_title: "Стратегия Pre-Sale и ликвидности",
-    presale_p1:
-      "Средства, собранные в ходе предпродажи, распределяются по заранее определённым правилам на создание ликвидности, расширение экосистемы и долгосрочную стабильность протокола. Цель — сформировать глубокую и устойчивую рыночную ликвидность с первого дня без дискреционного контроля над средствами пользователей.",
 
     footer_left:
       "Elofid является инфраструктурой безопасности для Web3. Сканирование токенов, защита кошельков, непрерывный мониторинг и API для разработчиков.",
@@ -3697,65 +2357,6 @@ html, body { overflow-x: hidden; }
     footer_x: "X",
     footer_telegram: "Telegram",
     footer_docs: "Документация",
-
-    claim_badge: "Портал наград",
-    claim_title: "Проверьте свою награду",
-    claim_subtitle:
-      "Подключите кошелёк, который держал CYCX на момент снимка. Elofid проверяет только активный цикл наград и никогда не запрашивает seed-фразу или приватный ключ.",
-    claim_btn_connect: "Подключить кошелёк и проверить",
-    claim_connecting_wallet: "Подключаем кошелёк…",
-    claim_connected: "Подключено",
-    claim_connection_timeout: "Время подключения истекло. Попробуйте снова.",
-    claim_connection_failed: "Не удалось подключить кошелёк. Попробуйте снова.",
-    claim_verified_cycle: "Проверено по ончейн-циклу #{cycle}.",
-    claim_btn_close: "Закрыть",
-    claim_caption:
-      "Проверка бесплатна. Газ в BNB оплачивается только при финальной транзакции получения награды.",
-    claim_checking_status: "Проверяем цикл наград…",
-    claim_no_active_cycle: "Сейчас нет открытого цикла наград. Следующее окно наград Elofid будет объявлено через официальные каналы.",
-    claim_portal_closed: "Получение наград ещё не открыто. Следите за официальным объявлением Elofid.",
-    claim_cycle_not_ready: "Цикл наград ещё готовится. Попробуйте снова немного позже.",
-    claim_cycle_mismatch: "Портал наград готовится к текущему циклу. Попробуйте снова после официального объявления.",
-    claim_service_unavailable: "Сервис наград временно недоступен. Транзакция не отправлялась. Попробуйте снова.",
-    claim_wrong_network: "Переключите кошелёк на BNB Chain и попробуйте снова.",
-    claim_checking_eligibility: "Проверяем право этого кошелька на награду…",
-    claim_now: "ПОЛУЧИТЬ НАГРАДУ",
-    claim_already_claimed: "Награда уже получена",
-    claim_already_claimed_text: "Этот кошелёк уже получил свою награду за текущий цикл.",
-    claim_claimed_amount: "Полученное начисление",
-    claim_preparing_proof: "Готовим и проверяем данные для получения награды…",
-    claim_pending: "Подтвердите claim-транзакцию в кошельке. Газ в BNB оплачивается вами.",
-    claim_success: "Награда успешно получена. CYCX переведены в ваш кошелёк ончейн.",
-    claim_cancelled: "Транзакция отменена. Награда не была получена.",
-    claim_failed: "Не удалось завершить получение награды. Она не считается полученной, пока транзакция не подтверждена ончейн.",
-    claim_no_allocation: "Для этого кошелька нет начисления в активном цикле.",
-    claim_proof_invalid: "Не удалось проверить Merkle-proof награды. Транзакция не отправлялась.",
-
-    not_eligible_title: "Нет права на награду в этом цикле",
-    not_eligible_text: "У этого кошелька нет подходящего начисления CYCX в активном цикле.",
-    future_eligible_title: "Получите право на будущие циклы",
-    future_eligible_text: "Храните CYCX в self-custody кошельке и завершите 60-дневный период до будущего снимка.",
-    eligible_title: "Есть право на награду в этом цикле",
-    eligible_wallet: "Кошелёк",
-    eligible_amount: "Начисление награды",
-
-    calc_title: "Калькулятор вознаграждений",
-    calc_desc:
-      "Оцените прогнозируемые распределения Elofid в рамках нескольких наградных циклов.",
-    calc_label_tokens: "Количество токенов:",
-    calc_placeholder_tokens: "Введите количество…",
-    calc_label_cycles: "Количество циклов:",
-    calc_cycle_1: "1 цикл",
-    calc_cycle_2: "2 цикла",
-    calc_cycle_4: "4 цикла (≈ 1 год)",
-    calc_cycle_8: "8 циклов (≈ 2 года)",
-    calc_cycle_12: "12 циклов (≈ 3 года)",
-    calc_cycle_20: "20 циклов (≈ 5 лет)",
-    calc_btn: "Рассчитать",
-    calc_disclaimer:
-      "Elofid стремится выплачивать 9% в каждом наградном цикле для долгосрочной устойчивости.<br>Если вы продолжаете держать токены (включая полученные награды) без продажи или перевода,<br>вознаграждения начисляются по принципу компаундирования — каждый цикл рассчитывается поверх предыдущего.<br><br><strong>Для получения вознаграждений требуется клейм в каждом цикле.<br>Невостребованные награды не переносятся.</strong>",
-    calc_note:
-      "Компаундирование применяется только в случае, если заявленные вознаграждения остаются в кошельке в течение будущих циклов.",
 
     social_kicker: "Сообщество",
     social_title: "Оставайтесь на связи",
@@ -3777,29 +2378,8 @@ html, body { overflow-x: hidden; }
     social_faq_desc: "Короткие ответы о Elofid",
     social_faq_btn: "Открыть",
 
-    elig_badge: "ELOFID",
-    elig_title: "Правила получения наград",
-    elig_subtitle:
-      "Несколько простых правил определяют, какие CYCX получают награду в каждом цикле. Прочитайте их перед продолжением.",
-    elig_body: `
-<ol>
-  <li><strong>Держите CYCX в собственном Web3-кошельке 60 полных дней.</strong><br>Подходят self-custody кошельки MetaMask, Trust Wallet, Ledger и аналогичные. <strong>CYCX на Binance, Coinbase, KuCoin или любой другой бирже не учитывается</strong>, потому что эти токены находятся не в вашем личном кошельке.</li>
-  <li><strong>Каждая полученная сумма начинает собственный 60-дневный отсчёт.</strong><br>Новый CYCX начинает отсчёт с момента поступления в кошелёк. Более старый CYCX сохраняет уже накопленный возраст удержания.</li>
-  <li><strong>Если часть CYCX уходит из кошелька, сначала считается ушедшей самая старая записанная часть.</strong><br>FIFO используется только для расчёта права на награду. Оставшийся CYCX сохраняет свой записанный возраст удержания — частичная продажа или перевод не обнуляет возраст остального баланса.</li>
-  <li><strong>Ваш подходящий баланс фиксируется в момент снимка цикла.</strong><br>Только CYCX, который завершил полные 60 дней к моменту снимка, может получить награду в этом цикле.</li>
-  <li><strong>Награды нужно получать отдельно в каждом цикле.</strong><div class="eligibility-warning"><strong>Невостребованные награды не переносятся и не добавляются к следующему циклу.</strong> Каждый цикл наград рассчитывается отдельно.</div></li>
-  <li><strong>Получить награду может только кошелёк, который держал CYCX.</strong><br>Каждое начисление защищено Merkle-proof, а смарт-контракт позволяет этому кошельку получить только собственное начисление.</li>
-  <li><strong>Полученные награды могут получить право на участие в будущих циклах.</strong><br>После получения они остаются в вашем кошельке как обычный CYCX и начинают собственный 60-дневный отсчёт.</li>
-</ol>
-<div class="eligibility-rate-note">Ставка награды — это целевой показатель на цикл, рассчитываемый офчейн, а не фиксированная или гарантированная доходность.</div>
-`,
-    elig_continue: "Понимаю — продолжить",
-    elig_caption:
-      "Продолжая, вы подтверждаете, что прочитали и поняли, как рассчитывается право на награды Elofid.",
   },
 };
-
-
 
     // -------- LANGUAGE SWITCH --------
     let cxCurrentLang = "en";
@@ -3854,1232 +2434,8 @@ html, body { overflow-x: hidden; }
 
     setLanguage("en");
 
-    
-// ✅ Modal state helper (prevents missing close / multiple modals issues)
-function cxUpdateModalState() {
-  const anyOpen = !!document.querySelector(
-    "#claim-modal-backdrop.active, #eligibility-modal-backdrop.active, #calculatorModal.active"
-  );
-
-  document.body.classList.toggle("modal-open", anyOpen);
-  document.body.style.overflow = anyOpen ? "hidden" : "";
-}
-
-    window.addEventListener("resize", cxUpdateModalState);
-
-    // -------- CLAIM MODAL --------
-    // -------- ELOFID REWARD CLAIM SYSTEM (PRIVATE GATEWAY) --------
-    const CX_CONTRACT_ADDRESS = "0xda63b65825AE30532a507B0C091B0bD9F8204F7E";
-    const CX_CURRENT_CYCLE_ID = 0; // MANUAL RELEASE GATE: set to the started on-chain cycle before opening claims. 0 = not configured.
-    const CX_REWARD_API = "https://cycles.elofid.com";
-    const CX_CHAIN_ID = 56;
-
-    // Public Turnstile Site Key. The matching SECRET stays only in the Reward Gateway Worker.
-    const CX_TURNSTILE_SITE_KEY = "0x4AAAAAAEykQoSaiA4Q56VX";
-    const CX_TURNSTILE_ACTIONS = Object.freeze({
-      "/v1/eligibility": "elofid_eligibility",
-      "/v1/proof": "elofid_proof",
-    });
-
-    function cxWaitForTurnstile(timeoutMs = 12000) {
-      if (window.turnstile?.render && window.turnstile?.execute) {
-        return Promise.resolve(window.turnstile);
-      }
-
-      return new Promise((resolve, reject) => {
-        const started = Date.now();
-        const timer = setInterval(() => {
-          if (window.turnstile?.render && window.turnstile?.execute) {
-            clearInterval(timer);
-            resolve(window.turnstile);
-            return;
-          }
-
-          if (Date.now() - started >= timeoutMs) {
-            clearInterval(timer);
-            reject(new Error("Turnstile failed to load"));
-          }
-        }, 50);
-      });
-    }
-
-    async function cxGetTurnstileToken(action) {
-      const ts = await cxWaitForTurnstile();
-
-      const host = document.createElement("div");
-      host.setAttribute("aria-hidden", "true");
-      host.style.cssText =
-        "position:fixed;right:16px;bottom:16px;z-index:2147483647;" +
-        "min-width:1px;min-height:1px;";
-      document.body.appendChild(host);
-
-      let widgetId = null;
-
-      try {
-        const token = await new Promise((resolve, reject) => {
-          let settled = false;
-
-          const finish = (fn, value) => {
-            if (settled) return;
-            settled = true;
-            clearTimeout(timeout);
-            fn(value);
-          };
-
-          const timeout = setTimeout(
-            () => finish(reject, new Error("Turnstile verification timed out")),
-            30000
-          );
-
-          widgetId = ts.render(host, {
-            sitekey: CX_TURNSTILE_SITE_KEY,
-            action,
-            execution: "execute",
-            appearance: "interaction-only",
-            theme: "dark",
-            retry: "auto",
-            "refresh-expired": "manual",
-            callback: (value) => finish(resolve, String(value || "")),
-            "error-callback": () =>
-              finish(reject, new Error("Turnstile verification failed")),
-            "expired-callback": () =>
-              finish(reject, new Error("Turnstile token expired")),
-            "timeout-callback": () =>
-              finish(reject, new Error("Turnstile challenge timed out")),
-          });
-
-          ts.execute(widgetId);
-        });
-
-        if (!token || token.length > 2048) {
-          throw new Error("Invalid Turnstile token");
-        }
-
-        return token;
-      } finally {
-        try {
-          if (widgetId !== null) ts.remove(widgetId);
-        } catch {}
-        host.remove();
-      }
-    }
-
-    let cxClaimInFlight = false;
-    let cxProvider = null;
-    let cxSigner = null;
-    let cxContract = null;
-    let cxUserAddress = null;
-    let cxPortalStatus = null;
-    let cxCurrentAllocation = null;
-
-    function cxDict() {
-      const lang = document.querySelector(".lang-btn.active")?.getAttribute("data-lang") || "en";
-      return translations[lang] || translations.en;
-    }
-
-    function cxT(key, fallback = "") {
-      const d = cxDict();
-      return d[key] || translations.en[key] || fallback;
-    }
-
-    function cxTF(key, vars = {}, fallback = "") {
-      let value = cxT(key, fallback);
-      for (const [name, replacement] of Object.entries(vars)) {
-        value = String(value).replaceAll(`{${name}}`, String(replacement));
-      }
-      return value;
-    }
-
-    function cxVerifiedCycleHTML(cycleId) {
-      if (!cycleId) return "";
-      return `<div class="verified-cycle-note">${cxTF("claim_verified_cycle", { cycle: cycleId }, `Verified against Cycle #${cycleId} on-chain.`)}</div>`;
-    }
-
-    function cxShortAddress(address) {
-      return `${address.slice(0, 6)}…${address.slice(-4)}`;
-    }
-
-    function cxSetCycleMeta(cycleId) {
-      const el = document.getElementById("claim-cycle-meta");
-      if (!el) return;
-      if (!cycleId) {
-        el.style.display = "none";
-        el.textContent = "";
-        return;
-      }
-      el.textContent = `Cycle #${cycleId} · BNB Chain`;
-      el.style.display = "block";
-    }
-
-    function cxSetConnectButton({ enabled, connectedAddress = null } = {}) {
-      const btn = document.getElementById("btn-connect-wallet");
-      if (!btn) return;
-      if (connectedAddress) {
-        btn.disabled = true;
-        btn.classList.remove("is-loading");
-        btn.classList.add("is-connected");
-        btn.textContent = `${cxT("claim_connected", "Connected")}: ${cxShortAddress(connectedAddress)}`;
-        return;
-      }
-      btn.classList.remove("is-connected", "is-loading");
-      btn.disabled = !enabled;
-      btn.textContent = cxT("claim_btn_connect", "Connect wallet & check");
-    }
-
-    async function cxApiJson(path, { method = "GET", body = null, retries = 1 } = {}) {
-      let lastErr = null;
-      const normalizedMethod = String(method || "GET").toUpperCase();
-      const turnstileAction =
-        normalizedMethod === "POST" ? CX_TURNSTILE_ACTIONS[path] || null : null;
-
-      for (let attempt = 0; attempt <= retries; attempt++) {
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 9000);
-
-        try {
-          // Turnstile tokens are single-use. Generate a fresh token inside the retry
-          // loop so a network retry never reuses a token that may already be consumed.
-          let requestBody = body ? { ...body } : null;
-          if (turnstileAction) {
-            requestBody = requestBody || {};
-            requestBody.turnstileToken = await cxGetTurnstileToken(turnstileAction);
-          }
-
-          const r = await fetch(`${CX_REWARD_API}${path}`, {
-            method: normalizedMethod,
-            cache: "no-store",
-            credentials: "omit",
-            headers: requestBody ? { "Content-Type": "application/json" } : undefined,
-            body: requestBody ? JSON.stringify(requestBody) : undefined,
-            signal: controller.signal,
-          });
-
-          const data = await r.json().catch(() => ({}));
-          clearTimeout(timer);
-
-          // A Turnstile token can expire or be consumed. On the one configured retry,
-          // obtain a brand-new token rather than returning a transient verification error.
-          if (
-            turnstileAction &&
-            attempt < retries &&
-            (data?.error === "turnstile_failed" ||
-             data?.error === "turnstile_token_missing" ||
-             data?.error === "turnstile_unavailable")
-          ) {
-            await new Promise(r => setTimeout(r, 250 * (attempt + 1)));
-            continue;
-          }
-
-          return { response: r, data };
-        } catch (e) {
-          clearTimeout(timer);
-          lastErr = e;
-          if (attempt < retries) await new Promise(r => setTimeout(r, 250 * (attempt + 1)));
-        }
-      }
-
-      throw lastErr || new Error("Reward API unavailable");
-    }
-
-    async function cxFetchPortalStatus() {
-      const { response, data } = await cxApiJson("/v1/status", { retries: 1 });
-      if (!response.ok || !data?.ok) throw new Error(data?.error || "status_failed");
-      return data;
-    }
-
-    async function cxFetchEligibility(address) {
-      const { response, data } = await cxApiJson("/v1/eligibility", {
-        method: "POST",
-        body: { address },
-        retries: 1,
-      });
-      return { response, data };
-    }
-
-    async function cxFetchClaimProof(address) {
-      const { response, data } = await cxApiJson("/v1/proof", {
-        method: "POST",
-        body: { address },
-        retries: 1,
-      });
-      return { response, data };
-    }
-
-    function cxShowEligibility({ address, amount }) {
-      const box = document.getElementById("claim-status");
-      if (!box) return;
-      const humanAmount = Number(ethers.formatUnits(amount, 18)).toLocaleString("en-US", { maximumFractionDigits: 2 });
-      const dict = cxDict();
-      const cycleId = cxPortalStatus?.activeCycle || CX_CURRENT_CYCLE_ID;
-      box.className = "success";
-      box.innerHTML = `
-        <div style="font-size:15px;font-weight:900;margin-bottom:8px">${dict.eligible_title}</div>
-        <div style="font-size:11px;opacity:.65;margin-bottom:3px">${dict.eligible_wallet}</div>
-        <div style="font-size:13px;font-weight:750;font-family:monospace;margin-bottom:10px">${cxShortAddress(address)}</div>
-        <div style="font-size:11px;opacity:.65;margin-bottom:2px">${dict.eligible_amount}</div>
-        <div style="font-size:23px;font-weight:950;letter-spacing:-.02em">${humanAmount} <span style="font-size:12px;opacity:.7">CYCX</span></div>
-        ${cxVerifiedCycleHTML(cycleId)}
-      `;
-      box.style.display = "block";
-      cxSetCycleMeta(null);
-    }
-
-    function cxShowNotEligible() {
-      const box = document.getElementById("claim-status");
-      if (!box) return;
-      const dict = cxDict();
-      const cycleId = cxPortalStatus?.activeCycle || CX_CURRENT_CYCLE_ID;
-      box.className = "muted";
-      box.innerHTML = `
-        <strong>${dict.not_eligible_title}</strong><br>
-        <span>${dict.not_eligible_text}</span>
-        ${cxVerifiedCycleHTML(cycleId)}
-        <div class="future-eligibility-card">
-          <strong>${dict.future_eligible_title}</strong>
-          <span>${dict.future_eligible_text}</span>
-        </div>
-      `;
-      box.style.display = "block";
-      cxSetCycleMeta(null);
-      cxHideClaimButton();
-    }
-
-    function cxHideClaimButton() {
-      const btn = document.getElementById("cx-claim-now-btn");
-      if (btn) btn.style.display = "none";
-    }
-
-    function cxShowAlreadyClaimed(amount = null) {
-      const cycleId = cxPortalStatus?.activeCycle || CX_CURRENT_CYCLE_ID;
-      let amountHTML = "";
-      if (amount && amount !== "0") {
-        try {
-          const humanAmount = Number(ethers.formatUnits(amount, 18)).toLocaleString("en-US", { maximumFractionDigits: 2 });
-          amountHTML = `
-            <div style="font-size:11px;opacity:.62;margin-top:10px;margin-bottom:2px">${cxT("claim_claimed_amount", "Claimed allocation")}</div>
-            <div style="font-size:20px;font-weight:950">${humanAmount} <span style="font-size:12px;opacity:.7">CYCX</span></div>
-          `;
-        } catch {}
-      }
-      cxSetClaimUI(
-        "claimed",
-        `<div style="font-size:15px;font-weight:900">${cxT("claim_already_claimed", "Reward already claimed")}</div>
-         <div style="margin-top:5px;opacity:.78">${cxT("claim_already_claimed_text", "This wallet has already claimed its reward for the current cycle.")}</div>
-         ${amountHTML}
-         ${cxVerifiedCycleHTML(cycleId)}`
-      );
-      cxSetCycleMeta(null);
-      cxHideClaimButton();
-    }
-
-    function cxSetClaimUI(state, message) {
-      const box = document.getElementById("claim-status");
-      const btn = document.getElementById("cx-claim-now-btn");
-      if (!box) return;
-      box.style.display = "block";
-      box.className = state || "";
-      box.id = "claim-status";
-      box.innerHTML = message || "";
-      if (btn) btn.disabled = state === "pending";
-    }
-
-    function cxHandleGatewayError(data) {
-      const error = data?.error || "";
-      if (error === "claims_closed") {
-        cxSetClaimUI("muted", `<strong>${cxT("claim_portal_closed")}</strong>`);
-        return;
-      }
-      if (error === "no_active_cycle") {
-        cxSetClaimUI("muted", `<strong>${cxT("claim_no_active_cycle")}</strong>`);
-        return;
-      }
-      if (["cycle_not_on_chain", "cycle_not_finalized", "r2_cycle_not_published", "cycle_integrity_mismatch", "invalid_rewards_json"].includes(error)) {
-        cxSetClaimUI("muted", `<strong>${cxT("claim_cycle_not_ready")}</strong>`);
-        return;
-      }
-      cxSetClaimUI("error", `<strong>${cxT("claim_service_unavailable")}</strong>`);
-    }
-
-    async function cxPrepareClaimPortal() {
-      cxPortalStatus = null;
-      cxCurrentAllocation = null;
-      cxHideClaimButton();
-      cxSetConnectButton({ enabled: false });
-      cxSetCycleMeta(null);
-      cxSetClaimUI("neutral", `<strong>${cxT("claim_checking_status")}</strong>`);
-
-      try {
-        const status = await cxFetchPortalStatus();
-        cxPortalStatus = status;
-
-        if (!status.activeCycle || status.reason === "no_active_cycle") {
-          cxSetClaimUI("muted", `<strong>${cxT("claim_no_active_cycle")}</strong>`);
-          return false;
-        }
-
-        cxSetCycleMeta(null);
-
-        if (!status.cycleReady) {
-          cxSetClaimUI("muted", `<strong>${cxT("claim_cycle_not_ready")}</strong>`);
-          return false;
-        }
-
-        // The site cycle is deliberately a manual release gate. It must match the
-        // cycle that the Worker independently verified from the deployed contract.
-        if (!Number.isInteger(CX_CURRENT_CYCLE_ID) || CX_CURRENT_CYCLE_ID <= 0 || Number(status.activeCycle) !== CX_CURRENT_CYCLE_ID) {
-          cxSetClaimUI("muted", `<strong>${cxT("claim_cycle_mismatch")}</strong>`);
-          return false;
-        }
-
-        if (!status.claimsOpen) {
-          cxSetClaimUI("muted", `<strong>${cxT("claim_portal_closed")}</strong>`);
-          return false;
-        }
-
-        // Ready. Do not expose any proof or allocation until a wallet is connected.
-        const box = document.getElementById("claim-status");
-        if (box) box.style.display = "none";
-        cxSetConnectButton({ enabled: true });
-
-        if (cxUserAddress && cxContract) {
-          await handleWalletConnected(cxUserAddress);
-        }
-        return true;
-      } catch (e) {
-        console.warn("[Elofid] reward portal status failed:", e?.message || e);
-        cxSetClaimUI("error", `<strong>${cxT("claim_service_unavailable")}</strong>`);
-        return false;
-      }
-    }
-
-    async function handleWalletConnected(address) {
-      try {
-        const addr = String(address || "").toLowerCase();
-        if (!ethers.isAddress(addr)) throw new Error("bad_address");
-
-        // Re-check status just before reading an allocation, so a cycle switch or
-        // emergency close is honored immediately.
-        const status = await cxFetchPortalStatus();
-        cxPortalStatus = status;
-        if (!status.claimsOpen || !status.cycleReady || Number(status.activeCycle) !== CX_CURRENT_CYCLE_ID) {
-          cxSetConnectButton({ enabled: false });
-          if (!status.claimsOpen) cxSetClaimUI("muted", `<strong>${cxT("claim_portal_closed")}</strong>`);
-          else cxSetClaimUI("muted", `<strong>${cxT("claim_cycle_mismatch")}</strong>`);
-          return;
-        }
-
-        cxSetCycleMeta(null);
-        cxSetConnectButton({ enabled: false, connectedAddress: addr });
-        cxSetClaimUI("neutral", `<strong>${cxT("claim_checking_eligibility")}</strong>`);
-
-        const { response, data } = await cxFetchEligibility(addr);
-        if (!response.ok || !data?.ok) {
-          cxHandleGatewayError(data);
-          return;
-        }
-        if (Number(data.cycleId) !== CX_CURRENT_CYCLE_ID) {
-          cxSetClaimUI("muted", `<strong>${cxT("claim_cycle_mismatch")}</strong>`);
-          return;
-        }
-        if (!data.eligible || !data.amount || data.amount === "0") {
-          cxCurrentAllocation = null;
-          cxShowNotEligible();
-          return;
-        }
-
-        cxCurrentAllocation = { cycleId: Number(data.cycleId), amount: String(data.amount) };
-
-        let already;
-        try {
-          already = await cxContract.hasClaimed(CX_CURRENT_CYCLE_ID, addr);
-        } catch (e) {
-          console.warn("[Elofid] hasClaimed failed:", e?.message || e);
-          cxSetClaimUI("error", `<strong>${cxT("claim_service_unavailable")}</strong>`);
-          return;
-        }
-        if (already) {
-          cxShowAlreadyClaimed(cxCurrentAllocation?.amount);
-          return;
-        }
-
-        cxShowEligibility({ address: addr, amount: cxCurrentAllocation.amount });
-        cxEnsureClaimButton();
-      } catch (err) {
-        console.error("[Elofid] eligibility check failed:", err);
-        cxSetClaimUI("error", `<strong>${cxT("claim_service_unavailable")}</strong>`);
-      }
-    }
-
-    async function cxEnsureWeb3() {
-      if (!window.cxAppKitModal?.getWalletProvider) {
-        console.warn("[Elofid] AppKit not ready");
-        return false;
-      }
-
-      let providerSource = window.cxAppKitModal.getWalletProvider();
-      if (!providerSource) {
-        await new Promise(r => setTimeout(r, 300));
-        providerSource = window.cxAppKitModal.getWalletProvider();
-      }
-      if (!providerSource) return false;
-
-      cxProvider = new ethers.BrowserProvider(providerSource);
-      const network = await cxProvider.getNetwork();
-      if (Number(network.chainId) !== CX_CHAIN_ID) {
-        cxSetClaimUI("error", `<strong>${cxT("claim_wrong_network")}</strong>`);
-        return false;
-      }
-
-      cxSigner = await cxProvider.getSigner();
-      cxUserAddress = (await cxSigner.getAddress()).toLowerCase();
-
-      const CX_CONTRACT = ethers.getAddress(CX_CONTRACT_ADDRESS);
-      cxContract = new ethers.Contract(
-        CX_CONTRACT,
-        [
-          "function claim(uint256 cycleId, address account, uint256 amount, bytes32[] calldata proof) external",
-          "function hasClaimed(uint256 cycleId, address account) view returns (bool)",
-          "function canClaim(uint256 cycleId, address account, uint256 amount, bytes32[] calldata proof) view returns (bool)",
-          "function paused() view returns (bool)"
-        ],
-        cxSigner
-      );
-      return true;
-    }
-
-    window.cxEnsureWeb3 = cxEnsureWeb3;
-
-    function cxUpdateWalletUI(address) {
-      cxSetConnectButton({ enabled: false, connectedAddress: address });
-    }
-
-    function cxEnsureClaimButton() {
-      const modal = document.querySelector("#claim-modal-backdrop .modal");
-      if (!modal) return;
-      let btn = document.getElementById("cx-claim-now-btn");
-      if (!btn) {
-        btn = document.createElement("button");
-        btn.id = "cx-claim-now-btn";
-        btn.setAttribute("data-i18n", "claim_now");
-        btn.addEventListener("click", cxPerformClaim);
-        modal.appendChild(btn);
-      }
-      btn.textContent = cxT("claim_now", "CLAIM REWARD");
-      btn.style.display = "block";
-      btn.disabled = false;
-    }
-
-    async function cxPerformClaim() {
-      if (cxClaimInFlight) return;
-      cxClaimInFlight = true;
-
-      try {
-        if (!cxUserAddress || !cxContract || !cxCurrentAllocation) {
-          cxSetClaimUI("error", `<strong>${cxT("claim_no_allocation")}</strong>`);
-          return;
-        }
-
-        const addr = cxUserAddress.toLowerCase();
-        cxSetClaimUI("pending", `<strong>${cxT("claim_preparing_proof")}</strong>`);
-
-        // Fetch proof only at the moment the user chooses to claim.
-        const { response, data } = await cxFetchClaimProof(addr);
-        if (!response.ok || !data?.ok) {
-          cxHandleGatewayError(data);
-          return;
-        }
-
-        if (
-          Number(data.cycleId) !== CX_CURRENT_CYCLE_ID ||
-          String(data.amount) !== String(cxCurrentAllocation.amount) ||
-          !Array.isArray(data.proof)
-        ) {
-          cxSetClaimUI("error", `<strong>${cxT("claim_proof_invalid")}</strong>`);
-          return;
-        }
-
-        // Fail closed before asking the wallet to send a transaction.
-        const already = await cxContract.hasClaimed(CX_CURRENT_CYCLE_ID, addr);
-        if (already) {
-          cxShowAlreadyClaimed(cxCurrentAllocation?.amount);
-          return;
-        }
-
-        const isPaused = await cxContract.paused();
-        if (isPaused) {
-          cxSetClaimUI("muted", `<strong>${cxT("claim_portal_closed")}</strong>`);
-          return;
-        }
-
-        const canClaim = await cxContract.canClaim(
-          CX_CURRENT_CYCLE_ID,
-          addr,
-          data.amount,
-          data.proof
-        );
-        if (!canClaim) {
-          cxSetClaimUI("error", `<strong>${cxT("claim_proof_invalid")}</strong>`);
-          return;
-        }
-
-        cxSetClaimUI("pending", `<strong>${cxT("claim_pending")}</strong>`);
-
-        const tx = await cxContract.claim(
-          CX_CURRENT_CYCLE_ID,
-          addr,
-          data.amount,
-          data.proof
-        );
-
-        await tx.wait();
-        cxSetClaimUI("success", `<strong>${cxT("claim_success")}</strong>`);
-        cxHideClaimButton();
-      } catch (err) {
-        console.error("[Elofid] claim failed:", err);
-        const isUserCancel =
-          err?.code === 4001 ||
-          err?.code === "ACTION_REJECTED" ||
-          err?.message?.toLowerCase().includes("user rejected") ||
-          err?.message?.toLowerCase().includes("user denied");
-        cxSetClaimUI(
-          "error",
-          `<strong>${isUserCancel ? cxT("claim_cancelled") : cxT("claim_failed")}</strong>`
-        );
-      } finally {
-        cxClaimInFlight = false;
-        const btn = document.getElementById("cx-claim-now-btn");
-        if (btn && btn.style.display !== "none") btn.disabled = false;
-      }
-    }
-
-    const claimBtn = document.getElementById("btn-claim");
-    const modalBackdrop = document.getElementById("claim-modal-backdrop");
-    const closeModalBtn = document.getElementById("btn-close-modal");
-    const closeX = document.getElementById("modal-close-x");
-    let cxEligibilityPendingAction = null;
-
-    function openClaimModal() {
-      if (!modalBackdrop) return;
-      modalBackdrop.classList.add("active");
-      modalBackdrop.setAttribute("aria-hidden", "false");
-      cxUpdateModalState();
-      cxPrepareClaimPortal().catch(() => {});
-    }
-
-    // Token disclaimer gate: show it every time before entering the Claim flow.
-    if (claimBtn) {
-      claimBtn.addEventListener("click", () => {
-        cxEligibilityPendingAction = { type: "claim" };
-        openEligibilityModal();
-      });
-    }
-
-
-    function closeModal() {
-  modalBackdrop.classList.remove("active");
-  modalBackdrop.setAttribute("aria-hidden", "true");
-
-  cxUpdateModalState(); // ✅
-
-  window.__cxCheckedAddress = null;
-  cxCurrentAllocation = null;
-  cxHideClaimButton();
-}
-
-
-    closeModalBtn.addEventListener("click", closeModal);
-    closeX.addEventListener("click", closeModal);
-    modalBackdrop.addEventListener("click", (e) => {
-      if (e.target === modalBackdrop) closeModal();
-    });
-
-    // Connect wallet + check eligibility using on-chain Merkle data
-    //document
-      //.getElementById("btn-connect-wallet")
-     // .addEventListener("click", () => {
-      //  cxConnectAndCheck();
-     // });
-    
-    // Token disclaimer gate: also show it every time before a Pre-Sale action.
-    const presaleLink = document.getElementById("presale-link");
-    if (presaleLink) {
-      presaleLink.addEventListener("click", (e) => {
-        e.preventDefault();
-        cxEligibilityPendingAction = {
-          type: "presale",
-          href: e.currentTarget.getAttribute("href") || "#"
-        };
-        openEligibilityModal();
-      });
-    }
-
-    // -------- COUNTDOWN TO 31 MAR 2026 --------
-    const countdownEl = document.getElementById("countdown-text");
-    const FIRST_DISTRIBUTION_UTC = Date.UTC(2026, 2, 31, 0, 0, 0); // 2026-03-31
-
-    function updateCountdown() {
-      if (!countdownEl) return;
-      const now = Date.now();
-      const diff = FIRST_DISTRIBUTION_UTC - now;
-      if (diff <= 0) {
-        countdownEl.textContent = "Cycle is live. Please check the latest on-chain distribution.";
-        return;
-      }
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      countdownEl.textContent = `Days remaining: ${days} · Hours: ${hours}`;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 60_000);
-
-    // -------- TOKEN / ELIGIBILITY DISCLAIMER GATE --------
-    const eligibilityBackdrop = document.getElementById("eligibility-modal-backdrop");
-    const eligibilityContinueBtn = document.getElementById("eligibility-continue-btn");
-    const eligibilityCloseX = document.getElementById("eligibility-modal-close-x");
-
-    function openEligibilityModal() {
-      if (!eligibilityBackdrop) return;
-      eligibilityBackdrop.classList.add("active");
-      eligibilityBackdrop.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      cxUpdateModalState();
-    }
-
-    function closeEligibilityModal() {
-      if (!eligibilityBackdrop) return;
-      eligibilityBackdrop.classList.remove("active");
-      eligibilityBackdrop.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      cxUpdateModalState();
-    }
-
-    if (eligibilityCloseX) {
-      eligibilityCloseX.addEventListener("click", () => {
-        cxEligibilityPendingAction = null;
-        closeEligibilityModal();
-      });
-    }
-
-    if (eligibilityContinueBtn) {
-      eligibilityContinueBtn.addEventListener("click", () => {
-        const pendingAction = cxEligibilityPendingAction;
-        cxEligibilityPendingAction = null;
-        closeEligibilityModal();
-
-        if (!pendingAction) return;
-
-        if (pendingAction.type === "claim") {
-          openClaimModal();
-          return;
-        }
-
-        if (pendingAction.type === "presale") {
-          const href = pendingAction.href;
-          if (!href || href === "#") {
-            alert("Pre-Sale link will point to your official PinkSale page once it is live.");
-            return;
-          }
-          window.location.assign(href);
-        }
-      });
-    }
-
-    if (eligibilityBackdrop) {
-      eligibilityBackdrop.addEventListener("click", (e) => {
-        if (e.target === eligibilityBackdrop) {
-          cxEligibilityPendingAction = null;
-          closeEligibilityModal();
-        }
-      });
-    }
-
-    // The disclaimer no longer opens on page load. It opens on every Claim / Pre-Sale attempt.
-
-        // -------- REWARD CALCULATOR LOGIC --------
-    const calcModal = document.getElementById("calculatorModal");
-    const openCalcBtn = document.getElementById("openCalculator");
-    const closeCalcBtn = document.getElementById("closeCalc");
-    const calcRunBtn = document.getElementById("calcRun");
-    const calcTokensInput = document.getElementById("calcTokens");
-    const calcCyclesSelect = document.getElementById("calcCycles");
-    const calcResultBox = document.getElementById("calcResult");
-
-    function openCalculator() {
-      if (!calcModal) return;
-      calcModal.classList.add("active");
-      document.body.style.overflow = "hidden";
-      cxUpdateModalState();
-      calcResultBox.innerHTML = "";
-    }
-
-    function closeCalculator() {
-      if (!calcModal) return;
-      calcModal.classList.remove("active");
-      document.body.style.overflow = "";
-      cxUpdateModalState();
-    }
-
-    if (openCalcBtn) {
-      openCalcBtn.addEventListener("click", openCalculator);
-    }
-
-    // Also wire the rewards-section calculator button
-    const openCalcRewardsBtn = document.getElementById("openCalculatorRewards");
-    if (openCalcRewardsBtn) {
-      openCalcRewardsBtn.addEventListener("click", openCalculator);
-    }
-
-    if (closeCalcBtn) {
-      closeCalcBtn.addEventListener("click", closeCalculator);
-    }
-
-    if (calcModal) {
-      calcModal.addEventListener("click", (e) => {
-        if (e.target === calcModal) {
-          closeCalculator();
-        }
-      });
-    }
-
-    if (calcRunBtn) {
-      calcRunBtn.addEventListener("click", () => {
-        const tokens = parseFloat(calcTokensInput.value);
-        const totalCycles = parseInt(calcCyclesSelect.value, 10);
-        const RATE = 0.09;
-
-        if (!tokens || tokens <= 0 || tokens > 1e12) {
-          calcResultBox.innerHTML = `<p style="color:#ff4757;font-size:13px;">⚠ Enter a valid token amount.</p>`;
-          return;
-        }
-
-        // Build cycle-by-cycle data
-        let balance = tokens;
-        const rows = [];
-        for (let c = 1; c <= totalCycles; c++) {
-          const reward = balance * RATE;
-          balance = balance + reward;
-          const year = (c / 4).toFixed(1);
-          rows.push({ cycle: c, reward, balance, year });
-        }
-
-        const totalReward = balance - tokens;
-        const pct = ((totalReward / tokens) * 100).toFixed(1);
-
-        const fmt = n => n.toLocaleString("en-US", { maximumFractionDigits: 2 });
-
-        // Summary cards
-        let html = `
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 10px;">
-            <div style="background:rgba(0,230,118,.08);border:1px solid rgba(0,230,118,.2);border-radius:14px;padding:12px;text-align:center;">
-              <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px;">Final balance</div>
-              <div style="font-size:20px;font-weight:950;color:#00e676;">${fmt(balance)}</div>
-              <div style="font-size:10px;color:rgba(255,255,255,.4);">CYCX</div>
-            </div>
-            <div style="background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.18);border-radius:14px;padding:12px;text-align:center;">
-              <div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px;">Total earned</div>
-              <div style="font-size:20px;font-weight:950;color:#00e5ff;">+${fmt(totalReward)}</div>
-              <div style="font-size:10px;color:rgba(255,255,255,.4);">+${pct}%</div>
-            </div>
-          </div>
-        `;
-
-        // Cycle table (group by year, show one row per cycle but compact)
-        html += `<div style="overflow-x:auto;margin-top:6px;">
-          <table style="width:100%;border-collapse:collapse;font-size:12px;">
-            <thead>
-              <tr style="color:rgba(255,255,255,.4);font-size:10px;letter-spacing:.1em;text-transform:uppercase;">
-                <th style="padding:6px 4px;text-align:left;">Cycle</th>
-                <th style="padding:6px 4px;text-align:right;">Reward</th>
-                <th style="padding:6px 4px;text-align:right;">Balance</th>
-                <th style="padding:6px 4px;text-align:right;">Growth</th>
-              </tr>
-            </thead>
-            <tbody>`;
-
-        rows.forEach(r => {
-          const growth = (((r.balance - tokens) / tokens) * 100).toFixed(1);
-          const isYearEnd = r.cycle % 4 === 0;
-          const rowBg = isYearEnd ? "background:rgba(0,229,255,.04);" : "";
-          html += `<tr style="${rowBg}border-top:1px solid rgba(255,255,255,.05);">
-            <td style="padding:5px 4px;color:rgba(255,255,255,.5);">#${r.cycle}${isYearEnd ? ' <span style="color:rgba(0,229,255,.6);font-size:9px;">↑ Q4</span>' : ''}</td>
-            <td style="padding:5px 4px;text-align:right;color:#3cffb0;">+${fmt(r.reward)}</td>
-            <td style="padding:5px 4px;text-align:right;font-weight:700;">${fmt(r.balance)}</td>
-            <td style="padding:5px 4px;text-align:right;color:rgba(0,229,255,.8);">+${growth}%</td>
-          </tr>`;
-        });
-
-        html += `</tbody></table></div>
-        <p style="font-size:11px;color:rgba(255,255,255,.45);margin-top:10px;text-align:center;line-height:1.6;border-top:1px solid rgba(255,255,255,.07);padding-top:10px;">
-            <strong style="color:rgba(255,255,255,.65);">Each cycle = target 9% on full balance. Requires claiming every cycle.</strong><br>
-            Unclaimed rewards do not roll over.
-          </p>`;
-
-        calcResultBox.innerHTML = html;
-      });
-    }
-
   </script>
 
-  <!-- ✅ Elofid Live On-Chain Metrics -->
-<script>
-(() => {
-  const CONTRACT_ADDRESS =
-  (typeof CX_CONTRACT_ADDRESS !== "undefined" && CX_CONTRACT_ADDRESS)
-    ? CX_CONTRACT_ADDRESS
-    : "0xda63b65825AE30532a507B0C091B0bD9F8204F7E";
-
-
-  const RPCS = [
-  "https://bsc-dataseed.binance.org",
-
-  // ✅ BNBChain public seeds
-  "https://bsc-dataseed1.bnbchain.org",
-  "https://bsc-dataseed2.bnbchain.org",
-  "https://bsc-dataseed3.bnbchain.org",
-
-  // ✅ backup
-  "https://bsc-dataseed1.defibit.io",
-];
-
-
-
-  const ABI = [
-    "function globalStats() view returns (uint256 claimed, uint256 burned, uint256 devSent)",
-    "function latestCycleId() view returns (uint256)",
-    "function cycles(uint256) view returns (bytes32 merkleRoot, uint256 startTime, uint256 totalReward, uint256 devReserve, uint256 burnAmount, bool finalized)"
-  ];
-
-  const DECIMALS = 18;
-  const $ = (id) => document.getElementById(id);
-let _cxRpcProvider = null;
-let _cxRpcUrl = "";
-  let _metricsInFlight = false;
-
-function sleep(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-function resetRpcCache() {
-  _cxRpcProvider = null;
-  _cxRpcUrl = "";
-}
-
-async function withRetry(fn, tries = 2) {
-  let lastErr;
-  for (let i = 0; i < tries; i++) {
-    try {
-      return await fn();
-    } catch (e) {
-      lastErr = e;
-      resetRpcCache();
-      await sleep(250 * (i + 1));
-    }
-  }
-  throw lastErr;
-}
-
-async function pickProvider() {
-  if (_cxRpcProvider) return _cxRpcProvider; // ✅ cache
-
-  for (const url of RPCS) {
-    try {
-      const p = new ethers.JsonRpcProvider(url);
-
-      await p.getBlockNumber(); 
-
-      const net = await p.getNetwork();
-      if (Number(net.chainId) !== 56) {
-        throw new Error(`Wrong chainId ${net.chainId} on ${url}`);
-      }
-
-      _cxRpcProvider = p;
-      _cxRpcUrl = url;
-
-      cxlog("✅ [Elofid] Using RPC:", url);
-      return p;
-    } catch (e) {
-      console.warn("⚠️ [Elofid] RPC failed:", url, e?.message || e);
-    }
-  }
-  throw new Error("All RPCs failed");
-}
-  // ---- tiny health dot for ON-CHAIN METRICS (no CSS dependencies) ----
-function ensureMetricsDot(){
-  let dot = document.getElementById("cx-metrics-dot");
-  if (dot) return dot;
-
-  // try to attach near the "On-Chain Transparency" title first
-  // Only shown next to the on-chain transparency title. Without that section
-  // there is no metric to report, so no dot is drawn anywhere else.
-  const title =
-    document.querySelector('[data-i18n="transparency_title"]') ||
-    document.querySelector('[data-i18n="home_transparency_title"]');
-  if (!title) return null;
-
-  dot = document.createElement("span");
-  dot.id = "cx-metrics-dot";
-  dot.title = "On-chain metrics status";
-  dot.setAttribute("aria-label", "On-chain metrics status");
-  dot.style.display = "inline-block";
-  dot.style.width = "10px";
-  dot.style.height = "10px";
-  dot.style.borderRadius = "999px";
-  dot.style.marginInlineStart = "10px";
-  dot.style.verticalAlign = "middle";
-  dot.style.boxShadow = "0 0 10px rgba(0,0,0,.35)";
-  dot.style.background = "rgba(255,255,255,.35)"; // unknown
-
-  if (title && title.parentNode) {
-    title.parentNode.insertBefore(dot, title.nextSibling);
-  } else {
-    // fallback: fixed
-    dot.style.position = "fixed";
-    dot.style.right = "18px";
-    dot.style.bottom = "52px"; // above activity dot if exists
-    dot.style.zIndex = "9999";
-    document.body.appendChild(dot);
-  }
-
-  return dot;
-}
-
-function setMetricsDot(ok){
-  const dot = ensureMetricsDot();
-  if (!dot) return;
-
-  if (ok) {
-    dot.style.background = "#39ff9a";
-    dot.style.boxShadow = "0 0 14px rgba(57,255,154,.45)";
-    dot.title = "On-chain metrics: OK";
-  } else {
-    dot.style.background = "rgba(255,80,80,.95)";
-    dot.style.boxShadow = "0 0 14px rgba(255,80,80,.35)";
-    dot.title = "On-chain metrics: OFFLINE";
-  }
-}
-
-
-  function formatCYCX(value) {
-  try {
-    const s = ethers.formatUnits(value, DECIMALS);
-    let [i, f = ""] = s.split(".");
-
-    f = f.slice(0, 2).replace(/0+$/, "");
-    const intWithCommas = i.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    return `${intWithCommas}${f ? "." + f : ""} CYCX`;
-  } catch {
-    return "0 CYCX";
-  }
-}
-
-
-  function formatTime(ts) {
-    const n = Number(ts);
-    if (!n) return "—";
-    return new Date(n * 1000).toLocaleString("en-GB", { timeZone: "Asia/Jerusalem" });
-  }
-
-  async function refreshMetrics() {
-  // The on-chain token metrics are not on the page while the ecosystem section
-  // is "coming soon". Skip the RPC calls entirely.
-  if (!$("stat-rewards")) return;
-  if (_metricsInFlight) return; 
-  _metricsInFlight = true;
-  ensureMetricsDot();
-
-
-  try {
-    const stats = await withRetry(async () => {
-      const provider = await pickProvider();
-      const c = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
-
-      try { c.interface.getFunction("globalStats"); } catch { return null; }
-
-      return await c.globalStats();
-    }, 2);
-
-    if (!stats) {
-  setMetricsDot(false);
-  if ($("stat-rewards")) $("stat-rewards").textContent = "—";
-  if ($("stat-burned")) $("stat-burned").textContent = "—";
-  if ($("stat-last-cycle")) $("stat-last-cycle").textContent = "—";
-  return;
-}
-
-setMetricsDot(true);
-
-    const claimed = stats.claimed ?? stats[0];
-    const burned  = stats.burned  ?? stats[1];
-
-    if ($("stat-rewards")) $("stat-rewards").textContent = formatCYCX(claimed);
-    if ($("stat-burned"))  $("stat-burned").textContent  = formatCYCX(burned);
-
-    const id = await withRetry(async () => {
-      const provider = await pickProvider();
-      const c = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
-      return await c.latestCycleId();
-    }, 2);
-
-    if (id === 0n) {
-      if ($("stat-last-cycle")) $("stat-last-cycle").textContent = "—";
-    } else {
-      const cy = await withRetry(async () => {
-        const provider = await pickProvider();
-        const c = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
-        return await c.cycles(id);
-      }, 2);
-
-      const startTime = cy.startTime ?? cy[1];
-      if ($("stat-last-cycle")) $("stat-last-cycle").textContent = formatTime(startTime);
-    }
-  } catch (e) {
-    setMetricsDot(false);
-    console.warn("Elofid metrics error:", e);
-    if ($("stat-rewards")) $("stat-rewards").textContent = "—";
-    if ($("stat-burned")) $("stat-burned").textContent = "—";
-    if ($("stat-last-cycle")) $("stat-last-cycle").textContent = "—";
-  } finally {
-    _metricsInFlight = false;
-  }
-}
-
-
-  refreshMetrics().catch((e) => console.warn("Elofid metrics error:", e));
-  setInterval(() => refreshMetrics().catch(() => {}), 60000);
-})();
-</script>
-
-  <script type="module">
-  cxlog("🟢 [Elofid] Step 2 module loaded");
-
-  async function waitForWalletProvider(timeoutMs = 90000) {
-    const start = Date.now();
-    while (Date.now() - start < timeoutMs) {
-      const p = window.cxAppKitModal?.getWalletProvider?.();
-      if (p) return p;
-      await new Promise(r => setTimeout(r, 250));
-    }
-    return null;
-  }
-
-  // Lazy-load AppKit only when user clicks Connect — avoids 9s critical path on initial load
-  let _appKitPromise = null;
-  function loadAppKit() {
-    if (_appKitPromise) return _appKitPromise;
-    _appKitPromise = (async () => {
-      cxlog("🟢 [Elofid] Lazy-loading AppKit...");
-      const [{ createAppKit }, { EthersAdapter }, { bsc }] = await Promise.all([
-        import("https://esm.sh/@reown/appkit@1.8.24"),
-        import("https://esm.sh/@reown/appkit-adapter-ethers@1.8.24"),
-        import("https://esm.sh/@reown/appkit@1.8.24/networks"),
-      ]);
-      cxlog("🟢 [Elofid] AppKit imports OK");
-      const projectId = "7886bcb95105e9e47337cec481d5de75";
-      const modal = createAppKit({
-        adapters: [new EthersAdapter()],
-        networks: [bsc],
-        defaultNetwork: bsc,
-        projectId,
-        analytics: false,
-        metadata: {
-          name: "Elofid",
-          description: "Elofid Claim Portal",
-          url: window.location.origin,
-          icons: [`${window.location.origin}/logo.webp`, `${window.location.origin}/logo.png`]
-        }
-      });
-      window.cxAppKitModal = modal;
-      cxlog("🟢 [Elofid] AppKit modal exposed globally");
-      cxlog("🟢 [Elofid] AppKit initialized");
-    })();
-    return _appKitPromise;
-  }
-    
-
-
-    // -------- Auto Reconnect --------
-//async function cxAutoReconnect() {
-  //if (!window.cxAppKitModal?.getWalletProvider) {
-    //console.log("🟡 [Elofid] AutoReconnect skipped – AppKit not ready");
-    //return;
-  //}
-  //try {
-    //if (window.cxAppKitModal?.getWalletProvider) {
-      //const provider = window.cxAppKitModal.getWalletProvider();
-     // if (provider) {
-       // console.log("🟢 [Elofid] Auto-reconnect: wallet already connected");
-        //if (typeof window.cxEnsureWeb3 === "function") {
-          //await window.cxEnsureWeb3();
-        //}
-      //}
-   // }
- // } catch (e) {
-   // console.warn("🟡 [Elofid] Auto-reconnect skipped:", e);
-  //}
-//}
-
-  const btn = document.getElementById("btn-connect-wallet");
-
-  if (!btn) {
-    console.error("🔴 [Elofid] btn-connect-wallet NOT FOUND");
-  } else {
-    cxlog("🟢 [Elofid] btn-connect-wallet found");
-
-   btn.addEventListener("click", async () => {
-  cxlog("🟡 Opening wallet list");
-
-  const box = document.getElementById("claim-status");
-  btn.disabled = true;
-  btn.classList.add("is-loading");
-  btn.textContent = cxT("claim_connecting_wallet", "Connecting wallet…");
-  if (box) box.style.display = "none";
-
-  await loadAppKit();
-  await window.cxAppKitModal.open({ view: "ConnectWallet" });
-
-  const provider = await waitForWalletProvider(90000);
-  if (!provider) {
-    console.error("🔴 Provider never became ready (timeout)");
-    btn.classList.remove("is-loading");
-    btn.disabled = false;
-    btn.textContent = cxT("claim_btn_connect", "Connect wallet & check");
-    if (box) {
-      box.style.display = "block";
-      box.className = "error";
-      box.innerHTML = `<strong>${cxT("claim_connection_timeout", "Connection timed out. Please try again.")}</strong>`;
-    }
-    return;
-  }
-
-  btn.textContent = cxT("claim_checking_eligibility", "Checking this wallet’s eligibility…");
-
-  const browserProvider = new ethers.BrowserProvider(provider);
-  const signer = await browserProvider.getSigner();
-  const address = await signer.getAddress();
-
-  cxlog("🟢 [Elofid] Wallet connected:", address);
-
-  const ok = await window.cxEnsureWeb3?.();
-  if (!ok) {
-    btn.classList.remove("is-loading");
-    btn.disabled = false;
-    btn.textContent = cxT("claim_btn_connect", "Connect wallet & check");
-    if (box) {
-      box.style.display = "block";
-      box.className = "error";
-      box.innerHTML = `<strong>${cxT("claim_connection_failed", "Wallet connection failed. Please try again.")}</strong>`;
-    }
-    return;
-  }
-
-  await handleWalletConnected(address);
-  btn.classList.remove("is-loading");
-});
-
-  }
-</script>
 <script>
 (function(){
   const fmt = (n) => {
@@ -5128,7 +2484,6 @@ function setHealthDot(ok){
   }
 }
 
-
   function socCountUp(el, target, duration) {
     if (!el) return;
     const startTime = performance.now();
@@ -5175,7 +2530,6 @@ function setHealthDot(ok){
   setInterval(refreshActivity, 86400000);
 })();
 </script>
-
 
 </body>
 </html>
