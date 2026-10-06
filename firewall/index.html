@@ -3370,7 +3370,8 @@ async function fetchPreview(net, address) {
       verified:  r?.verified,
       decimals:  r?.decimals ?? 18,
       balance:   r?.balance ?? null,
-      spenderName: r?.spenderName || ""
+      spenderName: r?.spenderName || "",
+      sid: r?.sid || "", tid: r?.tid || "", flagged: r?.flagged
       // token, spender intentionally omitted
     }));
   }
@@ -3450,8 +3451,14 @@ function computeMetrics(approvals) {
 
     // ── LAYER 1: Contract Risk ──────────────────────────
     // Weight 1-10 based on what we know about the spender
+    // Malicious only when the spender is flagged (high-risk list or GoPlus). Unverified is its own level.
+    // Older API responses have no "flagged" field: then risk "high" without verified=false counts as flagged.
+    const flagged = r?.flagged === true || r?.providerHighRisk === true ||
+      (Array.isArray(r?.flags) && r.flags.includes("high_risk_spender")) ||
+      risk === "malicious" || risk === "flagged" ||
+      (r?.flagged === undefined && !Array.isArray(r?.flags) && risk === "high" && verified !== false);
     let contractRisk, contractLabel, contractClass;
-    if (risk === "high" || risk === "malicious" || risk === "flagged") {
+    if (flagged) {
       contractRisk = 9; contractLabel = "Flagged / Malicious"; contractClass = "critical";
     } else if (verified === false) {
       contractRisk = 5; contractLabel = "Unverified Contract";  contractClass = "unverified";
@@ -3550,6 +3557,7 @@ function computeMetrics(approvals) {
 
     return {
       allow, symbol, token, spender, spenderName, verified, decimals, risk,
+      sid: String(r?.sid || ""), tid: String(r?.tid || ""),
       lastUpdated: r?.lastUpdated || "—",
       // Layer 1
       contractRisk, contractLabel, contractClass,
@@ -3579,18 +3587,31 @@ function computeMetrics(approvals) {
   const noApproval     = rows.filter(r => !r.hasApproval);
 
   // ── SCORE: penalise only ACTIVE threats ────────────────
+  // Per active approval: unlimited 14 (4 on a token with zero balance), covers full balance 10,
+  // high-risk contract 18, unverified 8. Everything on zero-balance tokens costs at most 20 in total.
+  // Flagged spenders always cost the full penalty. Same model as Site API v23 (Passport).
   let score = 100;
-  score -= unlimitedFunded.length  * 14;  // unlimited + active + balance (or unknown balance)
-  score -= Math.min(20, unlimitedEmpty.length * 4); // unlimited, zero balance today (capped at 20)
-  score -= fullBalanceActive.length * 10; // capped, but covers the full balance
-  score -= highRisk.length         * 18;  // flagged/malicious + active
-  score -= unverifiedActive.length * 8;   // unverified + active
+  let emptyPenalty = 0;
+  for (const r of rows) {
+    if (!r.hasApproval) continue;
+    const isFlagged = r.contractRisk >= 9;
+    const riskPart  = (r.contractRisk >= 5 ? 18 : 0) + (r.verified === false ? 8 : 0);
+    if (r.balance === 0n && !isFlagged) {
+      emptyPenalty += (r.isUnlimited ? 4 : 0) + riskPart;
+    } else {
+      score -= r.isUnlimited ? (r.balance === 0n ? 4 : 14) : 0;
+      score -= r.fullBalance ? 10 : 0;
+      score -= riskPart;
+    }
+  }
+  score -= Math.min(20, emptyPenalty);
   score = Math.max(5, Math.min(100, score));
 
   // ── Blast Radius: spenders that can move a full token balance ──
   // (unlimited, or a capped allowance that covers the balance)
-  const spenderKey   = (r, i) => (r.spender || "").toLowerCase() || ("s" + i);
-  const tokenKey     = (r, i) => (r.token || "").toLowerCase() || ("t" + i);
+  // Unique spender / token: address when known, else the one-way ID from the preview, else the row
+  const spenderKey   = (r, i) => (r.spender || "").toLowerCase() || r.sid || ("s" + i);
+  const tokenKey     = (r, i) => (r.token || "").toLowerCase() || r.tid || ("t" + i);
   const blastCount   = new Set(rows.map((r, i) => r.fullAccess ? spenderKey(r, i) : null).filter(Boolean)).size;
   const blastDisplay = blastCount === 0 ? "None" : `${blastCount} spender${blastCount === 1 ? "" : "s"}`;
 
@@ -3672,7 +3693,7 @@ function computeMetrics(approvals) {
       ...(unlimitedFunded.length  ? [{ label: `${unlimitedFunded.length} unlimited active`,  cls:"bad"  }] : []),
       ...(unlimitedEmpty.length   ? [{ label: `${unlimitedEmpty.length} unlimited on empty tokens`, cls:"warn" }] : []),
       ...(fullBalanceActive.length ? [{ label: `${fullBalanceActive.length} cover${fullBalanceActive.length === 1 ? "s" : ""} full balance`, cls:"bad" }] : []),
-      ...(highRisk.length         ? [{ label: `${highRisk.length} high-risk contracts`,       cls:"bad"  }] : []),
+      ...(rows.some(r => r.hasApproval && r.contractRisk >= 9) ? [{ label: (n => `${n} flagged contract${n === 1 ? "" : "s"}`)(rows.filter(r => r.hasApproval && r.contractRisk >= 9).length), cls:"bad" }] : []),
       ...(unverifiedActive.length ? [{ label: `${unverifiedActive.length} unverified active`, cls:"warn" }] : []),
       ...(!unlimitedActive.length && !fullBalanceActive.length && !highRisk.length ? [{ label:"No active unlimited detected", cls:"ok" }] : [])
     ],
