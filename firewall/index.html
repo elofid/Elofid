@@ -3567,6 +3567,9 @@ function computeMetrics(approvals) {
   const unlimited      = rows.filter(r => r.isUnlimited);
   const unlimitedActive= rows.filter(r => r.isUnlimited && r.hasApproval);
   const fullBalanceActive = rows.filter(r => r.fullBalance);
+  // Unlimited approvals on a token the wallet holds none of: risk only for future deposits
+  const unlimitedEmpty  = unlimitedActive.filter(r => r.balance === 0n);
+  const unlimitedFunded = unlimitedActive.filter(r => r.balance !== 0n);
   const highRisk       = rows.filter(r => r.hasApproval && r.contractRisk >= 5);
   const unverified     = rows.filter(r => r.verified === false);
   const unverifiedActive= rows.filter(r => r.verified === false && r.hasApproval);
@@ -3574,7 +3577,8 @@ function computeMetrics(approvals) {
 
   // ── SCORE: penalise only ACTIVE threats ────────────────
   let score = 100;
-  score -= unlimitedActive.length  * 14;  // unlimited + active
+  score -= unlimitedFunded.length  * 14;  // unlimited + active + balance (or unknown balance)
+  score -= Math.min(20, unlimitedEmpty.length * 4); // unlimited, zero balance today (capped at 20)
   score -= fullBalanceActive.length * 10; // capped, but covers the full balance
   score -= highRisk.length         * 18;  // flagged/malicious + active
   score -= unverifiedActive.length * 8;   // unverified + active
@@ -3662,7 +3666,8 @@ function computeMetrics(approvals) {
     threats,
     fixTargets,
     scoreMeta: [
-      ...(unlimitedActive.length  ? [{ label: `${unlimitedActive.length} unlimited active`,  cls:"bad"  }] : []),
+      ...(unlimitedFunded.length  ? [{ label: `${unlimitedFunded.length} unlimited active`,  cls:"bad"  }] : []),
+      ...(unlimitedEmpty.length   ? [{ label: `${unlimitedEmpty.length} unlimited on empty tokens`, cls:"warn" }] : []),
       ...(fullBalanceActive.length ? [{ label: `${fullBalanceActive.length} cover${fullBalanceActive.length === 1 ? "s" : ""} full balance`, cls:"bad" }] : []),
       ...(highRisk.length         ? [{ label: `${highRisk.length} high-risk contracts`,       cls:"bad"  }] : []),
       ...(unverifiedActive.length ? [{ label: `${unverifiedActive.length} unverified active`, cls:"warn" }] : []),
