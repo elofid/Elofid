@@ -273,6 +273,10 @@ twq('config','r4v6v');
   .drain-time{font-size:clamp(30px,3.5vw,46px);font-weight:950;letter-spacing:-.02em;color:var(--red)}
   .drain-fast{animation:drainPulse 2s ease-in-out infinite}
   .drain-time.drain-none{color:#3cffb0}
+  .exp-legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin-top:10px;font-size:11px;color:var(--muted)}
+  .exp-legend span{display:inline-flex;align-items:center;gap:6px}
+  .exp-legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .exp-legend b{color:rgba(244,246,255,.85);font-weight:800}
   .blast-amount,.drain-time{white-space:nowrap}
   @keyframes drainPulse{0%,100%{opacity:1}50%{opacity:.7}}
   .card-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
@@ -1464,6 +1468,8 @@ body{background:#05060a!important}
 .gauge-wrap{width:90px;height:90px;margin-bottom:6px}.gauge-svg{width:90px;height:90px}.gauge-num{font-size:22px}
 .blast-amount,.drain-time{font-size:clamp(26px,2.8vw,40px)}
 @media (max-width:600px){.blast-amount,.drain-time{white-space:normal;font-size:24px;line-height:1.1}}
+.threat-name{overflow-wrap:anywhere}
+@media (max-width:600px){.threat-top{flex-wrap:wrap}.threat-top>div:last-child{width:100%;align-items:flex-start!important}}
 .main-grid{grid-template-columns:1.3fr 1fr;gap:16px}
 #exposureMap{height:280px}
 .fix-card,.passport-wrap{padding:22px}
@@ -1779,13 +1785,12 @@ body{background:#05060a!important}
       <div id="accessGateOverlay" style="display:none;position:relative;z-index:10;margin-bottom:24px">
         <div style="
           background:linear-gradient(135deg,rgba(124,92,255,.12),rgba(0,229,255,.08));
-          border:1px solid rgba(124,92,255,.35);border-radius:22px;padding:28px;
+          border:1px solid rgba(124,92,255,.35);border-radius:22px;padding:22px 24px;
           text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 30px rgba(124,92,255,.12)
         ">
-          <div style="font-size:32px;margin-bottom:12px">🔒</div>
-          <div style="font-size:18px;font-weight:900;margin-bottom:8px">Unlock Full Access</div>
-          <div style="font-size:13px;color:var(--muted);line-height:1.7;max-width:52ch;margin:0 auto 20px">
-            <span data-i18n="gate_msg">Free: remove your biggest threat. <strong style="color:var(--cyan)">Full Access:</strong> clean the rest — bulk revoke, full Blast Radius, Wallet Passport, exports, and advanced protection.</span>
+          <div style="font-size:18px;font-weight:900;margin-bottom:8px" data-i18n="gate_title">Get the full report for free</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.7;max-width:60ch;margin:0 auto 16px">
+            <span data-i18n="gate_msg">Sign in with your wallet to see every spender, revoke in bulk, unlock the full Fix Plan, wallet relations, exports and a signed Passport. <strong style="color:var(--green)">Signing in is free, costs no gas and cannot move funds.</strong></span>
           </div>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
             <!-- Connect and sign in — triggers AppKit modal -->
@@ -1872,10 +1877,18 @@ body{background:#05060a!important}
         <!-- Exposure Map -->
         <div class="exp-card">
           <div class="exp-title" data-i18n="title_map">🗺 Exposure Map</div>
-          <div class="exp-sub" data-i18n="map_sub">Wallet → Spenders → Tokens. Node size = risk weight.</div>
+          <div class="exp-sub" data-i18n="map_sub">Wallet → Spenders → Tokens. Color = spender risk.</div>
           <svg id="exposureMap" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
             <!-- rendered by JS -->
           </svg>
+          <div class="exp-legend">
+            <span><i style="background:#ff4757"></i>High risk</span>
+            <span><i style="background:#ffd166"></i>Medium</span>
+            <span><i style="background:#3cffb0"></i>Low</span>
+            <span><b>∞</b> unlimited</span>
+            <span><b>100%</b> full balance</span>
+            <span><b>CAP</b> capped</span>
+          </div>
         </div>
 
         <!-- Top Threats -->
@@ -1918,8 +1931,8 @@ body{background:#05060a!important}
             <div class="lock-overlay" id="fixStep2Lock" style="border-radius:16px">
               <div class="lock-overlay-inner">
                 <div class="lock-icon" style="font-size:16px">🔒</div>
-                <p style="font-size:11px;margin-bottom:8px">Full Access required</p>
-                <button class="btn-full-access" onclick="requestFullAccess()" style="font-size:10px;padding:7px 14px">Unlock</button>
+                <p style="font-size:11px;margin-bottom:8px">Free sign-in</p>
+                <button class="btn-full-access" onclick="requestFullAccess()" style="font-size:10px;padding:7px 14px">Sign in</button>
               </div>
             </div>
             <div class="fix-step-num">2</div>
@@ -1932,8 +1945,8 @@ body{background:#05060a!important}
             <div class="lock-overlay" id="fixStep3Lock" style="border-radius:16px">
               <div class="lock-overlay-inner">
                 <div class="lock-icon" style="font-size:16px">🔒</div>
-                <p style="font-size:11px;margin-bottom:8px">Full Access required</p>
-                <button class="btn-full-access" onclick="requestFullAccess()" style="font-size:10px;padding:7px 14px">Unlock</button>
+                <p style="font-size:11px;margin-bottom:8px">Free sign-in</p>
+                <button class="btn-full-access" onclick="requestFullAccess()" style="font-size:10px;padding:7px 14px">Sign in</button>
               </div>
             </div>
             <div class="fix-step-num">3</div>
@@ -2042,20 +2055,9 @@ body{background:#05060a!important}
               </div>
             </div>
 
-            <!-- Free tier: unlock CTA + blurred Full Access preview -->
+            <!-- Free tier: one sign-in button -->
             <div id="passportUnlockSection" style="display:none;margin-top:14px">
-              <button class="btn-full-access" onclick="requestFullAccess()" style="width:100%;font-size:12px;padding:11px 18px">🔓 Unlock Full Access</button>
-              <div style="margin-top:10px;padding:14px;border-radius:12px;border:1px solid rgba(124,92,255,.2);background:rgba(124,92,255,.05);position:relative;overflow:hidden">
-                <div style="filter:blur(3px);pointer-events:none;opacity:.45">
-                  <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:10px">✅ Full Access — Verified Passport</div>
-                  <div style="height:36px;border-radius:999px;background:rgba(124,92,255,.25);margin-bottom:8px"></div>
-                  <div style="height:36px;border-radius:999px;background:rgba(124,92,255,.18)"></div>
-                </div>
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:6px">
-                  <span style="font-size:13px">🔒</span>
-                  <span style="font-size:11px;color:rgba(174,138,255,.9);font-weight:700;letter-spacing:.08em;text-transform:uppercase">Full Access Required</span>
-                </div>
-              </div>
+              <button class="btn-full-access" onclick="requestFullAccess()" style="width:100%;font-size:12px;padding:11px 18px">🔑 Sign in to sign your Passport (free)</button>
             </div>
 
             <button class="btn-passport secondary" id="btnCopyLink" style="margin-top:8px">🔗 Copy Share Link</button>
@@ -2130,7 +2132,7 @@ body{background:#05060a!important}
           <div class="fw-watch-top" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
             <div class="fw-watch-header-text" style="order:2;">
               <div style="font-size:16px;font-weight:800;margin-bottom:4px" data-i18n="watch_title">Track Multiple Wallets</div>
-              <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-i18n="watch_desc">Scores refresh when you press Scan All. You're alerted if a watched wallet drops below 60.</span> <span id="watchLimitLabel" data-i18n="watch_limit_label" style="color:var(--muted);font-size:11px">(Free: 2 wallets max — Unlock for up to 10)</span></div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-i18n="watch_desc">Scores refresh when you press Scan All. You're alerted if a watched wallet drops below 60.</span> <span id="watchLimitLabel" data-i18n="watch_limit_label" style="color:var(--muted);font-size:11px">(2 wallets without sign-in. Sign in for up to 10)</span></div>
             </div>
             <div class="fw-watch-header-actions" style="order:1;">
               <button class="fw-watch-submit" id="fwBtnScanAll" onclick="fwWatchScanAll()" style="background:rgba(93,255,178,.10);border-color:rgba(93,255,178,.3);color:var(--green)" data-i18n="watch_scan_all">↻ Scan All</button>
@@ -2171,7 +2173,7 @@ body{background:#05060a!important}
             </div>
             <!-- shown/hidden by JS based on tier -->
             <button class="fw-notif-btn" id="fwOnchainBtn" onclick="fwMonitorToggle()" style="border-color:rgba(0,229,255,.3);color:var(--cyan);display:none">Start</button>
-            <button class="fw-notif-btn" id="fwOnchainLockBtn" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.3);color:#a87eff">🔒 Full Access</button>
+            <button class="fw-notif-btn" id="fwOnchainLockBtn" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.3);color:#a87eff">🔑 Sign in</button>
           </div>
         </div>
       </div>
@@ -2851,10 +2853,9 @@ function fwUpdateExportVisibility() {
   const stat = document.getElementById("fwExportStatus");
   if (!sec) return;
 
-  // Always visible once scan has run (show as teaser in free tier)
-  sec.classList.add("fw-visible");
-
+  // Visible after sign-in only (the sign-in banner lists exports in the free tier)
   if (fwAccessTier === "full") {
+    sec.classList.add("fw-visible");
     // Unlocked: remove blur/lock, enable buttons
     card?.classList.remove("fw-export-locked");
     if (cta)  cta.style.display  = "none";
@@ -2867,7 +2868,8 @@ function fwUpdateExportVisibility() {
     // Bind events
     fwInitExport();
   } else {
-    // Locked: show CTA, keep blur
+    // Free tier: hidden until sign-in
+    sec.classList.remove("fw-visible");
     card?.classList.add("fw-export-locked");
     if (cta)  cta.style.display  = "block";
     if (stat) stat.style.display = "none";
@@ -3367,7 +3369,8 @@ async function fetchPreview(net, address) {
       risk:      r?.risk || "",
       verified:  r?.verified,
       decimals:  r?.decimals ?? 18,
-      balance:   r?.balance ?? null
+      balance:   r?.balance ?? null,
+      spenderName: r?.spenderName || ""
       // token, spender intentionally omitted
     }));
   }
@@ -3390,6 +3393,18 @@ async function fetchApprovals(net, address) {
     : Array.isArray(data?.items)                 ? data.items
     : [];
   return arr;
+}
+
+// Spender title for threat cards: known entity name, then provider contract name,
+// then the short address. Never a made-up name.
+function fwSpenderDisplayName(r) {
+  const addr = String(r?.spender || "").toLowerCase();
+  const known = addr && (FW_TAGGED_ENTITIES[fwNet] || {})[addr];
+  const name = (known && known.name) || r?.spenderName || "";
+  if (name && addr.length > 5) return `${name} · ${fwShort(r.spender)}`;
+  if (name) return name;
+  if (addr.length > 5) return fwShort(r.spender);
+  return r?.symbol ? `Spender of ${r.symbol}` : "Unknown spender";
 }
 
 // Score color matches the score label: Protected 85+, Exposed 70+, Vulnerable 50+, Critical below 50
@@ -3428,6 +3443,8 @@ function computeMetrics(approvals) {
     const risk     = String(r?.risk || "").toLowerCase();
     const verified = (r?.verified === true) ? true : (r?.verified === false) ? false : null;
     const decimals = Number(r?.decimals ?? r?.token_decimals ?? 18) || 18;
+    // Spender contract name from the data provider (GoPlus contract_name), when known
+    const spenderName = String(r?.spenderName || r?.spender_name || r?.goplus_spender_name || "").trim();
     // Wallet balance of this token in raw units (null when the provider did not send it)
     const balance  = (() => { try { return /^\d+$/.test(String(r?.balance ?? "")) ? BigInt(r.balance) : null; } catch { return null; } })();
 
@@ -3529,7 +3546,7 @@ function computeMetrics(approvals) {
     }
 
     return {
-      allow, symbol, token, spender, verified, decimals, risk,
+      allow, symbol, token, spender, spenderName, verified, decimals, risk,
       lastUpdated: r?.lastUpdated || "—",
       // Layer 1
       contractRisk, contractLabel, contractClass,
@@ -3594,8 +3611,8 @@ function computeMetrics(approvals) {
   // ── Threat items: sorted by risk, hard cap 50 for DOM perf ─
   // Paginated in UI (10/page). canRevoke requires real 0x addresses.
   const threats = sorted.slice(0, 15).map(r => ({
-    name:        (r.spender && r.spender.length > 5) ? fwShort(r.spender)
-                   : (r.symbol ? r.symbol + " Spender" : "Unknown Spender"),
+    name:        fwSpenderDisplayName(r),
+    spenderName: r.spenderName || "",
     fullSpender: r.spender,
     token:       r.token,
     symbol:      r.symbol,
@@ -4145,46 +4162,11 @@ async function runLoadSequence(walletAddr, net, isDemo) {
     fwRenderRelations(net, demoRels);
   } else {
     // Free tier + real wallet:
-    // Do NOT call fwFetchWalletTxs — would expose wallet address + full tx list in Network tab
-    // before the user has granted full access. Show a static locked teaser instead.
+    // Do NOT call fwFetchWalletTxs before sign-in. The section stays hidden in the
+    // free tier (the sign-in banner lists Wallet Relations) and opens after sign-in.
     window.__fwRelations = null;
-    if (relSection) relSection.style.display = "block";
-    if (relContent) relContent.innerHTML = `
-      <div style="
-        display:grid;
-        grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-        gap:12px;
-        pointer-events:none;
-        user-select:none;
-        opacity:.4;
-        filter:blur(2.5px);
-      ">
-        ${["DEX / AMM","CEX Bridge","Lending Protocol","Aggregator"].map(label => `
-          <div style="
-            background:rgba(255,255,255,.04);
-            border:1px solid rgba(255,255,255,.10);
-            border-radius:16px;
-            padding:16px 14px;
-          ">
-            <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px">${label}</div>
-            <div style="height:10px;border-radius:6px;background:rgba(255,255,255,.12);width:70%;margin-bottom:6px"></div>
-            <div style="height:8px;border-radius:6px;background:rgba(255,255,255,.07);width:45%"></div>
-          </div>
-        `).join("")}
-      </div>
-      <div style="
-        margin-top:14px;
-        padding:12px 16px;
-        border-radius:12px;
-        background:rgba(0,229,255,.05);
-        border:1px solid rgba(0,229,255,.15);
-        font-size:12px;
-        color:var(--muted);
-        text-align:center;
-      ">
-        🔒 Unlock Full Access to analyze wallet relationships and protocol interactions.
-      </div>
-    `;
+    if (relSection) relSection.style.display = "none";
+    if (relContent) relContent.innerHTML = "";
   }
 }
 
@@ -4844,22 +4826,26 @@ function renderExposureMap(wallet, threats, tier) {
   const visible = tier === "free" ? threats.slice(0, 3) : threats.slice(0, 8);
 
   // Debounce: don't re-render if data hasn't changed (prevents crash on rapid re-renders)
-  const hash = wallet + tier + visible.map(t=>t.risk+t.label).join(",");
+  const hash = wallet + tier + visible.map(t=>t.risk+t.label+t.name+(t.fullBalance?"f":"")+(t.isUnlimited?"u":"")).join(",");
   if (hash === _lastExposureHash) return;
   _lastExposureHash = hash;
   const n = visible.length;
   if (!n) { svg.innerHTML = `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="rgba(244,246,255,.35)" font-size="13" font-family="system-ui">No spenders detected</text>`; return; }
 
+  // Elliptical layout so every node stays inside the 480x260 frame.
+  // Spenders on an inner ellipse, their tokens further out on the same angle.
+  // Starting at the right spreads 2 spenders left and right instead of top and bottom.
+  const angleOf = (i) => (n === 1 ? 0 : (i/n) * Math.PI*2);
   const pos = visible.map((_, i) => {
-    const a = (i/n) * Math.PI*2 - Math.PI/2;
-    return { x: cx + 98*Math.cos(a), y: cy + 98*Math.sin(a) };
+    const a = angleOf(i);
+    return { x: cx + 118*Math.cos(a), y: cy + 66*Math.sin(a), a };
   });
 
   const tokPos = [];
   visible.forEach((t, ti) => {
     t.tokens.forEach((tok, ki) => {
-      const a = ((ti + ki*.28)/n)*Math.PI*2 - Math.PI/2;
-      tokPos.push({ x: cx + 168*Math.cos(a + ki*.32), y: cy + 168*Math.sin(a + ki*.32), name:tok, ti });
+      const a = angleOf(ti) + ki*.35;
+      tokPos.push({ x: cx + 200*Math.cos(a), y: cy + 100*Math.sin(a), name:tok, ti });
     });
   });
 
@@ -4881,23 +4867,32 @@ function renderExposureMap(wallet, threats, tier) {
     h += `<line x1="${sp.x}" y1="${sp.y}" x2="${tp.x}" y2="${tp.y}" stroke="rgba(255,255,255,.15)" stroke-width="1"/>`;
   });
   tokPos.forEach(tp => {
-    h += `<circle cx="${tp.x}" cy="${tp.y}" r="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
-      <text x="${tp.x}" y="${tp.y}" text-anchor="middle" dominant-baseline="middle" fill="rgba(244,246,255,.75)" font-size="8" font-family="system-ui" font-weight="700">${esc(tp.name).slice(0,6)}</text>`;
+    const tName = String(tp.name || "TOKEN").slice(0, 8);
+    const tW = Math.max(34, tName.length * 6.5 + 14);
+    h += `<rect x="${tp.x - tW/2}" y="${tp.y - 10}" width="${tW}" height="20" rx="10" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+      <text x="${tp.x}" y="${tp.y + .5}" text-anchor="middle" dominant-baseline="middle" fill="rgba(244,246,255,.85)" font-size="9" font-family="system-ui" font-weight="700">${esc(tName)}</text>`;
   });
   visible.forEach((t, i) => {
     const p = pos[i];
     const col = riskColor[t.risk] || "#888";
-    const r   = t.risk === "bad" ? 22 : 17;
+    const r   = t.risk === "bad" ? 22 : 18;
+    // Inside the node: what the spender can move. Under it: who the spender is.
+    const access = !t.hasApproval ? "—" : t.isUnlimited ? "∞" : t.fullBalance ? "100%" : "CAP";
+    const spFull = String(t.name || "Spender").split(" · ")[0];
+    const spName = spFull.length > 16 ? spFull.slice(0, 15) + "…" : spFull;
+    const below  = p.y >= cy ? 1 : -1;
+    const ly     = p.y + below * (r + 13);
     h += `<circle cx="${p.x}" cy="${p.y}" r="${r+8}" fill="${col}" fill-opacity=".06"/>
       <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="rgba(5,6,10,.9)" stroke="${col}" stroke-width="1.5"/>
-      <text x="${p.x}" y="${p.y}" text-anchor="middle" dominant-baseline="middle" fill="${col}" font-size="8" font-family="system-ui" font-weight="800">${esc(t.label).split(" ").map(w=>w[0]).join("").slice(0,4)}</text>`;
+      <text x="${p.x}" y="${p.y + .5}" text-anchor="middle" dominant-baseline="middle" fill="${col}" font-size="${access.length > 2 ? 9 : 14}" font-family="system-ui" font-weight="900">${esc(access)}</text>
+      <text x="${p.x}" y="${ly}" text-anchor="middle" dominant-baseline="middle" fill="rgba(244,246,255,.7)" font-size="9" font-family="system-ui" font-weight="700">${esc(spName)}</text>`;
   });
 
   // Greyed-out locked spots for free tier
   if (tier === "free" && threats.length > 3) {
     for (let i = 3; i < Math.min(threats.length, 5); i++) {
-      const a = (i/threats.length)*Math.PI*2 - Math.PI/2;
-      const x = cx + 98*Math.cos(a), y = cy + 98*Math.sin(a);
+      const a = (i/threats.length)*Math.PI*2;
+      const x = cx + 118*Math.cos(a), y = cy + 66*Math.sin(a);
       h += `<circle cx="${x}" cy="${y}" r="17" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="3 3"/>
         <text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,.22)" font-size="12">🔒</text>`;
     }
@@ -4994,19 +4989,19 @@ function _buildThreatCard(t, i, tier) {
   let actionBtn = "";
   if (tier === "full" && t.canRevoke) {
     // Have both addresses — real on-chain revoke
-    actionBtn = `<button class="btn-fix-small" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">Revoke ↗</button>`;
+    actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">🛡 Revoke</button>`;
   } else if (tier === "free" && t.hasApproval) {
     if (i === 0) {
       if (t.canRevoke) {
         // API returned full addresses — direct revoke
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">🛡 Revoke ↗</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">🛡 Revoke</button>`;
       } else {
         // API returned preview only — lazy on-chain lookup on click
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke('${esc(t.symbol||"")}','${esc(fwNet||"bsc")}',this)">🛡 Revoke ↗</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke('${esc(t.symbol||"")}','${esc(fwNet||"bsc")}',this)">🛡 Revoke</button>`;
       }
     } else {
       // All others: prompt upgrade
-      actionBtn = `<button class="btn-fix-small" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.4);color:#a87eff">Unlock ↗</button>`;
+      actionBtn = `<button class="btn-fix-small" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.4);color:#a87eff">🔑 Sign in to revoke</button>`;
     }
   }
   // tier=full + hasApproval + !canRevoke → no button here; handled by fwRescanBanner above
@@ -5709,10 +5704,14 @@ function renderPassport(wallet, d, tier) {
   if (scoreEl) scoreEl.style.color = fwScoreColor(sc);
 
   const statusEl = document.getElementById("ppStatus");
-  if (sc < 45) {
+  // Same thresholds as the score label: Protected 85+, Exposed 70+, Vulnerable 50+, Critical below 50
+  if (sc < 50) {
     statusEl.textContent = "🧨 Critical";
     statusEl.style.cssText = "border-color:rgba(255,71,87,.4);color:#ff6b6b;background:rgba(255,71,87,.10)";
   } else if (sc < 70) {
+    statusEl.textContent = "⚠ Vulnerable";
+    statusEl.style.cssText = "border-color:rgba(255,169,77,.4);color:#ffa94d;background:rgba(255,169,77,.10)";
+  } else if (sc < 85) {
     statusEl.textContent = "⚠ Exposed";
     statusEl.style.cssText = "border-color:rgba(255,193,7,.35);color:#ffd166;background:rgba(255,193,7,.10)";
   } else {
@@ -6883,7 +6882,7 @@ const FW_TRANSLATIONS = {
     // notices
     notice_live_title:"Live scan.", notice_live_body:"Read-only on-chain data. No transactions made.",
     notice_demo_body:"Showing sample data. Enter a real wallet address and click \"Scan Wallet\" to scan live.",
-    gate_msg:"Free: remove your biggest threat. <strong style=\"color:var(--cyan)\">Full Access:</strong> clean the rest — bulk revoke, full Blast Radius, Wallet Passport, exports, and advanced protection.",
+    gate_msg:'Sign in with your wallet to see every spender, revoke in bulk, unlock the full Fix Plan, wallet relations, exports and a signed Passport. <strong style="color:var(--green)">Signing in is free, costs no gas and cannot move funds.</strong>',
     notice_demo_title:"Demo mode:", notice_demo_body:'Showing sample data. Enter a real wallet address and click "Scan Wallet" to scan live.',
     // section titles
     sec_status:"Security Snapshot", sec_fix:"Fix Mode", sec_passport:"Wallet Passport",
@@ -6894,7 +6893,7 @@ const FW_TRANSLATIONS = {
     blast_sub:"spenders that can move a full token balance",
     drain_sub:"token balances a spender can move in full today",
     // map / threats
-    title_map:"Exposure Map", map_sub:"Wallet → Spenders → Tokens. Node size = risk weight.",
+    title_map:"Exposure Map", map_sub:"Wallet → Spenders → Tokens. Color = spender risk.",
     title_threats:"Top Threats",
     // fix mode
     fix_lock_msg:"Bulk revoke &amp; full cleanup require Full Access<br>(connect your wallet and sign in)",
@@ -6914,13 +6913,13 @@ const FW_TRANSLATIONS = {
     // Scan notice
     scan_running:"Scanning wallet…",
     // access gate
-    gate_msg:'Free: remove your biggest threat. <strong style="color:var(--cyan)">Full Access:</strong> clean the rest — bulk revoke, full Blast Radius, Verified Passport, exports, and advanced protection. <strong style="color:var(--green)">Connect your wallet and sign in to unlock. It is free.</strong>',
+    gate_msg:'Sign in with your wallet to see every spender, revoke in bulk, unlock the full Fix Plan, wallet relations, exports and a signed Passport. <strong style="color:var(--green)">Signing in is free, costs no gas and cannot move funds.</strong>', gate_title:'Get the full report for free',
     btn_rescan:"Scan another wallet",
     fix_impact:"The 3 most impactful actions to secure your wallet.",
     passport_copy_sub:"Your cryptographic proof of security. Share to prove you've secured your wallet.",
     export_sub:"Download your complete scan as CSV or JSON, or copy a shareable report.",
     rel_title:"Protocol & Exchange Relationships",
-    watch_limit_label:"(Free: 2 wallets max — Unlock for up to 10)",
+    watch_limit_label:"(2 wallets without sign-in. Sign in for up to 10)",
     watch_desc:"Scores refresh when you press Scan All. You're alerted if a watched wallet drops below 60.",
     watch_scan_all:"↻ Scan All",
     watch_add_btn:"+ Watch",
@@ -6957,7 +6956,7 @@ const FW_TRANSLATIONS = {
     demo_try:"使用演示钱包", micro_readonly:"只读扫描", micro_noconnect:"扫描无需连接钱包", micro_revoke:"仅撤销时连接", micro_chains:"BSC + ETH + Polygon",
     step1:"获取授权日志", step2:"分析风险合约", step3:"计算爆炸半径", step4:"生成修复计划",
     notice_live_title:"实时扫描。", notice_live_body:"只读链上数据，不产生任何交易。",
-    gate_msg:"免费：移除你最大的威胁。<strong style=\"color:var(--cyan)\">完整访问：</strong>清理其余全部 —— 批量撤销、完整爆炸半径、钱包护照、导出报告及高级防护。",
+    gate_msg:'用钱包登录即可查看所有授权方、批量撤销，并解锁完整修复计划、钱包关系、导出报告和签名护照。<strong style="color:var(--green)">登录免费，不消耗 Gas，也无法转移资金。</strong>',
     notice_demo_title:"演示模式：", notice_demo_body:"显示示例数据。输入真实钱包地址并点击「扫描钱包」进行实时扫描。",
     scan_running:"正在扫描钱包…",
     sec_status:"安全概览", sec_fix:"修复模式", sec_passport:"钱包护照",
@@ -6966,7 +6965,7 @@ const FW_TRANSLATIONS = {
     kicker_score:"防火墙评分", kicker_blast:"爆炸半径", kicker_drain:"暴露代币",
     blast_sub:"可转走某个代币全部余额的授权方",
     drain_sub:"今天可被授权方全部转走的代币余额",
-    title_map:"风险地图", map_sub:"钱包 → 授权方 → 代币。节点大小 = 风险权重。",
+    title_map:"风险地图", map_sub:"钱包 → 授权方 → 代币。颜色 = 授权方风险。",
     title_threats:"主要威胁",
     fix_lock_msg:"批量撤销和完整清理需要完整访问权限<br>（连接钱包并登录）",
     btn_unlock_fix:"解锁完整清理",
@@ -6978,13 +6977,13 @@ const FW_TRANSLATIONS = {
     passport_proof_title:"安全护照", passport_proof_sub:"可分享、可验证的钱包安全状态快照。", passport_verify_sub:"为钱包安全状态签署加密证明 — 任何人都可验证，无需KYC，无需Gas。",
     watch_title:"追踪多个钱包",
     score_protected:"受保护", score_exposed:"已暴露", score_vulnerable:"存在漏洞", score_critical:"危急",
-    gate_msg:'免费：撤销最高风险授权。<strong style="color:var(--cyan)">完整访问：</strong>批量撤销、完整爆炸半径、验证钱包护照、导出及高级保护工具。<strong style="color:var(--green)">连接钱包并登录即可免费解锁。</strong>',
+    gate_msg:'用钱包登录即可查看所有授权方、批量撤销，并解锁完整修复计划、钱包关系、导出报告和签名护照。<strong style="color:var(--green)">登录免费，不消耗 Gas，也无法转移资金。</strong>', gate_title:'获取完整报告，完全免费',
     btn_rescan:"扫描其他钱包",
     fix_impact:"以下3项操作将显著提升您的安全评分。",
     passport_copy_sub:"您的安全加密证明。分享以证明您已保护好钱包。",
     export_sub:"下载CSV或JSON格式的完整扫描报告，或复制可分享的摘要。",
     rel_title:"协议和交易所关系",
-    watch_limit_label:"（免费: 最多2个钱包 — 解锁可追踪10个）",
+    watch_limit_label:"（未登录最多2个钱包，登录后最多10个）",
     watch_desc:"点击「全部扫描」时更新评分；若监控钱包的评分低于 60，将提醒你。",
     watch_scan_all:"↻ 全部扫描",
     watch_add_btn:"+ 监控",
@@ -7022,7 +7021,7 @@ const FW_TRANSLATIONS = {
     step1:"جلب سجلات الموافقات", step2:"تحليل مخاطر العقود", step3:"حساب نطاق الضرر", step4:"بناء خطة الإصلاح",
     notice_live_title:"فحص مباشر.", notice_live_body:"بيانات للقراءة فقط. لا معاملات.",
     notice_demo_body:"عرض بيانات تجريبية. أدخل عنوان محفظة حقيقياً واضغط «فحص المحفظة» لإجراء فحص مباشر.",
-    gate_msg:"مجاناً: أزل أكبر تهديد لديك. <strong style=\"color:var(--cyan)\">وصول كامل:</strong> نظّف الباقي — إلغاء جماعي، نطاق الضرر الكامل، جواز المحفظة، التصدير، وحماية متقدمة.",
+    gate_msg:'سجّل الدخول بمحفظتك لرؤية كل الجهات المفوَّضة، والإلغاء الجماعي، وفتح خطة الإصلاح الكاملة وعلاقات المحفظة والتصدير وجواز موقَّع. <strong style="color:var(--green)">تسجيل الدخول مجاني، بلا رسوم غاز، ولا يمكنه نقل أموالك.</strong>',
     notice_demo_title:"وضع العرض التجريبي:", notice_demo_body:'بيانات نموذجية. أدخل عنوان محفظة حقيقية واضغط "تشغيل الجدار" للفحص الفعلي.',
     scan_running:"جارٍ فحص المحفظة…",
     sec_status:"ملخص الأمان", sec_fix:"وضع الإصلاح", sec_passport:"جواز المحفظة",
@@ -7031,7 +7030,7 @@ const FW_TRANSLATIONS = {
     kicker_score:"نقاط الجدار", kicker_blast:"نطاق الضرر", kicker_drain:"الرموز المكشوفة",
     blast_sub:"الجهات المفوَّضة القادرة على نقل كامل رصيد رمز ما",
     drain_sub:"أرصدة الرموز التي يمكن لجهة مفوَّضة نقلها بالكامل اليوم",
-    title_map:"خريطة التعرض", map_sub:"المحفظة ← المفوَّضون ← الرموز. حجم العقدة = وزن المخاطر.",
+    title_map:"خريطة التعرض", map_sub:"المحفظة ← المفوَّضون ← الرموز. اللون = خطورة الجهة المفوَّضة.",
     title_threats:"أبرز التهديدات",
     fix_lock_msg:"الإلغاء الجماعي والتنظيف الكامل يتطلبان وصولاً كاملاً<br>(اربط محفظتك وسجّل الدخول)",
     btn_unlock_fix:"فتح التنظيف الكامل",
@@ -7043,13 +7042,13 @@ const FW_TRANSLATIONS = {
     passport_proof_title:"جواز الأمان", passport_proof_sub:"لقطة قابلة للمشاركة والتحقق من حالة أمان محفظتك.", passport_verify_sub:"وقّع إثباتاً تشفيرياً لحالة أمان المحفظة — قابل للتحقق من أي شخص، بلا KYC وبلا رسوم Gas.",
     watch_title:"تتبع محافظ متعددة",
     score_protected:"محمي", score_exposed:"مكشوف", score_vulnerable:"ضعيف", score_critical:"حرج",
-    gate_msg:'مجاناً: إلغاء أكبر تهديد. <strong style="color:var(--cyan)">الوصول الكامل:</strong> التنظيف الشامل — الإلغاء الجماعي ونطاق الضرر الكامل وجواز المحفظة الموثق والتصدير وأدوات الحماية المتقدمة. <strong style="color:var(--green)">اربط محفظتك وسجّل الدخول لفتحه مجاناً.</strong>',
+    gate_msg:'سجّل الدخول بمحفظتك لرؤية كل الجهات المفوَّضة، والإلغاء الجماعي، وفتح خطة الإصلاح الكاملة وعلاقات المحفظة والتصدير وجواز موقَّع. <strong style="color:var(--green)">تسجيل الدخول مجاني، بلا رسوم غاز، ولا يمكنه نقل أموالك.</strong>', gate_title:'احصل على التقرير الكامل مجاناً',
     btn_rescan:"فحص محفظة أخرى",
     fix_impact:"الإجراءات الثلاثة الأكثر تأثيراً لتأمين محفظتك.",
     passport_copy_sub:"إثباتك التشفيري على الأمان. شاركه لإثبات أنك أمّنت محفظتك.",
     export_sub:"حمّل الفحص كاملاً بصيغة CSV أو JSON، أو انسخ تقريراً قابلاً للمشاركة.",
     rel_title:"علاقات البروتوكولات والبورصات",
-    watch_limit_label:"(مجاني: 2 محافظ كحد أقصى — الفتح يتيح 10)",
+    watch_limit_label:"(محفظتان بدون تسجيل دخول. سجّل الدخول لمتابعة حتى 10)",
     watch_desc:"تُحدَّث الدرجات عند الضغط على «فحص الكل»، وستتلقى تنبيهاً إذا انخفضت درجة محفظة مراقَبة عن 60.",
     watch_scan_all:"↻ فحص الكل",
     watch_add_btn:"+ مراقبة",
@@ -7088,7 +7087,7 @@ const FW_TRANSLATIONS = {
     step3:"Расчёт зоны поражения", step4:"Формирование плана защиты",
     notice_live_title:"Живое сканирование.", notice_live_body:"Только чтение. Транзакции не создаются.",
     notice_demo_body:"Показаны демо-данные. Введи реальный адрес кошелька и нажми «Сканировать» для живого сканирования.",
-    gate_msg:"Бесплатно: устрани самую большую угрозу. <strong style=\"color:var(--cyan)\">Полный Доступ:</strong> очисти остальное — массовый отзыв, полная Зона Поражения, Паспорт Кошелька, экспорт и расширенная защита.",
+    gate_msg:'Войдите через кошелёк, чтобы увидеть всех получателей одобрений, отозвать их пакетно и открыть полный план исправления, связи кошелька, экспорт и подписанный паспорт. <strong style="color:var(--green)">Вход бесплатный, без газа и не может переместить средства.</strong>',
     notice_demo_title:"Демо-режим:", notice_demo_body:'Тестовые данные. Введи адрес кошелька и нажми "Запустить" для реального сканирования.',
     scan_running:"Сканирование кошелька…",
     sec_status:"Сводка Безопасности", sec_fix:"Режим Исправления", sec_passport:"Паспорт Кошелька",
@@ -7097,7 +7096,7 @@ const FW_TRANSLATIONS = {
     kicker_score:"Оценка Файрвола", kicker_blast:"Зона Поражения", kicker_drain:"Открытые Токены",
     blast_sub:"получатели одобрений, способные вывести весь баланс токена",
     drain_sub:"балансы токенов, которые можно вывести полностью уже сегодня",
-    title_map:"Карта Рисков", map_sub:"Кошелёк → Получатели → Токены. Размер узла = вес риска.",
+    title_map:"Карта Рисков", map_sub:"Кошелёк → Получатели → Токены. Цвет = риск получателя.",
     title_threats:"Топ Угроз",
     fix_lock_msg:"Массовый отзыв и полная очистка требуют полного доступа<br>(подключите кошелёк и войдите)",
     btn_unlock_fix:"Полная очистка",
@@ -7109,13 +7108,13 @@ const FW_TRANSLATIONS = {
     passport_proof_title:"Паспорт Безопасности", passport_proof_sub:"Проверяемый снимок состояния безопасности кошелька, которым можно поделиться.", passport_verify_sub:"Подпиши криптографическое подтверждение состояния безопасности — проверяемое любым пользователем, без KYC и без газа.",
     watch_title:"Отслеживать несколько кошельков",
     score_protected:"Защищён", score_exposed:"Уязвим", score_vulnerable:"Критический", score_critical:"Опасность",
-    gate_msg:'Бесплатно: удали главную угрозу. <strong style="color:var(--cyan)">Полный доступ:</strong> полная очистка — массовый отзыв, полная зона риска, Верифицированный Паспорт, экспорт и расширенные инструменты защиты. <strong style="color:var(--green)">Подключите кошелёк и войдите, чтобы открыть бесплатно.</strong>',
+    gate_msg:'Войдите через кошелёк, чтобы увидеть всех получателей одобрений, отозвать их пакетно и открыть полный план исправления, связи кошелька, экспорт и подписанный паспорт. <strong style="color:var(--green)">Вход бесплатный, без газа и не может переместить средства.</strong>', gate_title:'Полный отчёт бесплатно',
     btn_rescan:"Сканировать другой кошелёк",
     fix_impact:"3 наиболее важных действия для защиты кошелька.",
     passport_copy_sub:"Твоё криптографическое доказательство безопасности. Поделись, чтобы подтвердить, что кошелёк защищён.",
     export_sub:"Скачай полный отчёт в CSV или JSON, или скопируй краткое резюме.",
     rel_title:"Связи протоколов и бирж",
-    watch_limit_label:"(Бесплатно: макс 2 кошелька — разблокируй до 10)",
+    watch_limit_label:"(2 кошелька без входа. Войдите, чтобы отслеживать до 10)",
     watch_desc:"Оценки обновляются по кнопке «Сканировать все». Если оценка отслеживаемого кошелька упадёт ниже 60 — ты получишь предупреждение.",
     watch_scan_all:"↻ Сканировать все",
     watch_add_btn:"+ Следить",
