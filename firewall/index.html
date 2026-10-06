@@ -3888,8 +3888,6 @@ function fwCleanupBeforeScan() {
   if (relContent) relContent.innerHTML = "";
   window.__fwRelations = null;
 
-  // 7. Stop approval poller if running (saves memory + network)
-  if (_fwPollerInterval) { clearInterval(_fwPollerInterval); _fwPollerInterval = null; }
 }
 
 // ── LOADING SEQUENCE ─────────────────────────────────────────────
