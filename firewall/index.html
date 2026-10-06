@@ -272,6 +272,8 @@ twq('config','r4v6v');
   .blast-amount{font-size:clamp(30px,3.5vw,46px);font-weight:950;letter-spacing:-.02em;color:#ffd166}
   .drain-time{font-size:clamp(30px,3.5vw,46px);font-weight:950;letter-spacing:-.02em;color:var(--red)}
   .drain-fast{animation:drainPulse 2s ease-in-out infinite}
+  .drain-time.drain-none{color:#3cffb0}
+  .blast-amount,.drain-time{white-space:nowrap}
   @keyframes drainPulse{0%,100%{opacity:1}50%{opacity:.7}}
   .card-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
   .meta-chip{
@@ -1460,7 +1462,8 @@ body{background:#05060a!important}
 .score-card{padding:22px 20px;min-height:0;border-radius:22px}
 .top3{grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
 .gauge-wrap{width:90px;height:90px;margin-bottom:6px}.gauge-svg{width:90px;height:90px}.gauge-num{font-size:22px}
-.blast-amount,.drain-time{font-size:clamp(30px,3.5vw,46px)}
+.blast-amount,.drain-time{font-size:clamp(26px,2.8vw,40px)}
+@media (max-width:600px){.blast-amount,.drain-time{white-space:normal;font-size:24px;line-height:1.1}}
 .main-grid{grid-template-columns:1.3fr 1fr;gap:16px}
 #exposureMap{height:280px}
 .fix-card,.passport-wrap{padding:22px}
@@ -1849,15 +1852,15 @@ body{background:#05060a!important}
         <div class="score-card card-blast">
           <div class="sc-kicker" data-i18n="kicker_blast">💥 Blast Radius</div>
           <div class="blast-amount" id="blastAmt">—</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:6px" data-i18n="blast_sub">max drainable if top spender exploited</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px" data-i18n="blast_sub">spenders that can move a full token balance</div>
           <div class="card-meta" id="blastMeta"></div>
         </div>
 
-        <!-- Time to Drain -->
+        <!-- Exposed Tokens -->
         <div class="score-card card-drain">
-          <div class="sc-kicker" data-i18n="kicker_drain">⏱ Time-to-Drain</div>
+          <div class="sc-kicker" data-i18n="kicker_drain">⚠ Exposed Tokens</div>
           <div class="drain-time" id="drainTime">—</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:6px" data-i18n="drain_sub">estimated drain time for exposed assets</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:6px" data-i18n="drain_sub">token balances a spender can move in full today</div>
           <div class="card-meta" id="drainMeta"></div>
         </div>
 
@@ -1995,10 +1998,10 @@ body{background:#05060a!important}
                   <div class="pp-stat-key">Blast Radius</div>
                 </div>
                 <div class="pp-stat drain">
-                  <div class="pp-drain-icon">⏱</div>
+                  <div class="pp-drain-icon">⚠</div>
                   <div class="pp-drain-inline">
                     <span class="pp-drain-val" id="ppDrain">—</span>
-                    <span class="pp-drain-caption">· to drain your wallet</span>
+                    <span class="pp-drain-caption" id="ppDrainCaption">· fully exposed</span>
                   </div>
                 </div>
                 <div class="pp-network-row">
@@ -2661,7 +2664,7 @@ window.fwExportCSV = function() {
   csv += `Network,${q((fwNet||'bsc').toUpperCase())}\n`;
   csv += `Firewall Score,${q((d.score??'—')+'/100 — '+(d.scoreLabel||''))}\n`;
   csv += `Blast Radius,${q(d.blastDisplay||'—')}\n`;
-  csv += `Drain Time,${q(d.drainTime||'—')}\n`;
+  csv += `Exposed Tokens,${q(d.drainTime||'—')}\n`;
   csv += `Total Approvals,${q(d.totalApprovals||0)}\n`;
   csv += `Unlimited Approvals,${q(d.unlimitedCount||0)}\n`;
   csv += `High Risk Approvals,${q(d.highRiskCount||0)}\n`;
@@ -3007,7 +3010,7 @@ window.fwExportPDF = function() {
   </div>
   <div style="flex:1">
     <div class="score-detail">${esc(d.scoreLabel||"—")}</div>
-    <div style="font-size:12px;color:#555;margin-top:4px">Blast Radius: <strong>${esc(d.blastDisplay||"—")}</strong> &nbsp;|&nbsp; Drain Time: <strong>${esc(d.drainTime||"—")}</strong></div>
+    <div style="font-size:12px;color:#555;margin-top:4px">Blast Radius: <strong>${esc(d.blastDisplay||"—")}</strong> &nbsp;|&nbsp; Exposed Tokens: <strong>${esc(d.drainTime||"—")}</strong></div>
     <div style="font-size:11px;color:#888;margin-top:6px">${rows.length} approvals analyzed • ${d.unlimitedCount||0} unlimited • ${d.highRiskCount||0} high risk • ${d.unverifiedCount||0} unverified</div>
   </div>
 </div>
@@ -3312,20 +3315,27 @@ async function _fwApiFetch(url, timeoutMs=50000) {
   } finally { clearTimeout(t); }
 }
 
-// Retries automatically while approval data is being prepared (up to ~1 min).
+// Retries automatically while approval data is being prepared.
+// The data provider prepares a wallet it has not seen before in about 30 to 60
+// seconds, so retries continue for up to 90 seconds (checks every 10 seconds at most).
 // Never substitutes partial or demo data for a real wallet.
-const FW_PREPARING_MAX_ATTEMPTS = 4;
+const FW_PREPARING_BUDGET_MS = 90000;
+const FW_PREPARING_MAX_WAIT_SEC = 10;
 async function _fwApiFetchPrepared(url) {
+  const started = Date.now();
   for (let attempt = 1; ; attempt++) {
     try {
       return await _fwApiFetch(url);
     } catch (e) {
-      if (e?.code !== "PREPARING" || attempt >= FW_PREPARING_MAX_ATTEMPTS) throw e;
-      for (let s = e.retryAfterSec; s > 0; s--) {
-        try { window.fwOnPreparing?.(attempt, FW_PREPARING_MAX_ATTEMPTS, s); } catch {}
+      if (e?.code !== "PREPARING") throw e;
+      const leftMs = FW_PREPARING_BUDGET_MS - (Date.now() - started);
+      if (leftMs <= 0) throw e;
+      const waitSec = Math.max(1, Math.min(e.retryAfterSec || FW_PREPARING_MAX_WAIT_SEC, FW_PREPARING_MAX_WAIT_SEC, Math.ceil(leftMs / 1000)));
+      for (let s = waitSec; s > 0; s--) {
+        try { window.fwOnPreparing?.(attempt, s, Date.now() - started); } catch {}
         await new Promise(r => setTimeout(r, 1000));
       }
-      try { window.fwOnPreparing?.(attempt, FW_PREPARING_MAX_ATTEMPTS, 0); } catch {}
+      try { window.fwOnPreparing?.(attempt, 0, Date.now() - started); } catch {}
     }
   }
 }
@@ -3356,7 +3366,8 @@ async function fetchPreview(net, address) {
       symbol:    r?.symbol || "TOKEN",
       risk:      r?.risk || "",
       verified:  r?.verified,
-      decimals:  r?.decimals ?? 18
+      decimals:  r?.decimals ?? 18,
+      balance:   r?.balance ?? null
       // token, spender intentionally omitted
     }));
   }
@@ -3379,6 +3390,11 @@ async function fetchApprovals(net, address) {
     : Array.isArray(data?.items)                 ? data.items
     : [];
   return arr;
+}
+
+// Score color matches the score label: Protected 85+, Exposed 70+, Vulnerable 50+, Critical below 50
+function fwScoreColor(sc) {
+  return sc >= 85 ? "#3cffb0" : sc >= 70 ? "#ffd166" : sc >= 50 ? "#ffa94d" : "#ff4757";
 }
 
 // ── METRICS COMPUTATION ───────────────────────────────────────────
@@ -3412,6 +3428,8 @@ function computeMetrics(approvals) {
     const risk     = String(r?.risk || "").toLowerCase();
     const verified = (r?.verified === true) ? true : (r?.verified === false) ? false : null;
     const decimals = Number(r?.decimals ?? r?.token_decimals ?? 18) || 18;
+    // Wallet balance of this token in raw units (null when the provider did not send it)
+    const balance  = (() => { try { return /^\d+$/.test(String(r?.balance ?? "")) ? BigInt(r.balance) : null; } catch { return null; } })();
 
     // ── LAYER 1: Contract Risk ──────────────────────────
     // Weight 1-10 based on what we know about the spender
@@ -3434,12 +3452,22 @@ function computeMetrics(approvals) {
     const allowBigNum  = (() => { try { return BigInt(allow); } catch { return 0n; } })();
     // isUnlimited covers "infinite" string (BigInt throws on it → 0n)
     const hasApproval  = isUnlimited || allowBigNum > 0n;
+    // A capped allowance that covers 99% or more of the balance can move the whole balance
+    const fullBalance  = !isUnlimited && hasApproval && balance !== null && balance > 0n && allowBigNum * 100n >= balance * 99n;
+    const fullAccess   = hasApproval && (isUnlimited || fullBalance);
+    // Exposed now: the current balance can be moved in full (unknown balance on unlimited counts)
+    const exposedNow   = fullAccess && (balance === null ? isUnlimited : balance > 0n);
+    // Share of the balance a capped allowance can move (null when unknown)
+    const balancePct   = (!isUnlimited && hasApproval && balance !== null && balance > 0n)
+      ? Number((allowBigNum * 10000n) / balance) / 100 : null;
 
     let approvalRisk, approvalLabel, approvalClass;
     if (!hasApproval) {
       approvalRisk = 0; approvalLabel = "No Active Approval"; approvalClass = "none";
     } else if (isUnlimited) {
       approvalRisk = 10; approvalLabel = "Unlimited Approval"; approvalClass = "unlimited";
+    } else if (fullBalance) {
+      approvalRisk = 8;  approvalLabel = "Covers Full Balance"; approvalClass = "fullbalance";
     } else {
       approvalRisk = 3;  approvalLabel = "Capped Approval";    approvalClass = "capped";
     }
@@ -3453,11 +3481,17 @@ function computeMetrics(approvals) {
     if (!hasApproval) {
       drainLabel = "No drain risk — no active approval";
       drainClass = "ok";
-    } else if (isUnlimited) {
+    } else if (isUnlimited && balance === 0n) {
+      drainLabel = "Unlimited — no " + symbol + " balance right now";
+      drainClass = "warn";
+    } else if (isUnlimited || fullBalance) {
       drainLabel = "100% of " + symbol + " balance drainable";
       drainClass = "bad";
+    } else if (balancePct !== null) {
+      drainLabel = (balancePct < 1 ? "Under 1%" : Math.floor(balancePct) + "%") + " of " + symbol + " balance drainable";
+      drainClass = balancePct >= 10 ? "warn" : "ok";
     } else {
-      drainLabel = "Partial — capped allowance";
+      drainLabel = "Capped allowance";
       drainClass = "warn";
     }
 
@@ -3473,6 +3507,8 @@ function computeMetrics(approvals) {
       riskReason = `🟠 Unlimited approval to unverified contract`;
     } else if (isUnlimited) {
       riskReason = `🟡 Unlimited approval to ${contractLabel.toLowerCase()}`;
+    } else if (fullBalance) {
+      riskReason = `🟠 Capped approval that covers your full ${symbol} balance`;
     } else {
       riskReason = `🟢 Capped approval — ${contractLabel.toLowerCase()}`;
     }
@@ -3484,7 +3520,7 @@ function computeMetrics(approvals) {
       displayRisk = contractRisk >= 5 ? "informational" : "safe";
     } else if (compositeRisk >= 40) {
       displayRisk = "critical";
-    } else if (compositeRisk >= 20 || isUnlimited) {
+    } else if (compositeRisk >= 20 || isUnlimited || fullBalance) {
       displayRisk = "high";
     } else if (compositeRisk >= 6) {
       displayRisk = "medium";
@@ -3500,6 +3536,7 @@ function computeMetrics(approvals) {
       // Layer 2
       approvalRisk, approvalLabel, approvalClass,
       isUnlimited, hasApproval, allowBigNum,
+      balance, fullBalance, fullAccess, exposedNow, balancePct,
       // Layer 3
       compositeRisk,
       // Display
@@ -3512,6 +3549,7 @@ function computeMetrics(approvals) {
   const activeThreats  = rows.filter(r => r.hasApproval && r.compositeRisk > 0);
   const unlimited      = rows.filter(r => r.isUnlimited);
   const unlimitedActive= rows.filter(r => r.isUnlimited && r.hasApproval);
+  const fullBalanceActive = rows.filter(r => r.fullBalance);
   const highRisk       = rows.filter(r => r.hasApproval && r.contractRisk >= 5);
   const unverified     = rows.filter(r => r.verified === false);
   const unverifiedActive= rows.filter(r => r.verified === false && r.hasApproval);
@@ -3520,33 +3558,25 @@ function computeMetrics(approvals) {
   // ── SCORE: penalise only ACTIVE threats ────────────────
   let score = 100;
   score -= unlimitedActive.length  * 14;  // unlimited + active
+  score -= fullBalanceActive.length * 10; // capped, but covers the full balance
   score -= highRisk.length         * 18;  // flagged/malicious + active
   score -= unverifiedActive.length * 8;   // unverified + active
   score = Math.max(5, Math.min(100, score));
 
-  // ── Blast Radius ────────────────────────────────────────
-  const blastCount   = unlimitedActive.length;
-  const blastLabel   = blastCount === 0 ? "$0 exposed"
-                     : blastCount <= 2  ? "Limited exposure"
-                     : blastCount <= 6  ? "Moderate exposure"
-                     : "High exposure";
-  const blastDisplay = blastCount > 0 ? `${blastLabel} (${blastCount} unlimited)` : blastLabel;
+  // ── Blast Radius: spenders that can move a full token balance ──
+  // (unlimited, or a capped allowance that covers the balance)
+  const spenderKey   = (r, i) => (r.spender || "").toLowerCase() || ("s" + i);
+  const tokenKey     = (r, i) => (r.token || "").toLowerCase() || ("t" + i);
+  const blastCount   = new Set(rows.map((r, i) => r.fullAccess ? spenderKey(r, i) : null).filter(Boolean)).size;
+  const blastDisplay = blastCount === 0 ? "None" : `${blastCount} spender${blastCount === 1 ? "" : "s"}`;
 
-  // ── Time-to-Drain: ONLY when there is an active unlimited approval
-  let drainTime, drainFast = false;
-  if (unlimitedActive.length === 0) {
-    drainTime = "N/A — no unlimited approvals";
-    drainFast = false;
-  } else if (unlimitedActive.length <= 2) {
-    drainTime = "~5 min";
-    drainFast = false;
-  } else if (unlimitedActive.length <= 6) {
-    drainTime = "~90 sec";
-    drainFast = true;
-  } else {
-    drainTime = "< 30 sec";
-    drainFast = true;
-  }
+  // ── Exposed Tokens: token balances a spender can move in full today ──
+  // (field name drainTime kept for the Passport, exports and share text)
+  const approvedTokens = new Set(rows.map((r, i) => r.hasApproval ? tokenKey(r, i) : null).filter(Boolean)).size;
+  const exposedTokens  = new Set(rows.map((r, i) => r.exposedNow ? tokenKey(r, i) : null).filter(Boolean)).size;
+  const drainTime = exposedTokens === 0 ? "None"
+                  : `${exposedTokens} of ${approvedTokens} token${approvedTokens === 1 ? "" : "s"}`;
+  const drainFast = exposedTokens > 0;
 
   // Score labels — translated via _t() at render time
   const _scoreLabelKey = score >= 85 ? "score_protected"
@@ -3580,6 +3610,8 @@ function computeMetrics(approvals) {
                    : r.compositeRisk >= 6  ? "warn" : "ok",
     why:         r.riskReason,
     drainLabel:  r.drainLabel,
+    drainClass:  r.drainClass,
+    fullBalance: r.fullBalance,
     approvalLabel: r.approvalLabel,
     contractLabel: r.contractLabel,
     isUnlimited: r.isUnlimited,
@@ -3614,17 +3646,20 @@ function computeMetrics(approvals) {
     fixTargets,
     scoreMeta: [
       ...(unlimitedActive.length  ? [{ label: `${unlimitedActive.length} unlimited active`,  cls:"bad"  }] : []),
+      ...(fullBalanceActive.length ? [{ label: `${fullBalanceActive.length} cover${fullBalanceActive.length === 1 ? "s" : ""} full balance`, cls:"bad" }] : []),
       ...(highRisk.length         ? [{ label: `${highRisk.length} high-risk contracts`,       cls:"bad"  }] : []),
       ...(unverifiedActive.length ? [{ label: `${unverifiedActive.length} unverified active`, cls:"warn" }] : []),
-      ...(!unlimitedActive.length && !highRisk.length ? [{ label:"No active unlimited detected", cls:"ok" }] : [])
+      ...(!unlimitedActive.length && !fullBalanceActive.length && !highRisk.length ? [{ label:"No active unlimited detected", cls:"ok" }] : [])
     ],
     blastMeta: blastCount > 0 ? [
-      { label: `${blastCount} unlimited active spenders`, cls:"bad"  },
-      { label: "Revoke to reduce exposure",               cls:"warn" }
-    ] : [{ label: "No active unlimited approvals ✓", cls:"ok" }],
+      ...(unlimitedActive.length   ? [{ label: `${unlimitedActive.length} unlimited`, cls:"bad" }] : []),
+      ...(fullBalanceActive.length ? [{ label: `${fullBalanceActive.length} cover${fullBalanceActive.length === 1 ? "s" : ""} full balance`, cls:"bad" }] : []),
+      { label: "Revoke to reduce exposure", cls:"warn" }
+    ] : [{ label: "No spender has full access ✓", cls:"ok" }],
     drainMeta: drainFast ? [
-      { label: "Unlimited + active spenders", cls:"bad" }
-    ] : [{ label: "Low drain risk", cls:"ok" }]
+      { label: "Full balance can be moved", cls:"bad" }
+    ] : [{ label: approvedTokens ? "No token fully exposed ✓" : "No active approvals ✓", cls:"ok" }],
+    exposedTokens, approvedTokens, blastCount
   };
 }
 
@@ -3922,12 +3957,13 @@ async function runLoadSequence(walletAddr, net, isDemo) {
   let approvals = [];
   let scanError = null;
 
-  window.fwOnPreparing = (attempt, max, sec) => {
+  window.fwOnPreparing = (attempt, sec, elapsedMs) => {
     const lbl = document.getElementById("loadLabel");
     if (!lbl) return;
+    const elapsed = Math.round((elapsedMs || 0) / 1000);
     lbl.textContent = sec > 0
-      ? `⏳ Preparing approval data for ${fwShort(walletAddr)} — retrying in ${sec}s (${attempt}/${max - 1})`
-      : `⏳ Checking ${fwShort(walletAddr)} again… (${attempt}/${max - 1})`;
+      ? `⏳ First scan of ${fwShort(walletAddr)}. Our data provider is preparing this wallet, which can take up to a minute. Checking again in ${sec}s (${elapsed}s so far)`
+      : `⏳ Checking ${fwShort(walletAddr)} again… (${elapsed}s so far)`;
   };
   // Long single request (heavy wallet): tell the user it's still working.
   const fwSlowHint = setTimeout(() => {
@@ -4540,7 +4576,7 @@ async function fwVerifyPassport(encoded) {
       document.getElementById("fvSub").innerHTML     =
         (() => {
         const sc = Number(score);
-        const scoreColor = sc < 45 ? "#ff4757" : sc < 70 ? "#ffd166" : "#3cffb0";
+        const scoreColor = fwScoreColor(sc);
         return `Authentic signature from <strong style="color:var(--cyan)">${fwShort(wallet)}</strong>`
           + ` on ${(net||"").toUpperCase()}. Score: <strong style="color:${scoreColor}">${score}/100</strong>.`;
       })();
@@ -4720,12 +4756,13 @@ function renderDashboard(wallet, d, tier) {
   document.getElementById("blastAmt").textContent = d.blastDisplay;
   renderMeta("blastMeta", d.blastMeta);
 
-  // Time-to-Drain
+  // Exposed Tokens
   _rdTimers.push(setTimeout(() => {
     const el = document.getElementById("drainTime");
     if (!el) return;
     el.textContent = d.drainTime;
     el.classList.toggle("drain-fast", !!d.drainFast);
+    el.classList.toggle("drain-none", !d.drainFast);
     renderMeta("drainMeta", d.drainMeta);
   }, 300));
 
@@ -4767,7 +4804,7 @@ function animateScore(target, label, meta) {
   const labEl = document.getElementById("scoreLabel");
   const dotEl = document.getElementById("scoreDot");
 
-  const color = target < 45 ? "#ff4757" : target < 70 ? "#ffd166" : "#3cffb0";
+  const color = fwScoreColor(target);
   fill.style.stroke = color;
   dotEl.style.background = color;
 
@@ -4927,6 +4964,8 @@ function _buildThreatCard(t, i, tier) {
   const approvalBadge = t.hasApproval
     ? (t.isUnlimited
         ? `<span class="sig bad"><span class="sig-dot"></span>∞ Unlimited</span>`
+        : t.fullBalance
+        ? `<span class="sig bad"><span class="sig-dot"></span>Covers full balance</span>`
         : `<span class="sig warn"><span class="sig-dot"></span>Capped</span>`)
     : `<span class="sig ok"><span class="sig-dot"></span>No Approval</span>`;
   // ── Approval Age badge (visible to all tiers) ──────────────────────────
@@ -4949,7 +4988,7 @@ function _buildThreatCard(t, i, tier) {
 
   const contractBadge = `<span class="sig ${t.risk}"><span class="sig-dot"></span>${esc(t.contractLabel||t.label)}</span>`;
   const drainRow = t.hasApproval
-    ? `<span class="threat-drain ${t.risk==="bad"?"bad":t.isUnlimited?"warn":"ok"}">${esc(t.drainLabel||"—")}</span>`
+    ? `<span class="threat-drain ${t.risk==="bad" || t.drainClass==="bad" ? "bad" : t.drainClass==="warn" || t.isUnlimited ? "warn" : "ok"}">${esc(t.drainLabel||"—")}</span>`
     : `<span class="threat-drain ok">No drain risk — no active approval</span>`;
   const tokenChip = t.symbol ? `<span class="threat-chip">Token: ${esc(t.symbol)}</span>` : "";
   let actionBtn = "";
@@ -5069,7 +5108,7 @@ function fwUpdateScoreAfterFix(step) {
   document.getElementById("scoreNum").textContent = fwCurrentScore;
   const c = 226.2;
   document.getElementById("gaugeFill").style.strokeDashoffset = c - (c * fwCurrentScore / 100);
-  const col = fwCurrentScore < 45 ? "#ff4757" : fwCurrentScore < 70 ? "#ffd166" : "#3cffb0";
+  const col = fwScoreColor(fwCurrentScore);
   document.getElementById("gaugeFill").style.stroke = col;
   document.getElementById("scoreDot").style.background = col;
   document.getElementById("scoreLabel").textContent = fwCurrentScore >= 85 ? "Protected" : fwCurrentScore >= 70 ? "Exposed" : "Vulnerable";
@@ -5323,7 +5362,7 @@ async function undoFix(step) {
   }
   fwCurrentScore = Math.max(0, fwCurrentScore - scoreIncrements[step]);
   document.getElementById("scoreNum").textContent = fwCurrentScore;
-  const col2 = fwCurrentScore < 45 ? "#ff4757" : fwCurrentScore < 70 ? "#ffd166" : "#3cffb0";
+  const col2 = fwScoreColor(fwCurrentScore);
   document.getElementById("gaugeFill").style.stroke = col2;
   document.getElementById("scoreDot").style.background = col2;
   delete window.__fwUndoData[step];
@@ -5658,14 +5697,16 @@ function renderPassport(wallet, d, tier) {
   document.getElementById("ppWallet").textContent = fwShort(wallet) + " · " + fwNet.toUpperCase();
   document.getElementById("ppScore").textContent = d.score;
   document.getElementById("ppApprovals").textContent = d.riskyApprovals;
-  document.getElementById("ppBlast").textContent = d.unlimitedCount > 0 ? `${d.unlimitedCount} unlimited` : "Clean";
-  document.getElementById("ppDrain").textContent = d.drainTime;
+  document.getElementById("ppBlast").textContent = d.blastCount > 0 ? d.blastDisplay : "Clean";
+  document.getElementById("ppDrain").textContent = d.drainTime === "None" ? "No tokens" : d.drainTime;
+  const _ppCap = document.getElementById("ppDrainCaption");
+  if (_ppCap) _ppCap.textContent = "· fully exposed";
   const _dtEl=document.getElementById("ppDateText")||document.getElementById("ppDate");if(_dtEl)_dtEl.textContent="Scanned: "+today();
   document.getElementById("ppChain").textContent = fwNet.toUpperCase();
 
   const sc = d.score;
   const scoreEl = document.getElementById("ppScore");
-  if (scoreEl) scoreEl.style.color = sc < 45 ? "#ff4757" : sc < 70 ? "#ffd166" : "#3cffb0";
+  if (scoreEl) scoreEl.style.color = fwScoreColor(sc);
 
   const statusEl = document.getElementById("ppStatus");
   if (sc < 45) {
@@ -5708,7 +5749,7 @@ Network: ${net}
 
 🛡 Firewall Score: ${score}/100
 💥 Blast Radius: ${blast}
-⏱ Drain Time: ${drain}
+⚠ Exposed tokens: ${drain}
 🎯 Risky Approvals: ${risky}
 
 Scan your wallet → https://elofid.com/firewall
@@ -5788,10 +5829,10 @@ function fwDownloadShareCard() {
   const isFree    = !(fwAccessTier === "full" && _fwAccessVerified);
   const isSigned  = document.getElementById("ppSigChip")?.style.display === "flex";
 
-  const sCol = score < 45 ? "#ff4757" : score < 70 ? "#ffd166" : "#3cffb0";
-  const statusTxt = score < 45 ? "🧨 CRITICAL" : score < 70 ? "⚠ EXPOSED" : "✅ PROTECTED";
-  const statusBorder = score < 45 ? "rgba(255,71,87,.45)" : score < 70 ? "rgba(255,193,7,.4)" : "rgba(93,255,178,.4)";
-  const statusBg     = score < 45 ? "rgba(255,71,87,.12)" : score < 70 ? "rgba(255,193,7,.12)" : "rgba(93,255,178,.1)";
+  const sCol = fwScoreColor(score);
+  const statusTxt = score >= 85 ? "✅ PROTECTED" : score >= 70 ? "⚠ EXPOSED" : score >= 50 ? "⚠ VULNERABLE" : "🧨 CRITICAL";
+  const statusBorder = score >= 85 ? "rgba(93,255,178,.4)" : score >= 50 ? "rgba(255,193,7,.4)" : "rgba(255,71,87,.45)";
+  const statusBg     = score >= 85 ? "rgba(93,255,178,.1)" : score >= 50 ? "rgba(255,193,7,.12)" : "rgba(255,71,87,.12)";
 
   // Canvas size — matches card aspect ratio, high resolution
   const S = 3; // pixel density — 3x is sharp on retina, avoids 12MB canvas crash
@@ -5981,16 +6022,17 @@ function fwDownloadShareCard() {
   rr(pad,y,pw-pad*2,dH,11); x.fill(); x.stroke();
   // ⏱ icon
   x.font = "17px serif"; x.fillStyle="rgba(255,255,255,0.7)";
-  x.fillText("⏱", pad+12, y+28);
+  x.fillText("⚠", pad+12, y+28);
   // drain value
   x.font = "900 20px system-ui,sans-serif";
-  x.fillStyle = "#ff4757"; x.shadowColor="#ff4757"; x.shadowBlur=14;
+  const _dCol = drain === "No tokens" ? "#3cffb0" : "#ff4757";
+  x.fillStyle = _dCol; x.shadowColor=_dCol; x.shadowBlur=14;
   x.fillText(drain, pad+38, y+28); x.shadowBlur=0;
   // caption
   const dvW = x.measureText(drain).width;
   x.font = "bold 9px system-ui,sans-serif";
   x.fillStyle = "rgba(255,71,87,0.75)";
-  x.fillText("· TO DRAIN YOUR WALLET", pad+38+dvW+8, y+28);
+  x.fillText("· FULLY EXPOSED", pad+38+dvW+8, y+28);
   y += dH + gap;
 
   // Network row
@@ -6848,9 +6890,9 @@ const FW_TRANSLATIONS = {
     sec_rules:"Firewall Rules", sec_relations:"Wallet Relations", sec_export:"Export Report",
     sec_watch:"Wallet Watch", sec_threats:"Threat Feed", sec_api:"Developer API",
     // status cards
-    kicker_score:"Firewall Score", kicker_blast:"Blast Radius", kicker_drain:"Time-to-Drain",
-    blast_sub:"max drainable if top spender exploited",
-    drain_sub:"estimated drain time for exposed assets",
+    kicker_score:"Firewall Score", kicker_blast:"Blast Radius", kicker_drain:"Exposed Tokens",
+    blast_sub:"spenders that can move a full token balance",
+    drain_sub:"token balances a spender can move in full today",
     // map / threats
     title_map:"Exposure Map", map_sub:"Wallet → Spenders → Tokens. Node size = risk weight.",
     title_threats:"Top Threats",
@@ -6921,9 +6963,9 @@ const FW_TRANSLATIONS = {
     sec_status:"安全概览", sec_fix:"修复模式", sec_passport:"钱包护照",
     sec_rules:"防火墙规则", sec_relations:"钱包关联", sec_export:"导出报告",
     sec_watch:"钱包监控", sec_threats:"威胁动态", sec_api:"开发者API",
-    kicker_score:"防火墙评分", kicker_blast:"爆炸半径", kicker_drain:"清空时间",
-    blast_sub:"顶级授权方被利用时的最大可清空金额",
-    drain_sub:"暴露资产的预估清空时间",
+    kicker_score:"防火墙评分", kicker_blast:"爆炸半径", kicker_drain:"暴露代币",
+    blast_sub:"可转走某个代币全部余额的授权方",
+    drain_sub:"今天可被授权方全部转走的代币余额",
     title_map:"风险地图", map_sub:"钱包 → 授权方 → 代币。节点大小 = 风险权重。",
     title_threats:"主要威胁",
     fix_lock_msg:"批量撤销和完整清理需要完整访问权限<br>（连接钱包并登录）",
@@ -6986,9 +7028,9 @@ const FW_TRANSLATIONS = {
     sec_status:"ملخص الأمان", sec_fix:"وضع الإصلاح", sec_passport:"جواز المحفظة",
     sec_rules:"قواعد الجدار", sec_relations:"علاقات المحفظة", sec_export:"تصدير التقرير",
     sec_watch:"مراقبة المحافظ", sec_threats:"خلاصة التهديدات", sec_api:"واجهة المطورين",
-    kicker_score:"نقاط الجدار", kicker_blast:"نطاق الضرر", kicker_drain:"وقت التصفية",
-    blast_sub:"أقصى مبلغ قابل للسحب عند استغلال أكبر مفوَّض",
-    drain_sub:"الوقت المقدر لتصفية الأصول المكشوفة",
+    kicker_score:"نقاط الجدار", kicker_blast:"نطاق الضرر", kicker_drain:"الرموز المكشوفة",
+    blast_sub:"الجهات المفوَّضة القادرة على نقل كامل رصيد رمز ما",
+    drain_sub:"أرصدة الرموز التي يمكن لجهة مفوَّضة نقلها بالكامل اليوم",
     title_map:"خريطة التعرض", map_sub:"المحفظة ← المفوَّضون ← الرموز. حجم العقدة = وزن المخاطر.",
     title_threats:"أبرز التهديدات",
     fix_lock_msg:"الإلغاء الجماعي والتنظيف الكامل يتطلبان وصولاً كاملاً<br>(اربط محفظتك وسجّل الدخول)",
@@ -7052,9 +7094,9 @@ const FW_TRANSLATIONS = {
     sec_status:"Сводка Безопасности", sec_fix:"Режим Исправления", sec_passport:"Паспорт Кошелька",
     sec_rules:"Правила Файрвола", sec_relations:"Связи Кошелька", sec_export:"Экспорт Отчёта",
     sec_watch:"Слежение", sec_threats:"Лента Угроз", sec_api:"API Разработчика",
-    kicker_score:"Оценка Файрвола", kicker_blast:"Зона Поражения", kicker_drain:"Время Опустошения",
-    blast_sub:"максимум потерь при атаке главного получателя одобрения",
-    drain_sub:"расчётное время опустошения открытых активов",
+    kicker_score:"Оценка Файрвола", kicker_blast:"Зона Поражения", kicker_drain:"Открытые Токены",
+    blast_sub:"получатели одобрений, способные вывести весь баланс токена",
+    drain_sub:"балансы токенов, которые можно вывести полностью уже сегодня",
     title_map:"Карта Рисков", map_sub:"Кошелёк → Получатели → Токены. Размер узла = вес риска.",
     title_threats:"Топ Угроз",
     fix_lock_msg:"Массовый отзыв и полная очистка требуют полного доступа<br>(подключите кошелёк и войдите)",
@@ -7232,7 +7274,7 @@ function fwQuickShare() {
 
 🛡 Score: ${score}/100
 💥 Blast Radius: ${blast}
-⏱ Drain Time: ${drain}
+⚠ Exposed tokens: ${drain}
 🎯 Risky Approvals: ${risky}
 🌐 Network: ${net}
 
