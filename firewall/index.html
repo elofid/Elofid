@@ -3455,7 +3455,7 @@ function computeMetrics(approvals) {
       contractRisk = 9; contractLabel = "Flagged / Malicious"; contractClass = "critical";
     } else if (verified === false) {
       contractRisk = 5; contractLabel = "Unverified Contract";  contractClass = "unverified";
-    } else if (risk === "medium") {
+    } else if (risk === "medium" && verified === true) {
       contractRisk = 3; contractLabel = "Verified — Privileged"; contractClass = "privileged";
     } else if (verified === true) {
       contractRisk = 1; contractLabel = "Verified & Known";     contractClass = "safe";
@@ -3481,6 +3481,9 @@ function computeMetrics(approvals) {
     let approvalRisk, approvalLabel, approvalClass;
     if (!hasApproval) {
       approvalRisk = 0; approvalLabel = "No Active Approval"; approvalClass = "none";
+    } else if (isUnlimited && balance === 0n) {
+      // Unlimited, but nothing to take today: risk is only for future deposits
+      approvalRisk = 4;  approvalLabel = "Unlimited Approval"; approvalClass = "unlimited";
     } else if (isUnlimited) {
       approvalRisk = 10; approvalLabel = "Unlimited Approval"; approvalClass = "unlimited";
     } else if (fullBalance) {
@@ -3537,7 +3540,7 @@ function computeMetrics(approvals) {
       displayRisk = contractRisk >= 5 ? "informational" : "safe";
     } else if (compositeRisk >= 40) {
       displayRisk = "critical";
-    } else if (compositeRisk >= 20 || isUnlimited || fullBalance) {
+    } else if (compositeRisk >= 20 || (isUnlimited && balance !== 0n) || fullBalance) {
       displayRisk = "high";
     } else if (compositeRisk >= 6) {
       displayRisk = "medium";
@@ -4831,28 +4834,27 @@ function renderExposureMap(wallet, threats, tier) {
   const visible = tier === "free" ? threats.slice(0, 3) : threats.slice(0, 8);
 
   // Debounce: don't re-render if data hasn't changed (prevents crash on rapid re-renders)
-  const hash = wallet + tier + visible.map(t=>t.risk+t.label+t.name+(t.fullBalance?"f":"")+(t.isUnlimited?"u":"")).join(",");
+  const hash = wallet + tier + threats.length + visible.map(t=>t.risk+t.label+t.name+(t.fullBalance?"f":"")+(t.isUnlimited?"u":"")).join(",");
   if (hash === _lastExposureHash) return;
   _lastExposureHash = hash;
   const n = visible.length;
   if (!n) { svg.innerHTML = `<text x="${W/2}" y="${H/2}" text-anchor="middle" fill="rgba(244,246,255,.35)" font-size="13" font-family="system-ui">No spenders detected</text>`; return; }
 
-  // Elliptical layout so every node stays inside the 480x260 frame.
-  // Spenders on an inner ellipse, their tokens further out on the same angle.
-  // Starting at the right spreads 2 spenders left and right instead of top and bottom.
-  const angleOf = (i) => (n === 1 ? 0 : (i/n) * Math.PI*2);
-  const pos = visible.map((_, i) => {
-    const a = angleOf(i);
-    return { x: cx + 118*Math.cos(a), y: cy + 66*Math.sin(a), a };
-  });
-
-  const tokPos = [];
-  visible.forEach((t, ti) => {
-    t.tokens.forEach((tok, ki) => {
-      const a = angleOf(ti) + ki*.35;
-      tokPos.push({ x: cx + 200*Math.cos(a), y: cy + 100*Math.sin(a), name:tok, ti });
-    });
-  });
+  // Row layout: Wallet on the left, one row per spender, its token on the right.
+  // Rows never overlap, whatever the number of spenders.
+  // Count every active approval, not only the threats passed in (the list is capped)
+  const totalActive = (typeof fwScanData !== "undefined" && fwScanData && Array.isArray(fwScanData.rows))
+    ? fwScanData.rows.filter(r => r.hasApproval).length : threats.length;
+  const hidden   = Math.max(0, Math.max(totalActive, threats.length) - visible.length);
+  const rowCount = n + (hidden ? 1 : 0);
+  const rowH     = Math.min(54, (H - 24) / rowCount);
+  const top      = (H - rowH * rowCount) / 2;
+  const rowY     = (i) => top + rowH * (i + 0.5);
+  const wx = 58, wy = H / 2;           // wallet
+  const sx = 196;                      // spender nodes
+  const tokRight = W - 14;             // token pills end here
+  const nodeR = Math.max(9, Math.min(15, rowH * 0.32));
+  const clip = (str, max) => { const a = Array.from(String(str || "")); return a.length > max ? a.slice(0, max - 1).join("") + "…" : a.join(""); };
 
   let h = `<defs>
     <radialGradient id="gC" cx="50%" cy="50%" r="50%">
@@ -4862,51 +4864,37 @@ function renderExposureMap(wallet, threats, tier) {
   </defs>`;
 
   visible.forEach((t, i) => {
-    const p = pos[i];
+    const y   = rowY(i);
     const col = riskColor[t.risk] || "#888";
-    h += `<line x1="${cx}" y1="${cy}" x2="${p.x}" y2="${p.y}" stroke="${col}" stroke-width="${t.risk==="bad"?2:1.2}" stroke-opacity=".5" stroke-dasharray="4 3"/>`;
-  });
-  tokPos.forEach(tp => {
-    const sp = pos[tp.ti];
-    if (!sp) return;
-    h += `<line x1="${sp.x}" y1="${sp.y}" x2="${tp.x}" y2="${tp.y}" stroke="rgba(255,255,255,.15)" stroke-width="1"/>`;
-  });
-  tokPos.forEach(tp => {
-    const tName = String(tp.name || "TOKEN").slice(0, 8);
-    const tW = Math.max(34, tName.length * 6.5 + 14);
-    h += `<rect x="${tp.x - tW/2}" y="${tp.y - 10}" width="${tW}" height="20" rx="10" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
-      <text x="${tp.x}" y="${tp.y + .5}" text-anchor="middle" dominant-baseline="middle" fill="rgba(244,246,255,.85)" font-size="9" font-family="system-ui" font-weight="700">${esc(tName)}</text>`;
-  });
-  visible.forEach((t, i) => {
-    const p = pos[i];
-    const col = riskColor[t.risk] || "#888";
-    const r   = t.risk === "bad" ? 22 : 18;
-    // Inside the node: what the spender can move. Under it: who the spender is.
     const access = !t.hasApproval ? "—" : t.isUnlimited ? "∞" : t.fullBalance ? "100%" : "CAP";
-    const spFull = String(t.name || "Spender").split(" · ")[0];
-    const spName = spFull.length > 16 ? spFull.slice(0, 15) + "…" : spFull;
-    const below  = p.y >= cy ? 1 : -1;
-    const ly     = p.y + below * (r + 13);
-    h += `<circle cx="${p.x}" cy="${p.y}" r="${r+8}" fill="${col}" fill-opacity=".06"/>
-      <circle cx="${p.x}" cy="${p.y}" r="${r}" fill="rgba(5,6,10,.9)" stroke="${col}" stroke-width="1.5"/>
-      <text x="${p.x}" y="${p.y + .5}" text-anchor="middle" dominant-baseline="middle" fill="${col}" font-size="${access.length > 2 ? 9 : 14}" font-family="system-ui" font-weight="900">${esc(access)}</text>
-      <text x="${p.x}" y="${ly}" text-anchor="middle" dominant-baseline="middle" fill="rgba(244,246,255,.7)" font-size="9" font-family="system-ui" font-weight="700">${esc(spName)}</text>`;
+    const spName = clip(String(t.name || "Spender").split(" · ")[0], 20);
+    const tok    = clip((t.tokens && t.tokens[0]) || t.symbol || "TOKEN", 9);
+    const tokW   = Math.max(40, Array.from(tok).length * 7 + 16);
+    const tokX   = tokRight - tokW;
+    const nameX  = sx + nodeR + 8;
+    const nameEnd = nameX + Math.min(150, Array.from(spName).length * 6.2);
+    // wallet → spender (soft curve), spender label → token
+    h += `<path d="M${wx + 30},${wy} C${(wx + sx) / 2},${wy} ${(wx + sx) / 2},${y} ${sx - nodeR},${y}" fill="none" stroke="${col}" stroke-width="${t.risk === "bad" ? 1.8 : 1.2}" stroke-opacity=".55" stroke-dasharray="4 3"/>`;
+    if (nameEnd + 10 < tokX) h += `<line x1="${nameEnd + 6}" y1="${y}" x2="${tokX - 4}" y2="${y}" stroke="rgba(255,255,255,.14)" stroke-width="1"/>`;
+    h += `<circle cx="${sx}" cy="${y}" r="${nodeR}" fill="rgba(5,6,10,.92)" stroke="${col}" stroke-width="1.5"/>
+      <text x="${sx}" y="${y + .5}" text-anchor="middle" dominant-baseline="middle" fill="${col}" font-size="${access.length > 2 ? 7.5 : 12}" font-family="system-ui" font-weight="900">${esc(access)}</text>
+      <text x="${nameX}" y="${y + .5}" dominant-baseline="middle" fill="rgba(244,246,255,.82)" font-size="10" font-family="system-ui" font-weight="700">${esc(spName)}</text>
+      <rect x="${tokX}" y="${y - 10}" width="${tokW}" height="20" rx="10" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+      <text x="${tokX + tokW / 2}" y="${y + .5}" text-anchor="middle" dominant-baseline="middle" fill="rgba(244,246,255,.88)" font-size="9.5" font-family="system-ui" font-weight="700">${esc(tok)}</text>`;
   });
 
-  // Greyed-out locked spots for free tier
-  if (tier === "free" && threats.length > 3) {
-    for (let i = 3; i < Math.min(threats.length, 5); i++) {
-      const a = (i/threats.length)*Math.PI*2;
-      const x = cx + 118*Math.cos(a), y = cy + 66*Math.sin(a);
-      h += `<circle cx="${x}" cy="${y}" r="17" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,.22)" font-size="12">🔒</text>`;
-    }
+  if (hidden) {
+    const y = rowY(n);
+    const label = tier === "free" ? `🔒 ${hidden} more spender${hidden === 1 ? "" : "s"} · sign in to see all` : `+ ${hidden} more in the list`;
+    h += `<path d="M${wx + 30},${wy} C${(wx + sx) / 2},${wy} ${(wx + sx) / 2},${y} ${sx - nodeR},${y}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="${sx}" cy="${y}" r="${nodeR}" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="${sx + nodeR + 8}" y="${y + .5}" dominant-baseline="middle" fill="rgba(244,246,255,.45)" font-size="10" font-family="system-ui" font-weight="700">${esc(label)}</text>`;
   }
 
-  h += `<circle cx="${cx}" cy="${cy}" r="36" fill="url(#gC)"/>
-    <circle cx="${cx}" cy="${cy}" r="28" fill="rgba(0,229,255,.10)" stroke="rgba(0,229,255,.45)" stroke-width="1.5"/>
-    <text x="${cx}" y="${cy-5}" text-anchor="middle" dominant-baseline="middle" fill="rgba(0,229,255,.95)" font-size="9" font-family="system-ui" font-weight="900">WALLET</text>
-    <text x="${cx}" y="${cy+8}" text-anchor="middle" dominant-baseline="middle" fill="rgba(0,229,255,.65)" font-size="7.5" font-family="ui-monospace,monospace">${esc(fwShort(wallet))}</text>`;
+  h += `<circle cx="${wx}" cy="${wy}" r="38" fill="url(#gC)"/>
+    <circle cx="${wx}" cy="${wy}" r="30" fill="rgba(0,229,255,.10)" stroke="rgba(0,229,255,.45)" stroke-width="1.5"/>
+    <text x="${wx}" y="${wy - 5}" text-anchor="middle" dominant-baseline="middle" fill="rgba(0,229,255,.95)" font-size="9" font-family="system-ui" font-weight="900">WALLET</text>
+    <text x="${wx}" y="${wy + 8}" text-anchor="middle" dominant-baseline="middle" fill="rgba(0,229,255,.65)" font-size="7" font-family="ui-monospace,monospace">${esc(fwShort(wallet))}</text>`;
 
   svg.innerHTML = h;
 }
