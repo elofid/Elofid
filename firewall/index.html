@@ -4090,17 +4090,8 @@ async function runLoadSequence(walletAddr, net, isDemo) {
   fwScanData = computeMetrics(approvals);
   fixApprovals = fwScanData.fixTargets;
 
-  // ── Report to homepage activity counters (real scans only) ───────────
-  if (!isDemo) {
-    try {
-      cxActivitySend("wallet_scan", 1);
-      // Risky = an active approval the risk model marks medium or above
-      const _riskyCount = (fwScanData.rows || []).filter(r =>
-        r.hasApproval && ["critical", "high", "medium"].includes(String(r.displayRisk || "").toLowerCase())
-      ).length;
-      if (_riskyCount > 0) cxActivitySend("risky_approvals", _riskyCount);
-    } catch {}
-  }
+  // Homepage activity counters: the API Worker counts every wallet scan it returns
+  // (scans, active approvals and high-risk spenders), so nothing is sent from here.
 
   // Show access gate in free tier
   if (fwAccessTier === "free") {
