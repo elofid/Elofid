@@ -53,7 +53,7 @@ twq('config','r4v6v');
     --bg:#05060a;
     --cyan:#00e5ff;
     --green:#5dffb2;
-    --purple:#7c5cff;
+    --purple:#42dbff;
     --red:#ff4757;
     --yellow:#ffd166;
     --text:rgba(244,246,255,1);
@@ -84,7 +84,7 @@ twq('config','r4v6v');
   .fw-bg-layer{
     position:fixed;inset:0;z-index:0;pointer-events:none;
     background:
-      radial-gradient(1200px 720px at 14% 10%,rgba(124,92,255,.20),transparent 58%),
+      radial-gradient(1200px 720px at 14% 10%,rgba(66,219,255,.20),transparent 58%),
       radial-gradient(1200px 720px at 86% 12%,rgba(0,229,255,.18),transparent 56%),
       radial-gradient(980px 680px at 55% 120%,rgba(0,58,76,.42),transparent 62%),
       linear-gradient(160deg,#05060a,#0b0a18,#021b24);
@@ -94,7 +94,7 @@ twq('config','r4v6v');
     content:"";position:absolute;inset:0;pointer-events:none;
     background:
       radial-gradient(740px 640px at 20% 14%,rgba(0,229,255,.10),transparent 60%),
-      radial-gradient(940px 780px at 78% 18%,rgba(124,92,255,.09),transparent 62%),
+      radial-gradient(940px 780px at 78% 18%,rgba(66,219,255,.09),transparent 62%),
       radial-gradient(820px 700px at 52% 78%,rgba(93,255,178,.06),transparent 64%);
     opacity:.10;
   }
@@ -118,7 +118,7 @@ twq('config','r4v6v');
   }
   .top-bar::before{
     content:"";position:absolute;inset:0;border-radius:999px;padding:1px;
-    background:linear-gradient(120deg,rgba(0,229,255,.22),rgba(124,92,255,.16),rgba(255,255,255,.10));
+    background:linear-gradient(120deg,rgba(0,229,255,.22),rgba(66,219,255,.16),rgba(255,255,255,.10));
     -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
     -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:.55
   }
@@ -167,7 +167,7 @@ twq('config','r4v6v');
   .hero-title{
     font-size:clamp(42px,5vw,80px);line-height:1.10;font-weight:950;letter-spacing:-.04em;
     margin-bottom:14px;
-    background:linear-gradient(110deg,rgba(244,246,255,1) 0%,rgba(255,150,100,.95) 35%,rgba(255,80,80,.90) 65%,rgba(124,92,255,.88) 100%);
+    background:linear-gradient(110deg,rgba(244,246,255,1) 0%,rgba(255,150,100,.95) 35%,rgba(255,80,80,.90) 65%,rgba(66,219,255,.88) 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
     background-size:220% 220%;animation:titleSheen 11s ease-in-out infinite
   }
@@ -317,7 +317,7 @@ twq('config','r4v6v');
   .threat-item.t-info{background:rgba(255,255,255,.015);border-color:rgba(255,255,255,.06)}
 
   .threat-item.locked-card{opacity:.35;pointer-events:none;user-select:none;position:relative}
-  .threat-item.locked-card::after{content:'🔒';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px}
+  .threat-item.locked-card::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px}
 
   .threat-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
   .threat-name{font-size:12px;font-weight:800;font-family:var(--mono);color:var(--text)}
@@ -416,7 +416,7 @@ twq('config','r4v6v');
   }
   .pp-header::after{
     content:"";position:absolute;bottom:-1px;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,rgba(0,229,255,.55),rgba(124,92,255,.3),rgba(255,71,87,.2),transparent)
+    background:linear-gradient(90deg,rgba(0,229,255,.55),rgba(66,219,255,.3),rgba(255,71,87,.2),transparent)
   }
   .pp-logo{
     font-size:12px;font-weight:900;text-transform:uppercase;
@@ -662,19 +662,19 @@ twq('config','r4v6v');
 
   /* ── FULL ACCESS BUTTON ───────────────────────── */
   .btn-full-access{
-    background:linear-gradient(135deg,#7c5cff,#a87eff);color:#fff;
+    background:linear-gradient(135deg,#42dbff,#7fe6ff);color:#fff;
     border:none;border-radius:999px;padding:13px 24px;
     font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;
     cursor:pointer;white-space:nowrap;transition:transform .2s ease,box-shadow .2s ease;
-    box-shadow:0 14px 42px rgba(124,92,255,.42)
+    box-shadow:0 14px 42px rgba(66,219,255,.42)
   }
-  .btn-full-access:hover{transform:translateY(-1px);box-shadow:0 20px 60px rgba(124,92,255,.58)}
+  .btn-full-access:hover{transform:translateY(-1px);box-shadow:0 20px 60px rgba(66,219,255,.58)}
   .btn-full-access-top{
-    background:rgba(124,92,255,.15);border:1px solid rgba(124,92,255,.35);color:#a87eff;
+    background:rgba(66,219,255,.15);border:1px solid rgba(66,219,255,.35);color:#7fe6ff;
     border-radius:999px;padding:8px 14px;font-size:11px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;
     cursor:pointer;transition:all .2s ease
   }
-  .btn-full-access-top:hover{background:rgba(124,92,255,.28);color:#c4a6ff}
+  .btn-full-access-top:hover{background:rgba(66,219,255,.28);color:#bdf3ff}
   .coming-soon-badge{
     position:absolute;top:-8px;right:-4px;
     background:linear-gradient(135deg,#ff9a6b,#ffd166);color:#03040a;
@@ -711,7 +711,7 @@ twq('config','r4v6v');
   .rel-card:hover{border-color:rgba(0,229,255,.32);transform:translateY(-1px)}
   .rel-card.cex {border-left:3px solid rgba(93,255,178,.65)}
   .rel-card.dex {border-left:3px solid rgba(0,229,255,.65)}
-  .rel-card.bridge{border-left:3px solid rgba(124,92,255,.65)}
+  .rel-card.bridge{border-left:3px solid rgba(66,219,255,.65)}
   .rel-card.lending{border-left:3px solid rgba(255,193,7,.65)}
   .rel-card.staking{border-left:3px solid rgba(255,174,71,.65)}
   .rel-entity-name{font-size:13px;font-weight:800;margin-bottom:6px;line-height:1.3}
@@ -719,7 +719,7 @@ twq('config','r4v6v');
   .rel-tag{font-size:9px;padding:2px 8px;border-radius:999px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
   .rel-tag.cex{background:rgba(93,255,178,.10);color:#5dffb2;border:1px solid rgba(93,255,178,.22)}
   .rel-tag.dex{background:rgba(0,229,255,.08);color:#00e5ff;border:1px solid rgba(0,229,255,.20)}
-  .rel-tag.bridge{background:rgba(124,92,255,.10);color:#a87eff;border:1px solid rgba(124,92,255,.25)}
+  .rel-tag.bridge{background:rgba(66,219,255,.10);color:#7fe6ff;border:1px solid rgba(66,219,255,.25)}
   .rel-tag.lending{background:rgba(255,193,7,.08);color:#ffd166;border:1px solid rgba(255,193,7,.22)}
   .rel-tag.staking{background:rgba(255,174,71,.08);color:#ffc04a;border:1px solid rgba(255,174,71,.22)}
   .rel-tag.trusted{background:rgba(93,255,178,.06);color:#5dffb2;border:1px solid rgba(93,255,178,.15)}
@@ -750,7 +750,7 @@ twq('config','r4v6v');
   .fw-export-btn:hover{transform:translateY(-1px);filter:brightness(1.15)}
   .fw-export-btn.csv {background:rgba(93,255,178,.07);border-color:rgba(93,255,178,.28);color:#5dffb2}
   .fw-export-btn.json{background:rgba(0,229,255,.06);border-color:rgba(0,229,255,.26);color:#00e5ff}
-  .fw-export-btn.copy{background:rgba(124,92,255,.07);border-color:rgba(124,92,255,.26);color:#a87eff}
+  .fw-export-btn.copy{background:rgba(66,219,255,.07);border-color:rgba(66,219,255,.26);color:#7fe6ff}
   #fwExportSection.hidden{display:none}
 
   /* ── TIMELINE MODAL ───────────────────────────── */
@@ -786,8 +786,8 @@ twq('config','r4v6v');
   }
   .fw-export-unlock-cta{
     margin-top:14px;padding:14px;border-radius:14px;
-    background:linear-gradient(135deg,rgba(124,92,255,.10),rgba(0,229,255,.07));
-    border:1px solid rgba(124,92,255,.28);text-align:center
+    background:linear-gradient(135deg,rgba(66,219,255,.10),rgba(0,229,255,.07));
+    border:1px solid rgba(66,219,255,.28);text-align:center
   }
 
   /* ── RULE CONFIRM MODAL ──────────────────────────── */
@@ -822,11 +822,11 @@ twq('config','r4v6v');
   .rc-btn-cancel:hover{background:rgba(255,255,255,.1)}
   .rc-btn-confirm{
     flex:2;padding:12px;border-radius:12px;border:none;
-    background:linear-gradient(135deg,#7c5cff,#a87eff);color:#fff;
+    background:linear-gradient(135deg,#42dbff,#7fe6ff);color:#fff;
     font-size:12px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;
-    cursor:pointer;transition:all .2s;box-shadow:0 8px 28px rgba(124,92,255,.35)
+    cursor:pointer;transition:all .2s;box-shadow:0 8px 28px rgba(66,219,255,.35)
   }
-  .rc-btn-confirm:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(124,92,255,.5)}
+  .rc-btn-confirm:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(66,219,255,.5)}
 
   /* ── SCAN HISTORY BANNER ─────────────────────────── */
   #fwHistoryBanner{
@@ -869,14 +869,14 @@ twq('config','r4v6v');
 
   /* ── SIGNED PASSPORT ───────────────────────────────── */
   .btn-passport.sign{
-    background:linear-gradient(135deg,rgba(124,92,255,.15),rgba(0,229,255,.10));
-    border:1px solid rgba(124,92,255,.45);color:#c4b5fd;
+    background:linear-gradient(135deg,rgba(66,219,255,.15),rgba(0,229,255,.10));
+    border:1px solid rgba(66,219,255,.45);color:#bdf3ff;
     font-weight:900;position:relative;overflow:hidden
   }
   .btn-passport.sign:hover{
-    background:linear-gradient(135deg,rgba(124,92,255,.25),rgba(0,229,255,.18));
-    border-color:rgba(124,92,255,.7);transform:translateY(-1px);
-    box-shadow:0 12px 40px rgba(124,92,255,.3)
+    background:linear-gradient(135deg,rgba(66,219,255,.25),rgba(0,229,255,.18));
+    border-color:rgba(66,219,255,.7);transform:translateY(-1px);
+    box-shadow:0 12px 40px rgba(66,219,255,.3)
   }
   .pp-signed-badge{
     display:none;
@@ -971,17 +971,17 @@ twq('config','r4v6v');
     position:relative;
     display:flex;align-items:center;gap:10px;margin-top:10px;
     padding:10px 14px;border-radius:11px;flex-wrap:wrap;
-    background:rgba(124,92,255,.06);border:1px solid rgba(124,92,255,.18)
+    background:rgba(66,219,255,.06);border:1px solid rgba(66,219,255,.18)
   }
   .fw-notif-row .fw-notif-icon{font-size:16px}
   .fw-notif-row .fw-notif-text{font-size:11px;color:var(--muted);flex:1;line-height:1.5}
   .fw-notif-btn{
     padding:6px 12px;border-radius:9px;font-size:10px;font-weight:900;
     letter-spacing:.07em;text-transform:uppercase;cursor:pointer;
-    background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.3);
-    color:#a87eff;transition:all .2s;white-space:nowrap
+    background:rgba(66,219,255,.12);border:1px solid rgba(66,219,255,.3);
+    color:#7fe6ff;transition:all .2s;white-space:nowrap
   }
-  .fw-notif-btn:hover{background:rgba(124,92,255,.2)}
+  .fw-notif-btn:hover{background:rgba(66,219,255,.2)}
   .fw-alert-banner{
     display:none;padding:14px 18px;border-radius:14px;margin-bottom:12px;
     background:linear-gradient(135deg,rgba(255,71,87,.12),rgba(255,71,87,.06));
@@ -1018,7 +1018,7 @@ twq('config','r4v6v');
   .tfd-tag.affected-you{background:rgba(255,71,87,.15);color:#ff7a8a;border:1px solid rgba(255,71,87,.3)}
   .tfd-tag.chain-bsc{background:rgba(255,193,7,.10);color:#ffd166}
   .tfd-tag.chain-eth{background:rgba(0,229,255,.08);color:var(--cyan)}
-  .tfd-tag.chain-polygon{background:rgba(130,71,229,.12);color:#a87eff}
+  .tfd-tag.chain-polygon{background:rgba(130,71,229,.12);color:#7fe6ff}
   .tfd-link{font-size:10px;color:var(--cyan);text-decoration:none;font-weight:700;opacity:.7;transition:opacity .2s}
   .tfd-link:hover{opacity:1}
   .tfd-affected-badge{font-size:10px;font-weight:900;letter-spacing:.06em;color:#ff7a8a;margin-bottom:6px;text-transform:uppercase}
@@ -1168,10 +1168,10 @@ body{background:#05060a!important}
 .lang-btn{font-size:11px;padding:6px 9px}
 .lang-btn.active{background:rgba(0,229,255,.13);color:#71efff}
 .btn-full-access-top{
-  background:rgba(124,92,255,.10);border-color:rgba(150,126,255,.25);color:#b9a9ff;
+  background:rgba(66,219,255,.10);border-color:rgba(66,219,255,.25);color:#bdf3ff;
   padding:9px 14px;font-size:10px;box-shadow:none
 }
-.btn-full-access-top:hover{background:rgba(124,92,255,.18);color:#d2c8ff}
+.btn-full-access-top:hover{background:rgba(66,219,255,.18);color:#bdf3ff}
 .back-link{
   padding:9px 14px;font-size:10px;letter-spacing:.13em;color:#75efff;
   border-color:rgba(0,229,255,.24);background:rgba(0,229,255,.045)
@@ -1231,12 +1231,12 @@ body{background:#05060a!important}
 /* Full access: one calm, premium upsell instead of an alert banner */
 #accessGateOverlay{margin-bottom:22px!important}
 #accessGateOverlay>div{
-  background:linear-gradient(135deg,rgba(124,92,255,.075),rgba(0,229,255,.045))!important;
+  background:linear-gradient(135deg,rgba(66,219,255,.075),rgba(0,229,255,.045))!important;
   border-color:rgba(140,126,255,.22)!important;border-radius:20px!important;padding:22px!important;
   box-shadow:0 18px 50px rgba(0,0,0,.30)!important
 }
 #accessGateOverlay>div>div:first-child{font-size:22px!important;margin-bottom:7px!important;opacity:.72}
-.btn-full-access{box-shadow:0 10px 30px rgba(124,92,255,.20);padding:11px 20px}
+.btn-full-access{box-shadow:0 10px 30px rgba(66,219,255,.20);padding:11px 20px}
 
 /* Current wallet toolbar */
 #walletBadge{max-width:min(66vw,520px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -1674,8 +1674,8 @@ body{background:#05060a!important}
   .brand-logo,.top-bar .brand-logo{width:50px!important;height:50px!important;border-radius:50%!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;object-fit:contain!important}
   @media (max-width:720px){.brand-logo,.top-bar .brand-logo{width:43px!important;height:43px!important}}
 </style>
-<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261012b">
-<script src="/assets/elofid-nav.js?v=20261012b" defer></script>
+<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261012c">
+<script src="/assets/elofid-nav.js?v=20261012c" defer></script>
 </head>
 <body class="eui-page-firewall">
 <div class="fw-bg-layer" aria-hidden="true"></div>
@@ -1701,13 +1701,11 @@ body{background:#05060a!important}
     <section class="hero" id="heroSection">
       <div class="hero-kicker" data-i18n="hero_kicker">WALLET FIREWALL</div>
       <h1 class="hero-title" data-i18n="hero_title">Know what your wallet<br>has approved.</h1>
-      <p class="hero-sub" data-i18n="hero_sub">
-        Scan your approvals, reveal your Blast Radius, get a guided Fix Plan —
-        and generate a shareable Proof Passport. In 60 seconds.
-      </p>
+      <p class="hero-sub" data-i18n="hero_sub">See every approval your wallet has granted, what each spender can access, and how to revoke it.</p>
 
       <div class="scan-bar">
         <input id="walletInput" class="mono" placeholder="0x... wallet address" spellcheck="false" autocomplete="off" />
+        <button type="button" class="fw-paste" id="fwPasteBtn" data-i18n="fw_paste" hidden>Paste</button>
         <select id="netSelect" class="scan-net">
           <option value="bsc">BSC</option>
           <option value="eth">ETH</option>
@@ -1716,17 +1714,8 @@ body{background:#05060a!important}
         <button class="btn-scan" id="btnRunFirewall" data-i18n="btn_run">Check wallet</button>
       </div>
 
-      <span class="demo-hint" id="demoHint" data-i18n="demo_try">Try with demo wallet</span>
-
-      <div class="hero-micro">
-        <span data-i18n="micro_readonly">Read-only scan</span>
-        <span class="micro-dot">·</span>
-        <span data-i18n="micro_noconnect">No wallet connection required</span>
-        <span class="micro-dot">·</span>
-        <span data-i18n="micro_revoke">Connect only to revoke</span>
-        <span class="micro-dot">·</span>
-        <span data-i18n="micro_chains">BSC, Ethereum, Polygon</span>
-      </div>
+      <div class="hero-micro fw-trust"><span class="fw-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span data-i18n="fw_trust">Read-only. Nothing is signed. Connect only if you choose to revoke.</span><span class="micro-dot">·</span><span data-i18n="micro_chains">BSC, Ethereum, Polygon</span></div>
+      <span class="demo-hint" id="demoHint" data-i18n="demo_try">Try with a demo wallet</span>
       <div class="fwg"><div class="fwg-kicker" data-i18n="fwg_kicker">What you get</div><h2 class="fwg-title" data-i18n="fwg_title">Everything the Firewall shows you.</h2><div class="fwg-grid"><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></span><h3 data-i18n="fwg_1_t">Blast Radius</h3><p data-i18n="fwg_1">Every active approval on the wallet and the value each spender could move.</p><div class="fwg-prev"><span><b>Token 1</b><code>0x0000…0000</code></span><em class="bad"><span data-i18n="fwg_unlimited">Unlimited</span></em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.4-.4-2.4 2.4-2.8Z"/></svg></span><h3 data-i18n="fwg_2_t">Fix Mode</h3><p data-i18n="fwg_2">Approvals ordered by exposure, with a guided revoke you review and sign yourself.</p><div class="fwg-prev"><span><b>1.</b><b>Token 1</b></span><em class="act"><span data-i18n="fwg_revoke">Revoke</span></em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span><h3 data-i18n="fwg_3_t">Wallet Watch</h3><p data-i18n="fwg_3">A browser alert when a new approval appears on a wallet you watch.</p><div class="fwg-prev"><span><b data-i18n="fwg_new">New approval</b></span><em class="warn">Token 2</em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-4"/></svg></span><h3 data-i18n="fwg_4_t">Wallet Passport</h3><p data-i18n="fwg_4">A signed, wallet-bound security record you can share.</p><div class="fwg-prev"><span><b>86</b><code>0x0000…0000</code></span><em class="ok"><span data-i18n="fwg_signed">Signed</span></em></div></div></div><div class="fwg-note" data-i18n="fwg_note">Illustrative preview</div></div>
     </section>
 
@@ -1768,15 +1757,15 @@ body{background:#05060a!important}
         <strong data-i18n="notice_live_title">Live scan.</strong> <span data-i18n="notice_live_body">Read-only on-chain data. No transactions made.</span>
       </div>
       <div class="notice" id="demoNotice">
-        <strong data-i18n="notice_demo_title">Demo mode:</strong> <span data-i18n="notice_demo_body">Showing sample data. Enter a real wallet address and click "Scan Wallet" to scan live.</span>
+        <strong data-i18n="notice_demo_title">Demo wallet.</strong> <span data-i18n="notice_demo_body">Sample data only. <a href="javascript:void(0)" onclick="document.getElementById('btnNewScan').click()">Scan your wallet</a></span>
       </div>
 
       <!-- ACCESS GATE OVERLAY -->
-      <div id="accessGateOverlay" style="display:none;position:relative;z-index:10;margin-bottom:24px">
+      <div id="accessGateOverlay" class="fw-gate" style="display:none;position:relative;z-index:10;margin-bottom:24px">
         <div style="
-          background:linear-gradient(135deg,rgba(124,92,255,.12),rgba(0,229,255,.08));
-          border:1px solid rgba(124,92,255,.35);border-radius:22px;padding:22px 24px;
-          text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 30px rgba(124,92,255,.12)
+          background:linear-gradient(135deg,rgba(66,219,255,.12),rgba(0,229,255,.08));
+          border:1px solid rgba(66,219,255,.35);border-radius:22px;padding:22px 24px;
+          text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 30px rgba(66,219,255,.12)
         ">
           <div style="font-size:18px;font-weight:900;margin-bottom:8px" data-i18n="gate_title">Get the full report for free</div>
           <div style="font-size:13px;color:var(--muted);line-height:1.7;max-width:60ch;margin:0 auto 16px">
@@ -1784,16 +1773,14 @@ body{background:#05060a!important}
           </div>
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
             <!-- Connect and sign in — triggers AppKit modal -->
-            <button class="btn btn-full-access" id="btnCheckAccess">
-              Connect &amp; Sign In
-            </button>
+            <button class="btn btn-full-access" id="btnCheckAccess" data-i18n="gate_btn">Sign in with wallet</button>
           </div>
           <div id="gateStatus" style="margin-top:14px;font-size:12px;color:var(--muted);min-height:18px"></div>
         </div>
       </div>
 
       <!-- Wallet badge -->
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+      <div class="fw-walletrow" style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:12px">
           <div class="meta-chip" style="font-family:var(--mono);font-size:12px;padding:8px 14px" id="walletBadge">0x...</div>
           <div class="meta-chip" id="netBadge">BSC</div>
@@ -1805,19 +1792,18 @@ body{background:#05060a!important}
         </div>
       </div>
 
-      <!-- TOP 3 CARDS -->
-      <!-- ── SCAN HISTORY BANNER ── -->
-      <div id="fwHistoryBanner" style="margin-bottom:20px">
-        <div class="fwh-row">
-          <span class="fwh-label">📈 Scan History</span>
-          <div id="fwHistoryDelta"></div>
-          <div id="fwHistoryDetail" class="fwh-detail"></div>
-          <div class="fwh-sparkline" id="fwHistorySparkline"></div>
+      <nav class="fw-subnav" id="fwSubnav" aria-label="Report sections"><a href="#fwSecOverview" data-i18n="nav_overview">Overview</a><a href="#fwSecFix" data-i18n="nav_fix">Fix</a><a href="#fwSecDetails" data-i18n="nav_details">Details</a><a href="#fwSecProtect" data-i18n="nav_protect">Protect</a><a href="#fwSecProof" data-i18n="nav_proof">Proof</a></nav>
+
+      <div class="section-title" id="fwSecOverview" style="margin-top:0" data-i18n="sec_status">Overview</div>
+      <div class="fw-ov" id="fwOverview">
+        <div class="fw-ov-main">
+          <div class="fw-ov-kicker"><i class="fw-ov-dot" id="fwOvDot"></i><span id="fwOvStatus">—</span></div>
+          <h2 class="fw-ov-title" id="fwOvSentence">—</h2>
+          <div class="fw-ov-meta" id="fwOvMeta"></div>
         </div>
-        <div class="fwh-multi" id="fwHistoryWallets" style="display:none"></div>
+        <a class="eui-btn eui-btn-primary fw-ov-btn" href="#fwSecFix" id="fwOvBtn" data-i18n="ov_btn">Review top risk</a>
       </div>
 
-      <div class="section-title" style="margin-top:0" data-i18n="sec_status">Firewall Status</div>
       <div class="top3">
 
         <!-- Score -->
@@ -1845,7 +1831,7 @@ body{background:#05060a!important}
 
         <!-- Blast Radius -->
         <div class="score-card card-blast">
-          <div class="sc-kicker" data-i18n="kicker_blast">💥 Blast Radius</div>
+          <div class="sc-kicker" data-i18n="kicker_blast">Blast Radius</div>
           <div class="blast-amount" id="blastAmt">—</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px" data-i18n="blast_sub">spenders that can move a full token balance</div>
           <div class="card-meta" id="blastMeta"></div>
@@ -1853,7 +1839,7 @@ body{background:#05060a!important}
 
         <!-- Exposed Tokens -->
         <div class="score-card card-drain">
-          <div class="sc-kicker" data-i18n="kicker_drain">⚠ Exposed Tokens</div>
+          <div class="sc-kicker" data-i18n="kicker_drain">Exposed Tokens</div>
           <div class="drain-time" id="drainTime">—</div>
           <div style="font-size:12px;color:var(--muted);margin-top:6px" data-i18n="drain_sub">token balances a spender can move in full today</div>
           <div class="card-meta" id="drainMeta"></div>
@@ -1861,41 +1847,25 @@ body{background:#05060a!important}
 
       </div>
 
-      <!-- MAIN GRID: Map + Threats -->
-      <div class="main-grid">
-
-        <!-- Exposure Map -->
-        <div class="exp-card">
-          <div class="exp-title" data-i18n="title_map">🗺 Exposure Map</div>
-          <div class="exp-sub" data-i18n="map_sub">Wallet → Spenders → Tokens. Color = spender risk.</div>
-          <svg id="exposureMap" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
-            <!-- rendered by JS -->
-          </svg>
-          <div class="exp-legend">
-            <span><i style="background:#ff4757"></i>High risk</span>
-            <span><i style="background:#ffd166"></i>Medium</span>
-            <span><i style="background:#3cffb0"></i>Low</span>
-            <span><b>∞</b> unlimited</span>
-            <span><b>100%</b> full balance</span>
-            <span><b>CAP</b> capped</span>
-          </div>
+      <!-- TOP 3 CARDS -->
+      <!-- ── SCAN HISTORY BANNER ── -->
+      <div id="fwHistoryBanner" style="margin-bottom:20px">
+        <div class="fwh-row">
+          <span class="fwh-label">Scan History</span>
+          <div id="fwHistoryDelta"></div>
+          <div id="fwHistoryDetail" class="fwh-detail"></div>
+          <div class="fwh-sparkline" id="fwHistorySparkline"></div>
         </div>
-
-        <!-- Top Threats -->
-        <div class="threats-card">
-          <div class="exp-title" style="margin-bottom:14px" data-i18n="title_threats">🎯 Top Threats</div>
-          <div id="threatsList"></div>
-        </div>
-
+        <div class="fwh-multi" id="fwHistoryWallets" style="display:none"></div>
       </div>
 
       <!-- FIX MODE -->
-      <div class="section-title" data-i18n="sec_fix">Fix Mode</div>
+      <div class="section-title" id="fwSecFix" data-i18n="sec_fix">Fix</div>
       <div class="fix-card" id="fixCard">
         <!-- No full overlay — Step 1 is free, Steps 2+3 have per-step locks -->
         <div class="fix-header">
           <div>
-            <div style="font-size:16px;font-weight:800;margin-bottom:4px" data-i18n="fix_title">🛠 3-Step Fix Plan</div>
+            <div style="font-size:16px;font-weight:800;margin-bottom:4px" data-i18n="fix_title">3-Step Fix Plan</div>
             <div style="font-size:13px;color:var(--muted)" data-i18n="fix_sub">Complete these actions to improve your Firewall Score.</div>
           </div>
           <div class="fix-score-gain" id="fixGain" style="display:none">
@@ -1912,15 +1882,15 @@ body{background:#05060a!important}
             <button class="btn-action btn-undo" id="undoFix1" style="display:none;margin-top:6px;background:rgba(255,100,50,.08);border-color:rgba(255,100,50,.3);color:#ff9a6b;font-size:10px" onclick="undoFix(0)">↩ Undo — Restore approval</button>
             <!-- Free-tier post-revoke upsell — shown after step 1 done -->
             <div id="fwPostRevokeUpsell" style="display:none;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(93,255,178,.07);border:1px solid rgba(93,255,178,.2);font-size:11px;line-height:1.6">
-              <strong style="color:var(--green);display:block;margin-bottom:4px">✅ You removed the biggest threat.</strong>
+              <strong style="color:var(--green);display:block;margin-bottom:4px">You removed the biggest threat.</strong>
               <span id="fwPostRevokeRemaining" style="color:var(--muted)">Risky approvals still remain.</span>
-              <button onclick="requestFullAccess()" style="display:block;margin-top:8px;width:100%;padding:7px 10px;border-radius:8px;border:1px solid rgba(124,92,255,.4);background:rgba(124,92,255,.12);color:#a87eff;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer">Unlock Full Fix Mode to clean the rest →</button>
+              <button onclick="requestFullAccess()" style="display:block;margin-top:8px;width:100%;padding:7px 10px;border-radius:8px;border:1px solid rgba(66,219,255,.4);background:rgba(66,219,255,.12);color:#7fe6ff;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer">Unlock Full Fix Mode to clean the rest →</button>
             </div>
           </div>
           <div class="fix-step locked-section" id="fixStep2">
             <div class="lock-overlay" id="fixStep2Lock" style="border-radius:16px">
               <div class="lock-overlay-inner">
-                <div class="lock-icon" style="font-size:16px">🔒</div>
+                <div class="lock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
                 <p style="font-size:11px;margin-bottom:8px">Free sign-in</p>
                 <button class="btn-full-access" onclick="requestFullAccess()" style="font-size:10px;padding:7px 14px">Sign in</button>
               </div>
@@ -1934,7 +1904,7 @@ body{background:#05060a!important}
           <div class="fix-step locked-section" id="fixStep3">
             <div class="lock-overlay" id="fixStep3Lock" style="border-radius:16px">
               <div class="lock-overlay-inner">
-                <div class="lock-icon" style="font-size:16px">🔒</div>
+                <div class="lock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
                 <p style="font-size:11px;margin-bottom:8px">Free sign-in</p>
                 <button class="btn-full-access" onclick="requestFullAccess()" style="font-size:10px;padding:7px 14px">Sign in</button>
               </div>
@@ -1948,12 +1918,122 @@ body{background:#05060a!important}
         </div>
 
         <div class="fix-score-gain" id="fixComplete" style="display:none">
-          ✅ Fix complete! Your estimated score after applying all fixes: <strong id="finalScore">—</strong>/100
+          Fix complete! Your estimated score after applying all fixes: <strong id="finalScore">—</strong>/100
         </div>
       </div>
 
+      <div class="section-title" id="fwSecDetails" data-i18n="sec_details">Details</div>
+      <!-- MAIN GRID: Map + Threats -->
+      <div class="main-grid">
+
+        <!-- Exposure Map -->
+        <div class="exp-card">
+          <div class="exp-title" data-i18n="title_map">Exposure Map</div>
+          <div class="exp-sub" data-i18n="map_sub">Wallet → Spenders → Tokens. Color = spender risk.</div>
+          <svg id="exposureMap" viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
+            <!-- rendered by JS -->
+          </svg>
+          <div class="exp-legend">
+            <span><i style="background:#ff4757"></i>High risk</span>
+            <span><i style="background:#ffd166"></i>Medium</span>
+            <span><i style="background:#3cffb0"></i>Low</span>
+            <span><b>∞</b> unlimited</span>
+            <span><b>100%</b> full balance</span>
+            <span><b>CAP</b> capped</span>
+          </div>
+        </div>
+
+        <!-- Top Threats -->
+        <div class="threats-card">
+          <div class="exp-title" style="margin-bottom:14px" data-i18n="title_threats">Top Threats</div>
+          <div id="threatsList"></div>
+        </div>
+
+      </div>
+
+      <!-- ── WALLET RELATIONS SECTION ── -->
+      <div id="fwRelSection" style="display:none">
+        <div class="section-title" data-i18n="sec_relations">Wallet Relations</div>
+        <div class="rel-section-wrap">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px">
+            <div>
+              <div style="font-size:16px;font-weight:800;margin-bottom:4px" data-i18n="rel_title">Protocol &amp; Exchange Relationships</div>
+              <div style="font-size:13px;color:var(--muted)">
+                Detected interactions with known DEXes, CEXes, bridges &amp; protocols on <span id="fwRelNetLabel" style="color:var(--cyan);font-weight:700">—</span>.
+              </div>
+            </div>
+            <div id="fwRelSummary" style="font-size:12px;color:var(--muted);text-align:right;line-height:1.6"></div>
+          </div>
+          <div id="fwRelContent"><div class="rel-loading">Analyzing wallet relationships…</div></div>
+        </div>
+      </div>
+
+      <div class="section-title" id="fwSecProtect" data-i18n="sec_protect">Protect</div>
+      <!-- ═══ WALLET WATCH ═══════════════════════════════════════ -->
+      <div id="fwWatchSection">
+        <div class="section-title" data-i18n="sec_watch">Wallet Watch</div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:16px">
+          <div class="fw-watch-top" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+            <div class="fw-watch-header-text" style="order:2;">
+              <div style="font-size:16px;font-weight:800;margin-bottom:4px" data-i18n="watch_title">Track Multiple Wallets</div>
+              <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-i18n="watch_desc">Scores refresh when you press Scan All. You're alerted if a watched wallet drops below 60.</span> <span id="watchLimitLabel" data-i18n="watch_limit_label" style="color:var(--muted);font-size:11px">(2 wallets without sign-in. Sign in for up to 10)</span></div>
+            </div>
+            <div class="fw-watch-header-actions" style="order:1;">
+              <button class="fw-watch-submit" id="fwBtnScanAll" onclick="fwWatchScanAll()" style="background:rgba(93,255,178,.10);border-color:rgba(93,255,178,.3);color:var(--green)" data-i18n="watch_scan_all">↻ Scan All</button>
+              <button class="fw-watch-submit" id="fwBtnEnableNotif" onclick="fwRequestNotifications()">Alerts</button>
+            </div>
+          </div>
+          <!-- Alert banner — shown when score drops on a watched wallet -->
+          <div class="fw-alert-banner" id="fwAlertBanner">
+            <div style="font-size:13px;font-weight:800;color:#ff7a8a;margin-bottom:4px" id="fwAlertTitle">Score Drop Detected</div>
+            <div style="font-size:12px;color:var(--muted)" id="fwAlertDesc"></div>
+          </div>
+          <!-- Watched wallets grid -->
+          <div class="fw-watch-grid" id="fwWatchGrid">
+            <div style="font-size:12px;color:var(--muted);grid-column:1/-1;padding:12px 0">No wallets watched yet. Add your first wallet below.</div>
+          </div>
+          <!-- Add wallet row -->
+          <div class="fw-watch-add">
+            <input class="fw-watch-input" id="fwWatchInput" placeholder="0x... wallet address" spellcheck="false" autocomplete="off">
+            <select class="fw-watch-input" id="fwWatchNet" style="flex:0 0 auto;min-width:0;width:100px">
+              <option value="bsc">BSC</option>
+              <option value="eth">ETH</option>
+              <option value="polygon">Polygon</option>
+            </select>
+            <button class="fw-watch-submit" id="fwWatchAddBtn" onclick="fwWatchAdd()" data-i18n="watch_add_btn">+ Watch</button>
+          </div>
+          <div class="fw-notif-row" id="fwNotifRow">
+            <span class="fw-notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+            <span class="fw-notif-text" id="fwNotifText">Get a browser notification when a watched wallet's score drops below 60 or a new approval appears. Works while this page is open.</span>
+            <button class="fw-notif-btn" id="fwNotifBtn" onclick="fwRequestNotifications()">Enable</button>
+          </div>
+          <!-- Live approval monitor — FULL ACCESS ONLY (read-only, no signature) -->
+          <div class="fw-notif-row" id="fwOnchainNotifRow" style="margin-top:8px">
+            <span class="fw-notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
+            <div class="fw-notif-text">
+              <strong style="color:var(--cyan)" data-i18n="monitor_title">Live approval monitor</strong> —
+              <span data-i18n="monitor_desc">Checks the scanned wallet for new token approvals every 30 seconds while this page is open. Read-only — no signature, no gas.</span>
+              <span id="fwOnchainStatus" style="display:block;margin-top:3px;font-size:11px;color:var(--muted)">Off</span>
+            </div>
+            <!-- shown/hidden by JS based on tier -->
+            <button class="fw-notif-btn" id="fwOnchainBtn" onclick="fwMonitorToggle()" style="border-color:rgba(0,229,255,.3);color:var(--cyan);display:none">Start</button>
+            <button class="fw-notif-btn" id="fwOnchainLockBtn" onclick="requestFullAccess()" style="border-color:rgba(66,219,255,.3);color:#7fe6ff">Sign in</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPEND RULES TEMPLATES -->
+      <div class="fw-rules-card" style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:16px">
+        <div style="font-size:16px;font-weight:800;margin-bottom:4px"><span data-i18n="rules_title">Spend Limit Templates</span></div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:18px"><span data-i18n="rules_sub">Apply a spending rule profile to reduce future exposure.</span></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" id="ruleTemplates">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
+
+      <div class="section-title" id="fwSecProof" data-i18n="sec_proof">Proof</div>
       <!-- WALLET PASSPORT -->
-      <div class="section-title" data-i18n="sec_passport">Wallet Passport</div>
       <div class="passport-wrap" id="passportWrap">
         <!-- Two-column header row: card title left, actions title right — aligned -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:14px" class="passport-header-row">
@@ -1974,7 +2054,7 @@ body{background:#05060a!important}
             <div class="pp-inner">
               <div class="pp-header">
                 <div class="pp-logo">
-                  <div class="pp-logo-shield">🛡</div>
+                  <div class="pp-logo-shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-4"/></svg></div>
                   <div>
                     <div class="pp-logo-text">ELOFID FIREWALL</div>
                     <div class="pp-logo-sub">Wallet Security Report</div>
@@ -1982,14 +2062,14 @@ body{background:#05060a!important}
                 </div>
                 <div class="pp-issue-badge">SECURITY SCAN</div>
               </div>
-              <div class="pp-sig-chip" id="ppSigChip">✅ Verified by Elofid</div>
+              <div class="pp-sig-chip" id="ppSigChip">Verified by Elofid</div>
               <div class="pp-wallet" id="ppWallet">0x...</div>
               <div class="pp-score-row">
                 <div class="pp-score-wrap">
                   <div class="pp-score-big" id="ppScore" style="color:#ffd166">—</div>
                   <div class="pp-score-label">Firewall Score</div>
                 </div>
-                <div class="pp-status" id="ppStatus">⚠ Exposed</div>
+                <div class="pp-status" id="ppStatus">Exposed</div>
               </div>
               <div class="pp-stats">
                 <div class="pp-stat">
@@ -2001,7 +2081,7 @@ body{background:#05060a!important}
                   <div class="pp-stat-key">Blast Radius</div>
                 </div>
                 <div class="pp-stat drain">
-                  <div class="pp-drain-icon">⚠</div>
+                  <div class="pp-drain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 16.5h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
                   <div class="pp-drain-inline">
                     <span class="pp-drain-val" id="ppDrain">—</span>
                     <span class="pp-drain-caption" id="ppDrainCaption">· fully exposed</span>
@@ -2024,69 +2104,41 @@ body{background:#05060a!important}
             <!-- title moved to passport-header-row above for alignment -->
 
             <!-- Free tier: share card with watermark -->
-            <button class="btn-passport" id="btnShareX" style="margin-top:2px">🐦 Share to X (Twitter)</button>
-            <button class="btn-passport secondary" id="btnDownloadCard">📥 Download Share Card</button>
-            <button class="btn-passport secondary" id="btnCopyPassport">📋 Copy Passport Text</button>
+            <button class="btn-passport" id="btnShareX" style="margin-top:2px">Share to X (Twitter)</button>
+            <button class="btn-passport secondary" id="btnDownloadCard">Download Share Card</button>
+            <button class="btn-passport secondary" id="btnCopyPassport">Copy Passport Text</button>
 
             <!-- Full Access only: Worker-signed Verified Passport -->
             <div id="passportPassSection" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)">
-              <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:8px">✅ Full Access — Verified Passport</div>
-              <button class="btn-passport sign" id="btnGetPassport">🪪 Get Verified Passport</button>
+              <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:800;margin-bottom:8px">Full Access — Verified Passport</div>
+              <button class="btn-passport sign" id="btnGetPassport">Get Verified Passport</button>
               <!-- Wallet-signed (EIP-712) passport retired from the UI: the Worker-issued passport
                    needs no extra signature. Old signed passport links still verify. -->
-              <button class="btn-passport sign" id="btnSignPassport" style="margin-top:8px;display:none">✍ Sign Passport (EIP-712)</button>
+              <button class="btn-passport sign" id="btnSignPassport" style="margin-top:8px;display:none">Sign Passport (EIP-712)</button>
               <div class="pp-signed-badge" id="ppSignedBadge">
-                <div style="font-size:10px;letter-spacing:.08em;font-weight:900;color:#5dffb2;margin-bottom:6px;font-family:var(--sans)">✅ SIGNED — CRYPTOGRAPHIC PROOF</div>
+                <div style="font-size:10px;letter-spacing:.08em;font-weight:900;color:#5dffb2;margin-bottom:6px;font-family:var(--sans)">SIGNED — CRYPTOGRAPHIC PROOF</div>
                 <div id="ppSigShort" style="color:var(--muted)"></div>
                 <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-                  <button class="btn-passport secondary" id="btnCopyVerifyLink" style="font-size:10px;padding:7px 14px;margin:0">🔗 Copy Verify Link</button>
-                  <button class="btn-passport secondary" id="btnShareXSigned" style="font-size:10px;padding:7px 14px;margin:0">🐦 Share to X</button>
+                  <button class="btn-passport secondary" id="btnCopyVerifyLink" style="font-size:10px;padding:7px 14px;margin:0">Copy Verify Link</button>
+                  <button class="btn-passport secondary" id="btnShareXSigned" style="font-size:10px;padding:7px 14px;margin:0">Share to X</button>
                 </div>
               </div>
             </div>
 
             <!-- Free tier: one sign-in button -->
             <div id="passportUnlockSection" style="display:none;margin-top:14px">
-              <button class="btn-full-access" onclick="requestFullAccess()" style="width:100%;font-size:12px;padding:11px 18px">🔑 Sign in to sign your Passport (free)</button>
+              <button class="btn-full-access" onclick="requestFullAccess()" style="width:100%;font-size:12px;padding:11px 18px">Sign in to sign your Passport (free)</button>
             </div>
 
-            <button class="btn-passport secondary" id="btnCopyLink" style="margin-top:8px">🔗 Copy Share Link</button>
+            <button class="btn-passport secondary" id="btnCopyLink" style="margin-top:8px">Copy Share Link</button>
             <div class="passport-shared" id="passportShared"></div>
           </div>
         </div>
       </div>
 
-      <!-- SPEND RULES TEMPLATES -->
-      <div class="section-title" data-i18n="sec_rules">Firewall Rules</div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:16px">
-        <div style="font-size:16px;font-weight:800;margin-bottom:4px">🔒 Spend Limit Templates</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:18px">Apply a spending rule profile to minimize future exposure.</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" id="ruleTemplates">
-          <!-- rendered by JS -->
-        </div>
-      </div>
-
-
-      <!-- ── WALLET RELATIONS SECTION ── -->
-      <div id="fwRelSection" style="display:none">
-        <div class="section-title" data-i18n="sec_relations">🔗 Wallet Relations</div>
-        <div class="rel-section-wrap">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:4px">
-            <div>
-              <div style="font-size:16px;font-weight:800;margin-bottom:4px" data-i18n="rel_title">Protocol &amp; Exchange Relationships</div>
-              <div style="font-size:13px;color:var(--muted)">
-                Detected interactions with known DEXes, CEXes, bridges &amp; protocols on <span id="fwRelNetLabel" style="color:var(--cyan);font-weight:700">—</span>.
-              </div>
-            </div>
-            <div id="fwRelSummary" style="font-size:12px;color:var(--muted);text-align:right;line-height:1.6"></div>
-          </div>
-          <div id="fwRelContent"><div class="rel-loading">🔍 Analyzing wallet relationships…</div></div>
-        </div>
-      </div>
-
       <!-- ── EXPORT SECTION — locked preview until full access ── -->
       <div id="fwExportSection">
-        <div class="section-title" data-i18n="sec_export">📊 Export Report</div>
+        <div class="section-title" data-i18n="sec_export">Export Report</div>
         <div class="fw-export-card fw-export-locked" id="fwExportCard">
           <div style="font-size:16px;font-weight:800;margin-bottom:4px">Download Scan Data</div>
           <div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.65">
@@ -2095,19 +2147,19 @@ body{background:#05060a!important}
           <!-- Buttons wrap — blurred when locked -->
           <div class="fw-export-btns-wrap">
             <div style="display:flex;gap:10px;flex-wrap:wrap;opacity:.45;align-items:center">
-              <button class="fw-export-btn csv" id="fwBtnExportCSV" disabled>📄 Export CSV</button>
-              <button class="fw-export-btn json" id="fwBtnExportJSON" disabled>🗃 Export JSON</button>
-              <button class="fw-export-btn copy" id="fwBtnCopyReport" disabled>📋 Copy Report</button>
-              <button class="fw-export-btn" id="fwBtnExportPDF" disabled style="background:rgba(255,100,100,.07);border-color:rgba(255,100,100,.26);color:#ff6b6b">🖨 Export PDF</button>
+              <button class="fw-export-btn csv" id="fwBtnExportCSV" disabled>Export CSV</button>
+              <button class="fw-export-btn json" id="fwBtnExportJSON" disabled>Export JSON</button>
+              <button class="fw-export-btn copy" id="fwBtnCopyReport" disabled>Copy Report</button>
+              <button class="fw-export-btn" id="fwBtnExportPDF" disabled style="background:rgba(255,100,100,.07);border-color:rgba(255,100,100,.26);color:#ff6b6b">Export PDF</button>
             </div>
           </div>
           <!-- CTA shown when locked -->
           <div class="fw-export-unlock-cta" id="fwExportCTA">
             <div style="font-size:12px;color:var(--muted);margin-bottom:10px">
-              🔒 Export requires <strong style="color:var(--cyan)">Full Access</strong>. Connect your wallet and sign in to unlock CSV, JSON &amp; report export.
+              Export requires <strong style="color:var(--cyan)">Full Access</strong>. Connect your wallet and sign in to unlock CSV, JSON &amp; report export.
             </div>
             <button class="btn-full-access" style="font-size:11px;padding:9px 20px" onclick="requestFullAccess()">
-              🔑 Unlock Export
+              Unlock Export
             </button>
           </div>
           <div id="fwExportStatus" style="margin-top:12px;font-size:12px;color:var(--muted);min-height:18px;line-height:1.5;display:none;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)"></div>
@@ -2115,99 +2167,30 @@ body{background:#05060a!important}
       </div>
 
 
-      <!-- ═══ WALLET WATCH ═══════════════════════════════════════ -->
-      <div id="fwWatchSection">
-        <div class="section-title" data-i18n="sec_watch">👁 Wallet Watch</div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:16px">
-          <div class="fw-watch-top" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
-            <div class="fw-watch-header-text" style="order:2;">
-              <div style="font-size:16px;font-weight:800;margin-bottom:4px" data-i18n="watch_title">Track Multiple Wallets</div>
-              <div style="font-size:13px;color:var(--muted);line-height:1.6"><span data-i18n="watch_desc">Scores refresh when you press Scan All. You're alerted if a watched wallet drops below 60.</span> <span id="watchLimitLabel" data-i18n="watch_limit_label" style="color:var(--muted);font-size:11px">(2 wallets without sign-in. Sign in for up to 10)</span></div>
-            </div>
-            <div class="fw-watch-header-actions" style="order:1;">
-              <button class="fw-watch-submit" id="fwBtnScanAll" onclick="fwWatchScanAll()" style="background:rgba(93,255,178,.10);border-color:rgba(93,255,178,.3);color:var(--green)" data-i18n="watch_scan_all">↻ Scan All</button>
-              <button class="fw-watch-submit" id="fwBtnEnableNotif" onclick="fwRequestNotifications()">🔔 Alerts</button>
-            </div>
-          </div>
-          <!-- Alert banner — shown when score drops on a watched wallet -->
-          <div class="fw-alert-banner" id="fwAlertBanner">
-            <div style="font-size:13px;font-weight:800;color:#ff7a8a;margin-bottom:4px" id="fwAlertTitle">⚠ Score Drop Detected</div>
-            <div style="font-size:12px;color:var(--muted)" id="fwAlertDesc"></div>
-          </div>
-          <!-- Watched wallets grid -->
-          <div class="fw-watch-grid" id="fwWatchGrid">
-            <div style="font-size:12px;color:var(--muted);grid-column:1/-1;padding:12px 0">No wallets watched yet. Add your first wallet below.</div>
-          </div>
-          <!-- Add wallet row -->
-          <div class="fw-watch-add">
-            <input class="fw-watch-input" id="fwWatchInput" placeholder="0x... wallet address" spellcheck="false" autocomplete="off">
-            <select class="fw-watch-input" id="fwWatchNet" style="flex:0 0 auto;min-width:0;width:100px">
-              <option value="bsc">BSC</option>
-              <option value="eth">ETH</option>
-              <option value="polygon">Polygon</option>
-            </select>
-            <button class="fw-watch-submit" id="fwWatchAddBtn" onclick="fwWatchAdd()" data-i18n="watch_add_btn">+ Watch</button>
-          </div>
-          <div class="fw-notif-row" id="fwNotifRow">
-            <span class="fw-notif-icon">🔔</span>
-            <span class="fw-notif-text" id="fwNotifText">Get a browser notification when a watched wallet's score drops below 60 or a new approval appears. Works while this page is open.</span>
-            <button class="fw-notif-btn" id="fwNotifBtn" onclick="fwRequestNotifications()">Enable</button>
-          </div>
-          <!-- Live approval monitor — FULL ACCESS ONLY (read-only, no signature) -->
-          <div class="fw-notif-row" id="fwOnchainNotifRow" style="margin-top:8px;border-color:rgba(0,229,255,.18);background:rgba(0,229,255,.04)">
-            <span class="fw-notif-icon">⛓</span>
-            <div class="fw-notif-text">
-              <strong style="color:var(--cyan)" data-i18n="monitor_title">Live approval monitor</strong> —
-              <span data-i18n="monitor_desc">Checks the scanned wallet for new token approvals every 30 seconds while this page is open. Read-only — no signature, no gas.</span>
-              <span id="fwOnchainStatus" style="display:block;margin-top:3px;font-size:10px;color:var(--muted)">Off</span>
-            </div>
-            <!-- shown/hidden by JS based on tier -->
-            <button class="fw-notif-btn" id="fwOnchainBtn" onclick="fwMonitorToggle()" style="border-color:rgba(0,229,255,.3);color:var(--cyan);display:none">Start</button>
-            <button class="fw-notif-btn" id="fwOnchainLockBtn" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.3);color:#a87eff">🔑 Sign in</button>
-          </div>
-        </div>
-      </div>
-
       <!-- ═══ THREAT FEED ══════════════════════════════════════════ -->
       <div id="fwThreatFeedSection">
-        <div class="section-title" data-i18n="sec_threats">🚨 Threat Feed</div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:16px">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
-            <div>
-              <div style="font-size:16px;font-weight:800;margin-bottom:4px">Recent Exploits & Threats</div>
-              <div style="font-size:13px;color:var(--muted)">Known hacks, rug pulls and suspicious contracts across BSC, ETH & Polygon. <span id="fwThreatAffectedBadge" style="display:none;color:#ff7a8a;font-weight:800"></span></div>
-            </div>
-            <!-- Threat feed timestamp hidden until a dynamic source timestamp is available. -->
-          </div>
+        <div class="section-title" data-i18n="sec_threats">Learn</div>
+        <details class="fw-inc" id="fwIncDetails">
+          <summary class="fw-inc-sum"><span class="fw-inc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 16.5h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span><span class="fw-inc-text"><b data-i18n="inc_title">Recent incidents</b><small><span data-i18n="inc_sub">Known exploits that involved token approvals on BSC, Ethereum and Polygon. Each one links to its source.</span> <span id="fwThreatAffectedBadge" style="display:none"></span></small></span><span class="fw-inc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary>
           <div id="fwThreatList"></div>
-        </div>
+        </details>
       </div>
 
-      <!-- ═══ PUBLIC API ═══════════════════════════════════════════ -->
       <div id="fwApiSection">
-        <div class="section-title" data-i18n="sec_api">🔌 Developer API</div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 22px;margin-bottom:16px;text-align:center">
-          <div style="font-size:28px;margin-bottom:10px">🔌</div>
-          <div style="font-size:16px;font-weight:800;margin-bottom:6px">Developer API — Coming Soon</div>
-          <div style="font-size:13px;color:var(--muted);line-height:1.65;max-width:380px;margin:0 auto">
-            Programmatic access to Elofid security data is on the roadmap — API keys, webhook support, and rate-limited endpoints for wallet scoring and approval data. Current features (scan, revoke, passport) are available via the UI now.
-          </div>
-        </div>
+        <div class="fw-api"><span class="fw-api-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><div class="fw-api-text"><span class="fw-api-kicker" data-i18n="fwapi_kicker">Monitoring and API</span><b data-i18n="fwapi_title">Keep watching after the scan.</b><p data-i18n="fwapi_sub">Track tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.</p></div><a class="eui-btn eui-btn-secondary fw-api-btn" href="/developers" data-i18n="fwapi_btn">For developers</a></div>
       </div>
 
     </div><!-- end #dashboard -->
   </main>
 
-  <footer class="footer">
-    <div>
-      <span class="footer-brand">Elofid Firewall</span>
-      <span style="margin:0 8px;opacity:.35">·</span>
-      <span>Wallet Protection Tool</span>
+  <footer class="eui-footer" data-eui-footer>
+    <div class="eui-foot-grid">
+      <div class="eui-foot-brand"><div class="eui-foot-logo"><img src="/elofid-mark.svg" alt="" width="28" height="28"><b>Elofid</b></div><p data-eui="f_about">Elofid is an on-chain security and continuous risk intelligence platform. Token scanning, wallet protection, continuous monitoring and a developer API.</p><p class="eui-foot-tag" data-eui="f_tag">Security that starts before the loss.</p></div>
+      <div class="eui-foot-col"><b data-eui="f_products">Products</b><a href="/security" data-eui="f_hub">Security Hub</a><a href="/firewall" data-eui="f_firewall">Firewall</a><a href="/developers" data-eui="f_developers">Developers</a><a href="https://t.me/ElofidBot" target="_blank" rel="noopener" data-eui="f_bot">Scanner Bot</a></div>
+      <div class="eui-foot-col"><b data-eui="f_community">Community</b><a href="https://x.com/ElofidNetwork" target="_blank" rel="noopener">X</a><a href="https://t.me/elofid_official" target="_blank" rel="noopener">Telegram</a><a href="https://elofid.com/whitepaper.pdf" target="_blank" rel="noopener" data-eui="f_whitepaper">Whitepaper</a><a href="https://elofid.com/FAQ.pdf" target="_blank" rel="noopener" data-eui="f_faq">FAQ</a></div>
+      <div class="eui-foot-col"><b data-eui="f_legal">Legal</b><a href="/terms.html" data-eui="f_terms">Terms</a><a href="/privacy.html" data-eui="f_privacy">Privacy</a><a href="/refund.html" data-eui="f_refund">Refund Policy</a></div>
     </div>
-    <div class="footer-note">
-      Informational only. No signatures. No transactions. Always verify contracts independently.
-      All revoke actions happen on-chain directly from this site.
-    </div>
+    <p class="eui-foot-note" data-i18n="footer_note">Informational only. Revoke actions happen on-chain, directly from your wallet. Always verify contracts independently.</p>
   </footer>
 
 </div><!-- .page-shell -->
@@ -2218,7 +2201,7 @@ body{background:#05060a!important}
 // ══════════════════════════════════════════════════════════════════
 
 // ── CONSTANTS ────────────────────────────────────────────────────
-const DEMO_WALLET = "0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD";
+const DEMO_WALLET = "0x0000000000000000000de0000000000000000000";
 const API_BASE    = window.ELOFID_API_BASE || location.origin;
 
 // ── Activity Counter — reports scan events to homepage dashboard ──────
@@ -2512,7 +2495,7 @@ function fwRenderRelations(net, relations) {
   if (!relations.length) {
     content.innerHTML = `
       <div class="rel-empty" style="padding:20px;text-align:center">
-        <div style="font-size:28px;margin-bottom:10px">🔍</div>
+        <div style="font-size:28px;margin-bottom:10px"></div>
         <div style="font-weight:700;font-size:14px;color:var(--text);margin-bottom:6px">No protocol interactions detected</div>
         <div style="font-size:12px;color:var(--muted);line-height:1.6">
           No interactions found with known DEXes, CEXes or bridges on ${FW_CHAINS[net]?.name||net.toUpperCase()}.
@@ -2528,13 +2511,13 @@ function fwRenderRelations(net, relations) {
   const brCount  = relations.filter(r=>r.entity.type==="bridge").length;
   const totalTxs = relations.reduce((s,r)=>s+r.in+r.out, 0);
   if (summary) summary.innerHTML = `
-    <span style="color:var(--green)">🏦 ${cexCount} exchanges</span> &nbsp;·&nbsp;
-    <span style="color:var(--cyan)">⚡ ${dexCount} DEXes</span> &nbsp;·&nbsp;
-    <span style="color:#a87eff">🌉 ${brCount} bridges</span><br>
+    <span style="color:var(--green)">${cexCount} exchanges</span> &nbsp;·&nbsp;
+    <span style="color:var(--cyan)">${dexCount} DEXes</span> &nbsp;·&nbsp;
+    <span style="color:#7fe6ff">${brCount} bridges</span><br>
     <span style="color:var(--muted)">${totalTxs} detected interactions</span>
   `;
 
-  const TYPE_EMOJI = {cex:"🏦",dex:"⚡",bridge:"🌉",lending:"💰",staking:"🥩",oracle:"🔮",util:"🔧"};
+  const TYPE_EMOJI = {};
 
   // isDemo check based on current wallet — isDemo is only in runLoadSequence scope
   const _isRelDemo = fwWallet === DEMO_WALLET;
@@ -2560,12 +2543,12 @@ function fwRenderRelations(net, relations) {
       ? (realTxCount > 0
           ? `<button class="rel-timeline-btn" onclick="fwShowTimeline(${idx})">View ${realTxCount} transactions ↗</button>`
           : "")
-      : `<button class="rel-timeline-btn" style="opacity:.65;border-color:rgba(124,92,255,.3);color:#a87eff" onclick="requestFullAccess()">🔒 Unlock to view transactions</button>`;
+      : `<button class="rel-timeline-btn" style="opacity:.65;border-color:rgba(66,219,255,.3);color:#7fe6ff" onclick="requestFullAccess()">Unlock to view transactions</button>`;
 
     return `
     <div class="rel-card ${typeClass}">
       <div class="rel-card-body">
-        <div class="rel-entity-name">${TYPE_EMOJI[e.type]||"🔗"} ${esc(e.name)}</div>
+        <div class="rel-entity-name">${esc(e.name)}</div>
         <div class="rel-tags">${tags}</div>
         <div class="rel-stats-row">
           <div class="rel-stat"><div class="rel-stat-val" style="color:${inColor}">${rel.in}</div><div class="rel-stat-key">Received</div></div>
@@ -2587,10 +2570,10 @@ function fwRenderRelations(net, relations) {
       ? "Connect your wallet &amp; unlock Full Access to see your real protocol interactions."
       : "Protocol names &amp; counts visible. Unlock Full Access to view transaction history.";
     teaserHtml = `<div style="padding:10px 14px;border-radius:12px;margin-bottom:12px;
-      background:rgba(124,92,255,.07);border:1px solid rgba(124,92,255,.2);
+      background:rgba(66,219,255,.07);border:1px solid rgba(66,219,255,.2);
       display:flex;align-items:center;gap:10px;flex-wrap:wrap">
       <span style="font-size:12px;color:var(--muted);flex:1">
-        🔒 <strong style="color:var(--text)">Wallet Relations</strong> — ${teaserMsg}
+        <strong style="color:var(--text)">Wallet Relations</strong> — ${teaserMsg}
       </span>
       <button class="fw-watch-submit" style="font-size:10px;padding:6px 14px" onclick="requestFullAccess()">Unlock</button>
     </div>`;
@@ -2616,7 +2599,7 @@ window.fwShowTimeline = function(idx) {
   title.textContent = `${rel.entity.name} — ${rel.in+rel.out} interactions`;
   body.innerHTML = realTxs.length ? realTxs.map(tx=>{
     const d = tx.ts ? new Date(tx.ts).toLocaleString() : "—";
-    const dirLabel = tx.dir==="in"?"⬅ INCOMING":"➡ OUTGOING";
+    const dirLabel = tx.dir==="in"?"INCOMING":"OUTGOING";
     const dirColor = tx.dir==="in"?"#5dffb2":"#ff9a6b";
     const shortHash = tx.hash.slice(0,10)+"…"+tx.hash.slice(-8);
     return `<div class="tm-entry ${tx.dir}">
@@ -2644,7 +2627,7 @@ function fwSetExportStatus(msg, color) {
 }
 
 window.fwExportCSV = function() {
-  if (!fwScanData?.rows?.length){fwSetExportStatus("⚠ Run a scan first.","#ffd166");return;}
+  if (!fwScanData?.rows?.length){fwSetExportStatus("Run a scan first.","#ffd166");return;}
   const q = v=>`"${String(v??"").replace(/"/g,'""')}"`;
   const d = fwScanData;
   const dateStr = new Date().toLocaleString();
@@ -2718,11 +2701,11 @@ window.fwExportCSV = function() {
   const a    = document.createElement('a');
   a.href=url; a.download=`Elofid-Firewall-${fwNet}-${new Date().toISOString().slice(0,10)}.csv`;
   a.click(); URL.revokeObjectURL(url);
-  fwSetExportStatus('✅ CSV exported!','#5dffb2');
+  fwSetExportStatus('CSV exported!','#5dffb2');
 };
 
 window.fwExportJSON = function() {
-  if (!fwScanData?.rows?.length){fwSetExportStatus("⚠ Run a scan first.","#ffd166");return;}
+  if (!fwScanData?.rows?.length){fwSetExportStatus("Run a scan first.","#ffd166");return;}
   const payload = {
     exported: new Date().toISOString(),
     wallet: fwWallet, network: fwNet,
@@ -2805,11 +2788,11 @@ window.fwExportJSON = function() {
   const a    = document.createElement("a");
   a.href=url; a.download=`Elofid-Firewall-${fwNet}-${new Date().toISOString().slice(0,10)}.json`;
   a.click(); URL.revokeObjectURL(url);
-  fwSetExportStatus("✅ JSON exported!","#5dffb2");
+  fwSetExportStatus("JSON exported!","#5dffb2");
 };
 
 window.fwCopyReport = function() {
-  if (!fwScanData){fwSetExportStatus("⚠ Run a scan first.","#ffd166");return;}
+  if (!fwScanData){fwSetExportStatus("Run a scan first.","#ffd166");return;}
   const d = fwScanData;
   const rels = (window.__fwRelations||[]).slice(0,8).map(r=>`  ${r.entity.type.toUpperCase()}: ${r.entity.name} (${r.in+r.out} txs)`).join("\n");
   const threats = (d.threats||[]).slice(0,3).map(t=>`  - ${t.name}: ${t.label}`).join("\n");
@@ -2831,7 +2814,7 @@ ${rels?"WALLET RELATIONS:\n"+rels+"\n":""}
 Scan your wallet: https://elofid.com/firewall
 `;
   navigator.clipboard.writeText(text)
-    .then(()=>fwSetExportStatus("✅ Report copied to clipboard!","#5dffb2"))
+    .then(()=>fwSetExportStatus("Report copied to clipboard!","#5dffb2"))
     .catch(()=>fwSetExportStatus("Copy failed — use CSV/JSON export instead.","#ffd166"));
 };
 
@@ -2879,7 +2862,7 @@ function fwInitExport() {
 }
 
 window.fwExportPDF = function() {
-  if (!fwScanData?.rows?.length) { fwSetExportStatus("⚠ Run a scan first.", "#ffd166"); return; }
+  if (!fwScanData?.rows?.length) { fwSetExportStatus("Run a scan first.", "#ffd166"); return; }
   const d        = fwScanData;
   const wallet   = fwWallet || "Unknown";
   const net      = (fwNet || "bsc").toUpperCase();
@@ -2925,7 +2908,7 @@ window.fwExportPDF = function() {
     const ld = rel.lastSeen  ? new Date(rel.lastSeen).toLocaleDateString()  : "—";
     const realTxs = (rel.txs||[]).filter(t=>t.hash&&/^0x[0-9a-fA-F]{64}$/.test(t.hash)).slice(0,5);
     const txHashHtml = realTxs.map(t=>{
-      const dir = t.dir==="in"?"⬅ IN":"➡ OUT";
+      const dir = t.dir==="in"?"IN":"OUT";
       const dirColor = t.dir==="in"?"#16a34a":"#7c3aed";
       const ts = t.ts ? new Date(t.ts).toLocaleDateString() : "";
       return `<div style="font-family:monospace;font-size:9px;margin-bottom:3px"><span style="color:${dirColor};font-weight:700">${dir}</span> <span style="color:#333">${esc(t.hash)}</span> <span style="color:#999">${ts}</span></div>`;
@@ -3041,10 +3024,10 @@ ${fixRows ? `<h2>Recommended Fix Plan</h2>
 </body></html>`;
 
   const w = window.open("","_blank","width=1000,height=800");
-  if (!w) { fwSetExportStatus("⚠ Allow popups to export PDF.", "#ffd166"); return; }
+  if (!w) { fwSetExportStatus("Allow popups to export PDF.", "#ffd166"); return; }
   w.document.write(html);
   w.document.close();
-  fwSetExportStatus("✅ PDF ready — print dialog opened!", "#5dffb2");
+  fwSetExportStatus("PDF ready — print dialog opened!", "#5dffb2");
 };
 
 
@@ -3158,7 +3141,7 @@ function _doUnlockUI() {
       fwRenderRelations(fwNet, window.__fwRelations);
     } else {
       // Still fetching in background (null) or never fetched — fetch now
-      if (relContent) relContent.innerHTML = '<div class="rel-loading">🔍 Fetching transaction data…</div>';
+      if (relContent) relContent.innerHTML = '<div class="rel-loading">Fetching transaction data…</div>';
       fwFetchWalletTxs(fwNet, fwWallet).then(txs => {
         const relations = fwAnalyzeRelations(fwNet, fwWallet, txs);
         window.__fwRelations = relations;
@@ -3170,7 +3153,7 @@ function _doUnlockUI() {
           <div style="padding:14px 16px;border-radius:12px;background:rgba(255,193,7,.06);
                border:1px solid rgba(255,193,7,.2);
                display:flex;align-items:center;justify-content:space-between;gap:10px">
-            <span style="font-size:12px;color:var(--muted)">⚠ Could not fetch transaction history.</span>
+            <span style="font-size:12px;color:var(--muted)">Could not fetch transaction history.</span>
             <button onclick="fwFetchWalletTxs(fwNet,fwWallet).then(t=>{window.__fwRelations=fwAnalyzeRelations(fwNet,fwWallet,t);fwRenderRelations(fwNet,window.__fwRelations);})"
               style="padding:5px 12px;border-radius:8px;border:1px solid rgba(255,193,7,.35);
               background:rgba(255,193,7,.06);color:#ffd166;font-size:11px;font-weight:700;cursor:pointer">
@@ -3516,18 +3499,18 @@ function computeMetrics(approvals) {
     let riskReason;
     if (!hasApproval) {
       riskReason = contractRisk >= 5
-        ? `⚠ High-risk contract — no active spending permission`
-        : `✅ No active approval`;
+        ? `High-risk contract — no active spending permission`
+        : `No active approval`;
     } else if (isUnlimited && contractRisk >= 9) {
-      riskReason = `🔴 Unlimited approval granted to flagged / malicious contract`;
+      riskReason = `Unlimited approval granted to flagged / malicious contract`;
     } else if (isUnlimited && contractRisk >= 5) {
-      riskReason = `🟠 Unlimited approval to unverified contract`;
+      riskReason = `Unlimited approval to unverified contract`;
     } else if (isUnlimited) {
-      riskReason = `🟡 Unlimited approval to ${contractLabel.toLowerCase()}`;
+      riskReason = `Unlimited approval to ${contractLabel.toLowerCase()}`;
     } else if (fullBalance) {
-      riskReason = `🟠 Capped approval that covers your full ${symbol} balance`;
+      riskReason = `Capped approval that covers your full ${symbol} balance`;
     } else {
-      riskReason = `🟢 Capped approval — ${contractLabel.toLowerCase()}`;
+      riskReason = `Capped approval — ${contractLabel.toLowerCase()}`;
     }
 
     // ── Risk Classification (for display badge) ─────────
@@ -3610,7 +3593,7 @@ function computeMetrics(approvals) {
   const approvedTokens = new Set(rows.map((r, i) => r.hasApproval ? tokenKey(r, i) : null).filter(Boolean)).size;
   const exposedTokens  = new Set(rows.map((r, i) => r.exposedNow ? tokenKey(r, i) : null).filter(Boolean)).size;
   const drainTime = exposedTokens === 0 ? "None"
-                  : `${exposedTokens} of ${approvedTokens} token${approvedTokens === 1 ? "" : "s"}`;
+                  : `${exposedTokens.toLocaleString("en-US")} of ${approvedTokens.toLocaleString("en-US")} token${approvedTokens === 1 ? "" : "s"}`;
   const drainFast = exposedTokens > 0;
 
   // Score labels — translated via _t() at render time
@@ -3667,7 +3650,7 @@ function computeMetrics(approvals) {
 
   return {
     score, scoreLabel,
-    blastDisplay,
+    blastDisplay, blastCount, exposedTokens, approvedTokens,
     drainTime, drainFast,
     riskyApprovals:  activeThreats.length,
     unlimitedCount:  unlimited.length,        // total unlimited approvals
@@ -3884,7 +3867,7 @@ async function requestFullAccess() {
   _fwAccessToken = null;
   _fwAccessExpiresAt = 0;
 
-  setGateStatus("Loading wallet module…", "#a87eff");
+  setGateStatus("Loading wallet module…", "#7fe6ff");
 
   let appkit;
   try { appkit = await fwLoadAppKit(); }
@@ -3892,14 +3875,14 @@ async function requestFullAccess() {
 
   if (!window.wallet?.address) {
     try {
-      setGateStatus("Choose your wallet and approve the connection…", "#a87eff");
+      setGateStatus("Choose your wallet and approve the connection…", "#7fe6ff");
       const c = await fwConnectViaModal(appkit);
       if (c.cancelled) { setGateStatus("Connect cancelled.", "#ff9a6b"); return; }
       if (!c.address) { setGateStatus("Wallet connection timed out. Try again.", "#ff9a6b"); return; }
     } catch { setGateStatus("Connect cancelled.", "#ff9a6b"); return; }
   }
 
-  setGateStatus("Confirm the sign-in in your wallet. It is free and is not a transaction.", "#a87eff");
+  setGateStatus("Confirm the sign-in in your wallet. It is free and is not a transaction.", "#7fe6ff");
   const auth = await fwCreateServerAccessSession();
 
   if (!auth.ok) {
@@ -3998,8 +3981,8 @@ async function runLoadSequence(walletAddr, net, isDemo) {
     if (!lbl) return;
     const elapsed = Math.round((elapsedMs || 0) / 1000);
     lbl.textContent = sec > 0
-      ? `⏳ First scan of ${fwShort(walletAddr)}. Our data provider is preparing this wallet, which can take up to a minute. Checking again in ${sec}s (${elapsed}s so far)`
-      : `⏳ Checking ${fwShort(walletAddr)} again… (${elapsed}s so far)`;
+      ? `First scan of ${fwShort(walletAddr)}. Our data provider is preparing this wallet, which can take up to a minute. Checking again in ${sec}s (${elapsed}s so far)`
+      : `Checking ${fwShort(walletAddr)} again… (${elapsed}s so far)`;
   };
   // Long single request (heavy wallet): tell the user it's still working.
   const fwSlowHint = setTimeout(() => {
@@ -4045,7 +4028,7 @@ async function runLoadSequence(walletAddr, net, isDemo) {
   if (scanError?.code === "PREPARING") {
     const lbl = document.getElementById("loadLabel");
     if (lbl) lbl.innerHTML =
-      `⏳ Approval data for ${fwShort(walletAddr)} is still being prepared by our data provider.<br>` +
+      `Approval data for ${fwShort(walletAddr)} is still being prepared by our data provider.<br>` +
       `<span style="font-size:12px;color:var(--muted)">This usually takes under a minute for wallets that haven't been scanned recently.</span><br>` +
       `<a href="javascript:fwRetryPreparing()" style="color:var(--cyan);font-weight:800">Retry now ↺</a>` +
       ` &nbsp;·&nbsp; <a href="javascript:fwBackToScanInput()" style="color:var(--muted);font-weight:700">Scan another wallet</a>`;
@@ -4076,8 +4059,8 @@ async function runLoadSequence(walletAddr, net, isDemo) {
       notice.style.background = "rgba(255,71,87,.10)";
       notice.style.borderColor = "rgba(255,71,87,.3)";
       notice.innerHTML = scanError.status === 429
-        ? `<strong style="color:#ff7a8a">⏳ Rate limit reached</strong> — Max 2 scans/hour per IP. Try again in a few minutes.`
-        : `<strong style="color:#ff7a8a">⚠ API Error ${scanError.status || "network"}</strong> — Scan failed. Showing demo data. <a href="javascript:startScan()" style="color:var(--cyan);font-weight:800">Try again ↺</a>`;
+        ? `<strong style="color:#ff7a8a">Rate limit reached</strong> — Max 2 scans/hour per IP. Try again in a few minutes.`
+        : `<strong style="color:#ff7a8a">API Error ${scanError.status || "network"}</strong> — Scan failed. Showing demo data. <a href="javascript:startScan()" style="color:var(--cyan);font-weight:800">Try again ↺</a>`;
     }
     // Also show a persistent top banner
     const existing = document.getElementById("fwApiErrorBanner");
@@ -4085,7 +4068,7 @@ async function runLoadSequence(walletAddr, net, isDemo) {
       const banner = document.createElement("div");
       banner.id = "fwApiErrorBanner";
       banner.style.cssText = "position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:9999;padding:10px 20px;border-radius:12px;background:rgba(255,71,87,.15);border:1px solid rgba(255,71,87,.4);color:#ff7a8a;font-size:12px;font-weight:700;max-width:480px;width:calc(100%-32px);text-align:center;cursor:pointer;backdrop-filter:blur(8px)";
-      banner.innerHTML = `⚠ API unavailable — showing demo data. <span style="color:var(--cyan)">Click to retry ↺</span>`;
+      banner.innerHTML = `API unavailable — showing demo data. <span style="color:var(--cyan)">Click to retry ↺</span>`;
       banner.onclick = () => { banner.remove(); startScan(); };
       document.body.appendChild(banner);
       setTimeout(() => banner?.remove(), 12000);
@@ -4126,6 +4109,7 @@ async function runLoadSequence(walletAddr, net, isDemo) {
     if (gate) gate.style.display = "block";
   }
 
+  window.__fwIsDemo = !!isDemo;
   renderDashboard(walletAddr, fwScanData, fwAccessTier);
 
   // ── SCAN HISTORY ─────────────────────────────────────────────────
@@ -4158,7 +4142,7 @@ async function runLoadSequence(walletAddr, net, isDemo) {
     if (relSection) relSection.style.display = "block";
     const relSummaryEl = document.getElementById("fwRelSummary");
     if (relSummaryEl) relSummaryEl.innerHTML = "";
-    if (relContent) relContent.innerHTML = '<div class="rel-loading">🔍 Analyzing wallet relationships…</div>';
+    if (relContent) relContent.innerHTML = '<div class="rel-loading">Analyzing wallet relationships…</div>';
     fwFetchWalletTxs(net, walletAddr).then(txs => {
       // Defer analysis off main thread — prevents freeze on large tx sets
       setTimeout(() => {
@@ -4167,15 +4151,15 @@ async function runLoadSequence(walletAddr, net, isDemo) {
         fwRenderRelations(net, relations);
       }, 0);
     }).catch(() => {
-      if (relContent) relContent.innerHTML = '<div class="rel-empty">⚠ Could not fetch transaction history. Check your connection and try again.</div>';
+      if (relContent) relContent.innerHTML = '<div class="rel-empty">Could not fetch transaction history. Check your connection and try again.</div>';
     });
   } else if (isDemo) {
     // Demo mode: show example relations with clearly-marked demo badge
     const demoRels = [
-      {entity:{name:"PancakeSwap V2",type:"dex",tags:["verified","defi"]}, address:"0x10ed43c718714eb63d5aa57b78b54704e256024e", in:3, out:12, txs:[], firstSeen:Date.now()-60*86400000, lastSeen:Date.now()-86400000},
-      {entity:{name:"1inch V5 BSC", type:"dex",tags:["aggregator","defi"]},address:"0x1111111254eeb25477b68fb85ed929f73a960582", in:0,  out:5,  txs:[], firstSeen:Date.now()-90*86400000, lastSeen:Date.now()-3*86400000},
-      {entity:{name:"Binance BSC Hot",type:"cex",tags:["trusted"]},         address:"0x8894e0a0c962cb723c1976a4421c95949be2d4e3", in:8,  out:2,  txs:[], firstSeen:Date.now()-120*86400000,lastSeen:Date.now()-7*86400000},
-      {entity:{name:"Stargate BSC",  type:"bridge",tags:["trusted"]},        address:"0xac98d8d1bb07d04f7e4e015f09bd2f1cb0c13ca1", in:1,  out:3,  txs:[], firstSeen:Date.now()-45*86400000, lastSeen:Date.now()-14*86400000}
+      {entity:{name:"DEX router 1",type:"dex",tags:["verified","defi"]}, address:"0x0000000000000000000c10000000000000000000", in:3, out:12, txs:[], firstSeen:Date.now()-60*86400000, lastSeen:Date.now()-1*86400000},
+      {entity:{name:"Aggregator 1",type:"dex",tags:["aggregator","defi"]}, address:"0x0000000000000000000c20000000000000000000", in:0, out:5, txs:[], firstSeen:Date.now()-90*86400000, lastSeen:Date.now()-3*86400000},
+      {entity:{name:"Exchange wallet 1",type:"cex",tags:["trusted"]}, address:"0x0000000000000000000c30000000000000000000", in:8, out:2, txs:[], firstSeen:Date.now()-120*86400000, lastSeen:Date.now()-7*86400000},
+      {entity:{name:"Bridge 1",type:"bridge",tags:["trusted"]}, address:"0x0000000000000000000c40000000000000000000", in:1, out:3, txs:[], firstSeen:Date.now()-45*86400000, lastSeen:Date.now()-14*86400000}
     ];
     window.__fwRelations = demoRels;
     fwRenderRelations(net, demoRels);
@@ -4309,7 +4293,7 @@ function fwRenderHistory(wallet, net, currentScore, currentData) {
     // Free tier: show score delta only; Full: show full breakdown
     const fullDetail = `Last scan: <strong>${prevDate}</strong> · Score was <strong>${prev.score}</strong><span class="fw-detail-full">${changeStr}</span>`;
     const freeTeaser = changes.length
-      ? ` <span class="fw-detail-free-only" style="color:var(--muted);font-size:10px">(approval changes hidden — <button onclick="requestFullAccess()" style="background:none;border:none;color:#a87eff;cursor:pointer;font-size:10px;padding:0;text-decoration:underline">unlock Full Access</button>)</span>`
+      ? ` <span class="fw-detail-free-only" style="color:var(--muted);font-size:10px">(approval changes hidden — <button onclick="requestFullAccess()" style="background:none;border:none;color:#7fe6ff;cursor:pointer;font-size:10px;padding:0;text-decoration:underline">unlock Full Access</button>)</span>`
       : "";
     detailEl.innerHTML = fullDetail + freeTeaser;
   } else {
@@ -4442,7 +4426,7 @@ function _fwSerializePassport(p) {
 async function fwSignPassport() {
   const btn = document.getElementById("btnSignPassport");
   if (!window.wallet?.signer) { requestFullAccess(); return; }
-  if (!fwScanData) { showPassportMsg("⚠ Run a scan first."); return; }
+  if (!fwScanData) { showPassportMsg("Run a scan first."); return; }
   if (!_fwAccessVerified) { requestFullAccess(); return; }
   if (!fwCheckWalletMatch(btn)) return;
 
@@ -4492,16 +4476,16 @@ async function fwSignPassport() {
 
     // Update UI
     _fwShowSignedState(signature, verifyURL);
-    showPassportMsg("✅ Passport signed — share your verify link!");
+    showPassportMsg("Passport signed — share your verify link!");
 
   } catch(e) {
     if (/reject|cancel|denied|4001/i.test(String(e?.message||""))) {
       showPassportMsg("Signing cancelled.");
     } else {
-      showPassportMsg(`⚠ Sign failed: ${(e.message||"").slice(0,80)}`);
+      showPassportMsg(`Sign failed: ${(e.message||"").slice(0,80)}`);
     }
     btn.disabled = false;
-    btn.textContent = "✍ Sign Passport (EIP-712)";
+    btn.textContent = "Sign Passport (EIP-712)";
   }
 }
 
@@ -4511,7 +4495,7 @@ function _fwShowSignedState(signature, verifyURL) {
   const sigShort = document.getElementById("ppSigShort");
   const chip   = document.getElementById("ppSigChip");
 
-  if (btn) { btn.textContent = "✍ Re-sign Passport"; btn.disabled = false; }
+  if (btn) { btn.textContent = "Re-sign Passport"; btn.disabled = false; }
   if (badge)  badge.classList.add("visible");
   if (sigShort) sigShort.textContent = `Sig: ${signature.slice(0,18)}…${signature.slice(-8)}`;
   if (chip)  chip.style.display = "flex";
@@ -4521,7 +4505,7 @@ function _fwShowSignedState(signature, verifyURL) {
   if (copyLinkBtn && !copyLinkBtn.__fwBound) {
     copyLinkBtn.addEventListener("click", () => {
       navigator.clipboard.writeText(verifyURL)
-        .then(() => showPassportMsg("✅ Verify link copied!"))
+        .then(() => showPassportMsg("Verify link copied!"))
         .catch(() => showPassportMsg("Copy failed."));
     });
     copyLinkBtn.__fwBound = true;
@@ -4783,6 +4767,10 @@ function renderDashboard(wallet, d, tier) {
   // Free: populates step 1 description + FREE badge; Full: full render
   _rdTimers.push(setTimeout(() => renderFixMode(d), 250));
 
+  // Overview sentence
+  window.__fwOv = { wallet, d };
+  fwRenderOverview();
+
   // Passport
   renderPassport(wallet, d, tier);
 
@@ -4897,7 +4885,7 @@ function renderExposureMap(wallet, threats, tier) {
   if (hidden) {
     const y = rowY(n);
     // Each row is one approval (a spender can appear on several tokens), so the count is approvals
-    const label = tier === "free" ? `🔒 ${hidden} more approval${hidden === 1 ? "" : "s"} · sign in to see all` : `+ ${hidden} more approval${hidden === 1 ? "" : "s"} in the list`;
+    const label = tier === "free" ? `${hidden} more approval${hidden === 1 ? "" : "s"} · sign in to see all` : `+ ${hidden} more approval${hidden === 1 ? "" : "s"} in the list`;
     h += `<path d="M${wx + 30},${wy} C${(wx + sx) / 2},${wy} ${(wx + sx) / 2},${y} ${sx - nodeR},${y}" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1" stroke-dasharray="3 3"/>
       <circle cx="${sx}" cy="${y}" r="${nodeR}" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="3 3"/>
       <text x="${sx + nodeR + 8}" y="${y + .5}" dominant-baseline="middle" fill="rgba(244,246,255,.45)" font-size="10" font-family="system-ui" font-weight="700">${esc(label)}</text>`;
@@ -4923,7 +4911,7 @@ function renderThreats(threats, tier) {
   const el = document.getElementById("threatsList");
   if (!el) return;
   if (!threats.length) {
-    el.innerHTML = `<div style="text-align:center;color:var(--muted);padding:24px;font-size:13px">✅ No significant threats detected.</div>`;
+    el.innerHTML = `<div style="text-align:center;color:var(--muted);padding:24px;font-size:13px">No significant threats detected.</div>`;
     return;
   }
   el.innerHTML = "";
@@ -4942,7 +4930,7 @@ function renderThreats(threats, tier) {
       display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap`;
     banner.innerHTML = `
       <span style="font-size:12px;color:var(--muted)">
-        🔄 <strong style="color:var(--text)">Full data needed</strong> —
+        <strong style="color:var(--text)">Full data needed</strong> —
         Click to load addresses and enable Revoke buttons.
       </span>
       <button onclick="fwRescanFull()" style="padding:6px 16px;border-radius:8px;
@@ -4994,19 +4982,19 @@ function _buildThreatCard(t, i, tier) {
   let actionBtn = "";
   if (tier === "full" && t.canRevoke) {
     // Have both addresses — real on-chain revoke
-    actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">🛡 Revoke</button>`;
+    actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">Revoke</button>`;
   } else if (tier === "free" && t.hasApproval) {
     if (i === 0) {
       if (t.canRevoke) {
         // API returned full addresses — direct revoke
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">🛡 Revoke</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">Revoke</button>`;
       } else {
         // API returned preview only — lazy on-chain lookup on click
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke('${esc(t.symbol||"")}','${esc(fwNet||"bsc")}',this)">🛡 Revoke</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke('${esc(t.symbol||"")}','${esc(fwNet||"bsc")}',this)">Revoke</button>`;
       }
     } else {
       // All others: prompt upgrade
-      actionBtn = `<button class="btn-fix-small" onclick="requestFullAccess()" style="border-color:rgba(124,92,255,.4);color:#a87eff">🔑 Sign in to revoke</button>`;
+      actionBtn = `<button class="btn-fix-small fw-btn-signin" onclick="requestFullAccess()">${esc(_t("btn_signin_revoke") || "Sign in to revoke")}</button>`;
     }
   }
   // tier=full + hasApproval + !canRevoke → no button here; handled by fwRescanBanner above
@@ -5033,7 +5021,9 @@ function _threatsAppendPage() {
   // Remove old "Show More" button if present
   document.getElementById("threatsShowMoreBtn")?.remove();
 
-  const end = Math.min(_threatsShown + THREATS_PAGE, _threatsAll.length);
+  // Free tier: the first three approvals, then one line instead of locked cards
+  const freeCap = _threatsTier !== "full" ? 3 : Infinity;
+  const end = Math.min(_threatsShown + THREATS_PAGE, _threatsAll.length, freeCap);
   const frag = document.createDocumentFragment();
   for (let i = _threatsShown; i < end; i++) {
     const div = document.createElement("div");
@@ -5043,6 +5033,20 @@ function _threatsAppendPage() {
   el.appendChild(frag);
   _threatsShown = end;
 
+  if (freeCap !== Infinity) {
+    const totalActive = (typeof fwScanData !== "undefined" && fwScanData && Array.isArray(fwScanData.rows))
+      ? fwScanData.rows.filter(r => r.hasApproval).length : _threatsAll.length;
+    const more = Math.max(0, Math.max(totalActive, _threatsAll.length) - _threatsShown);
+    if (more > 0) {
+      const row = document.createElement("div");
+      row.id = "threatsShowMoreBtn";
+      row.className = "fw-more-row";
+      const txt = (_t("threats_more") || "{n} more approvals. Sign in to see all.").replace("{n}", more.toLocaleString("en-US"));
+      row.innerHTML = `<span>${esc(txt)}</span><button type="button" class="btn-fix-small" onclick="requestFullAccess()">${esc(_t("btn_signin") || "Sign in")}</button>`;
+      el.appendChild(row);
+    }
+    return;
+  }
   if (_threatsShown < _threatsAll.length) {
     const remaining = _threatsAll.length - _threatsShown;
     const btn = document.createElement("button");
@@ -5133,7 +5137,7 @@ function fwCheckWalletMatch(btn) {
   const scanShort = fwWallet.slice(0,8)+"…"+fwWallet.slice(-5);
   if (btn) {
     const origText = btn.textContent;
-    btn.textContent = `⚠ Connected: ${connShort} ≠ Scanned: ${scanShort}`;
+    btn.textContent = `Connected: ${connShort} ≠ Scanned: ${scanShort}`;
     btn.style.background = "rgba(255,71,87,.18)";
     btn.style.borderColor = "rgba(255,71,87,.5)";
     btn.style.color = "#ff7a8a";
@@ -5144,7 +5148,7 @@ function fwCheckWalletMatch(btn) {
       btn.style.color = "";
     }, 4000);
   }
-  showPassportMsg(`⚠ Wallet mismatch: you're connected as ${connShort} but scanning ${scanShort}. Connect the scanned wallet to revoke.`);
+  showPassportMsg(`Wallet mismatch: you're connected as ${connShort} but scanning ${scanShort}. Connect the scanned wallet to revoke.`);
   return false;
 }
 async function applyFix(step) {
@@ -5178,7 +5182,7 @@ async function applyFix(step) {
         ? cxConnectWallet() : loadAppKit().then(a => a.open()));
       if (!window.wallet?.signer) {
         btn.disabled = false; btn.textContent = "Revoke Top Spender";
-        showPassportMsg("⚠ Connect your wallet to revoke.");
+        showPassportMsg("Connect your wallet to revoke.");
         return;
       }
     }
@@ -5215,7 +5219,7 @@ async function applyFix(step) {
         btn.disabled = false; btn.textContent = "Revoke (retry)"; return;
       }
       btn.textContent = "✗ Failed — retry"; btn.disabled = false;
-      showPassportMsg(`⚠ Revoke failed: ${e.message?.slice(0,80)}`); return;
+      showPassportMsg(`Revoke failed: ${e.message?.slice(0,80)}`); return;
     }
 
   // ── STEP 1: Revoke ALL unlimited approvals (like DNA revokeAll) ───
@@ -5244,7 +5248,7 @@ async function applyFix(step) {
       } catch(e) {
         if (/reject|cancel|denied|4001/i.test(String(e?.message||""))) {
           btn.disabled = false; btn.textContent = `Revoke All (${done} done — retry)`;
-          showPassportMsg(`⚠ Cancelled after ${done} revokes. Press again to continue.`);
+          showPassportMsg(`Cancelled after ${done} revokes. Press again to continue.`);
           // Store undo data for what was done so far
           window.__fwUndoData = window.__fwUndoData || {};
           window.__fwUndoData[1] = { all: unlimitedRows.slice(0, done) };
@@ -5263,7 +5267,7 @@ async function applyFix(step) {
     // Store undo data
     window.__fwUndoData = window.__fwUndoData || {};
     window.__fwUndoData[1] = { all: unlimitedRows };
-    showPassportMsg(`✅ Revoke All: ${done} approval(s) revoked${failed>0?`, ${failed} failed`:""}. Re-scan to verify.`);
+    showPassportMsg(`Revoke All: ${done} approval(s) revoked${failed>0?`, ${failed} failed`:""}. Re-scan to verify.`);
 
   // ── STEP 2: Flag top risky to local watchlist ─────────────────────
   } else if (step === 2) {
@@ -5330,7 +5334,7 @@ async function undoFix(step) {
   const targets = (step === 1 && data?.all?.length) ? data.all
     : (data?.token && data?.spender) ? [data] : [];
 
-  if (!targets.length) { showPassportMsg("⚠ No undo data for this step."); return; }
+  if (!targets.length) { showPassportMsg("No undo data for this step."); return; }
 
   if (undoBtn) { undoBtn.disabled = true; undoBtn.textContent = `Restoring ${targets.length === 1 ? "approval" : targets.length + " approvals"}…`; }
   const E = getE();
@@ -5379,7 +5383,7 @@ async function fwRescanFull() {
   if (scoreRing) scoreRing.textContent = "…";
   // Show loading in threats list
   const tlEl = document.getElementById("threatsList");
-  if (tlEl) tlEl.innerHTML = `<div style="text-align:center;color:var(--cyan);padding:20px;font-size:13px">🔍 Loading full approval data…</div>`;
+  if (tlEl) tlEl.innerHTML = `<div style="text-align:center;color:var(--cyan);padding:20px;font-size:13px">Loading full approval data…</div>`;
   try {
     const approvals = await fetchApprovals(fwNet, fwWallet);
 
@@ -5398,10 +5402,10 @@ async function fwRescanFull() {
       if (al !== "en") fwSetLanguage(al);
     } catch {}
     showPassportMsg(revokable > 0
-      ? `✅ Full data loaded — ${revokable} approval(s) ready to revoke.`
+      ? `Full data loaded — ${revokable} approval(s) ready to revoke.`
       : noAddr > 0
-        ? "⚠ Approvals found but addresses missing from API. Open DevTools > Console for details."
-        : "✅ Full data loaded.");
+        ? "Approvals found but addresses missing from API. Open DevTools > Console for details."
+        : "Full data loaded.");
   } catch(e) {
     const isPreparing = e?.code === "PREPARING";
     const is500 = !isPreparing && (e?.message?.includes("500") || e?.status === 500 || String(e).includes("500"));
@@ -5412,7 +5416,7 @@ async function fwRescanFull() {
            border:1px solid rgba(255,100,80,.2);">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:${is500?'10px':'0'}">
           <span style="font-size:13px;color:#ff9a6b">
-            ${isPreparing ? '⏳ Approval data is still being prepared — try again in a minute.' : is500 ? '⚠ Server error (500) — /api/getApprovals is down.' : '⚠ Could not load full approval data.'}
+            ${isPreparing ? 'Approval data is still being prepared — try again in a minute.' : is500 ? 'Server error (500) — /api/getApprovals is down.' : 'Could not load full approval data.'}
           </span>
           <button onclick="fwRescanFull()" style="padding:6px 14px;border-radius:8px;
             border:1px solid rgba(255,150,100,.4);background:rgba(255,150,100,.08);
@@ -5438,7 +5442,7 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
   try {
 
   const wallet = fwWallet;
-  if (!wallet) { showPassportMsg("⚠ No wallet address to scan."); return; }
+  if (!wallet) { showPassportMsg("No wallet address to scan."); return; }
 
   const chain = FW_CHAINS[net] || FW_CHAINS["bsc"];
   const rpcs  = chain.rpcUrls || [];
@@ -5452,7 +5456,7 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
   const ownerTopic = "0x" + "0".repeat(24) + wallet.toLowerCase().replace("0x","");
 
   btn.disabled = true;
-  btn.textContent = "🔍 Finding spender…";
+  btn.textContent = "Finding spender…";
   console.log("[CX revoke] START symbol:", symbol, "net:", net, "wallet:", wallet);
 
   // Friendly check: if a different wallet is already connected, warn user
@@ -5461,9 +5465,9 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
     const scanned   = (fwWallet || "").toLowerCase();
     if (scanned && scanned !== "demo" && connected !== scanned) {
       btn.disabled = false;
-      btn.textContent = "🛡 Revoke ↗";
+      btn.textContent = "Revoke ↗";
       showPassportMsg(
-        `⚠ You're connected as ${fwShort(window.wallet.address)} ` +
+        `You're connected as ${fwShort(window.wallet.address)} ` +
         `but scanning ${fwShort(fwWallet)}. ` +
         `Connect the scanned wallet to revoke.`
       );
@@ -5522,8 +5526,8 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
 
   if (!logs || !logs.length) {
     btn.disabled = false;
-    btn.textContent = "🛡 Revoke ↗";
-    showPassportMsg("⚠ No approval logs found on-chain. Try re-scanning.");
+    btn.textContent = "Revoke ↗";
+    showPassportMsg("No approval logs found on-chain. Try re-scanning.");
     return;
   }
 
@@ -5534,8 +5538,8 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
 
   if (!unlimited.length) {
     btn.disabled = false;
-    btn.textContent = "🛡 Revoke ↗";
-    showPassportMsg("✅ No unlimited approvals found on-chain — you may already be safe.");
+    btn.textContent = "Revoke ↗";
+    showPassportMsg("No unlimited approvals found on-chain — you may already be safe.");
     return;
   }
 
@@ -5576,8 +5580,8 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
 
   if (!bestToken || !bestSpender) {
     btn.disabled = false;
-    btn.textContent = "🛡 Revoke ↗";
-    showPassportMsg("⚠ Could not determine spender address. Try again.");
+    btn.textContent = "Revoke ↗";
+    showPassportMsg("Could not determine spender address. Try again.");
     return;
   }
 
@@ -5607,7 +5611,7 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
   // Still no signer — open connect modal, then ask user to tap again
   if (!window.wallet?.signer) {
     btn.disabled = false;
-    btn.textContent = "🛡 Revoke ↗";
+    btn.textContent = "Revoke ↗";
     // Open wallet connect modal
     if (typeof cxConnectWallet === "function") {
       cxConnectWallet().catch(() => {});
@@ -5616,10 +5620,10 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
     }
     // i18n-aware "tap again" message
     const _tapAgainMsgs = {
-      en: "Wallet connected ✅ Tap Revoke again to sign the transaction.",
-      zh: "钱包已连接 ✅ 再次点击 Revoke 以签名交易。",
-      ar: "تم ربط المحفظة ✅ اضغط Revoke مرة أخرى للتوقيع.",
-      ru: "Кошелёк подключён ✅ Нажмите Revoke ещё раз для подписи."
+      en: "Wallet connected. Tap Revoke again to sign the transaction.",
+      zh: "钱包已连接。再次点击 Revoke 以签名交易。",
+      ar: "تم ربط المحفظة. اضغط Revoke مرة أخرى للتوقيع.",
+      ru: "Кошелёк подключён. Нажмите Revoke ещё раз для подписи."
     };
     const _lang = (typeof _fwActiveLang !== "undefined" ? _fwActiveLang : null)
                || (typeof currentLang !== "undefined" ? currentLang : "en");
@@ -5651,23 +5655,23 @@ async function fwFetchTopSpenderAndRevoke(symbol, net, btn) {
         : "Consider a full cleanup for complete protection.";
       upsell.style.display = "block";
     }
-    showPassportMsg(`✅ Top spender revoked on-chain.`);
+    showPassportMsg(`Top spender revoked on-chain.`);
   } catch(e) {
     const msg = String(e?.message || "");
     if (/reject|cancel|denied|4001/i.test(msg)) {
-      btn.disabled = false; btn.textContent = "🛡 Revoke ↗";
-      showPassportMsg("⚠ Transaction canceled.");
+      btn.disabled = false; btn.textContent = "Revoke ↗";
+      showPassportMsg("Transaction canceled.");
     } else {
       btn.textContent = "✗ Failed — retry";
       btn.disabled = false;
-      showPassportMsg(`⚠ Revoke failed: ${msg.slice(0,80)}`);
+      showPassportMsg(`Revoke failed: ${msg.slice(0,80)}`);
     }
   }
 
   } catch(__outerErr) {
     console.error("[CX revoke] Unhandled error:", __outerErr);
-    try { btn.disabled = false; btn.textContent = "🛡 Revoke ↗"; } catch {}
-    showPassportMsg("⚠ Revoke error: " + String(__outerErr?.message || __outerErr).slice(0,100));
+    try { btn.disabled = false; btn.textContent = "Revoke ↗"; } catch {}
+    showPassportMsg("Revoke error: " + String(__outerErr?.message || __outerErr).slice(0,100));
   }
 }
 
@@ -5687,7 +5691,7 @@ async function revokeSpender(spender, token, btn) {
   } catch(e) {
     btn.disabled = false;
     btn.textContent = "Retry ↗";
-    showPassportMsg(`⚠ Revoke failed: ${e.message?.slice(0,80)}`);
+    showPassportMsg(`Revoke failed: ${e.message?.slice(0,80)}`);
     // Note: revoke.cash line removed — all revokes happen on-chain via this site
   }
 }
@@ -5711,16 +5715,16 @@ function renderPassport(wallet, d, tier) {
   const statusEl = document.getElementById("ppStatus");
   // Same thresholds as the score label: Protected 85+, Exposed 70+, Vulnerable 50+, Critical below 50
   if (sc < 50) {
-    statusEl.textContent = "🧨 Critical";
+    statusEl.textContent = "Critical";
     statusEl.style.cssText = "border-color:rgba(255,71,87,.4);color:#ff6b6b;background:rgba(255,71,87,.10)";
   } else if (sc < 70) {
-    statusEl.textContent = "⚠ Vulnerable";
+    statusEl.textContent = "Vulnerable";
     statusEl.style.cssText = "border-color:rgba(255,169,77,.4);color:#ffa94d;background:rgba(255,169,77,.10)";
   } else if (sc < 85) {
-    statusEl.textContent = "⚠ Exposed";
+    statusEl.textContent = "Exposed";
     statusEl.style.cssText = "border-color:rgba(255,193,7,.35);color:#ffd166;background:rgba(255,193,7,.10)";
   } else {
-    statusEl.textContent = "✅ Protected";
+    statusEl.textContent = "Protected";
     statusEl.style.cssText = "border-color:rgba(93,255,178,.35);color:var(--green);background:rgba(93,255,178,.08)";
   }
 
@@ -5766,10 +5770,10 @@ Scan your wallet → https://elofid.com/firewall
 // ── WORKER HMAC PASSPORT ─────────────────────────────────────────
 async function fwGetWorkerPassport() {
   const btn = document.getElementById("btnGetPassport");
-  if (!fwScanData || !fwWallet) { showPassportMsg("⚠ Run a scan first."); return; }
+  if (!fwScanData || !fwWallet) { showPassportMsg("Run a scan first."); return; }
   if (!_fwAccessVerified) { requestFullAccess(); return; }
   if (!fwCheckWalletMatch(btn)) return;
-  const origText = btn?.textContent || "🪪 Get Verified Passport";
+  const origText = btn?.textContent || "Get Verified Passport";
   if (btn) { btn.disabled = true; btn.textContent = "Issuing…"; }
   try {
     const payload = {
@@ -5795,22 +5799,22 @@ async function fwGetWorkerPassport() {
     const data = await res.json().catch(() => null);
     if (!res.ok) {
       showPassportMsg(data?.error === "NOT_ELIGIBLE"
-        ? "❌ Full Access is required. Connect your wallet and sign in."
-        : `⚠ ${data?.message || data?.error || "Failed."}`);
+        ? "Full Access is required. Connect your wallet and sign in."
+        : `${data?.message || data?.error || "Failed."}`);
       return;
     }
     const { passport } = data;
-    if (!passport?.sig) { showPassportMsg("⚠ Invalid passport response."); return; }
+    if (!passport?.sig) { showPassportMsg("Invalid passport response."); return; }
     const encoded = fwToBase64url(JSON.stringify(passport));
     const verifyURL = `${location.origin}/firewall?verify=${encoded}`;
     _fwShowSignedState(passport.sig, verifyURL);
     const wm = document.getElementById("ppWatermark");
     if (wm) wm.style.display = "none";
     const chip = document.getElementById("ppSigChip");
-    if (chip) { chip.textContent = "✅ Verified by Elofid"; chip.style.display = "flex"; }
-    showPassportMsg("✅ Verified Passport issued — share your link!");
+    if (chip) { chip.textContent = "Verified by Elofid"; chip.style.display = "flex"; }
+    showPassportMsg("Verified Passport issued — share your link!");
   } catch(e) {
-    showPassportMsg(`⚠ ${(e.message||"").slice(0,80)}`);
+    showPassportMsg(`${(e.message||"").slice(0,80)}`);
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = origText; }
   }
@@ -5820,8 +5824,8 @@ async function fwGetWorkerPassport() {
 // html2canvas cannot render ::before/::after pseudo-elements (dot grid, glow, gradient border)
 // so we draw the card manually on Canvas for pixel-perfect output.
 function fwDownloadShareCard() {
-  if (!fwScanData || !fwWallet) { showPassportMsg("⚠ Run a scan first."); return; }
-  showPassportMsg("📸 Generating…");
+  if (!fwScanData || !fwWallet) { showPassportMsg("Run a scan first."); return; }
+  showPassportMsg("Generating…");
 
   const score     = parseInt(document.getElementById("ppScore")?.textContent) || fwScanData.score;
   const approvals = document.getElementById("ppApprovals")?.textContent || "—";
@@ -5903,7 +5907,7 @@ function fwDownloadShareCard() {
   x.clip();
   const bd = x.createLinearGradient(0,0,pw,ph);
   bd.addColorStop(0,"rgba(0,229,255,0.45)");
-  bd.addColorStop(0.5,"rgba(124,92,255,0.25)");
+  bd.addColorStop(0.5,"rgba(66,219,255,0.25)");
   bd.addColorStop(1,"rgba(255,71,87,0.3)");
   x.strokeStyle = bd; x.lineWidth = 3;
   rr(1.5,1.5,pw-3,ph-3,R-1); x.stroke();
@@ -5944,7 +5948,7 @@ function fwDownloadShareCard() {
   // header divider line with gradient
   const hdl = x.createLinearGradient(pad,0,pw*0.7,0);
   hdl.addColorStop(0,"rgba(0,229,255,0.55)");
-  hdl.addColorStop(0.4,"rgba(124,92,255,0.3)");
+  hdl.addColorStop(0.4,"rgba(66,219,255,0.3)");
   hdl.addColorStop(1,"transparent");
   x.strokeStyle = hdl; x.lineWidth = 1;
   x.beginPath(); x.moveTo(pad,y); x.lineTo(pw-pad,y); x.stroke();
@@ -6084,8 +6088,8 @@ function fwDownloadShareCard() {
     a.download = `elofid-passport-${fwShort(fwWallet).replace(/[^a-zA-Z0-9]/g,"")}.png`;
     a.href = cv.toDataURL("image/png", 1.0);
     a.click();
-    showPassportMsg("✅ Downloaded!");
-  } catch(e) { showPassportMsg("⚠ Download failed — try a different browser."); }
+    showPassportMsg("Downloaded!");
+  } catch(e) { showPassportMsg("Download failed — try a different browser."); }
 }
 
 function _cxRoundRect(ctx,x,y,w,h,r) {
@@ -6135,22 +6139,22 @@ function fwShowRuleConfirm(title, warning, txLines, note, onConfirm) {
 // ── RULE TEMPLATES ────────────────────────────────────────────────
 var RULES = [
   {
-    name:"🔒 Strict",
+    name:"Strict",
     desc:"No unlimited. Cap $50 for unknown spenders. Alerts on any new spender.",
     action:"strict",          // revoke all unlimited + cap unknowns at 50
-    activeLabel:"🔒 Strict Protection Active"
+    activeLabel:"Strict Protection Active"
   },
   {
-    name:"⚖ Balanced",
+    name:"Balanced",
     desc:"Cap $200 for unknown spenders. Whitelist major DEXes. Weekly review.",
     action:"balanced",        // cap unknowns at 200
-    activeLabel:"⚖ Balanced Protection Active"
+    activeLabel:"Balanced Protection Active"
   },
   {
-    name:"📈 Trader",
+    name:"Trader",
     desc:"Allow known DEX unlimited. Alert on fresh/unknown spenders.",
     action:"trader",          // save watchlist profile locally
-    activeLabel:"📈 Trader Profile Active"
+    activeLabel:"Trader Profile Active"
   }
 ];
 
@@ -6196,14 +6200,14 @@ async function applyRule(i) {
     } catch {}
     ruleActive[i] = true;
     _refreshRuleCard(i);
-    showPassportMsg(`✅ Trader profile activated — unknown spenders will be flagged.`);
+    showPassportMsg(`Trader profile activated — unknown spenders will be flagged.`);
     return;
   }
 
   // ── Strict & Balanced: on-chain — need wallet ────────────────────
   if (!_fwAccessVerified || !window.wallet?.signer) { requestFullAccess(); return; }
   if (!fwScanData?.rows || fwScanData.rows.length === 0) {
-    showPassportMsg("⚠ No approval data loaded. Run a scan first."); return;
+    showPassportMsg("No approval data loaded. Run a scan first."); return;
   }
 
   // ── WALLET MISMATCH CHECK ─────────────────────────────────────────
@@ -6227,7 +6231,7 @@ async function applyRule(i) {
 
   if (!targets.length) {
     ruleActive[i] = true; _refreshRuleCard(i);
-    showPassportMsg(`✅ "${rule.name}" active — no matching approvals to fix right now.`);
+    showPassportMsg(`"${rule.name}" active — no matching approvals to fix right now.`);
     return;
   }
 
@@ -6239,10 +6243,10 @@ async function applyRule(i) {
   );
 
   const warningText = rule.action === "strict"
-    ? `⚠️ <strong>Strict mode</strong> will REVOKE <strong>${targets.length}</strong> unlimited approval(s) to 0. Each approval requires a separate transaction costing a small gas fee (~$0.01 each). <br><br>MetaMask will show "<em>Spending cap: 0</em>" — this means you are <strong>removing</strong> the permission, not giving new access.`
-    : `⚠️ <strong>Balanced mode</strong> will cap <strong>${targets.length}</strong> unverified unlimited approval(s) to 200 tokens each. <br><br>MetaMask will show "<em>Spending cap: 200 [TOKEN]</em>" — this <strong>reduces</strong> an existing unlimited permission to 200. You are <strong>NOT</strong> granting new access to anyone.`;
+    ? `<strong>Strict mode</strong> will REVOKE <strong>${targets.length}</strong> unlimited approval(s) to 0. Each approval requires a separate transaction costing a small gas fee (~$0.01 each). <br><br>MetaMask will show "<em>Spending cap: 0</em>" — this means you are <strong>removing</strong> the permission, not giving new access.`
+    : `<strong>Balanced mode</strong> will cap <strong>${targets.length}</strong> unverified unlimited approval(s) to 200 tokens each. <br><br>MetaMask will show "<em>Spending cap: 200 [TOKEN]</em>" — this <strong>reduces</strong> an existing unlimited permission to 200. You are <strong>NOT</strong> granting new access to anyone.`;
 
-  const note = `ℹ The connected wallet <strong style="color:var(--cyan)">${fwShort(window.wallet.address)}</strong> will sign ${targets.length} transaction(s). This is the wallet whose approvals are being modified.`;
+  const note = `The connected wallet <strong style="color:var(--cyan)">${fwShort(window.wallet.address)}</strong> will sign ${targets.length} transaction(s). This is the wallet whose approvals are being modified.`;
 
   fwShowRuleConfirm(rule.name, warningText, txLines, note, async () => {
     // ── EXECUTE ──────────────────────────────────────────────────────
@@ -6262,7 +6266,7 @@ async function applyRule(i) {
       } catch(e) {
         if (/reject|cancel|denied|4001/i.test(String(e?.message||""))) {
           btn.disabled = false; btn.textContent = "Cancelled — retry";
-          showPassportMsg(`⚠ Cancelled after ${done} tx(s). Press Apply to continue.`);
+          showPassportMsg(`Cancelled after ${done} tx(s). Press Apply to continue.`);
           return;
         }
         failed++;
@@ -6275,7 +6279,7 @@ async function applyRule(i) {
 
     ruleActive[i] = true;
     _refreshRuleCard(i);
-    showPassportMsg(`✅ "${rule.name}" active — ${done} approval(s) updated${failed>0?`, ${failed} failed`:""}. Re-scan to verify.`);
+    showPassportMsg(`"${rule.name}" active — ${done} approval(s) updated${failed>0?`, ${failed} failed`:""}. Re-scan to verify.`);
   });
 }
 
@@ -6303,7 +6307,7 @@ async function undoRule(i) {
 
   if (!window.wallet?.signer) { requestFullAccess(); return; }
   if (!fwCheckWalletMatch(null)) {
-    showPassportMsg('⚠ Connect the scanned wallet to deactivate this rule.');
+    showPassportMsg('Connect the scanned wallet to deactivate this rule.');
     return;
   }
   const targets = window.__fwRuleUndoData?.[i];
@@ -6317,7 +6321,7 @@ async function undoRule(i) {
   const btn = document.getElementById(`ruleBtn${i}`);
   if (btn) { btn.disabled = true; btn.textContent = "Restoring…"; }
 
-  // ⚠ Safety: deactivate sets approvals to 0 (REVOKE), NOT back to unlimited.
+  // Safety: deactivate sets approvals to 0 (REVOKE), NOT back to unlimited.
   // Restoring unlimited would be MORE dangerous than the capped state.
   const E = getE();
   let done = 0, failed = 0;
@@ -6334,7 +6338,7 @@ async function undoRule(i) {
     } catch(e) {
       if (/reject|cancel|denied|4001/i.test(String(e?.message||""))) {
         if (btn) { btn.disabled = false; btn.textContent = "↩ Retry deactivate"; }
-        showPassportMsg(`⚠ Cancelled after ${done} revoke(s).`);
+        showPassportMsg(`Cancelled after ${done} revoke(s).`);
         return;
       }
       failed++;
@@ -6385,15 +6389,80 @@ function _startSecCheck() {
 _startSecCheck();
 function getDemoApprovals() {
   return [
-    { token:"0xdAC17F958D2ee523a2206206994597C13D831ec7", spender:"0x1111111254eeb25477b68fb85ed929f73a960582", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"USDT", risk:"medium", verified:true,  decimals:6 },
-    { token:"0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",  spender:"0x10ED43C718714eb63d5aA57B78B54704E256024E", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"WBNB", risk:"low",    verified:true,  decimals:18 },
-    { token:"0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", spender:"0x6B175474E89094C44Da98b954EedeAC495271d0F", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"CAKE", risk:"high",   verified:false, decimals:18 },
-    { token:"0x2170Ed0880ac9A755fd29B2688956BD959F933F8", spender:"0xDef1C0ded9bec7F1a1670819833240f027b25EfF", allowance:"500000000000000000000", symbol:"ETH",  risk:"low",    verified:true,  decimals:18 },
-    { token:"0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",  spender:"0x44aD3F17960f0da287c3acEE50fe7f3c5D5B9B8E", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"BUSD", risk:"high",   verified:false, decimals:18 },
-    { token:"0x55d398326f99059fF775485246999027B3197955", spender:"0xba12222222228d8ba445958a75a0704d566bf2c8", allowance:"50000000000000000000000", symbol:"USDT", risk:"low",    verified:true,  decimals:18 },
-    { token:"0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d", spender:"0xFD14567eaf9ba941cB8c8a94eEC14831ca7fD1b4", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"USDC", risk:"medium", verified:null,  decimals:18 }
+    { token:"0x0000000000000000000a10000000000000000000", spender:"0x0000000000000000000b10000000000000000000", spenderName:"DEX router 1", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"Token 1", risk:"medium", verified:true,  decimals:6 },
+    { token:"0x0000000000000000000a20000000000000000000", spender:"0x0000000000000000000b20000000000000000000", spenderName:"DEX router 2", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"Token 2", risk:"low", verified:true,  decimals:18 },
+    { token:"0x0000000000000000000a30000000000000000000", spender:"0x0000000000000000000b30000000000000000000", spenderName:"", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"Token 3", risk:"high", verified:false,  decimals:18 },
+    { token:"0x0000000000000000000a40000000000000000000", spender:"0x0000000000000000000b40000000000000000000", spenderName:"Aggregator 1", allowance:"500000000000000000000", symbol:"Token 4", risk:"low", verified:true,  decimals:18 },
+    { token:"0x0000000000000000000a50000000000000000000", spender:"0x0000000000000000000b50000000000000000000", spenderName:"", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"Token 5", risk:"high", verified:false,  decimals:18 },
+    { token:"0x0000000000000000000a60000000000000000000", spender:"0x0000000000000000000b60000000000000000000", spenderName:"Vault 1", allowance:"50000000000000000000000", symbol:"Token 6", risk:"low", verified:true,  decimals:18 },
+    { token:"0x0000000000000000000a70000000000000000000", spender:"0x0000000000000000000b70000000000000000000", spenderName:"", allowance:"115792089237316195423570985008687907853269984665640564039457584007913129639935", symbol:"Token 7", risk:"medium", verified:null,  decimals:18 }
   ];
 }
+
+
+// ── OVERVIEW: one sentence that says what the scan found ─────────
+const FW_OV = {
+  en: { all: (n, m) => `${n} ${n === 1 ? "spender has" : "spenders have"} full access to ${m} token ${m === 1 ? "balance" : "balances"}.`,
+        nobal: (n) => `${n} ${n === 1 ? "spender has" : "spenders have"} full access, but those tokens hold no balance today.`,
+        none: "No spender has full access to your token balances.",
+        meta: "Scanned on {net} · {date} · Read from the chain", demo: "Demo wallet · Sample data" },
+  zh: { all: (n, m) => `${n} 个授权对象可完全动用 ${m} 个代币余额。`,
+        nobal: (n) => `${n} 个授权对象拥有完全授权，但相关代币目前没有余额。`,
+        none: "没有授权对象可以完全动用你的代币余额。",
+        meta: "已在 {net} 上扫描 · {date} · 数据读取自链上", demo: "演示钱包 · 示例数据" },
+  ar: { all: (n, m) => `جهات صرف لديها وصول كامل: ${n}. أرصدة التوكنات المعنية: ${m}.`,
+        nobal: (n) => `جهات صرف لديها وصول كامل: ${n}. لكن هذه التوكنات لا تحمل رصيدًا اليوم.`,
+        none: "لا توجد جهة صرف لديها وصول كامل إلى أرصدة توكناتك.",
+        meta: "تم الفحص على {net} · {date} · مقروء من السلسلة", demo: "محفظة تجريبية · بيانات نموذجية" },
+  ru: { all: (n, m) => `Получателей с полным доступом: ${n}. Затронуто балансов токенов: ${m}.`,
+        nobal: (n) => `Получателей с полным доступом: ${n}. Но на этих токенах сейчас нет баланса.`,
+        none: "Ни у одного получателя нет полного доступа к балансам ваших токенов.",
+        meta: "Проверено в {net} · {date} · Данные из блокчейна", demo: "Демо-кошелёк · Пример данных" }
+};
+const FW_NET_NAME = { bsc: "BNB Smart Chain", eth: "Ethereum", polygon: "Polygon" };
+function fwRenderOverview() {
+  const st = window.__fwOv; if (!st || !st.d) return;
+  const d = st.d, lang = FW_OV[_fwActiveLang] ? _fwActiveLang : "en", L = FW_OV[lang];
+  const n = d.blastCount || 0, m = d.exposedTokens || 0;
+  const sent = document.getElementById("fwOvSentence");
+  if (sent) sent.textContent = n === 0 ? L.none : m === 0 ? L.nobal(n) : L.all(n, m);
+  const stEl = document.getElementById("fwOvStatus");
+  if (stEl) stEl.textContent = fwGetScoreLabel(d.scoreLabel);
+  const dot = document.getElementById("fwOvDot");
+  if (dot) dot.style.background = fwScoreColor(d.score);
+  const meta = document.getElementById("fwOvMeta");
+  const demo = !!window.__fwIsDemo || !st.wallet || st.wallet === DEMO_WALLET;
+  if (meta) {
+    let date = "";
+    try { date = new Date().toLocaleDateString(lang === "zh" ? "zh-CN" : lang, { year: "numeric", month: "short", day: "numeric" }); } catch { date = new Date().toDateString(); }
+    meta.textContent = demo ? L.demo : L.meta.replace("{net}", FW_NET_NAME[fwNet] || String(fwNet || "").toUpperCase()).replace("{date}", date);
+  }
+  const btn = document.getElementById("fwOvBtn");
+  if (btn) btn.style.display = (d.riskyApprovals || 0) > 0 ? "" : "none";
+}
+
+// Sub navigation: highlight the section in view
+(function fwSubnavInit() {
+  const nav = document.getElementById("fwSubnav"); if (!nav || !window.IntersectionObserver) return;
+  const links = [...nav.querySelectorAll("a")];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id));
+    });
+  }, { rootMargin: "-30% 0px -60% 0px" });
+  links.forEach(a => { const t = document.getElementById(a.getAttribute("href").slice(1)); if (t) io.observe(t); });
+})();
+
+// Paste button in the wallet field
+(function fwPasteInit() {
+  const b = document.getElementById("fwPasteBtn"), inp = document.getElementById("walletInput");
+  if (!b || !inp || !(navigator.clipboard && navigator.clipboard.readText)) return;
+  b.hidden = false;
+  b.addEventListener("click", async () => {
+    try { const t = (await navigator.clipboard.readText() || "").trim(); if (t) { inp.value = t; inp.focus(); } } catch {}
+  });
+})();
 
 // ── UI EVENTS ─────────────────────────────────────────────────────
 function showPassportMsg(msg) {
@@ -6457,7 +6526,7 @@ function fwWatchSave(list) {
 // Scan all watched wallets one by one
 async function fwWatchScanAll() {
   const list = fwWatchLoad();
-  if (!list.length) { showPassportMsg("⚠ No wallets in watch list yet."); return; }
+  if (!list.length) { showPassportMsg("No wallets in watch list yet."); return; }
   const btn = document.getElementById("fwBtnScanAll");
   if (btn) { btn.disabled=true; btn.textContent="Scanning…"; }
   const isFull = fwAccessTier === "full" && _fwAccessVerified;
@@ -6505,15 +6574,15 @@ function fwWatchAdd() {
   const maxWatch = isFull ? 10 : 2;
   if (list.length >= maxWatch) {
     if (isFull) {
-      showPassportMsg(`⚠ Maximum ${maxWatch} wallets reached.`);
+      showPassportMsg(`Maximum ${maxWatch} wallets reached.`);
     } else {
-      showPassportMsg("⚠ Free tier: max 2 wallets. Unlock Full Access to track up to 10.");
+      showPassportMsg("Free tier: max 2 wallets. Unlock Full Access to track up to 10.");
       requestFullAccess();
     }
     return;
   }
   if (list.some(w=>w.wallet.toLowerCase()===wallet.toLowerCase()&&w.net===net)) {
-    showPassportMsg("⚠ Already watching this wallet."); return;
+    showPassportMsg("Already watching this wallet."); return;
   }
   const hist      = fwHistoryLoad(wallet, net);
   const lastScore = hist.length ? hist[0].score : null;
@@ -6521,7 +6590,7 @@ function fwWatchAdd() {
   fwWatchSave(list);
   if(input)input.value="";
   fwWatchRender();
-  showPassportMsg(`✅ Now watching ${fwShort(wallet)} on ${net.toUpperCase()} (${list.length}/${maxWatch})`);
+  showPassportMsg(`Now watching ${fwShort(wallet)} on ${net.toUpperCase()} (${list.length}/${maxWatch})`);
 }
 
 function fwWatchRemove(wallet, net) {
@@ -6581,11 +6650,11 @@ function fwWatchFireAlert(wallet, net, score, prevScore) {
   const title =document.getElementById("fwAlertTitle");
   const desc  =document.getElementById("fwAlertDesc");
   if(banner){banner.classList.add("show");
-    if(title)title.textContent=`⚠ Score Drop: ${fwShort(wallet)} on ${net.toUpperCase()}`;
+    if(title)title.textContent=`Score Drop: ${fwShort(wallet)} on ${net.toUpperCase()}`;
     if(desc) desc.textContent =`Score dropped to ${score}/100${prevScore?` from ${prevScore}`:""}. Review approvals immediately.`;
   }
   if(Notification.permission==="granted"){
-    try{new Notification("⚠ Elofid Firewall Alert",{body:`${fwShort(wallet)} score dropped to ${score}/100 on ${net.toUpperCase()}.`,icon:"/favicon-32x32.png"});}catch{}
+    try{new Notification("Elofid Firewall Alert",{body:`${fwShort(wallet)} score dropped to ${score}/100 on ${net.toUpperCase()}.`,icon:"/favicon-32x32.png"});}catch{}
   }
 }
 
@@ -6635,40 +6704,24 @@ function fwWatchInit() {
 const FW_THREATS = [
   {id:"socket-bridge-2024",title:"Socket Bridge Exploit",
    desc:"$3.3M drained via malformed calldata in Socket Gateway. Users who approved the Socket Gateway address were exposed.",
-   severity:"critical",icon:"🌐",date:"Jan 2024",chains:["eth"],
+   severity:"critical",icon:"",date:"Jan 2024",chains:["eth"],
    spenders:["0x3a23f943181408eac424116af7b7790c94cb97a5"],link:"https://rekt.news/socket-rekt/"},
   {id:"radiant-capital-2024",title:"Radiant Capital Hack",
    desc:"$50M stolen via compromised multisig signers. BSC & ETH lending approvals to Radiant contracts were at risk.",
-   severity:"critical",icon:"🏦",date:"Oct 2024",chains:["bsc","eth"],
+   severity:"critical",icon:"",date:"Oct 2024",chains:["bsc","eth"],
    spenders:["0xd50cf00b6e600dd036ba8ef475677d816d6c4281"],link:"https://rekt.news/radiant-capital-rekt2/"},
   {id:"orbit-chain-2024",title:"Orbit Chain Bridge — $82M",
    desc:"Validator keys compromised. Ethereum bridge approvals exposed. All Orbit Chain approvals should be revoked.",
-   severity:"critical",icon:"⛓",date:"Jan 2024",chains:["eth"],
+   severity:"critical",icon:"",date:"Jan 2024",chains:["eth"],
    spenders:["0x1bf68a9d1eaee7826b3593c20a0ca93293cb489a"],link:"https://rekt.news/orbit-chain-rekt/"},
   {id:"multichain-2023",title:"Multichain Bridge — $125M",
    desc:"Cross-chain bridge fully drained. Any remaining approval to Multichain contracts should be revoked immediately.",
-   severity:"critical",icon:"🌉",date:"Jul 2023",chains:["bsc","eth","polygon"],
+   severity:"critical",icon:"",date:"Jul 2023",chains:["bsc","eth","polygon"],
    spenders:["0xc564ee9f21ed8a2d8e7e76c085740d5e4c5fafbe"],link:"https://rekt.news/multichain-rekt2/"},
-  {id:"unlimited-phishing-2026",title:"Unlimited Approval Phishing Wave",
-   desc:"Active phishing campaign on BSC/Polygon with fake DEX aggregators. Unlimited approvals to vanity addresses (0x000...471df pattern) observed.",
-   severity:"high",icon:"🎣",date:"Feb 2026",chains:["polygon","bsc"],
-   spenders:["0x000000004ab03b268bce6126cb6dc55b3b2471df"],link:null},
-  {id:"unverified-surge-2025",title:"Unverified Contract Approval Surge",
-   desc:"BSC wallets increasingly approving unverified contracts. Pattern matches drain-on-approval schemes. Revoke all approvals to contracts without a verified badge.",
-   severity:"medium",icon:"⚠️",date:"2025",chains:["bsc"],
-   spenders:[],link:null},
   {id:"pancakebunny-2021",title:"PancakeBunny Flash Loan Attack",
    desc:"$45M exploit via flash loan price manipulation. Contracts 0x4188…c100 and the Bunny minter remain on-chain with active approval paths. Legacy approvals should be revoked.",
-   severity:"critical",icon:"🐰",date:"May 2021",chains:["bsc"],
-   spenders:["0x4188e09f4a5a39e7d0e306ea7e8de9b80cb32d5c"],link:"https://rekt.news/pancakebunny-rekt/"},
-  {id:"mevbot-approval-drain-2024",title:"MEV Bot Approval Drain Campaign",
-   desc:"Series of MEV bots on BSC draining wallets via pre-approved ERC-20 allowances. Bots monitor the mempool for unlimited approvals and front-run legitimate txs to drain tokens.",
-   severity:"high",icon:"🤖",date:"2024",chains:["bsc","eth"],
-   spenders:[],link:null},
-  {id:"bsc-fake-usdt-2025",title:"Fake USDT / BUSD Contract Approvals",
-   desc:"Scammers deploy contracts with USDT/BUSD ticker symbols on BSC. Users approve them via phishing sites thinking they're interacting with real stablecoins. Check token contract addresses carefully.",
-   severity:"high",icon:"💵",date:"2025",chains:["bsc"],
-   spenders:[],link:null}
+   severity:"critical",icon:"",date:"May 2021",chains:["bsc"],
+   spenders:["0x4188e09f4a5a39e7d0e306ea7e8de9b80cb32d5c"],link:"https://rekt.news/pancakebunny-rekt/"}
 ];
 
 function fwThreatRender(userSpenders) {
@@ -6681,19 +6734,19 @@ function fwThreatRender(userSpenders) {
     const isAffected = t.spenders.length>0 && t.spenders.some(s=>userLower.includes(s.toLowerCase()));
     if(isAffected) affectedCount++;
     const chainTags  = t.chains.map(c=>`<span class="tfd-tag chain-${c}">${c.toUpperCase()}</span>`).join("");
-    const affTag     = isAffected?`<span class="tfd-tag affected-you">⚠ You may be affected</span>`:"";
-    const linkHTML   = t.link?`<a href="${t.link}" target="_blank" rel="noopener" class="tfd-link">Read more ↗</a>`:"";
-    const affHdr     = isAffected?`<div class="tfd-affected-badge">⚠ APPROVAL DETECTED — REVOKE RECOMMENDED</div>`:"";
+    const affTag     = isAffected?`<span class="tfd-tag affected-you">${esc(_t("inc_affected") || "You may be affected")}</span>`:"";
+    const linkHTML   = t.link?`<a href="${t.link}" target="_blank" rel="noopener" class="tfd-link">${esc(_t("inc_source") || "Source")} ↗</a>`:"";
+    const affHdr     = isAffected?`<div class="tfd-affected-badge">${esc(_t("inc_detected") || "Approval detected. Revoking it is recommended.")}</div>`:"";
     return `<div class="tfd-item${isAffected?" affected":""}">
-      <div class="tfd-severity ${t.severity}">${t.icon}</div>
+      <div class="tfd-severity ${t.severity}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 16.5h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
       <div class="tfd-body">
         ${affHdr}<div class="tfd-title">${esc(t.title)}</div>
         <div class="tfd-desc">${esc(t.desc)}</div>
-        <div class="tfd-meta"><span class="tfd-tag date">📅 ${t.date}</span>${chainTags}${affTag}${linkHTML}</div>
+        <div class="tfd-meta"><span class="tfd-tag date">${t.date}</span>${chainTags}${affTag}${linkHTML}</div>
       </div></div>`;
   }).join("");
   if(badge){
-    if(affectedCount>0){badge.textContent=`⚠ ${affectedCount} threat(s) may affect you`;badge.style.display="inline";}
+    if(affectedCount>0){badge.textContent=(_t("inc_affect_n")||"{n} may affect you.").replace("{n}",affectedCount);badge.style.display="inline";const dt=document.getElementById("fwIncDetails");if(dt)dt.open=true;}
     else badge.style.display="none";
   }
 }
@@ -6710,7 +6763,7 @@ function fwThreatInit(scanData) {
 // ══════════════════════════════════════════════════════════════
 function fwApiCopy(url, btn) {
   navigator.clipboard.writeText(url).then(()=>{
-    const orig=btn.textContent; btn.textContent="✅ Copied"; btn.style.color="var(--green)";
+    const orig=btn.textContent; btn.textContent="Copied"; btn.style.color="var(--green)";
     setTimeout(()=>{btn.textContent=orig;btn.style.color=""},1800);
   }).catch(()=>{btn.textContent="Failed";});
 }
@@ -6872,27 +6925,27 @@ window.fwApiCopy             = fwApiCopy;
 // LANGUAGE SWITCHER
 // ══════════════════════════════════════════════════════════════
 const FW_TRANSLATIONS = {
-  en: {fwg_kicker:"What you get",fwg_title:"Everything the Firewall shows you.",fwg_1_t:"Blast Radius",fwg_1:"Every active approval on the wallet and the value each spender could move.",fwg_2_t:"Fix Mode",fwg_2:"Approvals ordered by exposure, with a guided revoke you review and sign yourself.",fwg_3_t:"Wallet Watch",fwg_3:"A browser alert when a new approval appears on a wallet you watch.",fwg_4_t:"Wallet Passport",fwg_4:"A signed, wallet-bound security record you can share.",fwg_unlimited:"Unlimited",fwg_revoke:"Revoke",fwg_new:"New approval",fwg_signed:"Signed",fwg_note:"Illustrative preview",
+  en: {fw_paste:"Paste",fw_trust:"Read-only. Nothing is signed. Connect only if you choose to revoke.",gate_btn:"Sign in with wallet",nav_overview:"Overview",nav_fix:"Fix",nav_details:"Details",nav_protect:"Protect",nav_proof:"Proof",sec_details:"Details",sec_protect:"Protect",sec_proof:"Proof",ov_btn:"Review top risk",rules_title:"Spend Limit Templates",rules_sub:"Apply a spending rule profile to reduce future exposure.",inc_title:"Recent incidents",inc_sub:"Known exploits that involved token approvals on BSC, Ethereum and Polygon. Each one links to its source.",inc_affected:"You may be affected",inc_source:"Source",inc_detected:"Approval detected. Revoking it is recommended.",inc_affect_n:"{n} may affect you.",fwapi_kicker:"Monitoring and API",fwapi_title:"Keep watching after the scan.",fwapi_sub:"Track tokens and contracts with the Elofid API. Risk Incidents arrive as signed webhooks.",fwapi_btn:"For developers",threats_more:"{n} more approvals. Sign in to see all.",btn_signin:"Sign in",btn_signin_revoke:"Sign in to revoke",footer_note:"Informational only. Revoke actions happen on-chain, directly from your wallet. Always verify contracts independently.",fwg_kicker:"What you get",fwg_title:"Everything the Firewall shows you.",fwg_1_t:"Blast Radius",fwg_1:"Every active approval on the wallet and the value each spender could move.",fwg_2_t:"Fix Mode",fwg_2:"Approvals ordered by exposure, with a guided revoke you review and sign yourself.",fwg_3_t:"Wallet Watch",fwg_3:"A browser alert when a new approval appears on a wallet you watch.",fwg_4_t:"Wallet Passport",fwg_4:"A signed, wallet-bound security record you can share.",fwg_unlimited:"Unlimited",fwg_revoke:"Revoke",fwg_new:"New approval",fwg_signed:"Signed",fwg_note:"Illustrative preview",
     // topbar
     brand_sub:"On-Chain Security", fw_badge:"FIREWALL", btn_full_access:"Full Access", btn_back:"Security Hub",
     // hero
     hero_kicker:"WALLET FIREWALL",
     hero_title:"Know what your wallet<br>has approved.",
-    hero_sub:"Scan wallet approvals, reveal your Blast Radius, identify risky spenders and get a guided Fix Plan — without connecting your wallet.",
+    hero_sub:"See every approval your wallet has granted, what each spender can access, and how to revoke it.",
     scan_placeholder:"0x... wallet address", btn_run:"Check wallet",
-    demo_try:"Try with demo wallet", micro_readonly:"Read-only scan", micro_noconnect:"No wallet connection required", micro_revoke:"Connect only to revoke", micro_chains:"BSC, Ethereum, Polygon",
+    demo_try:"Try with a demo wallet", micro_readonly:"Read-only scan", micro_noconnect:"No wallet connection required", micro_revoke:"Connect only to revoke", micro_chains:"BSC, Ethereum, Polygon",
     // loading
     step1:"Fetching approval logs", step2:"Analyzing spender risk",
     step3:"Calculating Blast Radius", step4:"Building Fix Plan",
     // notices
     notice_live_title:"Live scan.", notice_live_body:"Read-only on-chain data. No transactions made.",
-    notice_demo_body:"Showing sample data. Enter a real wallet address and click \"Scan Wallet\" to scan live.",
+    notice_demo_body:"Sample data only. <a href=\"javascript:void(0)\" onclick=\"document.getElementById('btnNewScan').click()\">Scan your wallet</a>",
     gate_msg:'Sign in with your wallet to see every spender, revoke in bulk, unlock the full Fix Plan, wallet relations, exports and a signed Passport. <strong style="color:var(--green)">Signing in is free, costs no gas and cannot move funds.</strong>',
-    notice_demo_title:"Demo mode:", notice_demo_body:'Showing sample data. Enter a real wallet address and click "Scan Wallet" to scan live.',
+    notice_demo_title:"Demo wallet.", notice_demo_body:"Sample data only. <a href=\"javascript:void(0)\" onclick=\"document.getElementById('btnNewScan').click()\">Scan your wallet</a>",
     // section titles
-    sec_status:"Security Snapshot", sec_fix:"Fix Mode", sec_passport:"Wallet Passport",
+    sec_status:"Overview", sec_fix:"Fix", sec_passport:"Wallet Passport",
     sec_rules:"Firewall Rules", sec_relations:"Wallet Relations", sec_export:"Export Report",
-    sec_watch:"Wallet Watch", sec_threats:"Threat Feed", sec_api:"Developer API",
+    sec_watch:"Wallet Watch", sec_threats:"Learn", sec_api:"Developer API",
     // status cards
     kicker_score:"Firewall Score", kicker_blast:"Blast Radius", kicker_drain:"Exposed Tokens",
     blast_sub:"spenders that can move a full token balance",
@@ -6928,15 +6981,15 @@ const FW_TRANSLATIONS = {
     watch_desc:"Scores refresh when you press Scan All. You're alerted if a watched wallet drops below 60.",
     watch_scan_all:"↻ Scan All",
     watch_add_btn:"+ Watch",
-    watch_alerts_btn:"🔔 Alerts",
-    watch_alerts_on:"✅ Alerts On",
+    watch_alerts_btn:"Alerts",
+    watch_alerts_on:"Alerts On",
     watch_empty:"No wallets watched yet. Add your first wallet below.",
-    watch_scan_ok:"✅ Scanned {n} wallet(s) — scores updated.",
-    watch_scan_partial:"⚠ Scanned {ok} of {n} wallet(s) — {fail} failed. Try again in a minute.",
+    watch_scan_ok:"Scanned {n} wallet(s) — scores updated.",
+    watch_scan_partial:"Scanned {ok} of {n} wallet(s) — {fail} failed. Try again in a minute.",
     notif_desc:"Get a browser notification when a watched wallet's score drops below 60 or a new approval appears. Works while this page is open.",
     notif_btn:"Enable",
-    notif_enabled_btn:"✅ Enabled",
-    notif_on:"✅ Browser alerts enabled — they work while this page is open.",
+    notif_enabled_btn:"Enabled",
+    notif_on:"Browser alerts enabled — they work while this page is open.",
     notif_blocked:"Notifications are blocked. Allow them in your browser settings.",
     notif_unsupported:"Your browser doesn't support notifications.",
     monitor_title:"Live approval monitor",
@@ -6945,28 +6998,28 @@ const FW_TRANSLATIONS = {
     monitor_stop:"Stop",
     monitor_off:"Off",
     monitor_starting:"Starting…",
-    monitor_on:"✅ Monitoring {w} on {net} — last check {t}",
-    monitor_need_scan:"⚠ Scan a wallet first, then start the monitor.",
-    monitor_alert_title:"⚠ New approval detected — {w} ({net})",
+    monitor_on:"Monitoring {w} on {net} — last check {t}",
+    monitor_need_scan:"Scan a wallet first, then start the monitor.",
+    monitor_alert_title:"New approval detected — {w} ({net})",
     monitor_alert_desc:"{token} was approved for spender {spender}{unl}. If you didn't do this, review and revoke it now.",
     monitor_unlimited:" (unlimited)",
     monitor_rescan:"Rescan now",
     tier_badge:"✓ FULL ACCESS",
   },
-  zh: {fwg_kicker:"你将获得",fwg_title:"防火墙为你展示的一切。",fwg_1_t:"风险暴露范围",fwg_1:"钱包上的每个有效授权，以及每个支出方可以转移的价值。",fwg_2_t:"修复模式",fwg_2:"按暴露程度排序的授权，并引导你撤销，由你自己审核并签名。",fwg_3_t:"钱包监控",fwg_3:"当你监控的钱包出现新授权时，在浏览器中提醒你。",fwg_4_t:"钱包护照",fwg_4:"一份经过签名、与钱包绑定、可以分享的安全记录。",fwg_unlimited:"无限",fwg_revoke:"撤销",fwg_new:"新授权",fwg_signed:"已签名",fwg_note:"示意预览",
+  zh: {fw_paste:"粘贴",fw_trust:"只读。不会签名任何内容。只有在你选择撤销时才需要连接。",gate_btn:"使用钱包登录",nav_overview:"概览",nav_fix:"修复",nav_details:"详情",nav_protect:"保护",nav_proof:"证明",sec_details:"详情",sec_protect:"保护",sec_proof:"证明",ov_btn:"查看最高风险",rules_title:"支出限额模板",rules_sub:"应用一个支出规则配置，降低未来的风险敞口。",inc_title:"近期安全事件",inc_sub:"涉及 BSC、以太坊和 Polygon 代币授权的已知漏洞事件。每条都附有来源。",inc_affected:"你可能受到影响",inc_source:"来源",inc_detected:"检测到相关授权。建议撤销。",inc_affect_n:"{n} 项可能影响你。",fwapi_kicker:"监控与 API",fwapi_title:"扫描之后，持续关注。",fwapi_sub:"使用 Elofid API 跟踪代币和合约。风险事件以签名 Webhook 推送。",fwapi_btn:"开发者",threats_more:"还有 {n} 项授权。登录即可查看全部。",btn_signin:"登录",btn_signin_revoke:"登录后撤销",footer_note:"仅供参考。撤销操作直接从你的钱包在链上完成。请始终独立核实合约。",fwg_kicker:"你将获得",fwg_title:"防火墙为你展示的一切。",fwg_1_t:"风险暴露范围",fwg_1:"钱包上的每个有效授权，以及每个支出方可以转移的价值。",fwg_2_t:"修复模式",fwg_2:"按暴露程度排序的授权，并引导你撤销，由你自己审核并签名。",fwg_3_t:"钱包监控",fwg_3:"当你监控的钱包出现新授权时，在浏览器中提醒你。",fwg_4_t:"钱包护照",fwg_4:"一份经过签名、与钱包绑定、可以分享的安全记录。",fwg_unlimited:"无限",fwg_revoke:"撤销",fwg_new:"新授权",fwg_signed:"已签名",fwg_note:"示意预览",
     brand_sub:"链上安全", fw_badge:"防火墙", btn_full_access:"完整访问", btn_back:"安全中心",
     hero_kicker:"钱包防火墙", hero_title:"了解你的钱包<br>授权了什么。",
-    hero_sub:"扫描钱包授权、查看风险暴露、识别高风险授权方并获得修复计划 — 扫描无需连接钱包。",
+    hero_sub:"查看你的钱包授予的每一项授权、每个授权对象可以动用什么，以及如何撤销。",
     scan_placeholder:"0x... 钱包地址", btn_run:"检查钱包",
-    demo_try:"使用演示钱包", micro_readonly:"只读扫描", micro_noconnect:"扫描无需连接钱包", micro_revoke:"仅撤销时连接", micro_chains:"BSC、以太坊、Polygon",
+    demo_try:"使用演示钱包试用", micro_readonly:"只读扫描", micro_noconnect:"扫描无需连接钱包", micro_revoke:"仅撤销时连接", micro_chains:"BSC、以太坊、Polygon",
     step1:"获取授权日志", step2:"分析风险合约", step3:"计算爆炸半径", step4:"生成修复计划",
     notice_live_title:"实时扫描。", notice_live_body:"只读链上数据，不产生任何交易。",
     gate_msg:'用钱包登录即可查看所有授权方、批量撤销，并解锁完整修复计划、钱包关系、导出报告和签名护照。<strong style="color:var(--green)">登录免费，不消耗 Gas，也无法转移资金。</strong>',
-    notice_demo_title:"演示模式：", notice_demo_body:"显示示例数据。输入真实钱包地址并点击「扫描钱包」进行实时扫描。",
+    notice_demo_title:"演示钱包。", notice_demo_body:"仅为示例数据。<a href=\"javascript:void(0)\" onclick=\"document.getElementById('btnNewScan').click()\">扫描你的钱包</a>",
     scan_running:"正在扫描钱包…",
-    sec_status:"安全概览", sec_fix:"修复模式", sec_passport:"钱包护照",
+    sec_status:"概览", sec_fix:"修复", sec_passport:"钱包护照",
     sec_rules:"防火墙规则", sec_relations:"钱包关联", sec_export:"导出报告",
-    sec_watch:"钱包监控", sec_threats:"威胁动态", sec_api:"开发者API",
+    sec_watch:"钱包监控", sec_threats:"了解", sec_api:"开发者API",
     kicker_score:"防火墙评分", kicker_blast:"爆炸半径", kicker_drain:"暴露代币",
     blast_sub:"可转走某个代币全部余额的授权方",
     drain_sub:"今天可被授权方全部转走的代币余额",
@@ -6992,15 +7045,15 @@ const FW_TRANSLATIONS = {
     watch_desc:"点击「全部扫描」时更新评分；若监控钱包的评分低于 60，将提醒你。",
     watch_scan_all:"↻ 全部扫描",
     watch_add_btn:"+ 监控",
-    watch_alerts_btn:"🔔 提醒",
-    watch_alerts_on:"✅ 提醒已开启",
+    watch_alerts_btn:"提醒",
+    watch_alerts_on:"提醒已开启",
     watch_empty:"还没有监控的钱包。请在下方添加第一个钱包。",
-    watch_scan_ok:"✅ 已扫描 {n} 个钱包 — 评分已更新。",
-    watch_scan_partial:"⚠ 已扫描 {ok}/{n} 个钱包 — {fail} 个失败。请稍后再试。",
+    watch_scan_ok:"已扫描 {n} 个钱包 — 评分已更新。",
+    watch_scan_partial:"已扫描 {ok}/{n} 个钱包 — {fail} 个失败。请稍后再试。",
     notif_desc:"当监控钱包的评分低于 60 或出现新的授权时，发送浏览器通知。页面打开时有效。",
     notif_btn:"启用",
-    notif_enabled_btn:"✅ 已启用",
-    notif_on:"✅ 浏览器提醒已启用 — 页面打开时有效。",
+    notif_enabled_btn:"已启用",
+    notif_on:"浏览器提醒已启用 — 页面打开时有效。",
     notif_blocked:"通知已被阻止。请在浏览器设置中允许。",
     notif_unsupported:"你的浏览器不支持通知。",
     monitor_title:"实时授权监控",
@@ -7009,29 +7062,29 @@ const FW_TRANSLATIONS = {
     monitor_stop:"停止",
     monitor_off:"未开启",
     monitor_starting:"启动中…",
-    monitor_on:"✅ 正在监控 {w}（{net}）— 上次检查 {t}",
-    monitor_need_scan:"⚠ 请先扫描一个钱包，再开启监控。",
-    monitor_alert_title:"⚠ 检测到新授权 — {w}（{net}）",
+    monitor_on:"正在监控 {w}（{net}）— 上次检查 {t}",
+    monitor_need_scan:"请先扫描一个钱包，再开启监控。",
+    monitor_alert_title:"检测到新授权 — {w}（{net}）",
     monitor_alert_desc:"{token} 已授权给 {spender}{unl}。如果不是你本人操作，请立即检查并撤销。",
     monitor_unlimited:"（无限授权）",
     monitor_rescan:"立即重新扫描",
     tier_badge:"✓ 完整访问",
   },
-  ar: {fwg_kicker:"ما تحصل عليه",fwg_title:"كل ما يعرضه لك الجدار الناري.",fwg_1_t:"نطاق الضرر",fwg_1:"كل موافقة نشطة على المحفظة والقيمة التي يمكن لكل جهة صرف تحريكها.",fwg_2_t:"وضع الإصلاح",fwg_2:"موافقات مرتبة حسب الانكشاف، مع إلغاء موجَّه تراجعه وتوقّعه بنفسك.",fwg_3_t:"مراقبة المحفظة",fwg_3:"تنبيه في المتصفح عند ظهور موافقة جديدة على محفظة تراقبها.",fwg_4_t:"جواز المحفظة",fwg_4:"سجل أمان موقّع ومرتبط بالمحفظة يمكنك مشاركته.",fwg_unlimited:"غير محدود",fwg_revoke:"إلغاء",fwg_new:"موافقة جديدة",fwg_signed:"موقّع",fwg_note:"معاينة توضيحية",
+  ar: {fw_paste:"لصق",fw_trust:"للقراءة فقط. لا يتم توقيع أي شيء. اربط المحفظة فقط إذا اخترت الإلغاء.",gate_btn:"سجّل الدخول بالمحفظة",nav_overview:"نظرة عامة",nav_fix:"الإصلاح",nav_details:"التفاصيل",nav_protect:"الحماية",nav_proof:"الإثبات",sec_details:"التفاصيل",sec_protect:"الحماية",sec_proof:"الإثبات",ov_btn:"راجع أعلى خطر",rules_title:"قوالب حدود الإنفاق",rules_sub:"طبّق ملف قواعد إنفاق لتقليل التعرض مستقبلًا.",inc_title:"حوادث حديثة",inc_sub:"ثغرات معروفة تتعلق بموافقات التوكنات على BSC و Ethereum و Polygon. لكل منها رابط لمصدرها.",inc_affected:"قد تكون متأثرًا",inc_source:"المصدر",inc_detected:"تم اكتشاف موافقة. يُنصح بإلغائها.",inc_affect_n:"عدد ما قد يؤثر عليك: {n}.",fwapi_kicker:"المراقبة و API",fwapi_title:"استمر في المراقبة بعد الفحص.",fwapi_sub:"تتبّع التوكنات والعقود عبر Elofid API. تصل حوادث المخاطر كـ Webhooks موقّعة.",fwapi_btn:"للمطورين",threats_more:"موافقات أخرى: {n}. سجّل الدخول لرؤيتها كلها.",btn_signin:"تسجيل الدخول",btn_signin_revoke:"سجّل الدخول للإلغاء",footer_note:"للمعلومات فقط. تتم عمليات الإلغاء على السلسلة مباشرة من محفظتك. تحقّق دائمًا من العقود بنفسك.",fwg_kicker:"ما تحصل عليه",fwg_title:"كل ما يعرضه لك الجدار الناري.",fwg_1_t:"نطاق الضرر",fwg_1:"كل موافقة نشطة على المحفظة والقيمة التي يمكن لكل جهة صرف تحريكها.",fwg_2_t:"وضع الإصلاح",fwg_2:"موافقات مرتبة حسب الانكشاف، مع إلغاء موجَّه تراجعه وتوقّعه بنفسك.",fwg_3_t:"مراقبة المحفظة",fwg_3:"تنبيه في المتصفح عند ظهور موافقة جديدة على محفظة تراقبها.",fwg_4_t:"جواز المحفظة",fwg_4:"سجل أمان موقّع ومرتبط بالمحفظة يمكنك مشاركته.",fwg_unlimited:"غير محدود",fwg_revoke:"إلغاء",fwg_new:"موافقة جديدة",fwg_signed:"موقّع",fwg_note:"معاينة توضيحية",
     brand_sub:"الأمان على البلوكشين", fw_badge:"جدار الحماية", btn_full_access:"وصول كامل", btn_back:"مركز الأمان",
     hero_kicker:"جدار حماية المحفظة", hero_title:"اعرف ما وافقت<br>عليه محفظتك.",
-    hero_sub:"افحص موافقات المحفظة، اكشف نطاق الضرر، حدّد الجهات عالية المخاطر واحصل على خطة إصلاح — من دون ربط المحفظة للفحص.",
+    hero_sub:"اطّلع على كل موافقة منحتها محفظتك، وما يمكن لكل جهة صرف الوصول إليه، وكيف تلغيها.",
     scan_placeholder:"عنوان المحفظة 0x...", btn_run:"افحص المحفظة",
-    demo_try:"جرّب محفظة تجريبية", micro_readonly:"فحص للقراءة فقط", micro_noconnect:"لا يلزم ربط المحفظة للفحص", micro_revoke:"الربط مطلوب فقط للإلغاء", micro_chains:"BSC و Ethereum و Polygon",
+    demo_try:"جرّب بمحفظة تجريبية", micro_readonly:"فحص للقراءة فقط", micro_noconnect:"لا يلزم ربط المحفظة للفحص", micro_revoke:"الربط مطلوب فقط للإلغاء", micro_chains:"BSC و Ethereum و Polygon",
     step1:"جلب سجلات الموافقات", step2:"تحليل مخاطر العقود", step3:"حساب نطاق الضرر", step4:"بناء خطة الإصلاح",
     notice_live_title:"فحص مباشر.", notice_live_body:"بيانات للقراءة فقط. لا معاملات.",
-    notice_demo_body:"عرض بيانات تجريبية. أدخل عنوان محفظة حقيقياً واضغط «فحص المحفظة» لإجراء فحص مباشر.",
+    notice_demo_body:"بيانات نموذجية فقط. <a href=\"javascript:void(0)\" onclick=\"document.getElementById('btnNewScan').click()\">افحص محفظتك</a>",
     gate_msg:'سجّل الدخول بمحفظتك لرؤية كل الجهات المفوَّضة، والإلغاء الجماعي، وفتح خطة الإصلاح الكاملة وعلاقات المحفظة والتصدير وجواز موقَّع. <strong style="color:var(--green)">تسجيل الدخول مجاني، بلا رسوم غاز، ولا يمكنه نقل أموالك.</strong>',
-    notice_demo_title:"وضع العرض التجريبي:", notice_demo_body:'بيانات نموذجية. أدخل عنوان محفظة حقيقية واضغط "تشغيل الجدار" للفحص الفعلي.',
+    notice_demo_title:"محفظة تجريبية.", notice_demo_body:"بيانات نموذجية فقط. <a href=\"javascript:void(0)\" onclick=\"document.getElementById('btnNewScan').click()\">افحص محفظتك</a>",
     scan_running:"جارٍ فحص المحفظة…",
-    sec_status:"ملخص الأمان", sec_fix:"وضع الإصلاح", sec_passport:"جواز المحفظة",
+    sec_status:"نظرة عامة", sec_fix:"الإصلاح", sec_passport:"جواز المحفظة",
     sec_rules:"قواعد الجدار", sec_relations:"علاقات المحفظة", sec_export:"تصدير التقرير",
-    sec_watch:"مراقبة المحافظ", sec_threats:"خلاصة التهديدات", sec_api:"واجهة المطورين",
+    sec_watch:"مراقبة المحافظ", sec_threats:"تعلّم", sec_api:"واجهة المطورين",
     kicker_score:"نقاط الجدار", kicker_blast:"نطاق الضرر", kicker_drain:"الرموز المكشوفة",
     blast_sub:"الجهات المفوَّضة القادرة على نقل كامل رصيد رمز ما",
     drain_sub:"أرصدة الرموز التي يمكن لجهة مفوَّضة نقلها بالكامل اليوم",
@@ -7057,15 +7110,15 @@ const FW_TRANSLATIONS = {
     watch_desc:"تُحدَّث الدرجات عند الضغط على «فحص الكل»، وستتلقى تنبيهاً إذا انخفضت درجة محفظة مراقَبة عن 60.",
     watch_scan_all:"↻ فحص الكل",
     watch_add_btn:"+ مراقبة",
-    watch_alerts_btn:"🔔 التنبيهات",
-    watch_alerts_on:"✅ التنبيهات مفعّلة",
+    watch_alerts_btn:"التنبيهات",
+    watch_alerts_on:"التنبيهات مفعّلة",
     watch_empty:"لا توجد محافظ مراقَبة بعد. أضف محفظتك الأولى بالأسفل.",
-    watch_scan_ok:"✅ تم فحص {n} محفظة — تم تحديث الدرجات.",
-    watch_scan_partial:"⚠ تم فحص {ok} من {n} محفظة — فشل {fail}. حاول مرة أخرى بعد دقيقة.",
+    watch_scan_ok:"تم فحص {n} محفظة — تم تحديث الدرجات.",
+    watch_scan_partial:"تم فحص {ok} من {n} محفظة — فشل {fail}. حاول مرة أخرى بعد دقيقة.",
     notif_desc:"احصل على إشعار في المتصفح عندما تنخفض درجة محفظة مراقَبة عن 60 أو تظهر موافقة جديدة. يعمل أثناء فتح هذه الصفحة.",
     notif_btn:"تفعيل",
-    notif_enabled_btn:"✅ مفعّل",
-    notif_on:"✅ تم تفعيل تنبيهات المتصفح — تعمل أثناء فتح هذه الصفحة.",
+    notif_enabled_btn:"مفعّل",
+    notif_on:"تم تفعيل تنبيهات المتصفح — تعمل أثناء فتح هذه الصفحة.",
     notif_blocked:"الإشعارات محظورة. اسمح بها من إعدادات المتصفح.",
     notif_unsupported:"متصفحك لا يدعم الإشعارات.",
     monitor_title:"مراقبة الموافقات المباشرة",
@@ -7074,30 +7127,30 @@ const FW_TRANSLATIONS = {
     monitor_stop:"إيقاف",
     monitor_off:"متوقف",
     monitor_starting:"جارٍ التشغيل…",
-    monitor_on:"✅ جارٍ مراقبة {w} على {net} — آخر فحص {t}",
-    monitor_need_scan:"⚠ افحص محفظة أولاً، ثم شغّل المراقبة.",
-    monitor_alert_title:"⚠ تم رصد موافقة جديدة — {w} ({net})",
+    monitor_on:"جارٍ مراقبة {w} على {net} — آخر فحص {t}",
+    monitor_need_scan:"افحص محفظة أولاً، ثم شغّل المراقبة.",
+    monitor_alert_title:"تم رصد موافقة جديدة — {w} ({net})",
     monitor_alert_desc:"تمت الموافقة على {token} للمفوَّض {spender}{unl}. إذا لم تقم بذلك، راجعها وألغها الآن.",
     monitor_unlimited:" (غير محدودة)",
     monitor_rescan:"أعد الفحص الآن",
     tier_badge:"✓ وصول كامل",
   },
-  ru: {fwg_kicker:"Что вы получаете",fwg_title:"Всё, что показывает Файервол.",fwg_1_t:"Зона риска",fwg_1:"Все активные разрешения кошелька и сумма, которую может переместить каждый получатель.",fwg_2_t:"Режим исправления",fwg_2:"Разрешения по уровню риска и пошаговый отзыв, который вы проверяете и подписываете сами.",fwg_3_t:"Наблюдение за кошельком",fwg_3:"Оповещение в браузере, когда у отслеживаемого кошелька появляется новое разрешение.",fwg_4_t:"Паспорт кошелька",fwg_4:"Подписанная запись о безопасности, привязанная к кошельку, которой можно поделиться.",fwg_unlimited:"Безлимит",fwg_revoke:"Отозвать",fwg_new:"Новое разрешение",fwg_signed:"Подписан",fwg_note:"Иллюстративный пример",
+  ru: {fw_paste:"Вставить",fw_trust:"Только чтение. Ничего не подписывается. Подключайте кошелёк, только если решите отозвать.",gate_btn:"Войти через кошелёк",nav_overview:"Обзор",nav_fix:"Исправление",nav_details:"Детали",nav_protect:"Защита",nav_proof:"Подтверждение",sec_details:"Детали",sec_protect:"Защита",sec_proof:"Подтверждение",ov_btn:"Смотреть главный риск",rules_title:"Шаблоны лимитов",rules_sub:"Примените профиль правил расходов, чтобы снизить риски в будущем.",inc_title:"Недавние инциденты",inc_sub:"Известные взломы, связанные с разрешениями токенов в BSC, Ethereum и Polygon. У каждого есть ссылка на источник.",inc_affected:"Возможно, это касается вас",inc_source:"Источник",inc_detected:"Найдено разрешение. Рекомендуем отозвать его.",inc_affect_n:"Может касаться вас: {n}.",fwapi_kicker:"Мониторинг и API",fwapi_title:"Продолжайте следить после проверки.",fwapi_sub:"Отслеживайте токены и контракты через Elofid API. Риск-инциденты приходят подписанными вебхуками.",fwapi_btn:"Разработчикам",threats_more:"Ещё разрешений: {n}. Войдите, чтобы увидеть все.",btn_signin:"Войти",btn_signin_revoke:"Войти, чтобы отозвать",footer_note:"Только для информации. Отзыв выполняется в блокчейне, прямо из вашего кошелька. Всегда проверяйте контракты самостоятельно.",fwg_kicker:"Что вы получаете",fwg_title:"Всё, что показывает Файервол.",fwg_1_t:"Зона риска",fwg_1:"Все активные разрешения кошелька и сумма, которую может переместить каждый получатель.",fwg_2_t:"Режим исправления",fwg_2:"Разрешения по уровню риска и пошаговый отзыв, который вы проверяете и подписываете сами.",fwg_3_t:"Наблюдение за кошельком",fwg_3:"Оповещение в браузере, когда у отслеживаемого кошелька появляется новое разрешение.",fwg_4_t:"Паспорт кошелька",fwg_4:"Подписанная запись о безопасности, привязанная к кошельку, которой можно поделиться.",fwg_unlimited:"Безлимит",fwg_revoke:"Отозвать",fwg_new:"Новое разрешение",fwg_signed:"Подписан",fwg_note:"Иллюстративный пример",
     brand_sub:"Ончейн-безопасность", fw_badge:"ФАЙРВОЛ", btn_full_access:"Полный Доступ", btn_back:"Security Hub",
     hero_kicker:"ФАЙРВОЛ КОШЕЛЬКА", hero_title:"Узнайте, что разрешил<br>ваш кошелёк.",
-    hero_sub:"Проверь разрешения кошелька, оцени зону риска, найди опасных получателей и получи план исправления — без подключения кошелька для сканирования.",
+    hero_sub:"Посмотрите все разрешения вашего кошелька, к чему имеет доступ каждый получатель и как их отозвать.",
     scan_placeholder:"0x... адрес кошелька", btn_run:"Проверить",
-    demo_try:"Попробовать демо-кошелёк", micro_readonly:"Сканирование только для чтения", micro_noconnect:"Подключение для сканирования не требуется", micro_revoke:"Подключение только для отзыва", micro_chains:"BSC, Ethereum, Polygon",
+    demo_try:"Попробовать на демо-кошельке", micro_readonly:"Сканирование только для чтения", micro_noconnect:"Подключение для сканирования не требуется", micro_revoke:"Подключение только для отзыва", micro_chains:"BSC, Ethereum, Polygon",
     step1:"Загрузка данных об одобрениях", step2:"Анализ рисков контрактов",
     step3:"Расчёт зоны поражения", step4:"Формирование плана защиты",
-    notice_live_title:"Живое сканирование.", notice_live_body:"Только чтение. Транзакции не создаются.",
-    notice_demo_body:"Показаны демо-данные. Введи реальный адрес кошелька и нажми «Сканировать» для живого сканирования.",
+    notice_live_title:"Живая проверка.", notice_live_body:"Только чтение. Транзакции не создаются.",
+    notice_demo_body:"Только пример данных. <a href=\"javascript:void(0)\" onclick=\"document.getElementById('btnNewScan').click()\">Проверить свой кошелёк</a>",
     gate_msg:'Войдите через кошелёк, чтобы увидеть всех получателей одобрений, отозвать их пакетно и открыть полный план исправления, связи кошелька, экспорт и подписанный паспорт. <strong style="color:var(--green)">Вход бесплатный, без газа и не может переместить средства.</strong>',
-    notice_demo_title:"Демо-режим:", notice_demo_body:'Тестовые данные. Введи адрес кошелька и нажми "Запустить" для реального сканирования.',
+    notice_demo_title:"Демо-кошелёк.", notice_demo_body:"Только пример данных. <a href=\"javascript:void(0)\" onclick=\"document.getElementById('btnNewScan').click()\">Проверить свой кошелёк</a>",
     scan_running:"Сканирование кошелька…",
-    sec_status:"Сводка Безопасности", sec_fix:"Режим Исправления", sec_passport:"Паспорт Кошелька",
+    sec_status:"Обзор", sec_fix:"Исправление", sec_passport:"Паспорт Кошелька",
     sec_rules:"Правила Файрвола", sec_relations:"Связи Кошелька", sec_export:"Экспорт Отчёта",
-    sec_watch:"Слежение", sec_threats:"Лента Угроз", sec_api:"API Разработчика",
+    sec_watch:"Слежение", sec_threats:"Полезно знать", sec_api:"API Разработчика",
     kicker_score:"Оценка Файрвола", kicker_blast:"Зона Поражения", kicker_drain:"Открытые Токены",
     blast_sub:"получатели одобрений, способные вывести весь баланс токена",
     drain_sub:"балансы токенов, которые можно вывести полностью уже сегодня",
@@ -7123,15 +7176,15 @@ const FW_TRANSLATIONS = {
     watch_desc:"Оценки обновляются по кнопке «Сканировать все». Если оценка отслеживаемого кошелька упадёт ниже 60 — ты получишь предупреждение.",
     watch_scan_all:"↻ Сканировать все",
     watch_add_btn:"+ Следить",
-    watch_alerts_btn:"🔔 Уведомления",
-    watch_alerts_on:"✅ Уведомления вкл.",
+    watch_alerts_btn:"Уведомления",
+    watch_alerts_on:"Уведомления вкл.",
     watch_empty:"Пока нет отслеживаемых кошельков. Добавь первый ниже.",
-    watch_scan_ok:"✅ Просканировано кошельков: {n} — оценки обновлены.",
-    watch_scan_partial:"⚠ Просканировано {ok} из {n} — ошибок: {fail}. Попробуй ещё раз через минуту.",
+    watch_scan_ok:"Просканировано кошельков: {n} — оценки обновлены.",
+    watch_scan_partial:"Просканировано {ok} из {n} — ошибок: {fail}. Попробуй ещё раз через минуту.",
     notif_desc:"Получай уведомление в браузере, если оценка отслеживаемого кошелька упадёт ниже 60 или появится новый approval. Работает, пока страница открыта.",
     notif_btn:"Включить",
-    notif_enabled_btn:"✅ Включено",
-    notif_on:"✅ Уведомления браузера включены — работают, пока страница открыта.",
+    notif_enabled_btn:"Включено",
+    notif_on:"Уведомления браузера включены — работают, пока страница открыта.",
     notif_blocked:"Уведомления заблокированы. Разреши их в настройках браузера.",
     notif_unsupported:"Твой браузер не поддерживает уведомления.",
     monitor_title:"Мониторинг approvals в реальном времени",
@@ -7140,9 +7193,9 @@ const FW_TRANSLATIONS = {
     monitor_stop:"Стоп",
     monitor_off:"Выключен",
     monitor_starting:"Запуск…",
-    monitor_on:"✅ Мониторинг {w} в {net} — последняя проверка {t}",
-    monitor_need_scan:"⚠ Сначала просканируй кошелёк, затем запусти мониторинг.",
-    monitor_alert_title:"⚠ Обнаружен новый approval — {w} ({net})",
+    monitor_on:"Мониторинг {w} в {net} — последняя проверка {t}",
+    monitor_need_scan:"Сначала просканируй кошелёк, затем запусти мониторинг.",
+    monitor_alert_title:"Обнаружен новый approval — {w} ({net})",
     monitor_alert_desc:"{token} одобрен для {spender}{unl}. Если это был не ты — проверь и отзови его сейчас.",
     monitor_unlimited:" (безлимитный)",
     monitor_rescan:"Пересканировать",
@@ -7186,6 +7239,7 @@ function fwSetLanguage(lang) {
     btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
   });
   try { fwNotifRender(); fwMonitorRender(); fwWatchRender(); } catch {}
+  try { fwRenderOverview(); } catch {}
   try { localStorage.setItem("elofid_lang", lang); } catch {}
   setTimeout(() => document.body.classList.remove("lang-switching"), 280);
 }
@@ -7213,25 +7267,25 @@ function _translateRiskReason(en_reason, t) {
   if (lang === "en") return en_reason;
   if (!t.hasApproval) {
     const labels = {
-      zh: t.compositeRisk >= 5 ? "⚠ 检测到高风险合约 — 无活跃支出权限" : `ℹ ${t.contractLabel} — 无活跃支出权限`,
-      ar: t.compositeRisk >= 5 ? "⚠ تم اكتشاف عقد عالي المخاطر — لا توجد صلاحية إنفاق نشطة" : `ℹ ${t.contractLabel} — لا موافقة نشطة`,
-      ru: t.compositeRisk >= 5 ? "⚠ Обнаружен высокорискованный контракт — нет активного разрешения" : `ℹ ${t.contractLabel} — нет активного разрешения`,
+      zh: t.compositeRisk >= 5 ? "检测到高风险合约 — 无活跃支出权限" : `${t.contractLabel} — 无活跃支出权限`,
+      ar: t.compositeRisk >= 5 ? "تم اكتشاف عقد عالي المخاطر — لا توجد صلاحية إنفاق نشطة" : `${t.contractLabel} — لا موافقة نشطة`,
+      ru: t.compositeRisk >= 5 ? "Обнаружен высокорискованный контракт — нет активного разрешения" : `${t.contractLabel} — нет активного разрешения`,
     };
     return labels[lang] || en_reason;
   }
   if (t.isUnlimited && t.compositeRisk >= 40) {
     const labels = {
-      zh: `🔴 无限授权给恶意/标记合约 — ${t.symbol}余额100%可被清空`,
-      ar: `🔴 موافقة غير محدودة لعقد خطير — 100% من رصيد ${t.symbol} قابل للسحب`,
-      ru: `🔴 Безлимитное одобрение вредоносному контракту — 100% баланса ${t.symbol} могут быть слиты`,
+      zh: `无限授权给恶意/标记合约 — ${t.symbol}余额100%可被清空`,
+      ar: `موافقة غير محدودة لعقد خطير — 100% من رصيد ${t.symbol} قابل للسحب`,
+      ru: `Безлимитное одобрение вредоносному контракту — 100% баланса ${t.symbol} могут быть слиты`,
     };
     return labels[lang] || en_reason;
   }
   if (t.isUnlimited) {
     const labels = {
-      zh: `⚠ 无限授权 — ${t.symbol}余额100%可被清空`,
-      ar: `⚠ موافقة غير محدودة — 100% من رصيد ${t.symbol} في خطر`,
-      ru: `⚠ Безлимитное одобрение — 100% баланса ${t.symbol} под угрозой`,
+      zh: `无限授权 — ${t.symbol}余额100%可被清空`,
+      ar: `موافقة غير محدودة — 100% من رصيد ${t.symbol} في خطر`,
+      ru: `Безлимитное одобрение — 100% баланса ${t.symbol} под угрозой`,
     };
     return labels[lang] || en_reason;
   }
@@ -7311,14 +7365,14 @@ document.getElementById("btnShareX").addEventListener("click", () => {
 document.getElementById("btnCopyPassport").addEventListener("click", () => {
   if (fwAccessTier !== "full") { requestFullAccess(); return; }
   navigator.clipboard.writeText(getPassportText())
-    .then(() => showPassportMsg("✅ Passport text copied!"))
+    .then(() => showPassportMsg("Passport text copied!"))
     .catch(() => showPassportMsg("Copy failed — try manually."));
 });
 
 document.getElementById("btnCopyLink").addEventListener("click", () => {
   const url = `${location.origin}/firewall?wallet=${fwWallet}&net=${fwNet}`;
   navigator.clipboard.writeText(url)
-    .then(() => showPassportMsg("✅ Share link copied!"))
+    .then(() => showPassportMsg("Share link copied!"))
     .catch(() => showPassportMsg("Copy failed."));
 });
 
