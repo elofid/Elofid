@@ -12309,6 +12309,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         render(cached.rep);
         cxDeepPrime(net, token);
         void cxRunDeepScan(cached.rep);
+        cxCountTokenScan(cached.rep);
         return;
       }
     }
@@ -13485,10 +13486,19 @@ async function qsLiqCheckBasic(net, token, provider) {
     clearStatus(st);
     render(rep);
     void cxRunDeepScan(rep);
+    cxCountTokenScan(rep);
+  }
+
+  // Homepage counter: every scan whose report rates the token high risk counts once.
+  // Same verdict the report shows. Known issuers with only strong admin controls are not counted.
+  function cxCountTokenScan(rep){
     try {
-      if (typeof cxActivitySend === "function" && Number(score) <= 80) {
-        cxActivitySend("high_risk_contract", 1);
-      }
+      if (!rep || ["Invalid","Not a token","Unknown"].includes(String(rep.overallText || ""))) return;
+      const score = Number(rep.score);
+      const high = /high risk/i.test(String(rep.overallText || "")) || (Number.isFinite(score) && score < 50);
+      if (!high) return;
+      try { if (typeof qsKnownIssuerPresentation === "function" && qsKnownIssuerPresentation(rep).authorityContext) return; } catch {}
+      if (typeof cxActivitySend === "function") cxActivitySend("high_risk_contract", 1);
     } catch {}
   }
 
@@ -13523,6 +13533,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       render(cached.rep);
       cxDeepPrime("solana", token);
       void cxRunDeepScan(cached.rep);
+      cxCountTokenScan(cached.rep);
       return;
     }
 
@@ -14186,6 +14197,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     clearStatus(st);
     render(rep);
     void cxRunDeepScan(rep);
+    cxCountTokenScan(rep);
   }
 
   function qsReviewGuideCopy(lang = currentLang){
