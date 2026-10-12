@@ -1700,7 +1700,7 @@ body{background:#05060a!important}
     <!-- ── HERO / LANDING ── -->
     <section class="hero" id="heroSection">
       <div class="hero-kicker" data-i18n="hero_kicker">WALLET FIREWALL</div>
-      <h1 class="hero-title" data-i18n="hero_title">Turn any wallet into<br>a protected wallet.</h1>
+      <h1 class="hero-title" data-i18n="hero_title">Know what your wallet<br>has approved.</h1>
       <p class="hero-sub" data-i18n="hero_sub">
         Scan your approvals, reveal your Blast Radius, get a guided Fix Plan —
         and generate a shareable Proof Passport. In 60 seconds.
@@ -1713,7 +1713,7 @@ body{background:#05060a!important}
           <option value="eth">ETH</option>
           <option value="polygon">POLYGON</option>
         </select>
-        <button class="btn-scan" id="btnRunFirewall" data-i18n="btn_run">Run Firewall</button>
+        <button class="btn-scan" id="btnRunFirewall" data-i18n="btn_run">Check wallet</button>
       </div>
 
       <span class="demo-hint" id="demoHint" data-i18n="demo_try">Try with demo wallet</span>
@@ -1725,8 +1725,9 @@ body{background:#05060a!important}
         <span class="micro-dot">·</span>
         <span data-i18n="micro_revoke">Connect only to revoke</span>
         <span class="micro-dot">·</span>
-        <span data-i18n="micro_chains">BSC + ETH + Polygon</span>
+        <span data-i18n="micro_chains">BSC, Ethereum, Polygon</span>
       </div>
+      <div class="fwg"><div class="fwg-kicker" data-i18n="fwg_kicker">What you get</div><h2 class="fwg-title" data-i18n="fwg_title">Everything the Firewall shows you.</h2><div class="fwg-grid"><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></span><h3 data-i18n="fwg_1_t">Blast Radius</h3><p data-i18n="fwg_1">Every active approval on the wallet and the value each spender could move.</p><div class="fwg-prev"><span><b>Token 1</b><code>0x0000…0000</code></span><em class="bad"><span data-i18n="fwg_unlimited">Unlimited</span></em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.4-.4-2.4 2.4-2.8Z"/></svg></span><h3 data-i18n="fwg_2_t">Fix Mode</h3><p data-i18n="fwg_2">Approvals ordered by exposure, with a guided revoke you review and sign yourself.</p><div class="fwg-prev"><span><b>1.</b><b>Token 1</b></span><em class="act"><span data-i18n="fwg_revoke">Revoke</span></em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span><h3 data-i18n="fwg_3_t">Wallet Watch</h3><p data-i18n="fwg_3">A browser alert when a new approval appears on a wallet you watch.</p><div class="fwg-prev"><span><b data-i18n="fwg_new">New approval</b></span><em class="warn">Token 2</em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-4"/></svg></span><h3 data-i18n="fwg_4_t">Wallet Passport</h3><p data-i18n="fwg_4">A signed, wallet-bound security record you can share.</p><div class="fwg-prev"><span><b>86</b><code>0x0000…0000</code></span><em class="ok"><span data-i18n="fwg_signed">Signed</span></em></div></div></div><div class="fwg-note" data-i18n="fwg_note">Illustrative preview</div></div>
     </section>
 
     <!-- ── LOADING STATE ── -->
@@ -6871,15 +6872,15 @@ window.fwApiCopy             = fwApiCopy;
 // LANGUAGE SWITCHER
 // ══════════════════════════════════════════════════════════════
 const FW_TRANSLATIONS = {
-  en: {
+  en: {fwg_kicker:"What you get",fwg_title:"Everything the Firewall shows you.",fwg_1_t:"Blast Radius",fwg_1:"Every active approval on the wallet and the value each spender could move.",fwg_2_t:"Fix Mode",fwg_2:"Approvals ordered by exposure, with a guided revoke you review and sign yourself.",fwg_3_t:"Wallet Watch",fwg_3:"A browser alert when a new approval appears on a wallet you watch.",fwg_4_t:"Wallet Passport",fwg_4:"A signed, wallet-bound security record you can share.",fwg_unlimited:"Unlimited",fwg_revoke:"Revoke",fwg_new:"New approval",fwg_signed:"Signed",fwg_note:"Illustrative preview",
     // topbar
     brand_sub:"On-Chain Security", fw_badge:"FIREWALL", btn_full_access:"Full Access", btn_back:"Security Hub",
     // hero
     hero_kicker:"WALLET FIREWALL",
-    hero_title:"Turn any wallet into<br>a protected wallet.",
+    hero_title:"Know what your wallet<br>has approved.",
     hero_sub:"Scan wallet approvals, reveal your Blast Radius, identify risky spenders and get a guided Fix Plan — without connecting your wallet.",
-    scan_placeholder:"0x... wallet address", btn_run:"Scan Wallet",
-    demo_try:"Try with demo wallet", micro_readonly:"Read-only scan", micro_noconnect:"No wallet connection required", micro_revoke:"Connect only to revoke", micro_chains:"BSC + ETH + Polygon",
+    scan_placeholder:"0x... wallet address", btn_run:"Check wallet",
+    demo_try:"Try with demo wallet", micro_readonly:"Read-only scan", micro_noconnect:"No wallet connection required", micro_revoke:"Connect only to revoke", micro_chains:"BSC, Ethereum, Polygon",
     // loading
     step1:"Fetching approval logs", step2:"Analyzing spender risk",
     step3:"Calculating Blast Radius", step4:"Building Fix Plan",
@@ -6952,12 +6953,12 @@ const FW_TRANSLATIONS = {
     monitor_rescan:"Rescan now",
     tier_badge:"✓ FULL ACCESS",
   },
-  zh: {
+  zh: {fwg_kicker:"你将获得",fwg_title:"防火墙为你展示的一切。",fwg_1_t:"风险暴露范围",fwg_1:"钱包上的每个有效授权，以及每个支出方可以转移的价值。",fwg_2_t:"修复模式",fwg_2:"按暴露程度排序的授权，并引导你撤销，由你自己审核并签名。",fwg_3_t:"钱包监控",fwg_3:"当你监控的钱包出现新授权时，在浏览器中提醒你。",fwg_4_t:"钱包护照",fwg_4:"一份经过签名、与钱包绑定、可以分享的安全记录。",fwg_unlimited:"无限",fwg_revoke:"撤销",fwg_new:"新授权",fwg_signed:"已签名",fwg_note:"示意预览",
     brand_sub:"链上安全", fw_badge:"防火墙", btn_full_access:"完整访问", btn_back:"安全中心",
-    hero_kicker:"钱包防火墙", hero_title:"让每个钱包都安全。",
+    hero_kicker:"钱包防火墙", hero_title:"了解你的钱包<br>授权了什么。",
     hero_sub:"扫描钱包授权、查看风险暴露、识别高风险授权方并获得修复计划 — 扫描无需连接钱包。",
-    scan_placeholder:"0x... 钱包地址", btn_run:"扫描钱包",
-    demo_try:"使用演示钱包", micro_readonly:"只读扫描", micro_noconnect:"扫描无需连接钱包", micro_revoke:"仅撤销时连接", micro_chains:"BSC + ETH + Polygon",
+    scan_placeholder:"0x... 钱包地址", btn_run:"检查钱包",
+    demo_try:"使用演示钱包", micro_readonly:"只读扫描", micro_noconnect:"扫描无需连接钱包", micro_revoke:"仅撤销时连接", micro_chains:"BSC、以太坊、Polygon",
     step1:"获取授权日志", step2:"分析风险合约", step3:"计算爆炸半径", step4:"生成修复计划",
     notice_live_title:"实时扫描。", notice_live_body:"只读链上数据，不产生任何交易。",
     gate_msg:'用钱包登录即可查看所有授权方、批量撤销，并解锁完整修复计划、钱包关系、导出报告和签名护照。<strong style="color:var(--green)">登录免费，不消耗 Gas，也无法转移资金。</strong>',
@@ -7016,12 +7017,12 @@ const FW_TRANSLATIONS = {
     monitor_rescan:"立即重新扫描",
     tier_badge:"✓ 完整访问",
   },
-  ar: {
+  ar: {fwg_kicker:"ما تحصل عليه",fwg_title:"كل ما يعرضه لك الجدار الناري.",fwg_1_t:"نطاق الضرر",fwg_1:"كل موافقة نشطة على المحفظة والقيمة التي يمكن لكل جهة صرف تحريكها.",fwg_2_t:"وضع الإصلاح",fwg_2:"موافقات مرتبة حسب الانكشاف، مع إلغاء موجَّه تراجعه وتوقّعه بنفسك.",fwg_3_t:"مراقبة المحفظة",fwg_3:"تنبيه في المتصفح عند ظهور موافقة جديدة على محفظة تراقبها.",fwg_4_t:"جواز المحفظة",fwg_4:"سجل أمان موقّع ومرتبط بالمحفظة يمكنك مشاركته.",fwg_unlimited:"غير محدود",fwg_revoke:"إلغاء",fwg_new:"موافقة جديدة",fwg_signed:"موقّع",fwg_note:"معاينة توضيحية",
     brand_sub:"الأمان على البلوكشين", fw_badge:"جدار الحماية", btn_full_access:"وصول كامل", btn_back:"مركز الأمان",
-    hero_kicker:"جدار حماية المحفظة", hero_title:"حوّل أي محفظة إلى محفظة محمية.",
+    hero_kicker:"جدار حماية المحفظة", hero_title:"اعرف ما وافقت<br>عليه محفظتك.",
     hero_sub:"افحص موافقات المحفظة، اكشف نطاق الضرر، حدّد الجهات عالية المخاطر واحصل على خطة إصلاح — من دون ربط المحفظة للفحص.",
-    scan_placeholder:"عنوان المحفظة 0x...", btn_run:"فحص المحفظة",
-    demo_try:"جرّب محفظة تجريبية", micro_readonly:"فحص للقراءة فقط", micro_noconnect:"لا يلزم ربط المحفظة للفحص", micro_revoke:"الربط مطلوب فقط للإلغاء", micro_chains:"BSC + ETH + Polygon",
+    scan_placeholder:"عنوان المحفظة 0x...", btn_run:"افحص المحفظة",
+    demo_try:"جرّب محفظة تجريبية", micro_readonly:"فحص للقراءة فقط", micro_noconnect:"لا يلزم ربط المحفظة للفحص", micro_revoke:"الربط مطلوب فقط للإلغاء", micro_chains:"BSC و Ethereum و Polygon",
     step1:"جلب سجلات الموافقات", step2:"تحليل مخاطر العقود", step3:"حساب نطاق الضرر", step4:"بناء خطة الإصلاح",
     notice_live_title:"فحص مباشر.", notice_live_body:"بيانات للقراءة فقط. لا معاملات.",
     notice_demo_body:"عرض بيانات تجريبية. أدخل عنوان محفظة حقيقياً واضغط «فحص المحفظة» لإجراء فحص مباشر.",
@@ -7081,12 +7082,12 @@ const FW_TRANSLATIONS = {
     monitor_rescan:"أعد الفحص الآن",
     tier_badge:"✓ وصول كامل",
   },
-  ru: {
+  ru: {fwg_kicker:"Что вы получаете",fwg_title:"Всё, что показывает Файервол.",fwg_1_t:"Зона риска",fwg_1:"Все активные разрешения кошелька и сумма, которую может переместить каждый получатель.",fwg_2_t:"Режим исправления",fwg_2:"Разрешения по уровню риска и пошаговый отзыв, который вы проверяете и подписываете сами.",fwg_3_t:"Наблюдение за кошельком",fwg_3:"Оповещение в браузере, когда у отслеживаемого кошелька появляется новое разрешение.",fwg_4_t:"Паспорт кошелька",fwg_4:"Подписанная запись о безопасности, привязанная к кошельку, которой можно поделиться.",fwg_unlimited:"Безлимит",fwg_revoke:"Отозвать",fwg_new:"Новое разрешение",fwg_signed:"Подписан",fwg_note:"Иллюстративный пример",
     brand_sub:"Ончейн-безопасность", fw_badge:"ФАЙРВОЛ", btn_full_access:"Полный Доступ", btn_back:"Security Hub",
-    hero_kicker:"ФАЙРВОЛ КОШЕЛЬКА", hero_title:"Защити любой кошелёк за секунды.",
+    hero_kicker:"ФАЙРВОЛ КОШЕЛЬКА", hero_title:"Узнайте, что разрешил<br>ваш кошелёк.",
     hero_sub:"Проверь разрешения кошелька, оцени зону риска, найди опасных получателей и получи план исправления — без подключения кошелька для сканирования.",
-    scan_placeholder:"0x... адрес кошелька", btn_run:"Сканировать",
-    demo_try:"Попробовать демо-кошелёк", micro_readonly:"Сканирование только для чтения", micro_noconnect:"Подключение для сканирования не требуется", micro_revoke:"Подключение только для отзыва", micro_chains:"BSC + ETH + Polygon",
+    scan_placeholder:"0x... адрес кошелька", btn_run:"Проверить",
+    demo_try:"Попробовать демо-кошелёк", micro_readonly:"Сканирование только для чтения", micro_noconnect:"Подключение для сканирования не требуется", micro_revoke:"Подключение только для отзыва", micro_chains:"BSC, Ethereum, Polygon",
     step1:"Загрузка данных об одобрениях", step2:"Анализ рисков контрактов",
     step3:"Расчёт зоны поражения", step4:"Формирование плана защиты",
     notice_live_title:"Живое сканирование.", notice_live_body:"Только чтение. Транзакции не создаются.",

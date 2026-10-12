@@ -4489,7 +4489,7 @@ twq('config','r4v6v');
     <!-- HERO -->
     <div class="hero">
       <div class="hero-kicker" data-i18n="hero_kicker">Elofid Security Hub</div>
-      <h1 class="hero-title" data-i18n="hero_title">Advanced Security Tools</h1>
+      <h1 class="hero-title" data-i18n="hero_title">Understand any token<br>before you interact.</h1>
       <p class="hero-sub" data-i18n="hero_subtitle">
         Quick Scan tokens, verify RPC health, decode transactions, and build dev tools — no wallet connection required.
       </p>
@@ -4497,8 +4497,7 @@ twq('config','r4v6v');
       <div class="fw-hero-block">
         <div class="hero-cta-row">
           <button type="button" class="hero-quick-btn" id="heroQuickScanBtn" aria-label="Open Quick / Deep Token Scan">
-            <span class="hero-quick-icon">⚡</span>
-            <span data-i18n="hero_quick_btn">Quick / Deep — Scan a Token</span>
+            <span data-i18n="hero_quick_btn">Scan a token</span>
           </button>
           <a href="/firewall" class="btn-firewall btn-firewall-hero">
             <span class="fw-btn-full" data-i18n="fw_hero_btn_compact">Scan My Wallet — Free</span>
@@ -4521,7 +4520,7 @@ twq('config','r4v6v');
 
         <!-- Quick Scan -->
         <div class="tool-card tc-quick" data-tool="quick">
-          <div class="tc-header"><div class="tc-icon">⚡</div>
+          <div class="tc-header"><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
           <div class="tc-name" data-i18n="cube_quick_title">Quick / Deep Scan</div>
           <span class="tc-featured" data-i18n="quick_start_here">Open Scan</span></div>
           <div class="tc-desc" data-i18n="cube_quick_desc">Quick token scan + Deep Intelligence context + shareable report + cache.</div>
@@ -4534,7 +4533,7 @@ twq('config','r4v6v');
 
         <!-- RPC Health Checker -->
         <div class="tool-card tc-rpc" data-tool="rpc">
-          <div class="tc-header"><div class="tc-icon">📡</div>
+          <div class="tc-header"><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12a7 7 0 0 1 14 0"/><path d="M8.5 12a3.5 3.5 0 0 1 7 0"/><circle cx="12" cy="12" r="1"/><path d="M12 13v8"/></svg></div>
           <div class="tc-name" data-i18n="cube_rpc_title">RPC Health Checker</div></div>
           <div class="tc-desc" data-i18n="cube_rpc_desc">Latency + chainId + block + eth_call + read logs + dev custom test.</div>
           <div class="tc-badges">
@@ -4546,7 +4545,7 @@ twq('config','r4v6v');
 
         <!-- Tx Decoder -->
         <div class="tool-card tc-tx" data-tool="tx">
-          <div class="tc-header"><div class="tc-icon">🔍</div>
+          <div class="tc-header"><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7"/><path d="m16 15 2 2 4-4"/></svg></div>
           <div class="tc-name" data-i18n="cube_tx_title">Tx Decoder</div></div>
           <div class="tc-desc" data-i18n="cube_tx_desc">Decode inputs + common events (Transfer/Approval) from a tx hash.</div>
           <div class="tc-badges">
@@ -4558,7 +4557,7 @@ twq('config','r4v6v');
 
         <!-- Dev Tools -->
         <div class="tool-card tc-dev" data-tool="dev">
-          <div class="tc-header"><div class="tc-icon">🛠</div>
+          <div class="tc-header"><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/></svg></div>
           <div class="tc-name" data-i18n="cube_dev_title">Dev Tools</div></div>
           <div class="tc-desc" data-i18n="cube_dev_desc">Bookmarklet generator + local contract monitor (no server).</div>
           <div class="tc-badges">
@@ -4569,7 +4568,7 @@ twq('config','r4v6v');
 
       </div>
       <a class="hub-api-strip" href="/developers/">
-        <span class="hub-api-icon">🧩</span>
+        <span class="hub-api-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span>
         <span class="hub-api-text">
           <span class="hub-api-kicker" data-i18n="api_strip_kicker">Monitoring and API</span>
           <span class="hub-api-title" data-i18n="api_strip_title">Keep watching after the scan.</span>
@@ -5056,17 +5055,17 @@ const translations = {
     tx_sum_risk_k: "Risk",
     tx_sum_target_k: "Target",
     tx_sum_impact_k: "Max Impact",
-    hero_title: "Advanced Security Tools",
-    hero_subtitle: "Quick / Deep Scan tokens, verify RPC health, decode transactions, and use dev tools — no wallet connection required.",
+    hero_title: "Understand any token<br>before you interact.",
+    hero_subtitle: "Run Quick or Deep scans across 12 chains, with contract, liquidity, market and trading-risk analysis. No wallet connection required.",
     btn_back: "Back to Site",
     btn_firewall: "Scan Wallet",
     btn_telegram: "Bot",
     fw_hero_btn: "Scan My Wallet — Free",
-    hero_quick_btn: "Quick / Deep — Scan a Token",
-    fw_hero_btn_compact: "Scan My Wallet — Free",
-    fw_hero_btn_mobile: "Scan My Wallet — Free",
-    hero_actions_hint: "Run a fast token scan first · Deep Intelligence adds context automatically · Firewall helps protect wallet permissions.",
-    quick_start_here: "Open Scan",
+    hero_quick_btn: "Scan a token",
+    fw_hero_btn_compact: "Check my wallet",
+    fw_hero_btn_mobile: "Check my wallet",
+    hero_actions_hint: "Also included: RPC Health, Transaction Decoder and Developer Tools.",
+    quick_start_here: "Open",
     qs_auto_detect: "Auto Detect",
     qs_token_placeholder: "Paste 0x… or Solana mint",
     qs_token_intelligence: "Token Intelligence",
@@ -5737,17 +5736,17 @@ const translations = {
     tx_sum_risk_k: "风险",
     tx_sum_target_k: "目标",
     tx_sum_impact_k: "最大影响",
-    hero_title: "高级安全工具",
-    hero_subtitle: "快速扫描代币、验证 RPC 健康并解码交易 — 无需连接钱包。",
+    hero_title: "在交互之前<br>了解任何代币。",
+    hero_subtitle: "在 12 条链上运行快速或深度扫描，分析合约、流动性、市场和交易风险。无需连接钱包。",
     btn_back: "返回主站",
     btn_firewall: "扫描钱包",
     btn_telegram: "机器人",
     fw_hero_btn: "免费扫描我的钱包",
-    hero_quick_btn: "快速 / 深度 — 扫描代币",
-    fw_hero_btn_compact: "免费扫描我的钱包",
-    fw_hero_btn_mobile: "免费扫描我的钱包",
-    hero_actions_hint: "立即扫描代币 · 使用 Firewall 检查钱包权限 · 验证链上信号。",
-    quick_start_here: "打开扫描",
+    hero_quick_btn: "扫描代币",
+    fw_hero_btn_compact: "检查我的钱包",
+    fw_hero_btn_mobile: "检查我的钱包",
+    hero_actions_hint: "还包括：RPC 健康检查、交易解码器和开发者工具。",
+    quick_start_here: "打开",
     qs_auto_detect: "自动检测",
     qs_token_placeholder: "粘贴 0x… 或 Solana Mint",
     qs_token_intelligence: "代币智能分析",
@@ -6418,17 +6417,17 @@ const translations = {
     tx_sum_risk_k: "المخاطر",
     tx_sum_target_k: "الهدف",
     tx_sum_impact_k: "أقصى تأثير",
-    hero_title: "أدوات الأمان المتقدمة",
-    hero_subtitle: "فحص سريع للتوكنات، التحقق من صحة RPC وفك تشفير المعاملات — بدون الحاجة لربط محفظة.",
+    hero_title: "افهم أي توكن<br>قبل أن تتعامل معه.",
+    hero_subtitle: "شغّل فحصًا سريعًا أو عميقًا عبر 12 سلسلة، مع تحليل العقد والسيولة والسوق ومخاطر التداول. لا يلزم ربط المحفظة.",
     btn_back: "العودة للموقع",
     btn_firewall: "فحص المحفظة",
     btn_telegram: "البوت",
     fw_hero_btn: "افحص محفظتي — مجانًا",
-    hero_quick_btn: "فحص سريع / عميق — افحص توكن",
-    fw_hero_btn_compact: "افحص محفظتي — مجانًا",
-    fw_hero_btn_mobile: "افحص محفظتي — مجانًا",
-    hero_actions_hint: "افحص توكن فورًا · راجع صلاحيات المحفظة عبر Firewall · تحقق من إشارات البلوكتشين.",
-    quick_start_here: "افتح الفحص",
+    hero_quick_btn: "افحص توكن",
+    fw_hero_btn_compact: "افحص محفظتي",
+    fw_hero_btn_mobile: "افحص محفظتي",
+    hero_actions_hint: "يتضمن أيضًا: فحص صحة RPC ومفكك المعاملات وأدوات المطورين.",
+    quick_start_here: "افتح",
     qs_auto_detect: "اكتشاف تلقائي",
     qs_token_placeholder: "ألصق 0x… أو عنوان Mint على Solana",
     qs_token_intelligence: "تحليل التوكن",
@@ -7099,17 +7098,17 @@ const translations = {
     tx_sum_risk_k: "Риск",
     tx_sum_target_k: "Цель",
     tx_sum_impact_k: "Макс. влияние",
-    hero_title: "Продвинутые инструменты безопасности",
-    hero_subtitle: "Быстрый скан токенов, проверка RPC, декодирование транзакций и dev-инструменты — подключение кошелька не требуется.",
+    hero_title: "Изучите любой токен<br>до взаимодействия.",
+    hero_subtitle: "Быстрые и глубокие сканы в 12 сетях с анализом контракта, ликвидности, рынка и торговых рисков. Подключение кошелька не требуется.",
     btn_back: "Назад на сайт",
     btn_firewall: "Сканировать кошелёк",
     btn_telegram: "Бот",
     fw_hero_btn: "Сканировать мой кошелёк — бесплатно",
-    hero_quick_btn: "Быстрый / Глубокий — Проверить токен",
-    fw_hero_btn_compact: "Сканировать мой кошелёк — бесплатно",
-    fw_hero_btn_mobile: "Сканировать мой кошелёк — бесплатно",
-    hero_actions_hint: "Мгновенно проверьте токен · Проверьте разрешения кошелька в Firewall · Сверьте ончейн-сигналы.",
-    quick_start_here: "Открыть скан",
+    hero_quick_btn: "Проверить токен",
+    fw_hero_btn_compact: "Проверить кошелёк",
+    fw_hero_btn_mobile: "Проверить кошелёк",
+    hero_actions_hint: "Также доступны: проверка RPC, декодер транзакций и инструменты разработчика.",
+    quick_start_here: "Открыть",
     qs_auto_detect: "Автоопределение",
     qs_token_placeholder: "Вставьте 0x… или Solana mint",
     qs_token_intelligence: "Анализ токена",
