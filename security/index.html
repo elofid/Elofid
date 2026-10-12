@@ -4466,8 +4466,8 @@ twq('config','r4v6v');
   .brand-logo,.top-bar .brand-logo{width:50px!important;height:50px!important;border-radius:50%!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;object-fit:contain!important}
   @media (max-width:720px){.brand-logo,.top-bar .brand-logo{width:43px!important;height:43px!important}}
 </style>
-<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261012b">
-<script src="/assets/elofid-nav.js?v=20261012b" defer></script>
+<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261012d">
+<script src="/assets/elofid-nav.js?v=20261012d" defer></script>
 </head>
 <body class="eui-page-hub">
 <div class="page-shell">
@@ -4493,25 +4493,28 @@ twq('config','r4v6v');
       <p class="hero-sub" data-i18n="hero_subtitle">
         Quick Scan tokens, verify RPC health, decode transactions, and build dev tools — no wallet connection required.
       </p>
-      <!-- PRIMARY HERO ACTION: Quick Scan. Firewall remains secondary. -->
-      <div class="fw-hero-block">
-        <div class="hero-cta-row">
-          <button type="button" class="hero-quick-btn" id="heroQuickScanBtn" aria-label="Open Quick / Deep Token Scan">
-            <span data-i18n="hero_quick_btn">Scan a token</span>
-          </button>
-          <a href="/firewall" class="btn-firewall btn-firewall-hero">
-            <span class="fw-btn-full" data-i18n="fw_hero_btn_compact">Scan My Wallet — Free</span>
-            <span class="fw-btn-mobile" data-i18n="fw_hero_btn_mobile">Scan My Wallet — Free</span>
-          </a>
-        </div>
-        <p class="fw-hero-tagline" data-i18n="hero_actions_hint">
-          Scan a token instantly · Check wallet permissions with Firewall · Verify on-chain signals.
-        </p>
-      </div>
+      <form class="hub-scan" id="hubScanForm" autocomplete="off" novalidate>
+        <span class="hub-scan-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <input id="hubToken" class="mono" type="text" inputmode="text" spellcheck="false" placeholder="Paste a token address (0x… or Solana mint)" data-i18n-placeholder="hub_scan_ph" aria-label="Token address" />
+        <button type="button" class="hub-paste" id="hubPasteBtn" data-i18n="hub_paste" hidden>Paste</button>
+        <button type="submit" class="eui-btn eui-btn-primary hub-scan-btn"><span data-i18n="btn_scan">Scan</span></button>
+      </form>
+      <div class="hub-trust"><span class="hub-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span data-i18n="hub_trust">Free. No wallet connection. Nothing is signed.</span><span class="hub-dot">·</span><a href="/firewall" data-i18n="hub_wallet_link">Check a wallet with Firewall</a></div>
+      <p class="fw-hero-tagline" data-i18n="hero_actions_hint">Also included: RPC Health, Transaction Decoder and Developer Tools.</p>
+      <button type="button" class="hero-quick-btn" id="heroQuickScanBtn" hidden aria-hidden="true" tabindex="-1"><span data-i18n="hero_quick_btn">Scan a token</span></button>
       <p class="hero-note-small" data-i18n="hero_note">
         Informational checks only — no signatures, no transactions. Always verify independently.
       </p>
     </div>
+
+    <section class="hx-what" aria-labelledby="hxTitle">
+      <div class="hx-kicker" data-i18n="hx_sec_kicker">What you get</div>
+      <h2 class="hx-title" id="hxTitle" data-i18n="hx_title">Everything a scan checks.</h2>
+      <div class="hx-grid">
+        <div class="hx-card-wrap"><div class="hm-card" aria-label="Scan preview"><div class="hm-card-top"><div class="hm-card-kicker" data-i18n="hx_kicker">Security Hub · Quick Scan</div><div class="hm-card-time" data-i18n="hx_scanned">Example scan</div></div><div class="hm-card-id"><span class="hm-tok">T1</span><div><b>Token 1</b><span>BNB Smart Chain · <code>0x0000…0000</code></span></div><div class="hm-score"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" class="trk"/><circle cx="22" cy="22" r="19" class="val" style="stroke-dasharray:98 120"/></svg><b>82</b></div></div><div class="hm-card-scorelabel"><span data-i18n="hx_score">Elofid Score</span><b>82 / 100</b></div><div class="hm-rows"><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_honeypot">Honeypot</span><small data-i18n="hx_honeypot_s">Sell simulation passed</small></div><div class="hm-row-val"><b data-i18n="hx_honeypot_v">Not detected</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_tax">Buy and sell tax</span><small data-i18n="hx_tax_s">Measured through simulation</small></div><div class="hm-row-val"><b>0% · 0%</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_owner">Owner</span><small data-i18n="hx_owner_s">No mint or pause control</small></div><div class="hm-row-val"><b data-i18n="hx_owner_v">Renounced</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_liq">Liquidity</span><small data-i18n="hx_liq_s">LP locked</small></div><div class="hm-row-val"><b>$1.2M</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_contract">Contract</span><small data-i18n="hx_contract_s">Source code verified</small></div><div class="hm-row-val"><b data-i18n="hx_contract_v">Verified</b></div></div><div class="hm-row warn"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v5"/><path d="M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg></span><div class="hm-row-main"><span data-i18n="hx_holders">Top 10 holders</span><small data-i18n="hx_holders_s">Higher than usual concentration</small></div><div class="hm-row-val"><b>38%</b></div></div></div><div class="hm-card-note" data-i18n="hx_note">Illustrative preview</div></div></div>
+        <div class="hx-feats"><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="M12 8v4"/><path d="M12 15.5h.01"/></svg></span><div><b data-i18n="hx_f1_t">Contract controls</b><p data-i18n="hx_f1">Owner, mint, pause and proxy controls, read from the contract.</p></div></div><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17 9 12l4 4 7-8"/><path d="M15 8h5v5"/></svg></span><div><b data-i18n="hx_f2_t">Trading simulation</b><p data-i18n="hx_f2">Buy and sell paths are simulated to measure tax and catch honeypots.</p></div></div><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c3 3.6 6 7 6 10.5a6 6 0 0 1-12 0c0-3.5 3-6.9 6-10.5Z"/></svg></span><div><b data-i18n="hx_f3_t">Liquidity and holders</b><p data-i18n="hx_f3">Observed liquidity, LP lock or burn evidence, and holder concentration.</p></div></div><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span><div><b data-i18n="hx_f4_t">Deep Intelligence</b><p data-i18n="hx_f4">Deployer funding, early buyers, wallet clusters and control changes over time.</p></div></div></div>
+      </div>
+    </section>
 
     <!-- TOOLS GRID -->
     <div class="tools-section">
@@ -4519,7 +4522,7 @@ twq('config','r4v6v');
       <div id="toolGrid">
 
         <!-- Quick Scan -->
-        <div class="tool-card tc-quick" data-tool="quick">
+        <div class="tool-card tc-quick" data-tool="quick" hidden>
           <div class="tc-header"><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
           <div class="tc-name" data-i18n="cube_quick_title">Quick / Deep Scan</div>
           <span class="tc-featured" data-i18n="quick_start_here">Open Scan</span></div>
@@ -5005,9 +5008,14 @@ twq('config','r4v6v');
 
     </div><!-- end modal-backdrop -->
 
-    <footer class="footer">
-      <div><span class="footer-brand">Elofid Security Hub</span> — <span data-i18n="footer_left">Public on-chain data. Protected risk logic runs server-side. No wallet connection required.</span></div>
-      <div data-i18n="footer_tagline">Verify twice. Connect only when you trust the page.</div>
+    <footer class="eui-footer" data-eui-footer>
+      <div class="eui-foot-grid">
+        <div class="eui-foot-brand"><div class="eui-foot-logo"><img src="/elofid-mark.svg" alt="" width="28" height="28"><b>Elofid</b></div><p data-eui="f_about">Elofid is an on-chain security and continuous risk intelligence platform. Token scanning, wallet protection, continuous monitoring and a developer API.</p><p class="eui-foot-tag" data-eui="f_tag">Security that starts before the loss.</p></div>
+        <div class="eui-foot-col"><b data-eui="f_products">Products</b><a href="/security" data-eui="f_hub">Security Hub</a><a href="/firewall" data-eui="f_firewall">Firewall</a><a href="/developers" data-eui="f_developers">Developers</a><a href="https://t.me/ElofidBot" target="_blank" rel="noopener" data-eui="f_bot">Scanner Bot</a></div>
+        <div class="eui-foot-col"><b data-eui="f_community">Community</b><a href="https://x.com/ElofidNetwork" target="_blank" rel="noopener">X</a><a href="https://t.me/elofid_official" target="_blank" rel="noopener">Telegram</a><a href="https://elofid.com/whitepaper.pdf" target="_blank" rel="noopener" data-eui="f_whitepaper">Whitepaper</a><a href="https://elofid.com/FAQ.pdf" target="_blank" rel="noopener" data-eui="f_faq">FAQ</a></div>
+        <div class="eui-foot-col"><b data-eui="f_legal">Legal</b><a href="/terms.html" data-eui="f_terms">Terms</a><a href="/privacy.html" data-eui="f_privacy">Privacy</a><a href="/refund.html" data-eui="f_refund">Refund Policy</a></div>
+      </div>
+      <p class="eui-foot-note"><span data-i18n="footer_left">Public on-chain data. Protected risk logic runs server-side. No wallet connection required.</span> <span data-i18n="footer_tagline">Verify twice. Connect only when you trust the page.</span></p>
     </footer>
   </main>
 </div>
@@ -5049,6 +5057,39 @@ async function loadAppKit() {
 // =========================
 const translations = {
   en: {
+    hx_honeypot_s: "Sell simulation passed",
+    hx_honeypot_v: "Not detected",
+    hx_contract_s: "Source code verified",
+    hx_contract_v: "Verified",
+    hx_holders_s: "Higher than usual concentration",
+    hx_contract: "Contract",
+    hx_honeypot: "Honeypot",
+    hx_scanned: "Example scan",
+    hx_owner_v: "Renounced",
+    hx_owner_s: "No mint or pause control",
+    hx_holders: "Top 10 holders",
+    hx_kicker: "Security Hub · Quick Scan",
+    hx_owner: "Owner",
+    hx_tax_s: "Measured through simulation",
+    hx_score: "Elofid Score",
+    hx_liq_s: "LP locked",
+    hx_note: "Illustrative preview",
+    hx_liq: "Liquidity",
+    hx_tax: "Buy and sell tax",
+    hub_scan_ph: "Paste a token address (0x… or Solana mint)",
+    hub_paste: "Paste",
+    hub_trust: "Free. No wallet connection. Nothing is signed.",
+    hub_wallet_link: "Check a wallet with Firewall",
+    hx_sec_kicker: "What you get",
+    hx_title: "Everything a scan checks.",
+    hx_f1_t: "Contract controls",
+    hx_f1: "Owner, mint, pause and proxy controls, read from the contract.",
+    hx_f2_t: "Trading simulation",
+    hx_f2: "Buy and sell paths are simulated to measure tax and catch honeypots.",
+    hx_f3_t: "Liquidity and holders",
+    hx_f3: "Observed liquidity, LP lock or burn evidence, and holder concentration.",
+    hx_f4_t: "Deep Intelligence",
+    hx_f4: "Deployer funding, early buyers, wallet clusters and control changes over time.",
     brand_sub: "On-Chain Security",
     hero_kicker: "Elofid Security Hub",
     tx_sum_action_k: "Action",
@@ -5117,7 +5158,7 @@ const translations = {
     hero_note: "Note: These checks are informational and do not guarantee safety. No signatures. No transactions. Always verify contracts and URLs independently.",
     hero_micro_quick: "Start here — no wallet needed.",
     hero_micro_access: "Unlock advanced approvals + revoke tools.",
-    tools_kicker: "CHOOSE A TOOL",
+    tools_kicker: "More tools",
     cube_quick_title: "Quick / Deep Scan",
     cube_quick_desc: "Quick token scan + Deep Intelligence context + shareable report + cache.",
     cube_liq_title: "Token + Liquidity Scan",
@@ -5730,6 +5771,39 @@ const translations = {
     ph_rpc_dev_topic: "0xddf252ad... (Transfer) or leave empty"
   },
   zh: {
+    hx_honeypot_s: "卖出模拟通过",
+    hx_honeypot_v: "未检测到",
+    hx_contract_s: "源代码已验证",
+    hx_contract_v: "已验证",
+    hx_holders_s: "集中度高于常见水平",
+    hx_contract: "合约",
+    hx_honeypot: "蜜罐",
+    hx_scanned: "示例扫描",
+    hx_owner_v: "已放弃",
+    hx_owner_s: "无增发或暂停控制",
+    hx_holders: "前 10 持有人",
+    hx_kicker: "安全中心 · 快速扫描",
+    hx_owner: "所有者",
+    hx_tax_s: "通过模拟测得",
+    hx_score: "Elofid 评分",
+    hx_liq_s: "LP 已锁定",
+    hx_note: "示意预览",
+    hx_liq: "流动性",
+    hx_tax: "买入和卖出税",
+    hub_scan_ph: "粘贴代币地址（0x… 或 Solana mint）",
+    hub_paste: "粘贴",
+    hub_trust: "免费。无需连接钱包。不会签名任何内容。",
+    hub_wallet_link: "用防火墙检查钱包",
+    hx_sec_kicker: "你将获得",
+    hx_title: "一次扫描检查的所有内容。",
+    hx_f1_t: "合约控制权",
+    hx_f1: "直接从合约读取所有者、增发、暂停和代理控制权。",
+    hx_f2_t: "交易模拟",
+    hx_f2: "模拟买入和卖出路径，以测量税率并识别蜜罐。",
+    hx_f3_t: "流动性与持有人",
+    hx_f3: "观察到的流动性、LP 锁定或销毁证据，以及持有人集中度。",
+    hx_f4_t: "深度情报",
+    hx_f4: "部署者资金来源、早期买家、钱包集群以及控制权的历史变化。",
     brand_sub: "链上安全",
     hero_kicker: "Elofid 安全中心",
     tx_sum_action_k: "操作",
@@ -5798,7 +5872,7 @@ const translations = {
     hero_note: "提示：这些检查仅供参考，不能保证安全。无需签名，无需交易。请务必自行核对合约与链接（URL）。",
     hero_micro_quick: "从这里开始 — 无需连接钱包。",
     hero_micro_access: "解锁高级授权分析 + 撤销工具。",
-    tools_kicker: "选择工具",
+    tools_kicker: "更多工具",
     cube_quick_title: "快速扫描",
     cube_quick_desc: "快速代币扫描 + Deep Intelligence 上下文 + 可分享报告 + 缓存。",
     cube_liq_title: "代币 + 流动性扫描",
@@ -6411,6 +6485,39 @@ const translations = {
     ph_rpc_dev_topic: "0xddf252ad...（Transfer）或留空"
   },
   ar: {
+    hx_honeypot_s: "نجحت محاكاة البيع",
+    hx_honeypot_v: "لم يُكتشف",
+    hx_contract_s: "الكود المصدري موثّق",
+    hx_contract_v: "موثّق",
+    hx_holders_s: "تركّز أعلى من المعتاد",
+    hx_contract: "العقد",
+    hx_honeypot: "Honeypot",
+    hx_scanned: "فحص تجريبي",
+    hx_owner_v: "متنازَل عنه",
+    hx_owner_s: "لا تحكم في السك أو الإيقاف",
+    hx_holders: "أكبر 10 حائزين",
+    hx_kicker: "مركز الأمان · فحص سريع",
+    hx_owner: "المالك",
+    hx_tax_s: "مقاسة عبر المحاكاة",
+    hx_score: "نتيجة Elofid",
+    hx_liq_s: "LP مقفلة",
+    hx_note: "معاينة توضيحية",
+    hx_liq: "السيولة",
+    hx_tax: "ضريبة الشراء والبيع",
+    hub_scan_ph: "الصق عنوان التوكن (0x… أو Solana mint)",
+    hub_paste: "لصق",
+    hub_trust: "مجاني. بلا ربط محفظة. لا يتم توقيع أي شيء.",
+    hub_wallet_link: "افحص محفظة عبر الجدار الناري",
+    hx_sec_kicker: "ما تحصل عليه",
+    hx_title: "كل ما يفحصه المسح.",
+    hx_f1_t: "صلاحيات العقد",
+    hx_f1: "صلاحيات المالك والسك والإيقاف والبروكسي، مقروءة من العقد.",
+    hx_f2_t: "محاكاة التداول",
+    hx_f2: "تتم محاكاة مسارات الشراء والبيع لقياس الضريبة وكشف الـ Honeypot.",
+    hx_f3_t: "السيولة والحائزون",
+    hx_f3: "السيولة المرصودة، وأدلة قفل أو حرق LP، وتركّز الحائزين.",
+    hx_f4_t: "Deep Intelligence",
+    hx_f4: "تمويل الناشر، والمشترون الأوائل، ومجموعات المحافظ، وتغيّرات الصلاحيات عبر الوقت.",
     brand_sub: "الأمان على البلوكشين",
     hero_kicker: "مركز أمان Elofid",
     tx_sum_action_k: "الإجراء",
@@ -6479,7 +6586,7 @@ const translations = {
     hero_note: "ملاحظة: هذه الفحوصات معلوماتية ولا تضمن السلامة. بدون توقيع. بدون معاملات. تحقّق دائمًا من العقود والروابط (URL) بنفسك.",
     hero_micro_quick: "ابدأ من هنا — لا حاجة لربط المحفظة.",
     hero_micro_access: "افتح تحليلات أذونات متقدمة + أدوات الإلغاء.",
-    tools_kicker: "اختر أداة",
+    tools_kicker: "أدوات أخرى",
     cube_quick_title: "فحص سريع",
     cube_quick_desc: "فحص سريع للتوكن + تقرير قابل للمشاركة + كاش.",
     cube_liq_title: "فحص التوكن + السيولة",
@@ -7092,6 +7199,39 @@ const translations = {
     ph_rpc_dev_topic: "0xddf252ad... (Transfer) أو اتركه فارغاً"
   },
   ru: {
+    hx_honeypot_s: "Симуляция продажи пройдена",
+    hx_honeypot_v: "Не обнаружен",
+    hx_contract_s: "Исходный код верифицирован",
+    hx_contract_v: "Верифицирован",
+    hx_holders_s: "Концентрация выше обычной",
+    hx_contract: "Контракт",
+    hx_honeypot: "Honeypot",
+    hx_scanned: "Пример сканирования",
+    hx_owner_v: "Отказался",
+    hx_owner_s: "Нет контроля выпуска и паузы",
+    hx_holders: "Топ-10 держателей",
+    hx_kicker: "Security Hub · Быстрый скан",
+    hx_owner: "Владелец",
+    hx_tax_s: "Измерено симуляцией",
+    hx_score: "Оценка Elofid",
+    hx_liq_s: "LP заблокирована",
+    hx_note: "Иллюстративный пример",
+    hx_liq: "Ликвидность",
+    hx_tax: "Налог на покупку и продажу",
+    hub_scan_ph: "Вставьте адрес токена (0x… или Solana mint)",
+    hub_paste: "Вставить",
+    hub_trust: "Бесплатно. Без подключения кошелька. Ничего не подписывается.",
+    hub_wallet_link: "Проверить кошелёк в Файерволе",
+    hx_sec_kicker: "Что вы получаете",
+    hx_title: "Всё, что проверяет скан.",
+    hx_f1_t: "Контроль контракта",
+    hx_f1: "Владелец, выпуск, пауза и прокси, прочитанные из контракта.",
+    hx_f2_t: "Симуляция торговли",
+    hx_f2: "Покупка и продажа симулируются, чтобы измерить налог и выявить honeypot.",
+    hx_f3_t: "Ликвидность и держатели",
+    hx_f3: "Наблюдаемая ликвидность, данные о блокировке или сжигании LP и концентрация держателей.",
+    hx_f4_t: "Deep Intelligence",
+    hx_f4: "Финансирование деплоера, ранние покупатели, кластеры кошельков и изменения контроля со временем.",
     brand_sub: "Ончейн-безопасность",
     hero_kicker: "Центр безопасности Elofid",
     tx_sum_action_k: "Действие",
@@ -7160,7 +7300,7 @@ const translations = {
     hero_note: "Примечание: эти проверки носят информационный характер и не гарантируют безопасность. Без подписей. Без транзакций. Всегда проверяйте контракты и ссылки (URL) самостоятельно.",
     hero_micro_quick: "Начните здесь — кошелёк не нужен.",
     hero_micro_access: "Откройте продвинутый анализ approvals + инструменты revoke.",
-    tools_kicker: "ВЫБЕРИТЕ ИНСТРУМЕНТ",
+    tools_kicker: "Другие инструменты",
     cube_quick_title: "Быстрый скан",
     cube_quick_desc: "Быстрая проверка токена + шаримый отчёт + кэш.",
     cube_liq_title: "Токен + ликвидность",
@@ -15854,6 +15994,38 @@ if (typeof window.cxActivitySend !== "function") {
     } catch(e) {}
   };
 }
+</script>
+
+<script>
+/* Hub hero scan: the field on the page runs the existing Quick / Deep scan */
+(function () {
+  var f = document.getElementById('hubScanForm'), inp = document.getElementById('hubToken');
+  if (!f || !inp) return;
+  function setVal(sel, v) {
+    var el = document.querySelector(sel); if (!el) return;
+    el.value = v;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = (inp.value || '').trim();
+    if (typeof window.showPanel === 'function') window.showPanel('quick');
+    else { var b = document.getElementById('heroQuickScanBtn'); if (b) b.click(); }
+    if (!v) { setTimeout(function () { var t = document.getElementById('qs-token'); if (t) t.focus(); }, 60); return; }
+    setVal('#qs-net', 'auto');
+    setVal('#qs-token', v);
+    setTimeout(function () { var r = document.getElementById('qs-run'); if (r) r.click(); }, 400);
+    try { if (typeof gtagEvent === 'function') gtagEvent('sec_hub_hero_scan'); } catch (err) {}
+  });
+  var pb = document.getElementById('hubPasteBtn');
+  if (pb && navigator.clipboard && navigator.clipboard.readText) {
+    pb.hidden = false;
+    pb.addEventListener('click', function () {
+      navigator.clipboard.readText().then(function (t) { t = (t || '').trim(); if (t) { inp.value = t; inp.focus(); } }).catch(function () {});
+    });
+  }
+})();
 </script>
 </body>
 </html>

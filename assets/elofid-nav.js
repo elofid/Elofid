@@ -88,6 +88,8 @@
 
     h.querySelectorAll('[data-eui-action="quick"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
+        var field = document.getElementById('hubToken');
+        if (field) { e.preventDefault(); field.scrollIntoView({ block: 'center', behavior: 'smooth' }); setTimeout(function () { field.focus(); }, 250); return; }
         var btn = document.getElementById('heroQuickScanBtn');
         if (btn) { e.preventDefault(); btn.click(); }
       });
