@@ -84,7 +84,8 @@
   .eui-lang-trigger [data-eui-lang-current]{display:none}
   .eui-burger{width:36px;height:36px}
 }
-@media(max-width:360px){.eui-actions .eui-cta{display:none}}
+@media(max-width:430px){.eui-brand span{display:none}}
+@media(max-width:340px){.eui-actions .eui-cta{display:none}}
 
 /* ---------- Existing page buttons, flat and quiet (no glow, no gradient) ---------- */
 /* Home */
