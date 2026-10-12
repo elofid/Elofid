@@ -923,32 +923,22 @@ twq('config','r4v6v');
   .footer-brand img,.dash-brand img{border-radius:50%!important;background:none!important;border:0!important}
   @media (max-width:720px){.brand img{width:41px!important;height:41px!important;flex:0 0 41px!important}}
 </style>
+<link rel="stylesheet" href="/assets/elofid-ui.css">
+<script src="/assets/elofid-nav.js" defer></script>
 </head>
-<body>
-  <div class="shell nav-wrap">
-    <header class="nav">
-      <a href="/" class="brand" aria-label="Elofid home">
-        <img src="/elofid-mark.svg" alt="Elofid" width="48" height="48" />
-        <span class="brand-copy"><span class="brand-name">Elofid</span><span class="brand-area" data-i18n="brandArea">Developer Intelligence</span></span>
-      </a>
-      <nav class="nav-links" aria-label="Developer navigation">
-        <a class="active" href="/developers">API</a>
-        <a href="#features" data-i18n="navFeatures">Features</a>
-        <a href="/docs/" data-i18n="navDocs">Docs</a>
-        <a href="#pricing" data-i18n="navPricing">Pricing</a>
-        <a href="#global-feed" data-i18n="navGlobalFeed">Global Feed</a>
-        <a href="/security" data-i18n="navSecurityHub">Security Hub</a>
-      </nav>
-      <div class="nav-actions">
-        <select class="lang-select" id="language" aria-label="Language">
-          <option value="en">EN</option><option value="zh">中文</option><option value="ar">عربي</option><option value="ru">RU</option>
-        </select>
-        <a class="btn btn-ghost" href="/dashboard/" data-i18n="signIn">Sign in</a>
-        <a class="btn btn-primary" href="/dashboard/" data-i18n="startFree">Start building free</a>
-        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
-      </div>
-    </header>
+<body class="eui-page-dev">
+  <div class="shell eui-shell"><header class="eui-header" data-eui-header>
+  <div class="eui-bar">
+    <a class="eui-brand" href="/" aria-label="Elofid home"><img src="/elofid-mark.svg" alt="" width="36" height="36"><span><b>Elofid</b><small data-eui="tagline">On-chain security</small></span></a>
+    <nav class="eui-nav" aria-label="Primary"><a href="/security" data-eui="hub">Security Hub</a><a href="/firewall" data-eui="firewall">Firewall</a><a href="/developers" data-eui="developers" aria-current="page">Developers</a><a href="/developers#pricing" data-eui="pricing">Pricing</a><a href="/docs/" data-eui="docs">Docs</a><a href="/#social" data-eui="community">Community</a></nav>
+    <div class="eui-actions">
+      <div class="eui-lang"><button type="button" class="eui-lang-trigger" aria-haspopup="true" aria-expanded="false" data-eui-aria="language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span data-eui-lang-current>EN</span><svg class="eui-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="eui-lang-menu" role="menu"><button class="lang-btn active" data-lang="en" type="button">English</button><button class="lang-btn" data-lang="zh" type="button">中文</button><button class="lang-btn" data-lang="ar" type="button">العربية</button><button class="lang-btn" data-lang="ru" type="button">Русский</button></div></div>
+      <select id="language" hidden aria-hidden="true" tabindex="-1"><option value="en">EN</option><option value="zh">中文</option><option value="ar">عربي</option><option value="ru">RU</option></select><a class="eui-signin" href="/dashboard/" data-eui="signin">Sign in</a><a class="eui-btn eui-btn-primary eui-cta" href="/dashboard/" data-eui="cta_build">Start building free</a>
+      <button type="button" class="eui-burger" aria-expanded="false" data-eui-aria="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
   </div>
+  <nav class="eui-mobile" aria-label="Mobile"><a href="/security" data-eui="hub">Security Hub</a><a href="/firewall" data-eui="firewall">Firewall</a><a href="/developers" data-eui="developers" aria-current="page">Developers</a><a href="/developers#pricing" data-eui="pricing">Pricing</a><a href="/docs/" data-eui="docs">Docs</a><a href="/#social" data-eui="community">Community</a><a class="eui-signin" href="/dashboard/" data-eui="signin">Sign in</a></nav>
+</header></div>
 
   <main>
     <section class="shell hero">
