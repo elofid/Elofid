@@ -124,7 +124,7 @@ twq('config','r4v6v');
 
  body::before{
   content:"";
-  position:fixed; inset:0;          
+  position:fixed; inset:0;
   pointer-events:none;
   background:
     radial-gradient(740px 640px at 20% 14%, rgba(0,229,255,.12), transparent 60%),
@@ -135,7 +135,7 @@ twq('config','r4v6v');
   background-repeat:no-repeat, no-repeat, no-repeat, repeat;
   opacity:.10;
   animation: drift 18s linear infinite;
-  transform: translate3d(0,0,0) scale(1.12);  
+  transform: translate3d(0,0,0) scale(1.12);
   transform-origin:center;
   mix-blend-mode: overlay;
   filter: blur(.25px);
@@ -143,7 +143,7 @@ twq('config','r4v6v');
 
 body::after{
   content:"";
-  position:fixed; inset:0;  
+  position:fixed; inset:0;
   pointer-events:none;
   background: radial-gradient(circle at 50% 18%, transparent 0%, rgba(0,0,0,.18) 55%, rgba(0,0,0,.60) 100%);
   opacity:.74;
@@ -246,7 +246,7 @@ body::after{
 .top-nav{
   position:relative; z-index:1;
   margin: 0 auto;
-  display:flex;                
+  display:flex;
   gap: 4px;
   align-items:center;
   justify-content:center;
@@ -342,8 +342,8 @@ body::after{
   white-space: nowrap;
 
   color: rgba(0,229,255,.95);
-  background: rgba(5,6,10,.20);           
-  border: 1px solid rgba(0,229,255,.35);  
+  background: rgba(5,6,10,.20);
+  border: 1px solid rgba(0,229,255,.35);
 
   box-shadow:
     0 10px 34px rgba(0,0,0,.45),
@@ -383,10 +383,10 @@ body::after{
      ========================= */
   .hero{
   position:relative;
-  max-width: 1100px;              
+  max-width: 1100px;
   margin: 18px auto 36px;
-  padding: 18px 0 18px;           
-  text-align: center;              
+  padding: 18px 0 18px;
+  text-align: center;
   animation: heroIn .7s var(--ease) both;
 }
 
@@ -397,7 +397,7 @@ body::after{
   position:absolute;
   inset: -70px 0 -40px;
   z-index:-1;
-  border-radius: 80px;        
+  border-radius: 80px;
   background:
     radial-gradient(circle at 50% 18%, rgba(0,229,255,.10), transparent 62%),
     radial-gradient(circle at 26% 40%, rgba(124,92,255,.08), transparent 66%);
@@ -474,16 +474,16 @@ body::after{
   flex-wrap:wrap;
   gap: 10px;
   margin: 14px 0 18px;
-  justify-content:center;     
+  justify-content:center;
 }
 
 .chip{
   display:inline-flex;
   align-items:center;
   gap: 8px;
-  padding: 9px 12px;          
+  padding: 9px 12px;
   border-radius: 999px;
-  font-size: 11px;            
+  font-size: 11px;
   letter-spacing: .18em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -592,13 +592,13 @@ body::after{
   align-items:stretch;
   gap: 12px;
 
-  flex-wrap: nowrap; 
+  flex-wrap: nowrap;
 }
 
 .hero-actions .btn{
-  flex: 1 1 0;      
-  min-width: 0;     
-  max-width: 520px; 
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 520px;
 }
 
   @media (min-width: 980px){
@@ -790,9 +790,9 @@ body::after{
     max-width: 520px;
     text-align: center;
 
-    display: flex;              
-    flex-direction: column;     
-    align-items: center;        
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .section-head{ grid-column: 1; }
@@ -833,7 +833,7 @@ body::after{
   .section.section-centered .section-title,
   .section.section-centered .section-body{
     grid-column: 1;
-    justify-self: center;           
+    justify-self: center;
     text-align: center;
   }
 
@@ -844,11 +844,11 @@ body::after{
   }
    /* Tighten the 3 lines (kicker + title + desc) + slightly smaller title */
   .section.section-centered{
-    row-gap: 8px;            
+    row-gap: 8px;
   }
 
   .section.section-centered .section-kicker{
-    margin-bottom: 4px;        
+    margin-bottom: 4px;
   }
 
   .section.section-centered .section-title{
@@ -860,12 +860,12 @@ body::after{
 }
 
   .section.section-centered .section-body{
-    margin-top: 2px;           
+    margin-top: 2px;
     max-width: 68ch;
   }
 
   .section.section-centered > .stats-grid{
-    margin-top: 14px;        
+    margin-top: 14px;
   }
 
 }
@@ -889,7 +889,7 @@ body::after{
 
   @media (max-width: 980px){
     .stats-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; border: none; }
-    
+
   }
   @media (max-width: 560px){ .stats-grid{ grid-template-columns: 1fr; } }
 
@@ -898,7 +898,7 @@ body::after{
      ========================= */
   .social-grid{
   display:grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); 
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   margin-top: 18px;
 }
@@ -1188,7 +1188,7 @@ body::after{
     letter-spacing:.04em;
     margin:2px 0 10px;
   }
-  
+
   .btn-wallet.is-connected{
     background:rgba(0,230,118,.07);
     color:#00e676;
@@ -1211,11 +1211,11 @@ body::after{
     .modal-title{ font-size:21px; line-height:1.12; padding-right:24px; }
     html[dir="rtl"] .modal-title{ padding-right:0; padding-left:24px; }
     .modal-subtitle{ font-size:12.5px; line-height:1.55; }
-    
+
     .modal-actions{ gap:8px; }
     .modal-actions .btn-wallet{ flex:1 1 100%; min-height:48px; }
     .modal-actions .btn-close{ margin-inline:auto; }
-    
+
     .modal-close-x{ top:8px; right:9px; font-size:17px; }
     html[dir="rtl"] .modal-close-x{ right:auto; left:9px; }
   }
@@ -1349,7 +1349,7 @@ body::after{
   /* Languages: full row UNDER brand */
   .lang-switch{
     grid-area: lang;
-    justify-self: center;         
+    justify-self: center;
     width: fit-content;
     max-width: none;
 
@@ -1615,7 +1615,7 @@ html, body { overflow-x: hidden; }
   .hero-primary-cta .btn{width:100% !important;min-height:48px;padding:12px 16px;font-size:12px;}
   .hero-primary-sub{font-size:12px;line-height:1.5;max-width:92%;}
   .soc-insight{font-size:12px;padding:0 8px;}
-  
+
 }
 
 </style>
@@ -1944,7 +1944,7 @@ html, body { overflow-x: hidden; }
 </div>
 
   <script>
-  const CX_DEBUG = false; 
+  const CX_DEBUG = false;
 
   function cxlog(...args) { if (CX_DEBUG) console.log(...args); }
   function cxwarn(...args) { if (CX_DEBUG) console.warn(...args); }

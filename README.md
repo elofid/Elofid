@@ -41,7 +41,7 @@ The Security Hub also includes a **Tx Decoder**, which turns a transaction into 
 Every Elofid product follows the same rules.
 
 - **Unknown is never shown as clean.** If a data source fails or coverage is incomplete, the report says so and explains why. A missing value is never displayed as zero, "none" or "safe".
-- **On-chain verification is marked.** Figures read directly from the blockchain are labeled as verified. Figures from third-party providers are labeled by source.
+- **On-chain verification is marked.** Figures read directly from the blockchain are labeled as verified. Anything that is not read from the chain is clearly marked.
 - **Simulations never touch real funds.** Buy, sell and transfer tests run as read-only simulations. Nothing is broadcast and nothing is signed.
 - **Context, not accusations.** Signals such as a fresh deployer wallet or shared funding are shown as evidence to review, with the reasoning visible.
 - **No secrets in the browser.** Scans never ask for a seed phrase or a wallet signature, and provider keys stay server-side.

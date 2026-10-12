@@ -63,9 +63,9 @@ We will keep you informed while we investigate. With your permission, we are hap
 
 We will not pursue legal action against researchers who act in good faith, follow this policy, avoid harm to users and data, and give us a reasonable opportunity to resolve the issue before disclosure.
 
-## Rewards
+## Recognition
 
-We value every valid report. Submitting a report does not guarantee a reward or bounty. Any recognition is at the discretion of Elofid.
+We value every valid report. Submitting a report does not guarantee a bounty. Any recognition is at the discretion of Elofid.
 
 ## Beware of impersonation
 
