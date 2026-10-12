@@ -4466,39 +4466,24 @@ twq('config','r4v6v');
   .brand-logo,.top-bar .brand-logo{width:50px!important;height:50px!important;border-radius:50%!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;object-fit:contain!important}
   @media (max-width:720px){.brand-logo,.top-bar .brand-logo{width:43px!important;height:43px!important}}
 </style>
+<link rel="stylesheet" href="/assets/elofid-ui.css">
+<script src="/assets/elofid-nav.js" defer></script>
 </head>
-<body>
+<body class="eui-page-hub">
 <div class="page-shell">
   <!-- TOP BAR -->
-  <nav class="top-bar">
-    <a class="brand" href="https://elofid.com/">
-      <img src="/elofid-mark.svg" alt="Elofid" class="brand-logo" width="50" height="50" />
-      <div class="brand-text">
-        <div class="brand-title">Elofid</div>
-        <div class="brand-sub" data-i18n="brand_sub">On-Chain Security</div>
-      </div>
-    </a>
-    <div class="top-right">
-      <a href="https://elofid.com/" class="back-link" data-i18n="btn_back">← Back to Site</a>
-      <a href="/firewall" class="btn-firewall">
-        <span data-i18n="btn_firewall">Scan Wallet</span>
-      </a>
-      <!-- ✅ NEW: Telegram bot cross-promotion — same design pattern as the
-           Firewall pill button above (static link, no new JS), just in
-           Telegram's brand blue instead of red so the two are visually
-           distinct at a glance. -->
-      <a href="https://t.me/ElofidBot" class="btn-telegram" target="_blank" rel="noopener">
-        <svg class="tg-icon" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-2 1.93c-.24.24-.44.44-.82.44z"/></svg>
-        <span data-i18n="btn_telegram">Bot</span>
-      </a>
-      <div class="lang-switch" aria-label="Language selector" data-i18n-aria-label="aria_lang_selector">
-        <button class="lang-btn active" data-lang="en">🇺🇸 EN</button>
-        <button class="lang-btn" data-lang="zh">🇨🇳 中文</button>
-        <button class="lang-btn" data-lang="ar">🇸🇦 عربي</button>
-        <button class="lang-btn" data-lang="ru">🇷🇺 RU</button>
-      </div>
+  <header class="eui-header" data-eui-header>
+  <div class="eui-bar">
+    <a class="eui-brand" href="/" aria-label="Elofid home"><img src="/elofid-mark.svg" alt="" width="36" height="36"><span><b>Elofid</b><small data-eui="tagline">On-chain security</small></span></a>
+    <nav class="eui-nav" aria-label="Primary"><a href="/security" data-eui="hub" aria-current="page">Security Hub</a><a href="/firewall" data-eui="firewall">Firewall</a><a href="/developers" data-eui="developers">Developers</a><a href="/developers#pricing" data-eui="pricing">Pricing</a><a href="/docs/" data-eui="docs">Docs</a><a href="/#social" data-eui="community">Community</a></nav>
+    <div class="eui-actions">
+      <div class="eui-lang"><button type="button" class="eui-lang-trigger" aria-haspopup="true" aria-expanded="false" data-eui-aria="language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span data-eui-lang-current>EN</span><svg class="eui-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="eui-lang-menu" role="menu"><button class="lang-btn active" data-lang="en" type="button">English</button><button class="lang-btn" data-lang="zh" type="button">中文</button><button class="lang-btn" data-lang="ar" type="button">العربية</button><button class="lang-btn" data-lang="ru" type="button">Русский</button></div></div>
+      <a class="eui-btn eui-btn-primary eui-cta" href="#" data-eui-action="quick" data-eui="cta_token">Scan a token</a>
+      <button type="button" class="eui-burger" aria-expanded="false" data-eui-aria="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
-  </nav>
+  </div>
+  <nav class="eui-mobile" aria-label="Mobile"><a href="/security" data-eui="hub" aria-current="page">Security Hub</a><a href="/firewall" data-eui="firewall">Firewall</a><a href="/developers" data-eui="developers">Developers</a><a href="/developers#pricing" data-eui="pricing">Pricing</a><a href="/docs/" data-eui="docs">Docs</a><a href="/#social" data-eui="community">Community</a></nav>
+</header>
 
   <main>
     <!-- HERO -->

@@ -1674,37 +1674,26 @@ body{background:#05060a!important}
   .brand-logo,.top-bar .brand-logo{width:50px!important;height:50px!important;border-radius:50%!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;object-fit:contain!important}
   @media (max-width:720px){.brand-logo,.top-bar .brand-logo{width:43px!important;height:43px!important}}
 </style>
+<link rel="stylesheet" href="/assets/elofid-ui.css">
+<script src="/assets/elofid-nav.js" defer></script>
 </head>
-<body>
+<body class="eui-page-firewall">
 <div class="fw-bg-layer" aria-hidden="true"></div>
 <div class="page-shell">
 
   <!-- TOP BAR -->
-  <header class="top-bar">
-    <a class="brand" href="/" title="Back to Elofid">
-      <picture>
-        <source srcset="/logo.webp" type="image/webp">
-        <img src="/elofid-mark.svg" alt="Elofid" class="brand-logo" width="50" height="50" onerror="this.style.display='none'">
-      </picture>
-      <div class="brand-text">
-        <div class="brand-title">Elofid</div>
-        <div class="brand-sub" data-i18n="brand_sub">On-Chain Security</div>
-      </div>
-    </a>
-    <div class="top-right">
-      <!-- Language switcher -->
-      <div class="lang-switch" aria-label="Language selector">
-        <button class="lang-btn active" data-lang="en" type="button">🇺🇸 EN</button>
-        <button class="lang-btn" data-lang="zh" type="button">🇨🇳 中文</button>
-        <button class="lang-btn" data-lang="ar" type="button">🇸🇦 عربي</button>
-        <button class="lang-btn" data-lang="ru" type="button">🇷🇺 RU</button>
-      </div>
-      <div id="tierBadge" style="display:none;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid rgba(93,255,178,.3);background:rgba(93,255,178,.08);color:var(--green);font-weight:800">✓ FULL ACCESS</div>
-      <div class="firewall-badge"><span class="dot"></span><span data-i18n="fw_badge">FIREWALL</span></div>
-      <button class="btn-full-access-top" id="btnTopAccess" title="Unlock full features" data-i18n="btn_full_access">🔑 Full Access</button>
-      <a class="back-link" href="/security" data-i18n="btn_back">← Back to Hub</a>
+  <header class="eui-header" data-eui-header>
+  <div class="eui-bar">
+    <a class="eui-brand" href="/" aria-label="Elofid home"><img src="/elofid-mark.svg" alt="" width="36" height="36"><span><b>Elofid</b><small data-eui="tagline">On-chain security</small></span></a>
+    <nav class="eui-nav" aria-label="Primary"><a href="/security" data-eui="hub">Security Hub</a><a href="/firewall" data-eui="firewall" aria-current="page">Firewall</a><a href="/developers" data-eui="developers">Developers</a><a href="/developers#pricing" data-eui="pricing">Pricing</a><a href="/docs/" data-eui="docs">Docs</a><a href="/#social" data-eui="community">Community</a></nav>
+    <div class="eui-actions">
+      <div class="eui-lang"><button type="button" class="eui-lang-trigger" aria-haspopup="true" aria-expanded="false" data-eui-aria="language"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span data-eui-lang-current>EN</span><svg class="eui-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="eui-lang-menu" role="menu"><button class="lang-btn active" data-lang="en" type="button">English</button><button class="lang-btn" data-lang="zh" type="button">中文</button><button class="lang-btn" data-lang="ar" type="button">العربية</button><button class="lang-btn" data-lang="ru" type="button">Русский</button></div></div>
+      <div id="tierBadge" style="display:none;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid rgba(93,255,178,.3);background:rgba(93,255,178,.08);color:var(--green);font-weight:800">✓ FULL ACCESS</div><button class="btn-full-access-top" id="btnTopAccess" title="Unlock full features" data-i18n="btn_full_access">Full Access</button><a class="eui-btn eui-btn-primary eui-cta" href="#walletInput" data-eui="cta_wallet">Check my wallet</a>
+      <button type="button" class="eui-burger" aria-expanded="false" data-eui-aria="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
-  </header>
+  </div>
+  <nav class="eui-mobile" aria-label="Mobile"><a href="/security" data-eui="hub">Security Hub</a><a href="/firewall" data-eui="firewall" aria-current="page">Firewall</a><a href="/developers" data-eui="developers">Developers</a><a href="/developers#pricing" data-eui="pricing">Pricing</a><a href="/docs/" data-eui="docs">Docs</a><a href="/#social" data-eui="community">Community</a></nav>
+</header>
 
   <main>
 
