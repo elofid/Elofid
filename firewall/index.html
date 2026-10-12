@@ -1674,8 +1674,8 @@ body{background:#05060a!important}
   .brand-logo,.top-bar .brand-logo{width:50px!important;height:50px!important;border-radius:50%!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;object-fit:contain!important}
   @media (max-width:720px){.brand-logo,.top-bar .brand-logo{width:43px!important;height:43px!important}}
 </style>
-<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261012e">
-<script src="/assets/elofid-nav.js?v=20261012e" defer></script>
+<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261012f">
+<script src="/assets/elofid-nav.js?v=20261012f" defer></script>
 </head>
 <body class="eui-page-firewall">
 <div class="fw-bg-layer" aria-hidden="true"></div>
@@ -2054,7 +2054,7 @@ body{background:#05060a!important}
             <div class="pp-inner">
               <div class="pp-header">
                 <div class="pp-logo">
-                  <div class="pp-logo-shield"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-4"/></svg></div>
+                  <div class="pp-logo-shield"><img src="/elofid-mark.svg" alt="Elofid" width="26" height="26"></div>
                   <div>
                     <div class="pp-logo-text">ELOFID FIREWALL</div>
                     <div class="pp-logo-sub">Wallet Security Report</div>
@@ -2205,18 +2205,17 @@ const DEMO_WALLET = "0x0000000000000000000de0000000000000000000";
 const API_BASE    = window.ELOFID_API_BASE || location.origin;
 
 // ── Activity Counter — reports scan events to homepage dashboard ──────
+// Counter for the homepage. A normal keepalive fetch first: many ad blockers drop
+// sendBeacon requests, which made scans go uncounted. Beacon is only the fallback.
 function cxActivitySend(t, n = 1) {
+  const payload = JSON.stringify({ t, n: Math.min(50, Math.max(1, Number(n) || 1)) });
+  const beacon = () => { try { navigator.sendBeacon && navigator.sendBeacon("/api/activity", new Blob([payload], { type: "application/json" })); } catch {} };
   try {
-    const payload = JSON.stringify({ t, n: Math.min(50, Math.max(1, Number(n) || 1)) });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon("/api/activity", new Blob([payload], { type: "application/json" }));
-      return;
-    }
     fetch("/api/activity", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: payload, keepalive: true
-    }).catch(() => {});
-  } catch {}
+      body: payload, keepalive: true, cache: "no-store"
+    }).then(r => { if (!r.ok) console.warn("[Elofid activity]", t, "status", r.status); }).catch(beacon);
+  } catch { beacon(); }
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -4095,10 +4094,10 @@ async function runLoadSequence(walletAddr, net, isDemo) {
   if (!isDemo) {
     try {
       cxActivitySend("wallet_scan", 1);
-      const _riskyCount = (fwScanData.rows || []).filter(r => {
-        const rr = String(r.risk || "").toLowerCase();
-        return rr.includes("high") || rr.includes("med");
-      }).length;
+      // Risky = an active approval the risk model marks medium or above
+      const _riskyCount = (fwScanData.rows || []).filter(r =>
+        r.hasApproval && ["critical", "high", "medium"].includes(String(r.displayRisk || "").toLowerCase())
+      ).length;
       if (_riskyCount > 0) cxActivitySend("risky_approvals", _riskyCount);
     } catch {}
   }
@@ -5823,6 +5822,7 @@ async function fwGetWorkerPassport() {
 // ── SHARE CARD PNG — Canvas renderer matching CSS exactly ────────────
 // html2canvas cannot render ::before/::after pseudo-elements (dot grid, glow, gradient border)
 // so we draw the card manually on Canvas for pixel-perfect output.
+(function () { try { const i = new Image(); i.src = "/elofid-mark.svg"; window.__fwLogoImg = i; } catch {} })();
 function fwDownloadShareCard() {
   if (!fwScanData || !fwWallet) { showPassportMsg("Run a scan first."); return; }
   showPassportMsg("Generating…");
@@ -5917,12 +5917,15 @@ function fwDownloadShareCard() {
   let y = pad;
 
   // ── HEADER ──────────────────────────────────────────────────────
-  // Shield box
-  x.fillStyle = "rgba(0,229,255,0.10)";
-  x.strokeStyle = "rgba(0,229,255,0.32)"; x.lineWidth = 1;
-  rr(pad,y,22,22,5); x.fill(); x.stroke();
-  x.font = "12px serif"; x.fillStyle="#fff"; x.textAlign="center";
-  x.fillText("🛡", pad+11, y+15);
+  // Elofid logo (preloaded), simple box as a fallback
+  const _logo = window.__fwLogoImg;
+  if (_logo && _logo.complete && _logo.naturalWidth) {
+    try { x.drawImage(_logo, pad - 1, y - 1, 24, 24); } catch {}
+  } else {
+    x.fillStyle = "rgba(0,229,255,0.10)";
+    x.strokeStyle = "rgba(0,229,255,0.32)"; x.lineWidth = 1;
+    rr(pad,y,22,22,5); x.fill(); x.stroke();
+  }
 
   // Title
   x.textAlign = "left";

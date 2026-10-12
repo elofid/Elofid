@@ -412,3 +412,8 @@ body.eui-page-dev{font-family:var(--eui-font)!important}
 }
 .eui-page-dev .hero .btn{min-height:50px;padding:0 24px;font-size:15px;font-weight:650;display:inline-flex;align-items:center;justify-content:center;min-width:190px}
 @media(max-width:560px){.eui-page-dev .hero .btn{min-width:0}}
+/* Firewall: notices centred, Elofid logo on the Passport */
+.eui-page-firewall #demoNotice,.eui-page-firewall #scanNotice{text-align:center!important}
+.eui-page-firewall .pp-logo-shield{width:26px!important;height:26px!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:50%!important}
+.eui-page-firewall .pp-logo-shield::before{display:none!important;content:none!important}
+.eui-page-firewall .pp-logo-shield img{display:block;width:26px;height:26px;border-radius:50%}
