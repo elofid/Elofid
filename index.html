@@ -66,12 +66,16 @@ twq('config','r4v6v');
   /* Hero */
   .hm-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:52px;align-items:center;padding:56px 0 64px}
   .hm-pill{display:inline-flex;align-items:center;gap:10px;margin-bottom:26px;padding:5px 12px 5px 5px;border-radius:999px;border:1px solid var(--hair2);background:rgba(255,255,255,.03);color:#cdd6e0;font-size:13px;transition:border-color .2s}
+  .hm-pill{max-width:100%}
+  .hm-pill>span{min-width:0}
+  .hm-hero-copy,.hm-hero-visual{min-width:0}
   .hm-pill:hover{border-color:rgba(66,219,255,.38)}
   .hm-pill b{padding:3px 9px;border-radius:999px;background:rgba(66,219,255,.12);color:#8beaff;font-size:11px;font-weight:700}
   .hm-pill-ic{width:14px;height:14px;opacity:.6}
   html[dir="rtl"] .hm-pill-ic,html[dir="rtl"] .hm-link-ic{transform:scaleX(-1)}
   .hm-h1{margin:0;font-size:clamp(36px,4.5vw,58px);line-height:1.04;letter-spacing:-.04em;font-weight:760;color:#fff}
   .hm-h1 span{color:#b9cfdd}
+  .hm-h1,.hm-title{overflow-wrap:break-word;hyphens:auto}
   .hm-sub{margin:22px 0 0;max-width:600px;color:#aab5c2;font-size:17px;line-height:1.65}
   .hm-identity{margin:14px 0 0;max-width:600px;color:var(--dim);font-size:13.5px;line-height:1.6}
   .hm-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
@@ -210,7 +214,7 @@ twq('config','r4v6v');
 
   @media(max-width:1060px){.hm-grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.hm-hero{gap:36px}}
   @media(max-width:920px){
-    .hm-hero{grid-template-columns:1fr;padding:36px 0 48px;text-align:center}
+    .hm-hero{grid-template-columns:minmax(0,1fr);padding:36px 0 48px;text-align:center}
     .hm-sub,.hm-identity,.hm-note{margin-left:auto;margin-right:auto}
     .hm-hero .hm-ctas{justify-content:center}
     .hm-hero-visual{max-width:520px;margin:0 auto;width:100%;text-align:start}
@@ -223,6 +227,8 @@ twq('config','r4v6v');
   @media(max-width:560px){
     .hm-shell{width:calc(100% - 24px)}
     .hm-pill{font-size:12px;gap:8px}
+    .hm-h1{font-size:clamp(26px,7.6vw,36px)}
+    .hm-title{font-size:clamp(26px,7.6vw,32px)}
     .hm-section{padding-top:68px}
     .hm-grid4{grid-template-columns:1fr}
     .hm-sub{font-size:15.5px}
