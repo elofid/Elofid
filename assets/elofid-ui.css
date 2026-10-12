@@ -378,3 +378,37 @@ body.eui-page-hub::before{display:none!important}
 .eui-page-hub #heroQuickScanBtn[hidden],.eui-page-hub .hub-paste[hidden],.eui-page-firewall .fw-paste[hidden]{display:none!important}
 @media(max-width:640px){.eui-page-hub #toolGrid{grid-template-columns:1fr!important}}
 .eui-page-hub .hero .fw-hero-tagline{text-align:center;margin-left:auto;margin-right:auto;max-width:640px}
+
+/* ───────────── One header geometry on every page (reference: Developers) ───────────── */
+.eui-header{--eui-w:min(1240px,calc(100vw - 40px));width:var(--eui-w);max-width:none;margin-left:calc((100% - var(--eui-w)) / 2);margin-right:calc((100% - var(--eui-w)) / 2)}
+.eui-shell .eui-header{margin-left:auto;margin-right:auto;width:100%}
+.eui-page-home .eui-header{top:28px;margin-top:14px}
+@media(max-width:560px){
+  .eui-header{--eui-w:calc(100vw - 24px)}
+  .eui-page-home .eui-header{top:16px;margin-top:2px}
+}
+/* Firewall and Security Hub: clip instead of hidden, so the header can stay on top like on the other pages */
+html:has(> body.eui-page-firewall),html:has(> body.eui-page-hub),body.eui-page-firewall,body.eui-page-hub{overflow-x:clip!important}
+.eui-page-firewall .page-shell,.eui-page-hub .page-shell{padding-top:0!important}
+.eui-page-firewall .eui-header,.eui-page-hub .eui-header{top:28px;margin-top:28px}
+@media(max-width:560px){.eui-page-firewall .eui-header,.eui-page-hub .eui-header{top:16px;margin-top:16px}}
+.eui-page-firewall .fw-subnav{top:92px}
+@media(max-width:560px){.eui-page-firewall .fw-subnav{top:74px}}
+
+/* ───────────── Developers: same type scale and font as the homepage ───────────── */
+body.eui-page-dev{font-family:var(--eui-font)!important}
+.eui-page-dev .ahw-svg .a{font-family:var(--eui-font)!important}
+.eui-page-dev main h1,.eui-page-dev .hero h1{font-size:clamp(36px,4.5vw,58px)!important;line-height:1.04!important;letter-spacing:-.04em!important;font-weight:760!important}
+.eui-page-dev .hero-copy{font-size:17px!important;line-height:1.65!important;letter-spacing:0!important}
+.eui-page-dev .eyebrow,.eui-page-dev .section-kicker{font-size:11px!important;font-weight:800!important;letter-spacing:.18em!important}
+.eui-page-dev .section-title{font-size:clamp(30px,3.6vw,46px)!important;line-height:1.08!important;letter-spacing:-.035em!important;font-weight:740!important}
+.eui-page-dev .section-copy{font-size:16px!important;line-height:1.7!important}
+.eui-page-dev .final-cta h2{font-size:clamp(28px,3vw,38px)!important;line-height:1.08!important;letter-spacing:-.035em!important;font-weight:740!important}
+@media(max-width:560px){
+  .eui-page-dev main h1,.eui-page-dev .hero h1{font-size:clamp(26px,7.6vw,36px)!important}
+  .eui-page-dev .hero-copy{font-size:15.5px!important}
+  .eui-page-dev .section-title,.eui-page-dev .final-cta h2{font-size:clamp(26px,7.6vw,32px)!important}
+  .eui-page-dev .section-copy{font-size:15px!important}
+}
+.eui-page-dev .hero .btn{min-height:50px;padding:0 24px;font-size:15px;font-weight:650;display:inline-flex;align-items:center;justify-content:center;min-width:190px}
+@media(max-width:560px){.eui-page-dev .hero .btn{min-width:0}}
