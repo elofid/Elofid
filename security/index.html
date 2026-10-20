@@ -5530,6 +5530,9 @@ const translations = {
     deep_v_sol_start_delayed: "Set to open {minutes} min after liquidity · the window was not moved to it",
     deep_v_sol_start_unverified: "Not verified · this pool type can open later, and no trade came right at liquidity",
     deep_cr_trading_start_unverified: "Trading may have started later than liquidity, so the window may not cover the real launch",
+    deep_v_sol_start_earlier: "Not verified · an earlier pool of this token ({minutes} min before) uses a program whose trades cannot be attributed here",
+    deep_cr_earlier_pool_unverified: "An earlier pool of this token could not be analysed, so the window may not cover the real launch",
+    deep_cr_prelaunch_cut_unverified: "An earlier pool of this token was not observed on-chain, so the point before launch is approximate",
     deep_resolved_pair: "The address entered ({input}) is a trading pair. Deep Intelligence analyzed its token {token}.",
     deep_resolved_v4: "The address entered ({input}) is a V4 pool id. Deep Intelligence analyzed its token {token}.",
     deep_error_pair_ambiguous: "This address is a trading pair and its token could not be identified. Enter the token address instead.",
@@ -6456,6 +6459,9 @@ const translations = {
     deep_v_sol_start_delayed: "设定在添加流动性 {minutes} 分钟后开放 · 窗口未随之移动",
     deep_v_sol_start_unverified: "未验证 · 此类池子可以延后开放，且添加流动性时没有立即出现交易",
     deep_cr_trading_start_unverified: "交易可能晚于添加流动性才开始，因此该窗口可能未覆盖真实的启动",
+    deep_v_sol_start_earlier: "未验证 · 该代币更早的池子（早 {minutes} 分钟）使用的程序无法在此归属交易",
+    deep_cr_earlier_pool_unverified: "该代币更早的池子无法分析，因此该窗口可能未覆盖真实的启动",
+    deep_cr_prelaunch_cut_unverified: "未在链上观察到该代币更早的池子，因此启动前的测量点是近似的",
     deep_resolved_pair: "输入的地址（{input}）是交易对。Deep Intelligence 分析的是其代币 {token}。",
     deep_resolved_v4: "输入的地址（{input}）是 V4 池 ID。Deep Intelligence 分析的是其代币 {token}。",
     deep_error_pair_ambiguous: "该地址是交易对，无法确定其代币。请改为输入代币地址。",
@@ -7382,6 +7388,9 @@ const translations = {
     deep_v_sol_start_delayed: "مضبوط على الفتح بعد {minutes} دقيقة من إضافة السيولة · لم تُنقل النافذة إليه",
     deep_v_sol_start_unverified: "غير مُتحقق · هذا النوع من المجمعات قد يفتح لاحقًا، ولم تأتِ صفقة فور إضافة السيولة",
     deep_cr_trading_start_unverified: "ربما بدأ التداول بعد إضافة السيولة، لذا قد لا تغطي النافذة الإطلاق الفعلي",
+    deep_v_sol_start_earlier: "غير مُتحقق · مجمع أسبق لهذا الرمز (قبل {minutes} دقيقة) يستخدم برنامجًا لا يمكن هنا نسب صفقاته",
+    deep_cr_earlier_pool_unverified: "تعذّر تحليل مجمع أسبق لهذا الرمز، لذا قد لا تغطي النافذة الإطلاق الفعلي",
+    deep_cr_prelaunch_cut_unverified: "لم يُرصد على السلسلة مجمع أسبق لهذا الرمز، لذا فإن نقطة القياس قبل الإطلاق تقريبية",
     deep_resolved_pair: "العنوان المُدخل ({input}) هو زوج تداول. حلّل Deep Intelligence رمزه {token}.",
     deep_resolved_v4: "العنوان المُدخل ({input}) هو معرّف مجمع V4. حلّل Deep Intelligence رمزه {token}.",
     deep_error_pair_ambiguous: "هذا العنوان زوج تداول ولم يمكن تحديد رمزه. أدخل عنوان الرمز بدلاً منه.",
@@ -8308,6 +8317,9 @@ const translations = {
     deep_v_sol_start_delayed: "Открытие назначено через {minutes} мин после добавления ликвидности · окно не сдвинуто",
     deep_v_sol_start_unverified: "Не подтверждено · такой пул может открыться позже, и сделки сразу после ликвидности не было",
     deep_cr_trading_start_unverified: "Торги могли начаться позже добавления ликвидности, поэтому окно может не охватывать реальный запуск",
+    deep_v_sol_start_earlier: "Не подтверждено · более ранний пул этого токена (на {minutes} мин раньше) использует программу, сделки которой здесь не атрибутируются",
+    deep_cr_earlier_pool_unverified: "Более ранний пул этого токена не удалось проанализировать, поэтому окно может не охватывать реальный запуск",
+    deep_cr_prelaunch_cut_unverified: "Более ранний пул этого токена не наблюдался в блокчейне, поэтому точка измерения до запуска приблизительна",
     deep_resolved_pair: "Введённый адрес ({input}) является торговой парой. Deep Intelligence проанализировал её токен {token}.",
     deep_resolved_v4: "Введённый адрес ({input}) является ID пула V4. Deep Intelligence проанализировал его токен {token}.",
     deep_error_pair_ambiguous: "Этот адрес является торговой парой, и её токен определить не удалось. Введите адрес токена.",
@@ -12821,7 +12833,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         return cxDeepKV(cxDeepTr("deep_k_trading_open"),cxDeepEsc(txt)); })(),
       // v1.19.3: Solana trading start, proven or not.
       (()=>{ const t=an&&an.tradingStart; if(!t||!solMode)return null;
-        const txt=t.found?cxDeepTr(t.basis==="program_opens_at_liquidity"?"deep_v_sol_start_program":t.basis==="open_time"?"deep_v_sol_start_open_time":"deep_v_sol_start_buy"):t.reason==="delayed_open"?cxDeepTr("deep_v_sol_start_delayed",{minutes:cxDeepFinite(t.gapMinutes)??"?"}):cxDeepTr("deep_v_sol_start_unverified");
+        const txt=t.found?cxDeepTr(t.basis==="program_opens_at_liquidity"?"deep_v_sol_start_program":t.basis==="open_time"?"deep_v_sol_start_open_time":"deep_v_sol_start_buy"):t.reason==="delayed_open"?cxDeepTr("deep_v_sol_start_delayed",{minutes:cxDeepFinite(t.gapMinutes)??"?"}):t.reason==="earlier_pool_unverified"?cxDeepTr("deep_v_sol_start_earlier",{minutes:cxDeepFinite(t.gapMinutes)??"?"}):cxDeepTr("deep_v_sol_start_unverified");
         return cxDeepKV(cxDeepTr("deep_k_sol_start"),cxDeepEsc(txt)); })(),
       an&&an.tradingOpen&&cxDeepFinite(an.tradingOpen.preOpenDeployerBuys)>0?cxDeepKV(cxDeepTr("deep_k_preopen_deployer_buys"),cxDeepEsc(an.tradingOpen.preOpenDeployerBuys)):null,
       swapMode&&early.swapsObserved?cxDeepKV(cxDeepTr(solMode?"deep_k_buy_txs":"deep_k_buy_swaps"),cxDeepEsc(cxDeepTr("deep_v_buy_sell",{buys:early.swapsObserved.buys??0,sells:early.swapsObserved.sells??0}))):null,
