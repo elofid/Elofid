@@ -4485,6 +4485,10 @@ twq('config','r4v6v');
   .cx-deep-core-line{margin-top:6px;font-size:10px;line-height:1.4;font-weight:700;color:rgba(207,216,224,.72)}
   .qs-intel-column .cx-deep-scope .cx-deep-explain-text{color:rgba(207,216,224,.8)}
 
+  /* Header strip fix: the shared header's top margin (elofid-ui.css) collapsed through .page-shell and body,
+     so body started 28px down and the solid html background showed above it as a dark strip.
+     flow-root keeps that margin inside .page-shell. The header position does not change. */
+  .eui-page-hub .page-shell{display:flow-root}
 </style>
 <style id="elofid-logo-style">
   /* Elofid logo: round header mark (elofid-mark.svg), no tile frame */
@@ -5429,6 +5433,7 @@ const translations = {
     deep_scope_none: "Nothing could be checked in this section",
     deep_scope_pools_observed: "Launch activity observed in {observed} of {identified} pool(s)",
     deep_scope_pools_identified: "{identified} pool(s) identified · {trades} launch-window trade(s) observed",
+    deep_scope_pools_identified_later: "{identified} pool(s) identified · {trades} trade(s) observed in the analysed pool window",
     deep_badge_risk_title: "Risk finding",
     deep_badge_coverage_title: "Check coverage",
     deep_cr_no_pools: "No trading pool was found, so launch checks could not run",
@@ -5530,8 +5535,22 @@ const translations = {
     deep_v_sol_start_delayed: "Set to open {minutes} min after liquidity · the window was not moved to it",
     deep_v_sol_start_unverified: "Not verified · this pool type can open later, and no trade came right at liquidity",
     deep_cr_trading_start_unverified: "Trading may have started later than liquidity, so the window may not cover the real launch",
-    deep_v_sol_start_earlier: "Not verified · an earlier pool of this token ({minutes} min before) uses a program whose trades cannot be attributed here",
+    deep_v_sol_start_earlier: "Not verified · an earlier pool of this token ({minutes} min before) was not analysed here, so the first trading could not be reconstructed",
+    // v1.19.5 UI wording fix: the window was measured on a later pool (an earlier pool was not analysed).
+    deep_v_sol_start_earlier_trade: "Not verified · activity consistent with trading was observed {minutes} min before the analysed window. The original trading venue and launch time could not be verified",
+    deep_k_launch_anchor_later: "Analysed pool anchor",
+    deep_v_anchor_slot_verified_later: "Slot {block} · liquidity instruction verified for the analysed pool only. Token activity was observed before it, so this is not proof of where or when trading first started",
+    deep_found_launch_sol_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analysed pool. Token activity was observed before this window, so it is not necessarily the original launch window. In that pool's first {blocks} slots, {buyers} verified buyer(s) bought and {bundled} wallet(s) received tokens without paying, inside a pool trade. {pct} of supply left the pool there, net of sells.",
+    deep_found_launch_sol_nobundle_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analysed pool. Token activity was observed before this window, so it is not necessarily the original launch window. In that pool's first {blocks} slots, {buyers} verified buyer(s) bought and {pct} of supply left the pool, net of sells.",
+    deep_found_launch_sol_plain_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analysed pool. Token activity was observed before this window, so it is not necessarily the original launch window.",
+    deep_k_opening_group_later: "First slots of the analysed pool",
+    deep_k_immediate_wallets_later: "Wallets right after the analysed pool opened (activity was seen before it)",
+    deep_k_immediate_supply_later: "Supply in that window (analysed pool)",
+    deep_k_top_buyers_later: "Largest buyers in the analysed pool window",
+    deep_k_first_activity_later: "First activity in the analysed pool",
+    deep_scope_sol_trades_later: "{verified} verified buyer wallet(s) from {buys} paid buy(s) · analysed pool from slot {block}, token activity was observed before it · window {window}",
     deep_cr_earlier_pool_unverified: "An earlier pool of this token could not be analysed, so the window may not cover the real launch",
+    deep_cr_earlier_activity_unverified: "Activity consistent with trading was observed before the analysed window, so the window may not cover the real launch",
     deep_cr_prelaunch_cut_unverified: "An earlier pool of this token was not observed on-chain, so the point before launch is approximate",
     deep_resolved_pair: "The address entered ({input}) is a trading pair. Deep Intelligence analyzed its token {token}.",
     deep_resolved_v4: "The address entered ({input}) is a V4 pool id. Deep Intelligence analyzed its token {token}.",
@@ -5597,6 +5616,7 @@ const translations = {
     deep_v_pl_unaccounted: "{pct} of supply passed through accounts that were not read",
     deep_v_anchor_slot_unverified: "Slot {block} · first trade, no pool deposit found",
     deep_k_buy_txs: "Pool trades in launch window",
+    deep_k_buy_txs_later: "Pool trades in the analysed pool window",
     deep_scope_sol_trades: "{verified} verified buyer wallet(s) from {buys} paid buy(s) · launch slot {block} · launch window {window}",
     deep_found_launch_sol: "Balance changes show {early} buyer wallet(s) that paid for the token in the launch window. In the first {blocks} slots, {buyers} verified buyer(s) bought and {bundled} wallet(s) received tokens without paying, inside a pool trade. {pct} of supply left the pool there, net of sells.",
     deep_found_launch_sol_nobundle: "Balance changes show {early} buyer wallet(s) that paid for the token in the launch window. In the first {blocks} slots, {buyers} verified buyer(s) bought and {pct} of supply left the pool, net of sells.",
@@ -6358,6 +6378,7 @@ const translations = {
     deep_scope_none: "此部分没有可检查的内容",
     deep_scope_pools_observed: "在 {identified} 个池中的 {observed} 个观察到启动期活动",
     deep_scope_pools_identified: "识别出 {identified} 个池 · 观察到 {trades} 笔启动窗口交易",
+    deep_scope_pools_identified_later: "识别出 {identified} 个池 · 在所分析池子的窗口内观察到 {trades} 笔交易",
     deep_badge_risk_title: "风险发现",
     deep_badge_coverage_title: "检查覆盖度",
     deep_cr_no_pools: "未找到交易池，因此无法运行启动检查",
@@ -6459,8 +6480,22 @@ const translations = {
     deep_v_sol_start_delayed: "设定在添加流动性 {minutes} 分钟后开放 · 窗口未随之移动",
     deep_v_sol_start_unverified: "未验证 · 此类池子可以延后开放，且添加流动性时没有立即出现交易",
     deep_cr_trading_start_unverified: "交易可能晚于添加流动性才开始，因此该窗口可能未覆盖真实的启动",
-    deep_v_sol_start_earlier: "未验证 · 该代币更早的池子（早 {minutes} 分钟）使用的程序无法在此归属交易",
+    deep_v_sol_start_earlier: "未验证 · 该代币更早的池子（早 {minutes} 分钟）未在此分析，因此无法重建最初的交易",
+    // v1.19.5 UI wording fix: the window was measured on a later pool (an earlier pool was not analysed).
+    deep_v_sol_start_earlier_trade: "未验证 · 在所分析窗口之前 {minutes} 分钟观察到与交易相符的活动。无法验证最初的交易场所和启动时间",
+    deep_k_launch_anchor_later: "所分析池子的锚点",
+    deep_v_anchor_slot_verified_later: "槽位 {block} · 仅验证了所分析池子的流动性指令。在此之前已观察到该代币的活动，因此这不能证明交易最初在何处、何时开始",
+    deep_found_launch_sol_later: "余额变化显示，在所分析池子的窗口内有 {early} 个付款购买该代币的买家钱包。在此窗口之前已观察到该代币的活动，因此它不一定是原始启动窗口。在该池子的前 {blocks} 个槽位内，{buyers} 个已验证买家买入，{bundled} 个钱包在池交易中未付款即获得代币。扣除卖出后，有 {pct} 的供应量从池中流出。",
+    deep_found_launch_sol_nobundle_later: "余额变化显示，在所分析池子的窗口内有 {early} 个付款购买该代币的买家钱包。在此窗口之前已观察到该代币的活动，因此它不一定是原始启动窗口。在该池子的前 {blocks} 个槽位内，{buyers} 个已验证买家买入，扣除卖出后有 {pct} 的供应量从池中流出。",
+    deep_found_launch_sol_plain_later: "余额变化显示，在所分析池子的窗口内有 {early} 个付款购买该代币的买家钱包。在此窗口之前已观察到该代币的活动，因此它不一定是原始启动窗口。",
+    deep_k_opening_group_later: "所分析池子的前几个槽位",
+    deep_k_immediate_wallets_later: "所分析池子开放后立即出现的钱包（此前已观察到活动）",
+    deep_k_immediate_supply_later: "该窗口的供应占比（所分析池子）",
+    deep_k_top_buyers_later: "所分析池子窗口内最大的买家",
+    deep_k_first_activity_later: "所分析池子的首次活动",
+    deep_scope_sol_trades_later: "来自 {buys} 笔已付款买入的 {verified} 个已验证买家钱包 · 所分析池子自槽位 {block} 起，此前已观察到该代币的活动 · 窗口{window}",
     deep_cr_earlier_pool_unverified: "该代币更早的池子无法分析，因此该窗口可能未覆盖真实的启动",
+    deep_cr_earlier_activity_unverified: "在所分析窗口之前观察到与交易相符的活动，因此该窗口可能未覆盖真实的启动",
     deep_cr_prelaunch_cut_unverified: "未在链上观察到该代币更早的池子，因此启动前的测量点是近似的",
     deep_resolved_pair: "输入的地址（{input}）是交易对。Deep Intelligence 分析的是其代币 {token}。",
     deep_resolved_v4: "输入的地址（{input}）是 V4 池 ID。Deep Intelligence 分析的是其代币 {token}。",
@@ -6526,6 +6561,7 @@ const translations = {
     deep_v_pl_unaccounted: "{pct} 的供应量经过了未读取的账户",
     deep_v_anchor_slot_unverified: "槽位 {block} · 首笔交易，未找到池存入",
     deep_k_buy_txs: "启动窗口内的池交易",
+    deep_k_buy_txs_later: "所分析池子窗口内的池交易",
     deep_scope_sol_trades: "来自 {buys} 笔已付款买入的 {verified} 个已验证买家钱包 · 启动槽位 {block} · 启动窗口{window}",
     deep_found_launch_sol: "余额变化显示启动窗口内有 {early} 个付款购买该代币的买家钱包。在前 {blocks} 个槽位内，{buyers} 个已验证买家买入，{bundled} 个钱包在池交易中未付款即获得代币。扣除卖出后，有 {pct} 的供应量从池中流出。",
     deep_found_launch_sol_nobundle: "余额变化显示启动窗口内有 {early} 个付款购买该代币的买家钱包。在前 {blocks} 个槽位内，{buyers} 个已验证买家买入，扣除卖出后有 {pct} 的供应量从池中流出。",
@@ -7287,6 +7323,7 @@ const translations = {
     deep_scope_none: "لم يكن هناك ما يمكن فحصه في هذا القسم",
     deep_scope_pools_observed: "تم رصد نشاط الإطلاق في {observed} من أصل {identified} مجمع",
     deep_scope_pools_identified: "تم تحديد {identified} مجمع · تم رصد {trades} صفقة في نافذة الإطلاق",
+    deep_scope_pools_identified_later: "تم تحديد {identified} مجمع · تم رصد {trades} صفقة في نافذة المجمع المُحلَّل",
     deep_badge_risk_title: "نتيجة مخاطر",
     deep_badge_coverage_title: "تغطية الفحص",
     deep_cr_no_pools: "لم يُعثر على مجمع تداول، لذلك تعذّر تشغيل فحوصات الإطلاق",
@@ -7388,8 +7425,22 @@ const translations = {
     deep_v_sol_start_delayed: "مضبوط على الفتح بعد {minutes} دقيقة من إضافة السيولة · لم تُنقل النافذة إليه",
     deep_v_sol_start_unverified: "غير مُتحقق · هذا النوع من المجمعات قد يفتح لاحقًا، ولم تأتِ صفقة فور إضافة السيولة",
     deep_cr_trading_start_unverified: "ربما بدأ التداول بعد إضافة السيولة، لذا قد لا تغطي النافذة الإطلاق الفعلي",
-    deep_v_sol_start_earlier: "غير مُتحقق · مجمع أسبق لهذا الرمز (قبل {minutes} دقيقة) يستخدم برنامجًا لا يمكن هنا نسب صفقاته",
+    deep_v_sol_start_earlier: "غير مُتحقق · مجمع أسبق لهذا الرمز (قبل {minutes} دقيقة) لم يُحلَّل هنا، لذا تعذّرت إعادة بناء التداول الأول",
+    // v1.19.5 UI wording fix: the window was measured on a later pool (an earlier pool was not analysed).
+    deep_v_sol_start_earlier_trade: "غير مُتحقق · رُصد نشاط يتوافق مع التداول قبل {minutes} دقيقة من النافذة المُحلَّلة. تعذّر التحقق من مكان التداول الأصلي ووقت الإطلاق",
+    deep_k_launch_anchor_later: "نقطة بدء المجمع المُحلَّل",
+    deep_v_anchor_slot_verified_later: "الخانة {block} · تعليمة السيولة موثّقة للمجمع المُحلَّل فقط. رُصد نشاط للرمز قبله، لذا هذا ليس دليلًا على مكان أو وقت بدء التداول أول مرة",
+    deep_found_launch_sol_later: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة المجمع المُحلَّل. رُصد نشاط للرمز قبل هذه النافذة، لذا فهي ليست بالضرورة نافذة الإطلاق الأصلية. في أول {blocks} خانات لهذا المجمع، اشترى {buyers} مشترٍ موثّق، وتلقّت {bundled} محفظة رموزًا دون دفع ضمن صفقة مجمع. وخرج {pct} من المعروض من المجمع هناك بعد خصم المبيعات.",
+    deep_found_launch_sol_nobundle_later: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة المجمع المُحلَّل. رُصد نشاط للرمز قبل هذه النافذة، لذا فهي ليست بالضرورة نافذة الإطلاق الأصلية. في أول {blocks} خانات لهذا المجمع، اشترى {buyers} مشترٍ موثّق، وخرج {pct} من المعروض من المجمع بعد خصم المبيعات.",
+    deep_found_launch_sol_plain_later: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة المجمع المُحلَّل. رُصد نشاط للرمز قبل هذه النافذة، لذا فهي ليست بالضرورة نافذة الإطلاق الأصلية.",
+    deep_k_opening_group_later: "الخانات الأولى للمجمع المُحلَّل",
+    deep_k_immediate_wallets_later: "المحافظ فور فتح المجمع المُحلَّل (رُصد نشاط قبله)",
+    deep_k_immediate_supply_later: "حصة العرض في تلك النافذة (المجمع المُحلَّل)",
+    deep_k_top_buyers_later: "أكبر المشترين في نافذة المجمع المُحلَّل",
+    deep_k_first_activity_later: "أول نشاط في المجمع المُحلَّل",
+    deep_scope_sol_trades_later: "{verified} محفظة مشترية موثّقة من {buys} عملية شراء مدفوعة · المجمع المُحلَّل من الخانة {block}، ورُصد نشاط للرمز قبله · النافذة {window}",
     deep_cr_earlier_pool_unverified: "تعذّر تحليل مجمع أسبق لهذا الرمز، لذا قد لا تغطي النافذة الإطلاق الفعلي",
+    deep_cr_earlier_activity_unverified: "رُصد نشاط يتوافق مع التداول قبل النافذة المُحلَّلة، لذا قد لا تغطي النافذة الإطلاق الفعلي",
     deep_cr_prelaunch_cut_unverified: "لم يُرصد على السلسلة مجمع أسبق لهذا الرمز، لذا فإن نقطة القياس قبل الإطلاق تقريبية",
     deep_resolved_pair: "العنوان المُدخل ({input}) هو زوج تداول. حلّل Deep Intelligence رمزه {token}.",
     deep_resolved_v4: "العنوان المُدخل ({input}) هو معرّف مجمع V4. حلّل Deep Intelligence رمزه {token}.",
@@ -7455,6 +7506,7 @@ const translations = {
     deep_v_pl_unaccounted: "مرّ {pct} من المعروض عبر حسابات لم تُقرأ",
     deep_v_anchor_slot_unverified: "الخانة {block} · أول صفقة، لم يُعثر على إيداع في المجمع",
     deep_k_buy_txs: "صفقات المجمع في نافذة الإطلاق",
+    deep_k_buy_txs_later: "صفقات المجمع في نافذة المجمع المُحلَّل",
     deep_scope_sol_trades: "{verified} محفظة مشترية موثّقة من {buys} عملية شراء مدفوعة · خانة الإطلاق {block} · نافذة الإطلاق {window}",
     deep_found_launch_sol: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة الإطلاق. في أول {blocks} خانات، اشترى {buyers} مشترٍ موثّق، وتلقّت {bundled} محفظة رموزًا دون دفع ضمن صفقة مجمع. خرج {pct} من المعروض من المجمع هناك بعد خصم المبيعات.",
     deep_found_launch_sol_nobundle: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة الإطلاق. في أول {blocks} خانات، اشترى {buyers} مشترٍ موثّق، وخرج {pct} من المعروض من المجمع بعد خصم المبيعات.",
@@ -8216,6 +8268,7 @@ const translations = {
     deep_scope_none: "В этом разделе нечего было проверить",
     deep_scope_pools_observed: "Активность запуска замечена в {observed} из {identified} пулов",
     deep_scope_pools_identified: "Выявлено пулов: {identified} · сделок в окне запуска: {trades}",
+    deep_scope_pools_identified_later: "Выявлено пулов: {identified} · сделок в окне анализируемого пула: {trades}",
     deep_badge_risk_title: "Найденный риск",
     deep_badge_coverage_title: "Покрытие проверки",
     deep_cr_no_pools: "Торговый пул не найден, поэтому проверки запуска не выполнялись",
@@ -8317,8 +8370,22 @@ const translations = {
     deep_v_sol_start_delayed: "Открытие назначено через {minutes} мин после добавления ликвидности · окно не сдвинуто",
     deep_v_sol_start_unverified: "Не подтверждено · такой пул может открыться позже, и сделки сразу после ликвидности не было",
     deep_cr_trading_start_unverified: "Торги могли начаться позже добавления ликвидности, поэтому окно может не охватывать реальный запуск",
-    deep_v_sol_start_earlier: "Не подтверждено · более ранний пул этого токена (на {minutes} мин раньше) использует программу, сделки которой здесь не атрибутируются",
+    deep_v_sol_start_earlier: "Не подтверждено · более ранний пул этого токена (на {minutes} мин раньше) здесь не анализировался, поэтому первые торги восстановить не удалось",
+    // v1.19.5 UI wording fix: the window was measured on a later pool (an earlier pool was not analysed).
+    deep_v_sol_start_earlier_trade: "Не подтверждено · за {minutes} мин до анализируемого окна замечена активность, похожая на торговлю. Исходную площадку торгов и время запуска подтвердить не удалось",
+    deep_k_launch_anchor_later: "Точка анализируемого пула",
+    deep_v_anchor_slot_verified_later: "Слот {block} · инструкция ликвидности подтверждена только для анализируемого пула. Активность токена замечена раньше, поэтому это не доказывает, где и когда впервые начались торги",
+    deep_found_launch_sol_later: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне анализируемого пула: {early}. Активность токена замечена до этого окна, поэтому это не обязательно окно исходного запуска. В первых {blocks} слотах этого пула купили подтверждённых покупателей: {buyers}, ещё {bundled} кошельков получили токены без оплаты внутри сделки пула. За вычетом продаж из пула ушло {pct} предложения.",
+    deep_found_launch_sol_nobundle_later: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне анализируемого пула: {early}. Активность токена замечена до этого окна, поэтому это не обязательно окно исходного запуска. В первых {blocks} слотах этого пула купили подтверждённых покупателей: {buyers}, а за вычетом продаж из пула ушло {pct} предложения.",
+    deep_found_launch_sol_plain_later: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне анализируемого пула: {early}. Активность токена замечена до этого окна, поэтому это не обязательно окно исходного запуска.",
+    deep_k_opening_group_later: "Первые слоты анализируемого пула",
+    deep_k_immediate_wallets_later: "Кошельки сразу после открытия анализируемого пула (активность замечена раньше)",
+    deep_k_immediate_supply_later: "Доля в этом окне (анализируемый пул)",
+    deep_k_top_buyers_later: "Крупнейшие покупатели в окне анализируемого пула",
+    deep_k_first_activity_later: "Первая активность в анализируемом пуле",
+    deep_scope_sol_trades_later: "Подтверждённых кошельков-покупателей: {verified} из {buys} оплаченных покупок · анализируемый пул со слота {block}, активность токена замечена раньше · окно: {window}",
     deep_cr_earlier_pool_unverified: "Более ранний пул этого токена не удалось проанализировать, поэтому окно может не охватывать реальный запуск",
+    deep_cr_earlier_activity_unverified: "До анализируемого окна замечена активность, похожая на торговлю, поэтому окно может не охватывать реальный запуск",
     deep_cr_prelaunch_cut_unverified: "Более ранний пул этого токена не наблюдался в блокчейне, поэтому точка измерения до запуска приблизительна",
     deep_resolved_pair: "Введённый адрес ({input}) является торговой парой. Deep Intelligence проанализировал её токен {token}.",
     deep_resolved_v4: "Введённый адрес ({input}) является ID пула V4. Deep Intelligence проанализировал его токен {token}.",
@@ -8384,6 +8451,7 @@ const translations = {
     deep_v_pl_unaccounted: "{pct} предложения прошло через непрочитанные аккаунты",
     deep_v_anchor_slot_unverified: "Слот {block} · первая сделка, депозит в пул не найден",
     deep_k_buy_txs: "Сделки пула в окне запуска",
+    deep_k_buy_txs_later: "Сделки в окне анализируемого пула",
     deep_scope_sol_trades: "Подтверждённых кошельков-покупателей: {verified} из {buys} оплаченных покупок · слот запуска {block} · окно запуска: {window}",
     deep_found_launch_sol: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне запуска: {early}. В первых {blocks} слотах купили подтверждённых покупателей: {buyers}, ещё {bundled} кошельков получили токены без оплаты внутри сделки пула. За вычетом продаж из пула там ушло {pct} предложения.",
     deep_found_launch_sol_nobundle: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне запуска: {early}. В первых {blocks} слотах купили подтверждённых покупателей: {buyers}, а за вычетом продаж из пула ушло {pct} предложения.",
@@ -12785,7 +12853,9 @@ async function qsLiqCheckBasic(net, token, provider) {
     const covDetail=(key)=>{
       const codes=Array.isArray(r?.coverageReasons?.[key])?r.coverageReasons[key]:[]; const raw=r?.coverageDetails?.[key]||"";
       if(!codes.length&&!raw) return null;
-      const txt=[...new Set((codes.length?codes:["incomplete"]).map(c=>{ const k="deep_cr_"+c; const v=cxDeepTr(k); return v===k?cxDeepTr("deep_cr_incomplete"):v; }))].join(" · ");
+      // v1.19.5 UI wording fix: trading-like activity before the window, with no pool address, is not called a pool.
+      const tsx=r?.earlyActivity?.method==="balance_deltas"?r.earlyActivity.anchor?.tradingStart:null, actOnly=tsx?.reason==="earlier_pool_unverified"&&!tsx.earlierPool;
+      const txt=[...new Set((codes.length?codes:["incomplete"]).map(c=>{ const k="deep_cr_"+(actOnly&&c==="earlier_pool_unverified"?"earlier_activity_unverified":c); const v=cxDeepTr(k); return v===k?cxDeepTr("deep_cr_incomplete"):v; }))].join(" · ");
       return cxDeepKV(cxDeepTr("deep_k_why_partial"),`<span${raw?` title="${cxDeepEsc(raw)}"`:""}>${cxDeepEsc(txt)}</span>`);
     };
     const countTxt=(n,capped)=>n==null?unknownTxt:capped?cxDeepTr("deep_v_capped",{count:n}):String(n);
@@ -12817,12 +12887,15 @@ async function qsLiqCheckBasic(net, token, provider) {
     const earlyVerified=cov.earlyActivity==="ok";
     const sampleMark=(txt)=>earlyVerified?txt:cxDeepTr("deep_v_partial_sample",{value:txt});
     const solMode=early.method==="balance_deltas", swapMode=early.method==="swap_events"||solMode, og=early.openingGroup||null, cat=early.categories||{}, an=early.anchor||null;
+    // v1.19.5 UI wording fix: an earlier pool was found and not analysed, so this section describes a later pool.
+    // Only the wording changes. Numbers, statuses and signals are untouched.
+    const laterPool=solMode&&an?.tradingStart?.reason==="earlier_pool_unverified", LP=k=>laterPool?k+"_later":k;
     const shortW=a=>cxDeepEsc(cxDeepShort(a,6,4));
     const topTxt=(Array.isArray(early.topBuyers)?early.topBuyers:[]).slice(0,3).map(x=>`${shortW(x.wallet)} (${cxDeepPct(x.supplyPct,2)}) · #${cxDeepEsc(x.firstBlock)}`).join("<br>");
     const unattributed=(cxDeepFinite(cat.unknown)||0)+(cxDeepFinite(cat.notAttributed)||0);
     const verifiedTotal=swapMode&&cxDeepFinite(cat.verifiedBuy)!=null?cat.verifiedBuy:early.earlyBuyerCount, verifiedMore=early.earlyBuyerCountCapped&&(!swapMode||unattributed>0);
     const earlyRows=[
-      an&&an.launchBlock!=null?cxDeepKV(cxDeepTr("deep_k_launch_anchor"),cxDeepEsc(cxDeepTr(solMode?(an.anchorVerified?"deep_v_anchor_slot_verified":an.liquiditySource==="pool_deposit_unverified"?"deep_v_anchor_slot_deposit":"deep_v_anchor_slot_unverified"):(an.anchorVerified?"deep_v_anchor_verified":"deep_v_anchor_unverified"),{block:an.launchBlock}))):null,
+      an&&an.launchBlock!=null?cxDeepKV(cxDeepTr(LP("deep_k_launch_anchor")),cxDeepEsc(cxDeepTr(solMode?(an.anchorVerified?LP("deep_v_anchor_slot_verified"):an.liquiditySource==="pool_deposit_unverified"?"deep_v_anchor_slot_deposit":"deep_v_anchor_slot_unverified"):(an.anchorVerified?"deep_v_anchor_verified":"deep_v_anchor_unverified"),{block:an.launchBlock}))):null,
       // v1.19.2: first observed external trading (EVM). The window is measured from it.
       (()=>{ const o=an&&an.tradingOpen; if(!o||solMode)return null; const rk=k=>{const key="deep_v_open_reason_"+k, v=cxDeepTr(key); return v===key?cxDeepTr("deep_v_open_reason_unknown"):v;};
         let txt=o.found?((cxDeepFinite(o.gapBlocks)||0)>0?cxDeepTr("deep_v_trading_open_later",{block:o.block,minutes:cxDeepFinite(o.gapMinutes)??"?"}):cxDeepTr("deep_v_trading_open_same")):cxDeepTr("deep_v_trading_open_unproven",{reason:rk(o.reason||"unknown")});
@@ -12833,13 +12906,13 @@ async function qsLiqCheckBasic(net, token, provider) {
         return cxDeepKV(cxDeepTr("deep_k_trading_open"),cxDeepEsc(txt)); })(),
       // v1.19.3: Solana trading start, proven or not.
       (()=>{ const t=an&&an.tradingStart; if(!t||!solMode)return null;
-        const txt=t.found?cxDeepTr(t.basis==="program_opens_at_liquidity"?"deep_v_sol_start_program":t.basis==="open_time"?"deep_v_sol_start_open_time":"deep_v_sol_start_buy"):t.reason==="delayed_open"?cxDeepTr("deep_v_sol_start_delayed",{minutes:cxDeepFinite(t.gapMinutes)??"?"}):t.reason==="earlier_pool_unverified"?cxDeepTr("deep_v_sol_start_earlier",{minutes:cxDeepFinite(t.gapMinutes)??"?"}):cxDeepTr("deep_v_sol_start_unverified");
+        const txt=t.found?cxDeepTr(t.basis==="program_opens_at_liquidity"?"deep_v_sol_start_program":t.basis==="open_time"?"deep_v_sol_start_open_time":"deep_v_sol_start_buy"):t.reason==="delayed_open"?cxDeepTr("deep_v_sol_start_delayed",{minutes:cxDeepFinite(t.gapMinutes)??"?"}):t.reason==="earlier_pool_unverified"?cxDeepTr(t.earlierPool?"deep_v_sol_start_earlier":"deep_v_sol_start_earlier_trade",{minutes:cxDeepFinite(t.gapMinutes)??"?"}):cxDeepTr("deep_v_sol_start_unverified");
         return cxDeepKV(cxDeepTr("deep_k_sol_start"),cxDeepEsc(txt)); })(),
       an&&an.tradingOpen&&cxDeepFinite(an.tradingOpen.preOpenDeployerBuys)>0?cxDeepKV(cxDeepTr("deep_k_preopen_deployer_buys"),cxDeepEsc(an.tradingOpen.preOpenDeployerBuys)):null,
-      swapMode&&early.swapsObserved?cxDeepKV(cxDeepTr(solMode?"deep_k_buy_txs":"deep_k_buy_swaps"),cxDeepEsc(cxDeepTr("deep_v_buy_sell",{buys:early.swapsObserved.buys??0,sells:early.swapsObserved.sells??0}))):null,
-      swapMode&&og&&og.wallets>0?cxDeepKV(cxDeepTr("deep_k_opening_group"),cxDeepEsc([cxDeepTr("deep_v_og_buyers",{buyers:og.verifiedWallets??0}),(og.bundledWallets||0)>0?cxDeepTr("deep_v_og_bundled",{bundled:og.bundledWallets}):"",(og.otherRecipients||0)>0?cxDeepTr("deep_v_og_others",{others:og.otherRecipients}):"",(og.uncertainSourceWallets||0)>0?cxDeepTr("deep_v_og_uncertain",{uncertain:og.uncertainSourceWallets}):"",cxDeepTr(solMode?"deep_v_og_tail_sol":"deep_v_og_tail",{pct:og.supplyPct!=null?cxDeepPct(og.supplyPct,1):cxDeepTr("deep_unknown"),from:og.fromBlock,to:og.toBlock})].filter(Boolean).join(" · "))):null,
+      swapMode&&early.swapsObserved?cxDeepKV(cxDeepTr(solMode?LP("deep_k_buy_txs"):"deep_k_buy_swaps"),cxDeepEsc(cxDeepTr("deep_v_buy_sell",{buys:early.swapsObserved.buys??0,sells:early.swapsObserved.sells??0}))):null,
+      swapMode&&og&&og.wallets>0?cxDeepKV(cxDeepTr(LP("deep_k_opening_group")),cxDeepEsc([cxDeepTr("deep_v_og_buyers",{buyers:og.verifiedWallets??0}),(og.bundledWallets||0)>0?cxDeepTr("deep_v_og_bundled",{bundled:og.bundledWallets}):"",(og.otherRecipients||0)>0?cxDeepTr("deep_v_og_others",{others:og.otherRecipients}):"",(og.uncertainSourceWallets||0)>0?cxDeepTr("deep_v_og_uncertain",{uncertain:og.uncertainSourceWallets}):"",cxDeepTr(solMode?"deep_v_og_tail_sol":"deep_v_og_tail",{pct:og.supplyPct!=null?cxDeepPct(og.supplyPct,1):cxDeepTr("deep_unknown"),from:og.fromBlock,to:og.toBlock})].filter(Boolean).join(" · "))):null,
       swapMode&&og&&og.sameBlockMax>1?cxDeepKV(cxDeepTr("deep_k_same_block_max"),cxDeepEsc(cxDeepTr("deep_v_same_block",{count:og.sameBlockMax,block:og.sameBlockMaxBlock}))):null,
-      swapMode&&topTxt?cxDeepKV(cxDeepTr("deep_k_top_buyers"),topTxt,true):null,
+      swapMode&&topTxt?cxDeepKV(cxDeepTr(LP("deep_k_top_buyers")),topTxt,true):null,
       swapMode&&early.supplyBasis==="current"?cxDeepKV(cxDeepTr("deep_k_supply_basis"),cxDeepEsc(cxDeepTr("deep_v_basis_current"))):null,
       swapMode&&cat.swapRecipient>0?cxDeepKV(cxDeepTr("deep_k_swap_recipients"),cxDeepEsc(cat.swapRecipient)):null,
       swapMode&&cat.distributionRecipient>0?cxDeepKV(cxDeepTr("deep_k_distribution"),cxDeepEsc(cat.distributionRecipient)):null,
@@ -12849,11 +12922,11 @@ async function qsLiqCheckBasic(net, token, provider) {
       swapMode&&!solMode&&Array.isArray(early.poolsVerified)&&early.poolsVerified.length?cxDeepKV(cxDeepTr("deep_k_pool_types"),cxDeepEsc([...new Set(early.poolsVerified.map(p=>p?.kind==="v4"?(p.hooked===true?cxDeepTr("deep_v_pool_v4_hooks"):"V4"):({v2:"V2",v3:"V3",algebra:"Algebra"})[p?.kind]).filter(Boolean))].join(", "))):null,
       swapMode&&cxDeepFinite(early.v4Reversals)>0?cxDeepKV(cxDeepTr("deep_k_v4_reversed"),cxDeepEsc(early.v4Reversals)):null,
       early.earlyBuyerCount!=null?cxDeepKV(cxDeepTr(swapMode?"deep_k_verified_buyers":"deep_k_early_buyers"),cxDeepEsc(sampleMark(countTxt(verifiedTotal,verifiedMore)))):null,
-      immediateCount!=null?cxDeepKV(cxDeepTr("deep_k_immediate_wallets"),cxDeepEsc(countTxt(immediateCount,early.immediateCountCapped))):null,
+      immediateCount!=null?cxDeepKV(cxDeepTr(LP("deep_k_immediate_wallets")),cxDeepEsc(countTxt(immediateCount,early.immediateCountCapped))):null,
       early.earlyBuyerCount?cxDeepKV(cxDeepTr("deep_k_early_supply"),earlyVerified?pctTxt(early.earlyBuyerSupplyPct,early.earlyBuyerCountCapped):cxDeepTr("deep_v_partial_sample",{value:pctTxt(early.earlyBuyerSupplyPct,early.earlyBuyerCountCapped)})):null,
-      immediateCount?cxDeepKV(cxDeepTr("deep_k_immediate_supply"),pctTxt(immediatePct,early.immediateCountCapped)):null,
+      immediateCount?cxDeepKV(cxDeepTr(LP("deep_k_immediate_supply")),pctTxt(immediatePct,early.immediateCountCapped)):null,
       early.programOwnedExcluded>0?cxDeepKV(cxDeepTr("deep_k_program_excluded"),cxDeepEsc(early.programOwnedExcluded)):null,
-      early.firstTradeAt?cxDeepKV(cxDeepTr("deep_k_first_activity"),cxDeepEsc(cxDeepWhen(early.firstTradeAt))):null,
+      early.firstTradeAt?cxDeepKV(cxDeepTr(LP("deep_k_first_activity")),cxDeepEsc(cxDeepWhen(early.firstTradeAt))):null,
       early.firstActivityAt?cxDeepKV(cxDeepTr("deep_k_first_activity"),cxDeepEsc(cxDeepWhen(early.firstActivityAt))):null,
       early.unclassifiedWindowTransfers>0?cxDeepKV(cxDeepTr("deep_k_unclassified_transfers"),cxDeepEsc(early.unclassifiedWindowTransfers)):null,
       early.truncated===true?cxDeepKV(cxDeepTr("deep_k_coverage"),cxDeepTr("deep_v_launch_truncated")):null,
@@ -13059,7 +13132,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         ?cxDeepTr("deep_found_deployer_partial")
         :cxDeepTr("deep_found_deployer_ok");
     const launchSpecial=cov.earlyActivity==="not_checked"?({launch_pool_unknown:"deep_found_launch_pool_unknown",v4_unsupported:"deep_found_launch_v4",anchor_unavailable:"deep_found_launch_no_anchor"})[covWhy("earlyActivity")]:null;
-    const swapFound=swapMode?(og&&og.wallets>0&&og.supplyPct!=null?cxDeepTr(solMode?((og.bundledWallets??0)>0?"deep_found_launch_sol":"deep_found_launch_sol_nobundle"):((og.bundledWallets??0)>0?"deep_found_launch_swap":"deep_found_launch_swap_nobundle"),{early:countTxt(verifiedTotal,verifiedMore),group:og.wallets,buyers:og.verifiedWallets??0,bundled:og.bundledWallets??0,blocks:(og.toBlock-og.fromBlock+1),pct:cxDeepPct(og.supplyPct,1)}):cxDeepTr(solMode?"deep_found_launch_sol_plain":"deep_found_launch_swap_plain",{early:countTxt(verifiedTotal,verifiedMore)})):null;
+    const swapFound=swapMode?(og&&og.wallets>0&&og.supplyPct!=null?cxDeepTr(solMode?LP((og.bundledWallets??0)>0?"deep_found_launch_sol":"deep_found_launch_sol_nobundle"):((og.bundledWallets??0)>0?"deep_found_launch_swap":"deep_found_launch_swap_nobundle"),{early:countTxt(verifiedTotal,verifiedMore),group:og.wallets,buyers:og.verifiedWallets??0,bundled:og.bundledWallets??0,blocks:(og.toBlock-og.fromBlock+1),pct:cxDeepPct(og.supplyPct,1)}):cxDeepTr(solMode?LP("deep_found_launch_sol_plain"):"deep_found_launch_swap_plain",{early:countTxt(verifiedTotal,verifiedMore)})):null;
     const launchFound=launchSpecial?cxDeepTr(launchSpecial):cov.earlyActivity==="insufficient_sample"
       ?((covWhy("earlyActivity")==="zero_buyers"||early.earlyBuyerCount===0)?cxDeepTr("deep_found_launch_zero"):cxDeepTr("deep_found_launch_few",{early:countTxt(early.earlyBuyerCount,early.earlyBuyerCountCapped)}))
       :stateFound("earlyActivity",swapFound||cxDeepTr("deep_found_launch",{early:countTxt(early.earlyBuyerCount,early.earlyBuyerCountCapped),immediate:countTxt(immediateCount,early.immediateCountCapped)}),swapFound||cxDeepTr("deep_found_launch_partial"));
@@ -13084,8 +13157,8 @@ async function qsLiqCheckBasic(net, token, provider) {
     // v1.14: per-section scope ("what was checked"). Only present on schema 7+.
     const winTxt=(()=>{const w=cxDeepTr(scope?.earlyActivity?.windowCovered?"deep_v_window_covered":"deep_v_window_partial");return (currentLang==="en"||currentLang==="ru")?w.toLocaleLowerCase(cxDeepLocale()):w;})();
     const se=scope?.earlyActivity||{}, sc=scope?.clusters||{};
-    const poolLine=!(cxDeepFinite(se.poolsIdentified)>0)?"":se.poolsObserved!=null?cxDeepTr("deep_scope_pools_observed",{observed:se.poolsObserved,identified:se.poolsIdentified}):cxDeepTr("deep_scope_pools_identified",{identified:se.poolsIdentified,trades:se.tradesObserved??0});
-    const scopeLaunch=!scope?"":[se.method==="balance_deltas"&&se.launchBlock!=null?cxDeepTr("deep_scope_sol_trades",{verified:se.verifiedBuyers??0,buys:se.buySwaps??0,block:se.launchBlock,window:winTxt}):se.method==="swap_events"&&se.launchBlock!=null?cxDeepTr("deep_scope_swaps",{verified:se.verifiedBuyers??0,buys:se.buySwaps??0,block:se.launchBlock,window:winTxt}):se.recipientsIdentified!=null?cxDeepTr("deep_scope_early",{wallets:se.walletsAccepted??0,recipients:se.recipientsIdentified,window:winTxt}):"",poolLine].filter(Boolean).join(" · ")||cxDeepTr("deep_scope_none");
+    const poolLine=!(cxDeepFinite(se.poolsIdentified)>0)?"":se.poolsObserved!=null?cxDeepTr("deep_scope_pools_observed",{observed:se.poolsObserved,identified:se.poolsIdentified}):cxDeepTr(LP("deep_scope_pools_identified"),{identified:se.poolsIdentified,trades:se.tradesObserved??0});
+    const scopeLaunch=!scope?"":[se.method==="balance_deltas"&&se.launchBlock!=null?cxDeepTr(LP("deep_scope_sol_trades"),{verified:se.verifiedBuyers??0,buys:se.buySwaps??0,block:se.launchBlock,window:winTxt}):se.method==="swap_events"&&se.launchBlock!=null?cxDeepTr("deep_scope_swaps",{verified:se.verifiedBuyers??0,buys:se.buySwaps??0,block:se.launchBlock,window:winTxt}):se.recipientsIdentified!=null?cxDeepTr("deep_scope_early",{wallets:se.walletsAccepted??0,recipients:se.recipientsIdentified,window:winTxt}):"",poolLine].filter(Boolean).join(" · ")||cxDeepTr("deep_scope_none");
     const scopeWallets=!scope?"":cxDeepFinite(sc.attempted)>0?cxDeepTr("deep_scope_clusters",{checked:sc.checked??0,attempted:sc.attempted,identified:sc.identified??sc.of??0}):cxDeepTr("deep_scope_none");
     const scopeHistory=!scope?"":scope.history?.records!=null?cxDeepTr("deep_scope_history",{records:scope.history.records}):cxDeepTr("deep_scope_none");
     const scopeDeployer=!scope?"":scope.deployer?.transactions!=null?cxDeepTr("deep_scope_deployer",{transactions:scope.deployer.transactions}):"";
