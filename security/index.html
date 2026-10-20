@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -4460,6 +4461,31 @@ twq('config','r4v6v');
     }
   }
 
+  /* ================================================================
+     v1.14 DEEP TRUTHFULNESS — grey states for checks that did not run
+     or did not reach a reliable sample. UI only.
+     ================================================================ */
+  .cx-deep-stage.notchecked{color:rgba(200,210,220,.62);border-color:rgba(183,194,204,.16)}
+  .cx-deep-stage.notchecked .cx-deep-stage-dot{background:#9aa6b2}
+  .cx-deep-stage.na{opacity:.55}
+  .qs-intel-column .cx-deep-stage.notchecked{background:rgba(183,194,204,.03)!important;border-color:rgba(183,194,204,.16)!important}
+  .qs-intel-column .cx-deep-stage.notchecked .cx-deep-stage-dot{background:#9aa6b2!important;box-shadow:none!important}
+  .qs-intel-column .cx-deep-stage.notchecked .cx-deep-stage-copy > span:first-child{color:#cfd8e0}
+  .qs-intel-column .cx-deep-stage.notchecked .cx-deep-stage-reason{color:rgba(207,216,224,.78)!important}
+  .qs-intel-column .cx-deep-stage.na{opacity:.55}
+  .qs-intel-column .cx-deep-detail-status[data-status="insufficient"],
+  .qs-intel-column .cx-deep-detail-status[data-status="notchecked"]{color:#cfd8e0;border-color:rgba(183,194,204,.28);background:rgba(183,194,204,.07)}
+  .qs-intel-column .cx-deep-detail-status[data-status="na"]{color:rgba(200,210,220,.55);border-color:rgba(200,210,220,.12);background:transparent}
+  .cx-deep-verdict[data-level="incomplete"]{border-color:rgba(183,194,204,.24);background:rgba(183,194,204,.045)}
+  .cx-deep-verdict[data-level="incomplete"] .cx-deep-verdict-title{color:#dbe3ea}
+  .qs-intel-column .cx-deep-verdict[data-level="incomplete"]::before{background:#9aa6b2}
+  .cx-deep-signal[data-severity="incomplete"]{border-color:rgba(183,194,204,.24);background:rgba(183,194,204,.05)}
+  .cx-deep-signal[data-severity="incomplete"] .cx-deep-signal-dot{background:#9aa6b2}
+  .qs-intel-column .cx-deep-detail-badges{display:inline-flex;gap:4px;align-items:center;justify-content:flex-end;flex-wrap:wrap;flex-shrink:0}
+  .qs-intel-column .cx-deep-detail-badges.two .cx-deep-detail-status{min-width:0!important;padding-left:7px!important;padding-right:7px!important}
+  .cx-deep-core-line{margin-top:6px;font-size:10px;line-height:1.4;font-weight:700;color:rgba(207,216,224,.72)}
+  .qs-intel-column .cx-deep-scope .cx-deep-explain-text{color:rgba(207,216,224,.8)}
+
 </style>
 <style id="elofid-logo-style">
   /* Elofid logo: round header mark (elofid-mark.svg), no tile frame */
@@ -5240,9 +5266,9 @@ const translations = {
     deep_stage_simulation: "Simulation",
     deep_stage_entity: "Entity intelligence",
     deep_section_entity: "Entity Intelligence",
-    deep_reason_entity_partial: "Some addresses have structural classification only; semantic identity remains unverified",
-    deep_found_entity: "Classified {classified}/{checked} key addresses; {labeled} had known service or protocol labels.",
-    deep_found_entity_partial: "Structurally classified {classified}/{checked} key addresses; some semantic entity identity remains unavailable.",
+    deep_reason_entity_partial: "Some addresses have structural classification only. Semantic identity remains unverified",
+    deep_found_entity: "Classified {classified}/{checked} key addresses. {labeled} had known service or protocol labels.",
+    deep_found_entity_partial: "Structurally classified {classified}/{checked} key addresses. Some semantic entity identity remains unavailable.",
     deep_why_entity: "Entity context reduces false positives by distinguishing ordinary wallets from exchanges, bridges, routers, protocols, liquidity infrastructure and other known services.",
     deep_why_entity_issuer: "Known issuer context helps interpret administrative powers: regulated tokens can intentionally retain strong controls, but those controls remain real and are still disclosed.",
     deep_why_entity_incident: "Historical incident context is matched to the exact token address and is kept separate from the token's current on-chain state.",
@@ -5308,7 +5334,7 @@ const translations = {
     deep_status_stage_partial: "{stage} — partial coverage",
     deep_status_cache: "Loading verified Deep Intelligence cache…",
     deep_status_complete: "Deep Intelligence complete.",
-    deep_status_quick_complete_deep_failed: "Quick Scan is complete; Deep Intelligence could not finish.",
+    deep_status_quick_complete_deep_failed: "Quick Scan is complete. Deep Intelligence could not finish.",
     deep_error_unavailable: "Deep Intelligence unavailable.",
     deep_error_quick_unaffected: "Quick Scan remains unaffected.",
     deep_error_run_quick_first: "Run a valid Quick Scan first.",
@@ -5319,7 +5345,7 @@ const translations = {
     deep_reject_score: "Deep scan paused — the protected Quick Scan score was unavailable.",
     deep_reject_solana_data: "Deep scan not started — the Solana Quick Scan returned no usable security or market data.",
     deep_error_rate_limited: "Deep Intelligence rate limit reached. Try again later.",
-    deep_sim_reason_evm: "Dynamic transfer-path diagnostics; no transaction is broadcast.",
+    deep_sim_reason_evm: "Dynamic transfer-path diagnostics. No transaction is broadcast.",
     deep_sim_reason_solana: "No transaction is broadcast. Full router swap simulation is not claimed for Solana in this version.",
     deep_unknown: "Unknown",
     deep_unavailable: "Unavailable",
@@ -5382,6 +5408,184 @@ const translations = {
     deep_status_review: "REVIEW",
     deep_status_partial: "PARTIAL",
     deep_status_context: "CONTEXT",
+    deep_status_insufficient: "INSUFFICIENT",
+    deep_status_notchecked: "NOT CHECKED",
+    deep_status_na: "N/A",
+    deep_verdict_incomplete: "Core analysis incomplete",
+    deep_signal_incomplete_title: "This is not a clean result",
+    deep_signal_incomplete_detail: "These checks could not fully run for this token: {stages}. Missing checks are not counted as safe.",
+    deep_core_line: "Core checks complete: {done} of {total}",
+    deep_reason_not_checked: "This check could not run",
+    deep_reason_insufficient: "Not enough data for a reliable conclusion",
+    deep_reason_na: "Not applicable to this token",
+    deep_reason_early_zero: "No launch buyers could be identified",
+    deep_reason_early_few: "Too few launch buyers for a reliable conclusion",
+    deep_reason_clusters_sample: "Only {checked} of {total} early wallets were checked",
+    deep_reason_clusters_none: "No early-wallet sample was available to check",
+    deep_scope_label: "WHAT WAS CHECKED",
+    deep_scope_early: "{wallets} early wallet candidate(s) identified from {recipients} recipient(s) · launch window {window}",
+    deep_scope_clusters: "Funding history read for {checked} of {attempted} wallet(s) · chosen from {identified} wallet(s) that acquired supply",
+    deep_scope_history: "{records} launch-period records sampled",
+    deep_scope_deployer: "{transactions} pre-launch transactions sampled",
+    deep_scope_none: "Nothing could be checked in this section",
+    deep_scope_pools_observed: "Launch activity observed in {observed} of {identified} pool(s)",
+    deep_scope_pools_identified: "{identified} pool(s) identified · {trades} launch-window trade(s) observed",
+    deep_badge_risk_title: "Risk finding",
+    deep_badge_coverage_title: "Check coverage",
+    deep_cr_no_pools: "No trading pool was found, so launch checks could not run",
+    deep_cr_lookups_failed: "Some wallet funding lookups failed",
+    deep_k_wallets_checked: "Wallets checked",
+    deep_v_wallets_checked: "{checked} of {attempted} · {cov} of the acquired supply",
+    deep_k_wallet_sample: "Sample",
+    deep_v_wallet_sample: "{pre} held supply at launch · {buy} launch buyers · {bundled} bundled recipients",
+    deep_k_linked_group: "Linked group {n}",
+    deep_v_linked_group: "{count} wallet(s) · {pct} of supply · {links}",
+    deep_v_with_deployer: "includes the deployer",
+    deep_link_tokens_from_deployer: "tokens from the deployer",
+    deep_link_funded_by_deployer: "funded by the deployer",
+    deep_link_bundle_payer: "same bundle payer",
+    deep_link_funded_by_candidate: "funded by another listed wallet",
+    deep_link_shared_funder: "same funder",
+    deep_link_shared_upstream: "same funder two steps back",
+    deep_k_deployer_funded: "Funded by the deployer",
+    deep_v_deployer_funded: "{count} wallet(s) · {pct} of supply",
+    deep_k_link_basis: "What a link means",
+    deep_k_funding_scope: "Funding traced",
+    deep_v_funding_scope_native: "Native coin transfers only. Funding through stablecoins or other tokens is not traced, so its absence is not proven",
+    deep_v_strong_core: "{n} held together by funding links",
+    deep_v_link_basis: "An economic link by funding or token flow, not proof of common ownership",
+    deep_found_wallet_groups: "Found {groups} linked group(s) among {checked} checked wallet(s). The largest acquired {pct} of supply.",
+    deep_sig_linked_title: "Linked wallets acquired a large share",
+    deep_sig_linked_detail: "{wallets} wallet(s) linked to each other by funding or token flow acquired {pct}% of supply at launch. This is an economic link, not proof of common ownership.",
+    deep_sig_linked_detail_dep: "{wallets} wallet(s) linked to the deployer by funding or token flow acquired {pct}% of supply at launch. This is an economic link, not proof of common ownership.",
+    deep_sig_depfund_title: "Deployer funded launch wallets",
+    deep_sig_depfund_detail: "{count} wallet(s) that acquired supply were funded by the deployer, directly or through one intermediate wallet, before they bought or received tokens.",
+    deep_reason_linked: "Linked wallets require review",
+    deep_cr_upstream_unavailable: "Some second-step funding histories could not be read",
+    deep_cr_age_unverified: "The deployer wallet age could not be verified",
+    deep_cr_funding_unverified: "The deployer funding source could not be verified",
+    deep_cr_lock_unknown: "LP lock or burn status is unknown",
+    deep_cr_history_unknown: "Ownership, upgrade or admin history is unknown",
+    deep_cr_window_partial: "The launch window was not fully covered",
+    deep_cr_sample_capped: "Only the earliest part of the launch buyers was sampled",
+    deep_cr_quick_scan_only: "LP evidence came only from Quick Scan and was not re-verified",
+    deep_cr_launch_pool_unknown: "The first liquidity came long after the token was created, so the original launch could not be identified",
+    deep_cr_v4_unsupported: "Only singleton pools that could not be verified were found",
+    deep_cr_swap_unverified: "Buys were inferred from pool transfers, not verified swap events",
+    deep_cr_anchor_unverified: "The launch block is the first pool transfer, not a verified liquidity event",
+    deep_cr_anchor_unavailable: "The launch could not be reconstructed from pool events",
+    deep_found_launch_swap: "Verified pool swaps show {early} buyer wallet(s) in the launch window. In the first {blocks} blocks, {buyers} verified buyer(s) bought and {bundled} wallet(s) received tokens through bundled buys. {pct} of supply left the pool there, net of sells.",
+    deep_found_launch_swap_nobundle: "Verified pool swaps show {early} buyer wallet(s) in the launch window. In the first {blocks} blocks, {buyers} verified buyer(s) bought and {pct} of supply left the pool, net of sells.",
+    deep_found_launch_swap_plain: "Verified pool swaps show {early} buyer wallet(s) in the launch window.",
+    deep_found_launch_pool_unknown: "The first liquidity found came long after the token was created, so the original launch could not be identified. This is not a clean result.",
+    deep_found_launch_v4: "This token trades only in singleton pools that could not be verified, so its launch was not decoded. This is not a clean result.",
+    deep_found_launch_no_anchor: "The launch could not be reconstructed from pool events. This is not a clean result.",
+    deep_k_launch_anchor: "Launch anchor",
+    deep_v_anchor_verified: "Block {block} · liquidity event verified",
+    deep_v_anchor_unverified: "Block {block} · first pool transfer, not verified",
+    deep_k_verified_buyers: "Verified buyer wallets",
+    deep_k_buy_swaps: "Pool swaps in launch window",
+    deep_v_buy_sell: "{buys} buys · {sells} sells",
+    deep_k_swap_recipients: "Swap recipients (not the sender)",
+    deep_k_distribution: "Distribution recipients",
+    deep_k_unattributed: "Buys not attributed",
+    deep_k_deployer_buys: "Deployer buys at launch",
+    deep_k_opening_group: "Opening-block group",
+    deep_k_same_block_max: "Most recipients in one block",
+    deep_v_same_block: "{count} wallets in block {block}",
+    deep_k_top_buyers: "Largest launch buyers",
+    deep_k_v4_skipped: "Unverified singleton pools",
+    deep_k_pool_types: "Verified pools",
+    deep_v_pool_v4_hooks: "V4 with hooks",
+    deep_k_v4_reversed: "V4 swaps with contradicting token flow",
+    deep_resolved_pair: "The address entered ({input}) is a trading pair. Deep Intelligence analyzed its token {token}.",
+    deep_resolved_v4: "The address entered ({input}) is a V4 pool id. Deep Intelligence analyzed its token {token}.",
+    deep_error_pair_ambiguous: "This address is a trading pair and its token could not be identified. Enter the token address instead.",
+    deep_error_pair_unresolved: "This pool id could not be matched to a token. Enter the token address instead.",
+    deep_scope_swaps: "{verified} verified buyer wallet(s) from {buys} buy swap(s) · launch block {block} · launch window {window}",
+    deep_sig_opening_title: "Opening-block buying concentration",
+    deep_sig_opening_p1: "In the first {blocks} blocks after liquidity was added, {buyers} verified buyer wallet(s) bought.",
+    deep_sig_opening_f_bundled: "{bundled} more wallet(s) received tokens through bundled buys.",
+    deep_sig_opening_f_others: "{others} other swap recipient(s) received tokens.",
+    deep_sig_opening_f_uncertain: "{uncertain} more wallet(s) received tokens whose source could not be separated from the distributor's own balance. They are not counted.",
+    deep_sig_opening_p2: "{pct}% of supply left the pool in those blocks, net of sells. This is launch volume, not current holdings.",
+    deep_sig_opening_p2_sol: "{pct}% of supply left the pool in those slots, net of sells. This is launch volume, not current holdings.",
+    deep_v_og_buyers: "{buyers} verified buyer(s)",
+    deep_v_og_bundled: "{bundled} via bundled buys",
+    deep_v_og_others: "{others} other swap recipient(s)",
+    deep_v_og_uncertain: "{uncertain} with uncertain source (not counted)",
+    deep_v_og_tail: "{pct} of supply left the pool (net) · blocks {from} to {to}",
+    deep_cr_v4_flow_mismatch: "Some V4 swaps moved the token the opposite way to their event and were not counted as buys",
+    deep_cr_v4_attribution_unproven: "Some V4 buys shared their transaction with other pool activity on the same pool manager, so their buyer could not be proven",
+    deep_cr_swap_anomalies: "Some swap events showed no valid counter asset and were not classified",
+    deep_cr_swap_unmatched: "Some swaps had no matching pool transfer before the swap event",
+    deep_section_prelaunch: "Pre-launch Allocation",
+    deep_why_prelaunch: "Tokens handed out before trading opens can be sold into the first buyers. Vesting, treasury and liquidity contracts are normal, so they are listed apart from wallets.",
+    deep_found_prelaunch: "When trading opened, {wallets} wallet(s) other than the deployer each held at least {min}% of supply, {pct} together. The deployer held {dep} and contracts held {contracts}.",
+    deep_found_prelaunch_none: "When trading opened, no wallet other than the deployer held {min}% or more of supply. The deployer held {dep} and contracts held {contracts}.",
+    deep_found_prelaunch_notchecked: "Holdings at launch could not be measured because the launch point was not established. This is not a clean result.",
+    deep_k_pl_transfers: "Transfers before launch analysed",
+    deep_k_pl_recipients: "Recipients before launch",
+    deep_k_pl_large: "Wallets holding {min}% or more",
+    deep_v_pl_large: "{count} · {pct} of supply",
+    deep_k_pl_deployer: "Deployer at launch",
+    deep_k_pl_contracts: "Contracts at launch",
+    deep_k_pl_top: "Largest holders at launch",
+    deep_v_kind_wallet: "wallet",
+    deep_v_kind_contract: "contract",
+    deep_v_kind_unknown: "type unknown",
+    deep_v_kind_deployer: "deployer",
+    deep_scope_prelaunch: "{transfers} balance change(s) before launch · {recipients} recipient(s)",
+    deep_reason_prelaunch_conc: "Supply concentrated before launch",
+    deep_sig_prelaunch_title: "Supply concentrated before launch",
+    deep_sig_prelaunch_detail: "When trading opened, {wallets} wallet(s) other than the deployer each held at least 1% of supply, {pct}% together. Contracts and the deployer are not included.",
+    deep_cr_supply_unknown: "Token supply could not be read",
+    deep_cr_prelaunch_capped: "The transfer history before launch reached the retrieval limit",
+    deep_cr_holder_kind_unknown: "Some holder account types could not be read",
+    deep_cr_owner_unknown: "Buyer account types could not be read, so buys were not verified",
+    deep_v_anchor_slot_verified: "Slot {block} · liquidity instruction of the pool program verified",
+    deep_v_anchor_slot_deposit: "Slot {block} · first pool deposit without a pool liquidity instruction, not verified",
+    deep_cr_history_inconsistent: "Some balances before launch do not match the retrieved history, so transfers are missing",
+    deep_cr_holder_history_failed: "Some token account histories before launch could not be read",
+    deep_cr_holders_unqueried: "Not every token account that received supply before launch could be read within the scan budget",
+    deep_cr_supply_current_basis: "Percentages use the current supply because the supply at launch could not be proven",
+    deep_k_supply_basis: "Supply basis",
+    deep_v_basis_launch: "Supply when trading opened",
+    deep_v_basis_current: "Current supply, not the supply at launch",
+    deep_sig_prelaunch_detail_partial: "When trading opened, at least {wallets} wallet(s) other than the deployer each held 1% or more of supply, {pct}% together. The history before launch is not proven complete, so this is context only.",
+    deep_found_prelaunch_incomplete: "The history before launch is not proven complete, so these figures may be missing transfers.",
+    deep_k_pl_history: "History before launch",
+    deep_v_pl_hist_complete: "Complete. Every account that received supply was read",
+    deep_v_pl_hist_material: "Materially complete. {pct} of supply traced, the rest is dust in accounts that were not read",
+    deep_v_pl_hist_consistent: "Balances consistent, history not proven complete",
+    deep_v_pl_hist_inconsistent: "Balances do not match the history, transfers are missing",
+    deep_v_pl_unaccounted: "{pct} of supply passed through accounts that were not read",
+    deep_v_anchor_slot_unverified: "Slot {block} · first trade, no pool deposit found",
+    deep_k_buy_txs: "Pool trades in launch window",
+    deep_scope_sol_trades: "{verified} verified buyer wallet(s) from {buys} paid buy(s) · launch slot {block} · launch window {window}",
+    deep_found_launch_sol: "Balance changes show {early} buyer wallet(s) that paid for the token in the launch window. In the first {blocks} slots, {buyers} verified buyer(s) bought and {bundled} wallet(s) received tokens without paying, inside a pool trade. {pct} of supply left the pool there, net of sells.",
+    deep_found_launch_sol_nobundle: "Balance changes show {early} buyer wallet(s) that paid for the token in the launch window. In the first {blocks} slots, {buyers} verified buyer(s) bought and {pct} of supply left the pool, net of sells.",
+    deep_found_launch_sol_plain: "Balance changes show {early} buyer wallet(s) that paid for the token in the launch window.",
+    deep_sig_opening_p1_sol: "In the first {blocks} slots after liquidity was added, {buyers} verified buyer wallet(s) bought.",
+    deep_v_og_tail_sol: "{pct} of supply left the pool (net) · slots {from} to {to}",
+    deep_reason_opening_group: "Concentrated buying in the opening blocks",
+    deep_v_partial_sample: "{value} (partial sample)",
+    deep_v_from_quick: "{value} (from Quick Scan, not re-verified)",
+    deep_found_launch_zero: "No launch buyers could be identified from the available history. This is not a clean result.",
+    deep_found_launch_few: "Only {early} launch buyer(s) were identified. This is too few for a reliable conclusion about the launch.",
+    deep_found_wallet_few: "Only {checked} wallet(s) could be checked for shared funding. This is too few to rule out coordinated wallets.",
+    deep_found_wallet_none_sample: "No shared-funding cluster was found among the {checked} wallets checked. {rest} other early wallet(s) were not checked.",
+    deep_found_wallet_not_checked: "Funding relationships were not analyzed because no early-wallet sample was available. This is not a clean result.",
+    deep_found_not_checked: "This section could not be checked for this token. This is not a clean result.",
+    deep_found_na: "This check does not apply to this token.",
+    deep_cr_zero_buyers: "No launch buyers were identified",
+    deep_cr_too_few_buyers: "Too few launch buyers were identified",
+    deep_cr_too_few_wallets: "Too few wallets could be checked",
+    deep_cr_sample_limited: "The checked wallets do not cover most of the acquired supply, or the launch stages are not verified",
+    deep_cr_no_sample: "No wallets that acquired supply were available",
+    deep_cr_no_address: "No deployer or creator address was found",
+    deep_cr_no_records: "No launch-period records were found",
+    deep_cr_not_run: "This check did not run",
     deep_what_found: "WHAT WE FOUND",
     deep_why_matters: "WHY IT MATTERS",
     deep_evidence: "EVIDENCE",
@@ -5403,7 +5607,7 @@ const translations = {
     deep_found_deployer_ok: "Deployer / creator identity and the available funding history were analyzed.",
     deep_found_deployer_partial: "Deployer / creator identity or funding history could not be fully verified from the available indexed evidence.",
     deep_why_deployer: "Creator and deployer history can reveal prior launches, funding relationships, and unusually fresh wallets.",
-    deep_found_launch: "Analyzed {early} early buyer(s); {immediate} wallet(s) appeared in the immediate-launch window.",
+    deep_found_launch: "Analyzed {early} early buyer(s). {immediate} wallet(s) appeared in the immediate-launch window.",
     deep_found_launch_partial: "Only part of the early-launch activity could be reconstructed from the available history.",
     deep_why_launch: "Concentrated early buying can reveal coordinated launch activity or unusually aggressive sniper behavior.",
     deep_found_wallet_clusters: "Observed {clusters} shared-funding cluster(s) among {checked} checked wallet(s).",
@@ -5414,7 +5618,7 @@ const translations = {
     deep_found_liquidity_partial: "Liquidity was observed, but LP ownership / lock evidence could not be fully verified.",
     deep_why_liquidity: "LP ownership, burns, locks, and removal history help show how much control exists over available liquidity.",
     deep_found_control: "Observed {ownership} ownership transfer(s), {upgrades} proxy upgrade(s), and {admin} admin change(s) in the sampled history.",
-    deep_found_control_solana: "Current Solana authorities verified; {authority} historical authority-change event(s) observed.",
+    deep_found_control_solana: "Current Solana authorities verified. {authority} historical authority-change event(s) observed.",
     deep_found_control_partial: "Control and upgrade history was only partially reconstructable from the available logs.",
     deep_why_control: "Ownership transfers, proxy upgrades, and admin changes can materially alter contract control after deployment.",
     deep_found_simulation: "Buy-like path: {buy}. Sell-like path: {sell}. Wallet transfer: {wallet}.",
@@ -5954,9 +6158,9 @@ const translations = {
     deep_stage_simulation: "模拟",
     deep_stage_entity: "实体情报",
     deep_section_entity: "实体情报",
-    deep_reason_entity_partial: "部分地址仅完成结构分类；语义实体身份仍未验证",
-    deep_found_entity: "已分类 {classified}/{checked} 个关键地址；其中 {labeled} 个具有已知服务或协议标签。",
-    deep_found_entity_partial: "已对 {classified}/{checked} 个关键地址完成结构分类；部分语义实体身份仍不可用。",
+    deep_reason_entity_partial: "部分地址仅完成结构分类。语义实体身份仍未验证",
+    deep_found_entity: "已分类 {classified}/{checked} 个关键地址。其中 {labeled} 个具有已知服务或协议标签。",
+    deep_found_entity_partial: "已对 {classified}/{checked} 个关键地址完成结构分类。部分语义实体身份仍不可用。",
     deep_why_entity: "实体背景可区分普通钱包、交易所、跨链桥、路由器、协议、流动性基础设施和其他已知服务，从而减少误报。",
     deep_why_entity_issuer: "已知发行方背景有助于解释管理权限：受监管代币可能会有意保留较强控制权，但这些权限仍然真实存在并会继续披露。",
     deep_why_entity_incident: "历史事件背景按精确代币地址匹配，并与代币当前链上状态分开呈现。",
@@ -6022,7 +6226,7 @@ const translations = {
     deep_status_stage_partial: "{stage} — 部分覆盖",
     deep_status_cache: "正在加载已验证的 Deep Intelligence 缓存…",
     deep_status_complete: "Deep Intelligence 已完成。",
-    deep_status_quick_complete_deep_failed: "Quick Scan 已完成；Deep Intelligence 未能完成。",
+    deep_status_quick_complete_deep_failed: "Quick Scan 已完成。Deep Intelligence 未能完成。",
     deep_error_unavailable: "Deep Intelligence 暂不可用。",
     deep_error_quick_unaffected: "Quick Scan 不受影响。",
     deep_error_run_quick_first: "请先运行有效的 Quick Scan。",
@@ -6033,7 +6237,7 @@ const translations = {
     deep_reject_score: "深度扫描已暂停 — 受保护的 Quick Scan 评分暂不可用。",
     deep_reject_solana_data: "深度扫描未启动 — Solana Quick Scan 未返回可用的安全或市场数据。",
     deep_error_rate_limited: "Deep Intelligence 已达到速率限制，请稍后再试。",
-    deep_sim_reason_evm: "动态转账路径诊断；不会广播任何交易。",
+    deep_sim_reason_evm: "动态转账路径诊断。不会广播任何交易。",
     deep_sim_reason_solana: "不会广播任何交易。本版本不声称在 Solana 上进行了完整路由交换模拟。",
     deep_unknown: "未知",
     deep_unavailable: "不可用",
@@ -6096,6 +6300,184 @@ const translations = {
     deep_status_review: "需复核",
     deep_status_partial: "部分",
     deep_status_context: "上下文",
+    deep_status_insufficient: "样本不足",
+    deep_status_notchecked: "未检查",
+    deep_status_na: "不适用",
+    deep_verdict_incomplete: "核心分析未完成",
+    deep_signal_incomplete_title: "这不是干净的结果",
+    deep_signal_incomplete_detail: "以下检查未能对该代币完整运行：{stages}。缺失的检查不会被视为安全。",
+    deep_core_line: "核心检查已完成：{done} / {total}",
+    deep_reason_not_checked: "此检查未能运行",
+    deep_reason_insufficient: "数据不足，无法得出可靠结论",
+    deep_reason_na: "不适用于此代币",
+    deep_reason_early_zero: "未能识别任何启动期买家",
+    deep_reason_early_few: "启动期买家太少，无法得出可靠结论",
+    deep_reason_clusters_sample: "仅检查了 {total} 个早期钱包中的 {checked} 个",
+    deep_reason_clusters_none: "没有可供检查的早期钱包样本",
+    deep_scope_label: "检查范围",
+    deep_scope_early: "从 {recipients} 个接收地址中识别出 {wallets} 个早期钱包候选 · 启动窗口{window}",
+    deep_scope_clusters: "已读取 {attempted} 个钱包中 {checked} 个的资金历史 · 从 {identified} 个获得供应量的钱包中选出",
+    deep_scope_history: "抽样了 {records} 条启动期记录",
+    deep_scope_deployer: "抽样了 {transactions} 笔启动前交易",
+    deep_scope_none: "此部分没有可检查的内容",
+    deep_scope_pools_observed: "在 {identified} 个池中的 {observed} 个观察到启动期活动",
+    deep_scope_pools_identified: "识别出 {identified} 个池 · 观察到 {trades} 笔启动窗口交易",
+    deep_badge_risk_title: "风险发现",
+    deep_badge_coverage_title: "检查覆盖度",
+    deep_cr_no_pools: "未找到交易池，因此无法运行启动检查",
+    deep_cr_lookups_failed: "部分钱包资金查询失败",
+    deep_k_wallets_checked: "已检查钱包",
+    deep_v_wallets_checked: "{attempted} 个中的 {checked} 个 · 覆盖已获取供应量的 {cov}",
+    deep_k_wallet_sample: "样本",
+    deep_v_wallet_sample: "{pre} 个启动时持有供应量 · {buy} 个启动买家 · {bundled} 个捆绑接收者",
+    deep_k_linked_group: "关联组 {n}",
+    deep_v_linked_group: "{count} 个钱包 · 供应量的 {pct} · {links}",
+    deep_v_with_deployer: "包含部署者",
+    deep_link_tokens_from_deployer: "来自部署者的代币",
+    deep_link_funded_by_deployer: "由部署者出资",
+    deep_link_bundle_payer: "同一捆绑付款方",
+    deep_link_funded_by_candidate: "由另一个列出的钱包出资",
+    deep_link_shared_funder: "同一资金来源",
+    deep_link_shared_upstream: "两层之前的同一资金来源",
+    deep_k_deployer_funded: "由部署者出资",
+    deep_v_deployer_funded: "{count} 个钱包 · 供应量的 {pct}",
+    deep_k_link_basis: "关联的含义",
+    deep_k_funding_scope: "已追踪的资金",
+    deep_v_funding_scope_native: "仅限原生币转账。未追踪通过稳定币或其他代币的资金，因此无法证明不存在此类资金",
+    deep_v_strong_core: "{n} 个通过资金关联连接",
+    deep_v_link_basis: "通过资金或代币流向形成的经济关联，并非共同所有权的证明",
+    deep_found_wallet_groups: "在检查的 {checked} 个钱包中发现 {groups} 个关联组。最大的一组获得了 {pct} 的供应量。",
+    deep_sig_linked_title: "关联钱包获得了大量份额",
+    deep_sig_linked_detail: "{wallets} 个通过资金或代币流向相互关联的钱包在启动时获得了 {pct}% 的供应量。这是经济关联，并非共同所有权的证明。",
+    deep_sig_linked_detail_dep: "{wallets} 个通过资金或代币流向与部署者关联的钱包在启动时获得了 {pct}% 的供应量。这是经济关联，并非共同所有权的证明。",
+    deep_sig_depfund_title: "部署者为启动钱包出资",
+    deep_sig_depfund_detail: "{count} 个获得供应量的钱包在买入或收到代币之前，由部署者直接或通过一个中间钱包出资。",
+    deep_reason_linked: "关联钱包需要复核",
+    deep_cr_upstream_unavailable: "部分第二层资金历史无法读取",
+    deep_cr_age_unverified: "无法验证部署者钱包年龄",
+    deep_cr_funding_unverified: "无法验证部署者资金来源",
+    deep_cr_lock_unknown: "LP 锁定或销毁状态未知",
+    deep_cr_history_unknown: "所有权、升级或管理员历史未知",
+    deep_cr_window_partial: "启动窗口未被完整覆盖",
+    deep_cr_sample_capped: "仅抽样了最早的一部分启动期买家",
+    deep_cr_quick_scan_only: "LP 证据仅来自快速扫描，未重新验证",
+    deep_cr_launch_pool_unknown: "最早的流动性出现在代币创建很久之后，因此无法确定最初的启动",
+    deep_cr_v4_unsupported: "仅发现无法验证的单例池",
+    deep_cr_swap_unverified: "买入是根据池转账推断的，而非已验证的兑换事件",
+    deep_cr_anchor_unverified: "启动区块是池的首笔转账，而非已验证的流动性事件",
+    deep_cr_anchor_unavailable: "无法根据池事件重建启动过程",
+    deep_found_launch_swap: "已验证的池兑换显示启动窗口内有 {early} 个买家钱包。在前 {blocks} 个区块内，{buyers} 个已验证买家买入，{bundled} 个钱包通过捆绑买入获得代币。扣除卖出后，有 {pct} 的供应量从池中流出。",
+    deep_found_launch_swap_nobundle: "已验证的池兑换显示启动窗口内有 {early} 个买家钱包。在前 {blocks} 个区块内，{buyers} 个已验证买家买入，扣除卖出后有 {pct} 的供应量从池中流出。",
+    deep_found_launch_swap_plain: "已验证的池兑换显示启动窗口内有 {early} 个买家钱包。",
+    deep_found_launch_pool_unknown: "最早发现的流动性出现在代币创建很久之后，因此无法确定最初的启动。这不是干净的结果。",
+    deep_found_launch_v4: "该代币仅在无法验证的单例池中交易，因此未解码其发行过程。这不是干净的结果。",
+    deep_found_launch_no_anchor: "无法根据池事件重建启动过程。这不是干净的结果。",
+    deep_k_launch_anchor: "启动锚点",
+    deep_v_anchor_verified: "区块 {block} · 流动性事件已验证",
+    deep_v_anchor_unverified: "区块 {block} · 池的首笔转账，未验证",
+    deep_k_verified_buyers: "已验证的买家钱包",
+    deep_k_buy_swaps: "启动窗口内的池兑换",
+    deep_v_buy_sell: "{buys} 笔买入 · {sells} 笔卖出",
+    deep_k_swap_recipients: "兑换接收方（非发送者）",
+    deep_k_distribution: "分发接收方",
+    deep_k_unattributed: "未归属的买入",
+    deep_k_deployer_buys: "部署者在启动时的买入",
+    deep_k_opening_group: "开盘区块群组",
+    deep_k_same_block_max: "单一区块内最多接收钱包数",
+    deep_v_same_block: "区块 {block} 内 {count} 个钱包",
+    deep_k_top_buyers: "最大的启动期买家",
+    deep_k_v4_skipped: "未验证的单例池",
+    deep_k_pool_types: "已验证的池",
+    deep_v_pool_v4_hooks: "带 hooks 的 V4",
+    deep_k_v4_reversed: "代币流向与事件矛盾的 V4 兑换",
+    deep_resolved_pair: "输入的地址（{input}）是交易对。Deep Intelligence 分析的是其代币 {token}。",
+    deep_resolved_v4: "输入的地址（{input}）是 V4 池 ID。Deep Intelligence 分析的是其代币 {token}。",
+    deep_error_pair_ambiguous: "该地址是交易对，无法确定其代币。请改为输入代币地址。",
+    deep_error_pair_unresolved: "无法将该池 ID 对应到代币。请改为输入代币地址。",
+    deep_scope_swaps: "来自 {buys} 笔买入兑换的 {verified} 个已验证买家钱包 · 启动区块 {block} · 启动窗口{window}",
+    deep_sig_opening_title: "开盘区块买入集中",
+    deep_sig_opening_p1: "添加流动性后的前 {blocks} 个区块内，{buyers} 个已验证买家钱包买入。",
+    deep_sig_opening_f_bundled: "另有 {bundled} 个钱包通过捆绑买入获得代币。",
+    deep_sig_opening_f_others: "{others} 个其他兑换接收方获得了代币。",
+    deep_sig_opening_f_uncertain: "另有 {uncertain} 个钱包获得的代币无法与分发方自身余额区分来源，未计入。",
+    deep_sig_opening_p2: "扣除卖出后，这些区块内有 {pct}% 的供应量流出池子。这是启动期交易量，而非当前持仓。",
+    deep_sig_opening_p2_sol: "扣除卖出后，这些槽位内有 {pct}% 的供应量流出池子。这是启动期交易量，而非当前持仓。",
+    deep_v_og_buyers: "{buyers} 个已验证买家",
+    deep_v_og_bundled: "{bundled} 个来自捆绑买入",
+    deep_v_og_others: "{others} 个其他兑换接收方",
+    deep_v_og_uncertain: "{uncertain} 个来源不确定（未计入）",
+    deep_v_og_tail: "{pct} 的供应量流出池子（净额）· 区块 {from} 至 {to}",
+    deep_cr_v4_flow_mismatch: "部分 V4 兑换的代币流向与其事件相反，未计为买入",
+    deep_cr_v4_attribution_unproven: "部分 V4 买入与同一池管理器上的其他池活动处于同一笔交易中，因此无法证明其买家",
+    deep_cr_swap_anomalies: "部分兑换事件未显示有效的对手资产，未被分类",
+    deep_cr_swap_unmatched: "部分兑换在兑换事件之前没有匹配的池转账",
+    deep_section_prelaunch: "启动前分配",
+    deep_why_prelaunch: "交易开始前分发的代币可能被卖给最早的买家。归属、金库和流动性合约属于正常情况，因此与钱包分开列出。",
+    deep_found_prelaunch: "交易开始时，除部署者外有 {wallets} 个钱包各自持有至少 {min}% 的供应量，合计 {pct}。部署者持有 {dep}，合约持有 {contracts}。",
+    deep_found_prelaunch_none: "交易开始时，除部署者外没有钱包持有 {min}% 或以上的供应量。部署者持有 {dep}，合约持有 {contracts}。",
+    deep_found_prelaunch_notchecked: "由于未能确定启动时间点，无法衡量启动时的持仓。这不是干净的结果。",
+    deep_k_pl_transfers: "已分析的启动前转账",
+    deep_k_pl_recipients: "启动前接收方",
+    deep_k_pl_large: "持有 {min}% 或以上的钱包",
+    deep_v_pl_large: "{count} · 占供应量 {pct}",
+    deep_k_pl_deployer: "启动时部署者持仓",
+    deep_k_pl_contracts: "启动时合约持仓",
+    deep_k_pl_top: "启动时最大持有者",
+    deep_v_kind_wallet: "钱包",
+    deep_v_kind_contract: "合约",
+    deep_v_kind_unknown: "类型未知",
+    deep_v_kind_deployer: "部署者",
+    deep_scope_prelaunch: "启动前 {transfers} 次余额变化 · {recipients} 个接收方",
+    deep_reason_prelaunch_conc: "启动前供应量集中",
+    deep_sig_prelaunch_title: "启动前供应量集中",
+    deep_sig_prelaunch_detail: "交易开始时，除部署者外有 {wallets} 个钱包各自持有至少 1% 的供应量，合计 {pct}%。不包括合约和部署者。",
+    deep_cr_supply_unknown: "无法读取代币供应量",
+    deep_cr_prelaunch_capped: "启动前的转账历史达到获取上限",
+    deep_cr_holder_kind_unknown: "部分持有者账户类型无法读取",
+    deep_cr_owner_unknown: "无法读取买家账户类型，因此买入未被验证",
+    deep_v_anchor_slot_verified: "槽位 {block} · 已验证池程序的流动性指令",
+    deep_v_anchor_slot_deposit: "槽位 {block} · 首次池存入，没有池流动性指令，未验证",
+    deep_cr_history_inconsistent: "部分启动前余额与获取到的历史不一致，说明有转账缺失",
+    deep_cr_holder_history_failed: "部分代币账户的启动前历史无法读取",
+    deep_cr_holders_unqueried: "在扫描预算内未能读取启动前所有收到供应量的代币账户",
+    deep_cr_supply_current_basis: "无法证明启动时的供应量，百分比按当前供应量计算",
+    deep_k_supply_basis: "供应量基准",
+    deep_v_basis_launch: "交易开始时的供应量",
+    deep_v_basis_current: "当前供应量，而非启动时的供应量",
+    deep_sig_prelaunch_detail_partial: "交易开始时，除部署者外至少有 {wallets} 个钱包各自持有 1% 或以上的供应量，合计 {pct}%。启动前的历史未被证明完整，因此仅作参考。",
+    deep_found_prelaunch_incomplete: "启动前的历史未被证明完整，这些数字可能缺少部分转账。",
+    deep_k_pl_history: "启动前历史",
+    deep_v_pl_hist_complete: "完整。已读取所有收到供应量的账户",
+    deep_v_pl_hist_material: "实质完整。已追踪 {pct} 的供应量，其余是未读取账户中的零星余额",
+    deep_v_pl_hist_consistent: "余额一致，但历史未被证明完整",
+    deep_v_pl_hist_inconsistent: "余额与历史不符，存在缺失的转账",
+    deep_v_pl_unaccounted: "{pct} 的供应量经过了未读取的账户",
+    deep_v_anchor_slot_unverified: "槽位 {block} · 首笔交易，未找到池存入",
+    deep_k_buy_txs: "启动窗口内的池交易",
+    deep_scope_sol_trades: "来自 {buys} 笔已付款买入的 {verified} 个已验证买家钱包 · 启动槽位 {block} · 启动窗口{window}",
+    deep_found_launch_sol: "余额变化显示启动窗口内有 {early} 个付款购买该代币的买家钱包。在前 {blocks} 个槽位内，{buyers} 个已验证买家买入，{bundled} 个钱包在池交易中未付款即获得代币。扣除卖出后，有 {pct} 的供应量从池中流出。",
+    deep_found_launch_sol_nobundle: "余额变化显示启动窗口内有 {early} 个付款购买该代币的买家钱包。在前 {blocks} 个槽位内，{buyers} 个已验证买家买入，扣除卖出后有 {pct} 的供应量从池中流出。",
+    deep_found_launch_sol_plain: "余额变化显示启动窗口内有 {early} 个付款购买该代币的买家钱包。",
+    deep_sig_opening_p1_sol: "添加流动性后的前 {blocks} 个槽位内，{buyers} 个已验证买家钱包买入。",
+    deep_v_og_tail_sol: "{pct} 的供应量流出池子（净额）· 槽位 {from} 至 {to}",
+    deep_reason_opening_group: "开盘区块内买入集中",
+    deep_v_partial_sample: "{value}（部分样本）",
+    deep_v_from_quick: "{value}（来自快速扫描，未重新验证）",
+    deep_found_launch_zero: "无法从现有历史中识别任何启动期买家。这不是干净的结果。",
+    deep_found_launch_few: "仅识别出 {early} 个启动期买家。数量太少，无法对启动得出可靠结论。",
+    deep_found_wallet_few: "仅能检查 {checked} 个钱包的共同资金来源。数量太少，无法排除协同钱包。",
+    deep_found_wallet_none_sample: "在已检查的 {checked} 个钱包中未发现共同资金集群。另有 {rest} 个早期钱包未被检查。",
+    deep_found_wallet_not_checked: "由于没有可用的早期钱包样本，未分析资金关系。这不是干净的结果。",
+    deep_found_not_checked: "此部分未能针对该代币进行检查。这不是干净的结果。",
+    deep_found_na: "此检查不适用于该代币。",
+    deep_cr_zero_buyers: "未识别出启动期买家",
+    deep_cr_too_few_buyers: "识别出的启动期买家太少",
+    deep_cr_too_few_wallets: "可检查的钱包太少",
+    deep_cr_sample_limited: "已检查的钱包未覆盖大部分已获取供应量，或启动阶段未经验证",
+    deep_cr_no_sample: "没有可用的获取供应量的钱包",
+    deep_cr_no_address: "未找到部署者或创建者地址",
+    deep_cr_no_records: "未找到启动期记录",
+    deep_cr_not_run: "此检查未运行",
     deep_what_found: "发现内容",
     deep_why_matters: "为何重要",
     deep_evidence: "证据",
@@ -6117,7 +6499,7 @@ const translations = {
     deep_found_deployer_ok: "已分析部署者 / 创建者身份及可用的资金历史。",
     deep_found_deployer_partial: "基于当前可用的索引证据，部署者 / 创建者身份或资金历史无法完全验证。",
     deep_why_deployer: "创建者和部署者历史可揭示过往发行、资金关系以及异常新的钱包。",
-    deep_found_launch: "分析了 {early} 个早期买家；其中 {immediate} 个钱包出现在启动即刻窗口。",
+    deep_found_launch: "分析了 {early} 个早期买家。其中 {immediate} 个钱包出现在启动即刻窗口。",
     deep_found_launch_partial: "基于当前可用历史，只能重建部分早期启动活动。",
     deep_why_launch: "高度集中的早期买入可能揭示协同启动活动或异常激进的抢跑行为。",
     deep_found_wallet_clusters: "在检查的 {checked} 个钱包中观察到 {clusters} 个共同资金来源集群。",
@@ -6128,7 +6510,7 @@ const translations = {
     deep_found_liquidity_partial: "已观察到流动性，但 LP 所有权 / 锁仓证据未能完全验证。",
     deep_why_liquidity: "LP 所有权、销毁、锁仓和移除历史有助于判断可用流动性的控制程度。",
     deep_found_control: "在采样历史中观察到 {ownership} 次所有权转移、{upgrades} 次代理升级和 {admin} 次管理员变更。",
-    deep_found_control_solana: "当前 Solana 权限已验证；观察到 {authority} 个历史权限变更事件。",
+    deep_found_control_solana: "当前 Solana 权限已验证。观察到 {authority} 个历史权限变更事件。",
     deep_found_control_partial: "基于当前可用日志，只能部分重建控制与升级历史。",
     deep_why_control: "所有权转移、代理升级和管理员变更可能在部署后实质改变合约控制权。",
     deep_found_simulation: "类买入路径：{buy}。类卖出路径：{sell}。钱包转账：{wallet}。",
@@ -6668,9 +7050,9 @@ const translations = {
     deep_stage_simulation: "المحاكاة",
     deep_stage_entity: "ذكاء الكيانات",
     deep_section_entity: "ذكاء الكيانات",
-    deep_reason_entity_partial: "تم تصنيف بعض العناوين هيكلياً فقط؛ ولا تزال الهوية الدلالية غير مؤكدة",
-    deep_found_entity: "تم تصنيف {classified} من أصل {checked} عناوين رئيسية؛ وكان لدى {labeled} منها تصنيفات معروفة لخدمات أو بروتوكولات.",
-    deep_found_entity_partial: "تم التصنيف الهيكلي لـ {classified} من أصل {checked} عناوين رئيسية؛ ولا تزال بعض هويات الكيانات الدلالية غير متاحة.",
+    deep_reason_entity_partial: "تم تصنيف بعض العناوين هيكلياً فقط. ولا تزال الهوية الدلالية غير مؤكدة",
+    deep_found_entity: "تم تصنيف {classified} من أصل {checked} عناوين رئيسية. وكان لدى {labeled} منها تصنيفات معروفة لخدمات أو بروتوكولات.",
+    deep_found_entity_partial: "تم التصنيف الهيكلي لـ {classified} من أصل {checked} عناوين رئيسية. ولا تزال بعض هويات الكيانات الدلالية غير متاحة.",
     deep_why_entity: "يساعد سياق الكيانات على تقليل الإشارات الخاطئة عبر التمييز بين المحافظ العادية والمنصات والجسور والموجّهات والبروتوكولات وبنية السيولة والخدمات المعروفة الأخرى.",
     deep_why_entity_issuer: "يساعد سياق الجهة المُصدرة المعروفة على تفسير الصلاحيات الإدارية: قد تحتفظ الرموز المنظمة عمداً بضوابط قوية، لكن هذه الصلاحيات حقيقية وتظل معروضة بوضوح.",
     deep_why_entity_incident: "تتم مطابقة سياق الحوادث التاريخية مع عنوان الرمز نفسه، ويُعرض منفصلاً عن حالته الحالية على السلسلة.",
@@ -6736,7 +7118,7 @@ const translations = {
     deep_status_stage_partial: "{stage} — تغطية جزئية",
     deep_status_cache: "جارٍ تحميل ذاكرة Deep Intelligence الموثقة…",
     deep_status_complete: "اكتمل Deep Intelligence.",
-    deep_status_quick_complete_deep_failed: "اكتمل Quick Scan؛ تعذّر إكمال Deep Intelligence.",
+    deep_status_quick_complete_deep_failed: "اكتمل Quick Scan. تعذّر إكمال Deep Intelligence.",
     deep_error_unavailable: "Deep Intelligence غير متاح.",
     deep_error_quick_unaffected: "Quick Scan لم يتأثر.",
     deep_error_run_quick_first: "شغّل Quick Scan صالحًا أولًا.",
@@ -6747,7 +7129,7 @@ const translations = {
     deep_reject_score: "تم إيقاف الفحص العميق مؤقتًا — تقييم Quick Scan المحمي غير متاح.",
     deep_reject_solana_data: "لم يبدأ الفحص العميق — لم يُرجع Quick Scan على Solana بيانات أمان أو سوق قابلة للاستخدام.",
     deep_error_rate_limited: "تم الوصول إلى حد معدل Deep Intelligence. حاول مرة أخرى لاحقًا.",
-    deep_sim_reason_evm: "تشخيص ديناميكي لمسار التحويل؛ لا يتم بث أي معاملة.",
+    deep_sim_reason_evm: "تشخيص ديناميكي لمسار التحويل. لا يتم بث أي معاملة.",
     deep_sim_reason_solana: "لا يتم بث أي معاملة. لا يدّعي هذا الإصدار محاكاة مبادلة كاملة عبر الراوتر على Solana.",
     deep_unknown: "غير معروف",
     deep_unavailable: "غير متاح",
@@ -6810,6 +7192,184 @@ const translations = {
     deep_status_review: "مراجعة",
     deep_status_partial: "جزئي",
     deep_status_context: "سياق",
+    deep_status_insufficient: "عينة غير كافية",
+    deep_status_notchecked: "لم يُفحص",
+    deep_status_na: "لا ينطبق",
+    deep_verdict_incomplete: "التحليل الأساسي غير مكتمل",
+    deep_signal_incomplete_title: "هذه ليست نتيجة نظيفة",
+    deep_signal_incomplete_detail: "تعذّر تشغيل هذه الفحوصات بالكامل لهذا الرمز: {stages}. الفحوصات الناقصة لا تُحتسب كآمنة.",
+    deep_core_line: "الفحوصات الأساسية المكتملة: {done} من {total}",
+    deep_reason_not_checked: "تعذّر تشغيل هذا الفحص",
+    deep_reason_insufficient: "لا توجد بيانات كافية لاستنتاج موثوق",
+    deep_reason_na: "لا ينطبق على هذا الرمز",
+    deep_reason_early_zero: "تعذّر تحديد أي مشترين عند الإطلاق",
+    deep_reason_early_few: "عدد المشترين عند الإطلاق قليل جدًا لاستنتاج موثوق",
+    deep_reason_clusters_sample: "تم فحص {checked} فقط من أصل {total} محفظة مبكرة",
+    deep_reason_clusters_none: "لم تتوفر عينة من المحافظ المبكرة للفحص",
+    deep_scope_label: "ما الذي تم فحصه",
+    deep_scope_early: "تم تحديد {wallets} محفظة مبكرة مرشحة من أصل {recipients} عنوانًا مستلمًا · نافذة الإطلاق {window}",
+    deep_scope_clusters: "قُرئ سجل التمويل لـ {checked} من {attempted} محفظة · اختيرت من {identified} محفظة اكتسبت معروضًا",
+    deep_scope_history: "تم أخذ عينة من {records} سجل خلال فترة الإطلاق",
+    deep_scope_deployer: "تم أخذ عينة من {transactions} معاملة قبل الإطلاق",
+    deep_scope_none: "لم يكن هناك ما يمكن فحصه في هذا القسم",
+    deep_scope_pools_observed: "تم رصد نشاط الإطلاق في {observed} من أصل {identified} مجمع",
+    deep_scope_pools_identified: "تم تحديد {identified} مجمع · تم رصد {trades} صفقة في نافذة الإطلاق",
+    deep_badge_risk_title: "نتيجة مخاطر",
+    deep_badge_coverage_title: "تغطية الفحص",
+    deep_cr_no_pools: "لم يُعثر على مجمع تداول، لذلك تعذّر تشغيل فحوصات الإطلاق",
+    deep_cr_lookups_failed: "فشلت بعض عمليات الاستعلام عن تمويل المحافظ",
+    deep_k_wallets_checked: "المحافظ التي تم فحصها",
+    deep_v_wallets_checked: "{checked} من {attempted} · {cov} من المعروض المكتسب",
+    deep_k_wallet_sample: "العينة",
+    deep_v_wallet_sample: "{pre} تحمل معروضًا عند الإطلاق · {buy} مشترين عند الإطلاق · {bundled} مستلمين عبر مشتريات مجمّعة",
+    deep_k_linked_group: "مجموعة مرتبطة {n}",
+    deep_v_linked_group: "{count} محفظة · {pct} من المعروض · {links}",
+    deep_v_with_deployer: "يشمل الناشر",
+    deep_link_tokens_from_deployer: "رموز من الناشر",
+    deep_link_funded_by_deployer: "ممولة من الناشر",
+    deep_link_bundle_payer: "نفس دافع الشراء المجمّع",
+    deep_link_funded_by_candidate: "ممولة من محفظة أخرى في القائمة",
+    deep_link_shared_funder: "نفس المموّل",
+    deep_link_shared_upstream: "نفس المموّل قبل خطوتين",
+    deep_k_deployer_funded: "ممولة من الناشر",
+    deep_v_deployer_funded: "{count} محفظة · {pct} من المعروض",
+    deep_k_link_basis: "معنى الارتباط",
+    deep_k_funding_scope: "التمويل المتتبَّع",
+    deep_v_funding_scope_native: "تحويلات العملة الأصلية فقط. التمويل عبر العملات المستقرة أو رموز أخرى غير متتبَّع، لذا غيابه غير مثبت",
+    deep_v_strong_core: "{n} مترابطة عبر روابط تمويل",
+    deep_v_link_basis: "ارتباط اقتصادي عبر التمويل أو تدفق الرموز، وليس دليلًا على ملكية مشتركة",
+    deep_found_wallet_groups: "عُثر على {groups} مجموعة مرتبطة بين {checked} محفظة تم فحصها. أكبرها اكتسبت {pct} من المعروض.",
+    deep_sig_linked_title: "محافظ مرتبطة اكتسبت حصة كبيرة",
+    deep_sig_linked_detail: "{wallets} محفظة مرتبطة ببعضها عبر التمويل أو تدفق الرموز اكتسبت {pct}% من المعروض عند الإطلاق. هذا ارتباط اقتصادي وليس دليلًا على ملكية مشتركة.",
+    deep_sig_linked_detail_dep: "{wallets} محفظة مرتبطة بالناشر عبر التمويل أو تدفق الرموز اكتسبت {pct}% من المعروض عند الإطلاق. هذا ارتباط اقتصادي وليس دليلًا على ملكية مشتركة.",
+    deep_sig_depfund_title: "الناشر موّل محافظ الإطلاق",
+    deep_sig_depfund_detail: "{count} محفظة اكتسبت معروضًا موّلها الناشر مباشرة أو عبر محفظة وسيطة واحدة قبل أن تشتري أو تتلقى الرموز.",
+    deep_reason_linked: "المحافظ المرتبطة تحتاج إلى مراجعة",
+    deep_cr_upstream_unavailable: "تعذّرت قراءة بعض سجلات التمويل في الخطوة الثانية",
+    deep_cr_age_unverified: "تعذّر التحقق من عمر محفظة الناشر",
+    deep_cr_funding_unverified: "تعذّر التحقق من مصدر تمويل الناشر",
+    deep_cr_lock_unknown: "حالة قفل أو حرق السيولة غير معروفة",
+    deep_cr_history_unknown: "سجل الملكية أو الترقيات أو المسؤول غير معروف",
+    deep_cr_window_partial: "لم تتم تغطية نافذة الإطلاق بالكامل",
+    deep_cr_sample_capped: "تم أخذ عينة من الجزء الأقدم فقط من المشترين عند الإطلاق",
+    deep_cr_quick_scan_only: "أدلة السيولة جاءت من الفحص السريع فقط ولم يُعَد التحقق منها",
+    deep_cr_launch_pool_unknown: "جاءت أول سيولة بعد إنشاء الرمز بوقت طويل، لذلك تعذّر تحديد الإطلاق الأصلي",
+    deep_cr_v4_unsupported: "تم العثور فقط على مجمعات أحادية تعذّر التحقق منها",
+    deep_cr_swap_unverified: "تم استنتاج عمليات الشراء من تحويلات المجمع، وليس من أحداث مبادلة موثّقة",
+    deep_cr_anchor_unverified: "كتلة الإطلاق هي أول تحويل من المجمع، وليست حدث سيولة موثّقًا",
+    deep_cr_anchor_unavailable: "تعذّر إعادة بناء الإطلاق من أحداث المجمع",
+    deep_found_launch_swap: "تُظهر مبادلات المجمع الموثّقة {early} محفظة مشترية في نافذة الإطلاق. في أول {blocks} كتل، اشترى {buyers} مشترٍ موثّق، وتلقّت {bundled} محفظة رموزًا عبر مشتريات مجمّعة. خرج {pct} من المعروض من المجمع هناك بعد خصم المبيعات.",
+    deep_found_launch_swap_nobundle: "تُظهر مبادلات المجمع الموثّقة {early} محفظة مشترية في نافذة الإطلاق. في أول {blocks} كتل، اشترى {buyers} مشترٍ موثّق، وخرج {pct} من المعروض من المجمع بعد خصم المبيعات.",
+    deep_found_launch_swap_plain: "تُظهر مبادلات المجمع الموثّقة {early} محفظة مشترية في نافذة الإطلاق.",
+    deep_found_launch_pool_unknown: "جاءت أول سيولة تم العثور عليها بعد إنشاء الرمز بوقت طويل، لذلك تعذّر تحديد الإطلاق الأصلي. هذه ليست نتيجة نظيفة.",
+    deep_found_launch_v4: "يتم تداول هذا الرمز فقط في مجمعات أحادية تعذّر التحقق منها، لذلك لم يُفك ترميز إطلاقه. هذه ليست نتيجة نظيفة.",
+    deep_found_launch_no_anchor: "تعذّر إعادة بناء الإطلاق من أحداث المجمع. هذه ليست نتيجة نظيفة.",
+    deep_k_launch_anchor: "نقطة الإطلاق",
+    deep_v_anchor_verified: "الكتلة {block} · حدث السيولة موثّق",
+    deep_v_anchor_unverified: "الكتلة {block} · أول تحويل من المجمع، غير موثّق",
+    deep_k_verified_buyers: "محافظ المشترين الموثّقة",
+    deep_k_buy_swaps: "مبادلات المجمع في نافذة الإطلاق",
+    deep_v_buy_sell: "{buys} عملية شراء · {sells} عملية بيع",
+    deep_k_swap_recipients: "مستلمو المبادلة (ليسوا المرسل)",
+    deep_k_distribution: "مستلمو التوزيع",
+    deep_k_unattributed: "عمليات شراء غير منسوبة",
+    deep_k_deployer_buys: "مشتريات الناشر عند الإطلاق",
+    deep_k_opening_group: "مجموعة كتل الافتتاح",
+    deep_k_same_block_max: "أكبر عدد مستلمين في كتلة واحدة",
+    deep_v_same_block: "{count} محفظة في الكتلة {block}",
+    deep_k_top_buyers: "أكبر المشترين عند الإطلاق",
+    deep_k_v4_skipped: "مجمعات أحادية غير مُتحقق منها",
+    deep_k_pool_types: "المجمعات المُتحقق منها",
+    deep_v_pool_v4_hooks: "V4 مع hooks",
+    deep_k_v4_reversed: "مبادلات V4 يتعارض فيها تدفق الرمز مع الحدث",
+    deep_resolved_pair: "العنوان المُدخل ({input}) هو زوج تداول. حلّل Deep Intelligence رمزه {token}.",
+    deep_resolved_v4: "العنوان المُدخل ({input}) هو معرّف مجمع V4. حلّل Deep Intelligence رمزه {token}.",
+    deep_error_pair_ambiguous: "هذا العنوان زوج تداول ولم يمكن تحديد رمزه. أدخل عنوان الرمز بدلاً منه.",
+    deep_error_pair_unresolved: "تعذّر ربط معرّف المجمع هذا برمز. أدخل عنوان الرمز بدلاً منه.",
+    deep_scope_swaps: "{verified} محفظة مشترية موثّقة من {buys} مبادلة شراء · كتلة الإطلاق {block} · نافذة الإطلاق {window}",
+    deep_sig_opening_title: "تركّز الشراء في كتل الافتتاح",
+    deep_sig_opening_p1: "في أول {blocks} كتل بعد إضافة السيولة، اشترت {buyers} محفظة مشترية موثّقة.",
+    deep_sig_opening_f_bundled: "تلقّت {bundled} محفظة أخرى رموزًا عبر مشتريات مجمّعة.",
+    deep_sig_opening_f_others: "تلقّى {others} مستلم مبادلة آخر رموزًا.",
+    deep_sig_opening_f_uncertain: "تلقّت {uncertain} محفظة أخرى رموزًا تعذّر فصل مصدرها عن رصيد الموزّع نفسه. لم يتم احتسابها.",
+    deep_sig_opening_p2: "خرج {pct}% من المعروض من المجمع في تلك الكتل بعد خصم المبيعات. هذا حجم الإطلاق وليس الحيازات الحالية.",
+    deep_sig_opening_p2_sol: "خرج {pct}% من المعروض من المجمع في تلك الخانات بعد خصم المبيعات. هذا حجم الإطلاق وليس الحيازات الحالية.",
+    deep_v_og_buyers: "{buyers} مشترٍ موثّق",
+    deep_v_og_bundled: "{bundled} عبر مشتريات مجمّعة",
+    deep_v_og_others: "{others} مستلم مبادلة آخر",
+    deep_v_og_uncertain: "{uncertain} بمصدر غير مؤكد (غير محتسبة)",
+    deep_v_og_tail: "خرج {pct} من المعروض من المجمع (صافٍ) · الكتل من {from} إلى {to}",
+    deep_cr_v4_flow_mismatch: "بعض مبادلات V4 نقلت الرمز في الاتجاه المعاكس لحدثها ولم تُحتسب كعمليات شراء",
+    deep_cr_v4_attribution_unproven: "بعض عمليات شراء V4 تشاركت معاملتها مع نشاط مجمع آخر على مدير المجمعات نفسه، لذلك تعذّر إثبات المشتري",
+    deep_cr_swap_anomalies: "بعض أحداث المبادلة لم تُظهر أصلًا مقابلًا صالحًا ولم يتم تصنيفها",
+    deep_cr_swap_unmatched: "بعض المبادلات لم يكن لها تحويل مطابق من المجمع قبل حدث المبادلة",
+    deep_section_prelaunch: "التوزيع قبل الإطلاق",
+    deep_why_prelaunch: "الرموز الموزّعة قبل بدء التداول يمكن بيعها لأوائل المشترين. عقود الاستحقاق والخزينة والسيولة أمر طبيعي، لذلك تُدرج منفصلة عن المحافظ.",
+    deep_found_prelaunch: "عند بدء التداول، كانت {wallets} محفظة غير الناشر تحمل كل منها {min}% على الأقل من المعروض، و{pct} مجتمعة. كان الناشر يحمل {dep} والعقود {contracts}.",
+    deep_found_prelaunch_none: "عند بدء التداول، لم تكن أي محفظة غير الناشر تحمل {min}% أو أكثر من المعروض. كان الناشر يحمل {dep} والعقود {contracts}.",
+    deep_found_prelaunch_notchecked: "تعذّر قياس الحيازات عند الإطلاق لأن نقطة الإطلاق لم تُحدَّد. هذه ليست نتيجة نظيفة.",
+    deep_k_pl_transfers: "التحويلات المحلّلة قبل الإطلاق",
+    deep_k_pl_recipients: "المستلمون قبل الإطلاق",
+    deep_k_pl_large: "محافظ تحمل {min}% أو أكثر",
+    deep_v_pl_large: "{count} · {pct} من المعروض",
+    deep_k_pl_deployer: "الناشر عند الإطلاق",
+    deep_k_pl_contracts: "العقود عند الإطلاق",
+    deep_k_pl_top: "أكبر الحائزين عند الإطلاق",
+    deep_v_kind_wallet: "محفظة",
+    deep_v_kind_contract: "عقد",
+    deep_v_kind_unknown: "نوع غير معروف",
+    deep_v_kind_deployer: "الناشر",
+    deep_scope_prelaunch: "{transfers} تغيير رصيد قبل الإطلاق · {recipients} مستلم",
+    deep_reason_prelaunch_conc: "تركّز المعروض قبل الإطلاق",
+    deep_sig_prelaunch_title: "تركّز المعروض قبل الإطلاق",
+    deep_sig_prelaunch_detail: "عند بدء التداول، كانت {wallets} محفظة غير الناشر تحمل كل منها 1% على الأقل من المعروض، و{pct}% مجتمعة. لا تشمل العقود والناشر.",
+    deep_cr_supply_unknown: "تعذّرت قراءة المعروض",
+    deep_cr_prelaunch_capped: "بلغ سجل التحويلات قبل الإطلاق حد الاسترجاع",
+    deep_cr_holder_kind_unknown: "تعذّرت قراءة أنواع بعض حسابات الحائزين",
+    deep_cr_owner_unknown: "تعذّرت قراءة أنواع حسابات المشترين، لذلك لم يتم التحقق من المشتريات",
+    deep_v_anchor_slot_verified: "الخانة {block} · تعليمة السيولة من برنامج المجمع موثّقة",
+    deep_v_anchor_slot_deposit: "الخانة {block} · أول إيداع في المجمع بلا تعليمة سيولة من المجمع، غير موثّق",
+    deep_cr_history_inconsistent: "بعض الأرصدة قبل الإطلاق لا تطابق السجل المسترجع، أي أن هناك تحويلات مفقودة",
+    deep_cr_holder_history_failed: "تعذّرت قراءة سجلات بعض حسابات الرموز قبل الإطلاق",
+    deep_cr_holders_unqueried: "لم تُقرأ جميع حسابات الرموز التي تلقّت من المعروض قبل الإطلاق ضمن ميزانية الفحص",
+    deep_cr_supply_current_basis: "النسب محسوبة على المعروض الحالي لأن المعروض عند الإطلاق لم يُثبت",
+    deep_k_supply_basis: "أساس المعروض",
+    deep_v_basis_launch: "المعروض عند بدء التداول",
+    deep_v_basis_current: "المعروض الحالي، لا المعروض عند الإطلاق",
+    deep_sig_prelaunch_detail_partial: "عند بدء التداول، كانت {wallets} محفظة على الأقل غير الناشر تحمل كل منها 1% أو أكثر من المعروض، و{pct}% مجتمعة. لم يثبت اكتمال السجل قبل الإطلاق، لذا هذا للسياق فقط.",
+    deep_found_prelaunch_incomplete: "لم يثبت اكتمال السجل قبل الإطلاق، لذا قد تنقص هذه الأرقام بعض التحويلات.",
+    deep_k_pl_history: "السجل قبل الإطلاق",
+    deep_v_pl_hist_complete: "مكتمل. قُرئت كل الحسابات التي تلقّت من المعروض",
+    deep_v_pl_hist_material: "مكتمل جوهريًا. تُتبّع {pct} من المعروض، والباقي فتات في حسابات لم تُقرأ",
+    deep_v_pl_hist_consistent: "الأرصدة متّسقة، لكن اكتمال السجل غير مثبت",
+    deep_v_pl_hist_inconsistent: "الأرصدة لا تطابق السجل، هناك تحويلات مفقودة",
+    deep_v_pl_unaccounted: "مرّ {pct} من المعروض عبر حسابات لم تُقرأ",
+    deep_v_anchor_slot_unverified: "الخانة {block} · أول صفقة، لم يُعثر على إيداع في المجمع",
+    deep_k_buy_txs: "صفقات المجمع في نافذة الإطلاق",
+    deep_scope_sol_trades: "{verified} محفظة مشترية موثّقة من {buys} عملية شراء مدفوعة · خانة الإطلاق {block} · نافذة الإطلاق {window}",
+    deep_found_launch_sol: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة الإطلاق. في أول {blocks} خانات، اشترى {buyers} مشترٍ موثّق، وتلقّت {bundled} محفظة رموزًا دون دفع ضمن صفقة مجمع. خرج {pct} من المعروض من المجمع هناك بعد خصم المبيعات.",
+    deep_found_launch_sol_nobundle: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة الإطلاق. في أول {blocks} خانات، اشترى {buyers} مشترٍ موثّق، وخرج {pct} من المعروض من المجمع بعد خصم المبيعات.",
+    deep_found_launch_sol_plain: "تُظهر تغييرات الأرصدة {early} محفظة مشترية دفعت ثمن الرمز في نافذة الإطلاق.",
+    deep_sig_opening_p1_sol: "في أول {blocks} خانات بعد إضافة السيولة، اشترت {buyers} محفظة مشترية موثّقة.",
+    deep_v_og_tail_sol: "خرج {pct} من المعروض من المجمع (صافٍ) · الخانات من {from} إلى {to}",
+    deep_reason_opening_group: "شراء مركّز في كتل الافتتاح",
+    deep_v_partial_sample: "{value} (عينة جزئية)",
+    deep_v_from_quick: "{value} (من الفحص السريع، دون إعادة تحقق)",
+    deep_found_launch_zero: "تعذّر تحديد أي مشترين عند الإطلاق من السجل المتاح. هذه ليست نتيجة نظيفة.",
+    deep_found_launch_few: "تم تحديد {early} مشترٍ فقط عند الإطلاق. هذا عدد قليل جدًا لاستنتاج موثوق حول الإطلاق.",
+    deep_found_wallet_few: "أمكن فحص التمويل المشترك لـ {checked} محفظة فقط. هذا عدد قليل جدًا لاستبعاد وجود محافظ منسقة.",
+    deep_found_wallet_none_sample: "لم يُعثر على تجمع تمويل مشترك بين {checked} محفظة تم فحصها. لم يتم فحص {rest} محفظة مبكرة أخرى.",
+    deep_found_wallet_not_checked: "لم يتم تحليل علاقات التمويل لعدم توفر عينة من المحافظ المبكرة. هذه ليست نتيجة نظيفة.",
+    deep_found_not_checked: "تعذّر فحص هذا القسم لهذا الرمز. هذه ليست نتيجة نظيفة.",
+    deep_found_na: "هذا الفحص لا ينطبق على هذا الرمز.",
+    deep_cr_zero_buyers: "لم يتم تحديد مشترين عند الإطلاق",
+    deep_cr_too_few_buyers: "عدد المشترين المحددين عند الإطلاق قليل جدًا",
+    deep_cr_too_few_wallets: "عدد المحافظ التي أمكن فحصها قليل جدًا",
+    deep_cr_sample_limited: "المحافظ المفحوصة لا تغطي معظم المعروض المكتسب، أو أن مراحل الإطلاق غير موثّقة",
+    deep_cr_no_sample: "لا توجد محافظ اكتسبت معروضًا",
+    deep_cr_no_address: "لم يُعثر على عنوان الناشر أو المنشئ",
+    deep_cr_no_records: "لم يُعثر على سجلات خلال فترة الإطلاق",
+    deep_cr_not_run: "لم يتم تشغيل هذا الفحص",
     deep_what_found: "ما الذي وجدناه",
     deep_why_matters: "لماذا يهم",
     deep_evidence: "الأدلة",
@@ -6831,7 +7391,7 @@ const translations = {
     deep_found_deployer_ok: "تم تحليل هوية الناشر / المنشئ وسجل التمويل المتاح.",
     deep_found_deployer_partial: "تعذر التحقق الكامل من هوية الناشر / المنشئ أو سجل التمويل من الأدلة المفهرسة المتاحة.",
     deep_why_deployer: "يمكن لسجل المنشئ والناشر كشف عمليات إطلاق سابقة وعلاقات تمويل ومحافظ حديثة بشكل غير معتاد.",
-    deep_found_launch: "تم تحليل {early} من المشترين الأوائل؛ وظهرت {immediate} محفظة ضمن نافذة الإطلاق الفوري.",
+    deep_found_launch: "تم تحليل {early} من المشترين الأوائل. وظهرت {immediate} محفظة ضمن نافذة الإطلاق الفوري.",
     deep_found_launch_partial: "أمكنت إعادة بناء جزء فقط من نشاط الإطلاق المبكر من السجل المتاح.",
     deep_why_launch: "قد يكشف الشراء المبكر شديد التركّز عن نشاط إطلاق منسق أو سلوك قنص شديد.",
     deep_found_wallet_clusters: "تم رصد {clusters} تجمع تمويل مشترك بين {checked} محفظة تم فحصها.",
@@ -6842,7 +7402,7 @@ const translations = {
     deep_found_liquidity_partial: "تم رصد السيولة، لكن تعذر التحقق الكامل من ملكية / قفل LP.",
     deep_why_liquidity: "تساعد ملكية LP والحرق والقفل وسجل الإزالة على فهم مقدار التحكم في السيولة المتاحة.",
     deep_found_control: "تم رصد {ownership} نقل ملكية و{upgrades} ترقية Proxy و{admin} تغيير إداري في السجل الذي تم فحصه.",
-    deep_found_control_solana: "تم التحقق من صلاحيات Solana الحالية؛ تم رصد {authority} حدثًا تاريخيًا لتغيير الصلاحية.",
+    deep_found_control_solana: "تم التحقق من صلاحيات Solana الحالية. تم رصد {authority} حدثًا تاريخيًا لتغيير الصلاحية.",
     deep_found_control_partial: "أمكنت إعادة بناء سجل التحكم والترقيات بشكل جزئي فقط من السجلات المتاحة.",
     deep_why_control: "يمكن لنقل الملكية وترقيات Proxy والتغييرات الإدارية تغيير التحكم بالعقد بشكل جوهري بعد النشر.",
     deep_found_simulation: "مسار شبيه بالشراء: {buy}. مسار شبيه بالبيع: {sell}. تحويل محفظة: {wallet}.",
@@ -7382,9 +7942,9 @@ const translations = {
     deep_stage_simulation: "Симуляция",
     deep_stage_entity: "Аналитика сущностей",
     deep_section_entity: "Аналитика сущностей",
-    deep_reason_entity_partial: "Для части адресов определён только структурный тип; семантическая сущность не подтверждена",
-    deep_found_entity: "Классифицировано {classified} из {checked} ключевых адресов; у {labeled} есть известные метки сервисов или протоколов.",
-    deep_found_entity_partial: "Структурно классифицировано {classified} из {checked} ключевых адресов; часть семантической идентификации сущностей недоступна.",
+    deep_reason_entity_partial: "Для части адресов определён только структурный тип. Семантическая сущность не подтверждена",
+    deep_found_entity: "Классифицировано {classified} из {checked} ключевых адресов. У {labeled} есть известные метки сервисов или протоколов.",
+    deep_found_entity_partial: "Структурно классифицировано {classified} из {checked} ключевых адресов. Часть семантической идентификации сущностей недоступна.",
     deep_why_entity: "Контекст сущностей снижает ложные срабатывания, отличая обычные кошельки от бирж, мостов, роутеров, протоколов, инфраструктуры ликвидности и других известных сервисов.",
     deep_why_entity_issuer: "Контекст известного эмитента помогает интерпретировать административные полномочия: регулируемые токены могут намеренно сохранять сильные права управления, но эти права реальны и всё равно раскрываются.",
     deep_why_entity_incident: "Контекст исторического инцидента сопоставляется с точным адресом токена и показывается отдельно от его текущего ончейн-состояния.",
@@ -7450,7 +8010,7 @@ const translations = {
     deep_status_stage_partial: "{stage} — частичное покрытие",
     deep_status_cache: "Загрузка проверенного кэша Deep Intelligence…",
     deep_status_complete: "Deep Intelligence завершён.",
-    deep_status_quick_complete_deep_failed: "Quick Scan завершён; Deep Intelligence не удалось закончить.",
+    deep_status_quick_complete_deep_failed: "Quick Scan завершён. Deep Intelligence не удалось закончить.",
     deep_error_unavailable: "Deep Intelligence недоступен.",
     deep_error_quick_unaffected: "Quick Scan не затронут.",
     deep_error_run_quick_first: "Сначала запустите корректный Quick Scan.",
@@ -7461,7 +8021,7 @@ const translations = {
     deep_reject_score: "Deep Scan приостановлен — защищённый результат Quick Scan недоступен.",
     deep_reject_solana_data: "Deep Scan не запущен — Solana Quick Scan не вернул пригодных данных безопасности или рынка.",
     deep_error_rate_limited: "Достигнут лимит запросов Deep Intelligence. Повторите позже.",
-    deep_sim_reason_evm: "Динамическая диагностика пути перевода; транзакция не отправляется.",
+    deep_sim_reason_evm: "Динамическая диагностика пути перевода. Транзакция не отправляется.",
     deep_sim_reason_solana: "Транзакция не отправляется. В этой версии для Solana не заявляется полная симуляция swap через роутер.",
     deep_unknown: "Неизвестно",
     deep_unavailable: "Недоступно",
@@ -7524,6 +8084,184 @@ const translations = {
     deep_status_review: "ПРОВЕРИТЬ",
     deep_status_partial: "ЧАСТИЧНО",
     deep_status_context: "КОНТЕКСТ",
+    deep_status_insufficient: "МАЛО ДАННЫХ",
+    deep_status_notchecked: "НЕ ПРОВЕРЕНО",
+    deep_status_na: "Н/П",
+    deep_verdict_incomplete: "Основной анализ не завершён",
+    deep_signal_incomplete_title: "Это не чистый результат",
+    deep_signal_incomplete_detail: "Для этого токена не удалось полностью выполнить проверки: {stages}. Недостающие проверки не считаются безопасными.",
+    deep_core_line: "Основные проверки завершены: {done} из {total}",
+    deep_reason_not_checked: "Эту проверку не удалось выполнить",
+    deep_reason_insufficient: "Недостаточно данных для надёжного вывода",
+    deep_reason_na: "Не применимо к этому токену",
+    deep_reason_early_zero: "Не удалось определить ни одного покупателя при запуске",
+    deep_reason_early_few: "Слишком мало покупателей при запуске для надёжного вывода",
+    deep_reason_clusters_sample: "Проверено только {checked} из {total} ранних кошельков",
+    deep_reason_clusters_none: "Нет выборки ранних кошельков для проверки",
+    deep_scope_label: "ЧТО ПРОВЕРЕНО",
+    deep_scope_early: "Выявлено кандидатов в ранние кошельки: {wallets} из {recipients} получателей · окно запуска: {window}",
+    deep_scope_clusters: "История финансирования прочитана для {checked} из {attempted} кошельков · выбраны из {identified} кошельков, получивших предложение",
+    deep_scope_history: "В выборке записей периода запуска: {records}",
+    deep_scope_deployer: "В выборке транзакций до запуска: {transactions}",
+    deep_scope_none: "В этом разделе нечего было проверить",
+    deep_scope_pools_observed: "Активность запуска замечена в {observed} из {identified} пулов",
+    deep_scope_pools_identified: "Выявлено пулов: {identified} · сделок в окне запуска: {trades}",
+    deep_badge_risk_title: "Найденный риск",
+    deep_badge_coverage_title: "Покрытие проверки",
+    deep_cr_no_pools: "Торговый пул не найден, поэтому проверки запуска не выполнялись",
+    deep_cr_lookups_failed: "Часть запросов финансирования кошельков не удалась",
+    deep_k_wallets_checked: "Проверено кошельков",
+    deep_v_wallets_checked: "{checked} из {attempted} · {cov} полученного предложения",
+    deep_k_wallet_sample: "Выборка",
+    deep_v_wallet_sample: "{pre} держали предложение на запуске · {buy} покупателей запуска · {bundled} получателей пакетных покупок",
+    deep_k_linked_group: "Связанная группа {n}",
+    deep_v_linked_group: "Кошельков: {count} · {pct} предложения · {links}",
+    deep_v_with_deployer: "включая деплоера",
+    deep_link_tokens_from_deployer: "токены от деплоера",
+    deep_link_funded_by_deployer: "профинансированы деплоером",
+    deep_link_bundle_payer: "один плательщик пакета",
+    deep_link_funded_by_candidate: "профинансированы другим кошельком из списка",
+    deep_link_shared_funder: "общий источник средств",
+    deep_link_shared_upstream: "общий источник на два шага раньше",
+    deep_k_deployer_funded: "Профинансированы деплоером",
+    deep_v_deployer_funded: "Кошельков: {count} · {pct} предложения",
+    deep_k_link_basis: "Что означает связь",
+    deep_k_funding_scope: "Отслеженное финансирование",
+    deep_v_funding_scope_native: "Только переводы нативной монеты. Финансирование через стейблкоины или другие токены не отслеживается, поэтому его отсутствие не доказано",
+    deep_v_strong_core: "{n} связаны финансированием",
+    deep_v_link_basis: "Экономическая связь через финансирование или движение токенов, а не доказательство общего владельца",
+    deep_found_wallet_groups: "Найдено связанных групп: {groups} среди {checked} проверенных кошельков. Крупнейшая получила {pct} предложения.",
+    deep_sig_linked_title: "Связанные кошельки получили большую долю",
+    deep_sig_linked_detail: "{wallets} кошельков, связанных финансированием или движением токенов, получили {pct}% предложения на запуске. Это экономическая связь, а не доказательство общего владельца.",
+    deep_sig_linked_detail_dep: "{wallets} кошельков, связанных с деплоером финансированием или движением токенов, получили {pct}% предложения на запуске. Это экономическая связь, а не доказательство общего владельца.",
+    deep_sig_depfund_title: "Деплоер профинансировал кошельки запуска",
+    deep_sig_depfund_detail: "Кошельков, получивших предложение и профинансированных деплоером напрямую или через один промежуточный кошелёк до покупки или получения токенов: {count}.",
+    deep_reason_linked: "Связанные кошельки требуют проверки",
+    deep_cr_upstream_unavailable: "Не удалось прочитать часть историй финансирования второго шага",
+    deep_cr_age_unverified: "Возраст кошелька деплоера не удалось подтвердить",
+    deep_cr_funding_unverified: "Источник финансирования деплоера не удалось подтвердить",
+    deep_cr_lock_unknown: "Статус блокировки или сжигания LP неизвестен",
+    deep_cr_history_unknown: "История владения, обновлений или админов неизвестна",
+    deep_cr_window_partial: "Окно запуска покрыто не полностью",
+    deep_cr_sample_capped: "В выборку попала только самая ранняя часть покупателей при запуске",
+    deep_cr_quick_scan_only: "Данные о LP получены только из Quick Scan и не перепроверены",
+    deep_cr_launch_pool_unknown: "Первая ликвидность появилась намного позже создания токена, поэтому исходный запуск определить не удалось",
+    deep_cr_v4_unsupported: "Найдены только singleton-пулы, которые не удалось проверить",
+    deep_cr_swap_unverified: "Покупки выведены из переводов пула, а не из подтверждённых событий обмена",
+    deep_cr_anchor_unverified: "Блок запуска определён по первому переводу пула, а не по подтверждённому событию ликвидности",
+    deep_cr_anchor_unavailable: "Запуск не удалось восстановить по событиям пула",
+    deep_found_launch_swap: "Подтверждённые обмены в пуле показывают кошельков-покупателей в окне запуска: {early}. В первых {blocks} блоках купили подтверждённых покупателей: {buyers}, через пакетные покупки токены получили кошельков: {bundled}. За вычетом продаж из пула там ушло {pct} предложения.",
+    deep_found_launch_swap_nobundle: "Подтверждённые обмены в пуле показывают кошельков-покупателей в окне запуска: {early}. В первых {blocks} блоках купили подтверждённых покупателей: {buyers}, а за вычетом продаж из пула ушло {pct} предложения.",
+    deep_found_launch_swap_plain: "Подтверждённые обмены в пуле показывают кошельков-покупателей в окне запуска: {early}.",
+    deep_found_launch_pool_unknown: "Первая найденная ликвидность появилась намного позже создания токена, поэтому исходный запуск определить не удалось. Это не чистый результат.",
+    deep_found_launch_v4: "Этот токен торгуется только в singleton-пулах, которые не удалось проверить, поэтому его запуск не декодирован. Это не чистый результат.",
+    deep_found_launch_no_anchor: "Запуск не удалось восстановить по событиям пула. Это не чистый результат.",
+    deep_k_launch_anchor: "Точка запуска",
+    deep_v_anchor_verified: "Блок {block} · событие ликвидности подтверждено",
+    deep_v_anchor_unverified: "Блок {block} · первый перевод пула, не подтверждено",
+    deep_k_verified_buyers: "Подтверждённые кошельки-покупатели",
+    deep_k_buy_swaps: "Обмены в пуле в окне запуска",
+    deep_v_buy_sell: "Покупок: {buys} · продаж: {sells}",
+    deep_k_swap_recipients: "Получатели обмена (не отправитель)",
+    deep_k_distribution: "Получатели распределения",
+    deep_k_unattributed: "Покупки без атрибуции",
+    deep_k_deployer_buys: "Покупки деплоера при запуске",
+    deep_k_opening_group: "Группа первых блоков",
+    deep_k_same_block_max: "Больше всего получателей в одном блоке",
+    deep_v_same_block: "Кошельков: {count} в блоке {block}",
+    deep_k_top_buyers: "Крупнейшие покупатели при запуске",
+    deep_k_v4_skipped: "Непроверенные singleton-пулы",
+    deep_k_pool_types: "Проверенные пулы",
+    deep_v_pool_v4_hooks: "V4 с hooks",
+    deep_k_v4_reversed: "Свопы V4 с противоречивым движением токена",
+    deep_resolved_pair: "Введённый адрес ({input}) является торговой парой. Deep Intelligence проанализировал её токен {token}.",
+    deep_resolved_v4: "Введённый адрес ({input}) является ID пула V4. Deep Intelligence проанализировал его токен {token}.",
+    deep_error_pair_ambiguous: "Этот адрес является торговой парой, и её токен определить не удалось. Введите адрес токена.",
+    deep_error_pair_unresolved: "Этот ID пула не удалось сопоставить с токеном. Введите адрес токена.",
+    deep_scope_swaps: "Подтверждённых кошельков-покупателей: {verified} из {buys} обменов-покупок · блок запуска {block} · окно запуска: {window}",
+    deep_sig_opening_title: "Концентрация покупок в первых блоках",
+    deep_sig_opening_p1: "В первых {blocks} блоках после добавления ликвидности купили подтверждённых кошельков: {buyers}.",
+    deep_sig_opening_f_bundled: "Ещё {bundled} кошельков получили токены через пакетные покупки.",
+    deep_sig_opening_f_others: "Другие получатели обмена получили токены: {others}.",
+    deep_sig_opening_f_uncertain: "Ещё {uncertain} кошельков получили токены, источник которых нельзя отделить от собственного баланса распределителя. Они не учитываются.",
+    deep_sig_opening_p2: "За вычетом продаж из пула в этих блоках ушло {pct}% предложения. Это объём запуска, а не текущие владения.",
+    deep_sig_opening_p2_sol: "За вычетом продаж из пула в этих слотах ушло {pct}% предложения. Это объём запуска, а не текущие владения.",
+    deep_v_og_buyers: "Подтверждённых покупателей: {buyers}",
+    deep_v_og_bundled: "через пакетные покупки: {bundled}",
+    deep_v_og_others: "других получателей обмена: {others}",
+    deep_v_og_uncertain: "с неясным источником (не учитываются): {uncertain}",
+    deep_v_og_tail: "из пула ушло {pct} предложения (нетто) · блоки с {from} по {to}",
+    deep_cr_v4_flow_mismatch: "Часть свопов V4 переместила токен в направлении, противоположном их событию, и не засчитана как покупки",
+    deep_cr_v4_attribution_unproven: "Часть покупок V4 прошла в одной транзакции с активностью другого пула того же менеджера пулов, поэтому покупателя не удалось доказать",
+    deep_cr_swap_anomalies: "Часть событий обмена не показала корректного встречного актива и не классифицирована",
+    deep_cr_swap_unmatched: "Для части обменов нет соответствующего перевода пула перед событием обмена",
+    deep_section_prelaunch: "Распределение до запуска",
+    deep_why_prelaunch: "Токены, розданные до начала торгов, могут быть проданы первым покупателям. Контракты вестинга, казначейства и ликвидности — это нормально, поэтому они показаны отдельно от кошельков.",
+    deep_found_prelaunch: "На момент начала торгов кошельков, кроме деплоера, с долей не менее {min}% каждый: {wallets}, вместе {pct}. У деплоера было {dep}, у контрактов {contracts}.",
+    deep_found_prelaunch_none: "На момент начала торгов ни у одного кошелька, кроме деплоера, не было {min}% предложения или больше. У деплоера было {dep}, у контрактов {contracts}.",
+    deep_found_prelaunch_notchecked: "Владения на момент запуска измерить не удалось, потому что точка запуска не установлена. Это не чистый результат.",
+    deep_k_pl_transfers: "Проанализировано переводов до запуска",
+    deep_k_pl_recipients: "Получатели до запуска",
+    deep_k_pl_large: "Кошельки с долей {min}% и более",
+    deep_v_pl_large: "{count} · {pct} предложения",
+    deep_k_pl_deployer: "Деплоер на момент запуска",
+    deep_k_pl_contracts: "Контракты на момент запуска",
+    deep_k_pl_top: "Крупнейшие держатели на момент запуска",
+    deep_v_kind_wallet: "кошелёк",
+    deep_v_kind_contract: "контракт",
+    deep_v_kind_unknown: "тип неизвестен",
+    deep_v_kind_deployer: "деплоер",
+    deep_scope_prelaunch: "Изменений баланса до запуска: {transfers} · получателей: {recipients}",
+    deep_reason_prelaunch_conc: "Предложение сконцентрировано до запуска",
+    deep_sig_prelaunch_title: "Предложение сконцентрировано до запуска",
+    deep_sig_prelaunch_detail: "На момент начала торгов кошельков, кроме деплоера, с долей не менее 1% каждый: {wallets}, вместе {pct}%. Контракты и деплоер не учитываются.",
+    deep_cr_supply_unknown: "Не удалось прочитать предложение токена",
+    deep_cr_prelaunch_capped: "История переводов до запуска достигла лимита получения",
+    deep_cr_holder_kind_unknown: "Не удалось прочитать типы части аккаунтов держателей",
+    deep_cr_owner_unknown: "Не удалось прочитать типы аккаунтов покупателей, поэтому покупки не подтверждены",
+    deep_v_anchor_slot_verified: "Слот {block} · инструкция ликвидности программы пула подтверждена",
+    deep_v_anchor_slot_deposit: "Слот {block} · первый депозит в пул без инструкции ликвидности пула, не подтверждён",
+    deep_cr_history_inconsistent: "Часть балансов до запуска не совпадает с полученной историей, значит часть переводов отсутствует",
+    deep_cr_holder_history_failed: "Не удалось прочитать историю части токен-аккаунтов до запуска",
+    deep_cr_holders_unqueried: "В рамках лимита сканирования прочитаны не все токен-аккаунты, получавшие предложение до запуска",
+    deep_cr_supply_current_basis: "Проценты считаются от текущего предложения, так как предложение на момент запуска не подтверждено",
+    deep_k_supply_basis: "База предложения",
+    deep_v_basis_launch: "Предложение на момент начала торгов",
+    deep_v_basis_current: "Текущее предложение, а не предложение на момент запуска",
+    deep_sig_prelaunch_detail_partial: "На момент начала торгов не менее {wallets} кошельков, кроме деплоера, держали по 1% предложения или больше, вместе {pct}%. Полнота истории до запуска не подтверждена, поэтому это только контекст.",
+    deep_found_prelaunch_incomplete: "Полнота истории до запуска не подтверждена, поэтому в этих цифрах могут отсутствовать переводы.",
+    deep_k_pl_history: "История до запуска",
+    deep_v_pl_hist_complete: "Полная. Прочитаны все аккаунты, получавшие предложение",
+    deep_v_pl_hist_material: "По существу полная. Отслежено {pct} предложения, остаток это пыль в непрочитанных аккаунтах",
+    deep_v_pl_hist_consistent: "Балансы согласованы, полнота истории не подтверждена",
+    deep_v_pl_hist_inconsistent: "Балансы не совпадают с историей, часть переводов отсутствует",
+    deep_v_pl_unaccounted: "{pct} предложения прошло через непрочитанные аккаунты",
+    deep_v_anchor_slot_unverified: "Слот {block} · первая сделка, депозит в пул не найден",
+    deep_k_buy_txs: "Сделки пула в окне запуска",
+    deep_scope_sol_trades: "Подтверждённых кошельков-покупателей: {verified} из {buys} оплаченных покупок · слот запуска {block} · окно запуска: {window}",
+    deep_found_launch_sol: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне запуска: {early}. В первых {blocks} слотах купили подтверждённых покупателей: {buyers}, ещё {bundled} кошельков получили токены без оплаты внутри сделки пула. За вычетом продаж из пула там ушло {pct} предложения.",
+    deep_found_launch_sol_nobundle: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне запуска: {early}. В первых {blocks} слотах купили подтверждённых покупателей: {buyers}, а за вычетом продаж из пула ушло {pct} предложения.",
+    deep_found_launch_sol_plain: "Изменения балансов показывают кошельков-покупателей, оплативших токен в окне запуска: {early}.",
+    deep_sig_opening_p1_sol: "В первых {blocks} слотах после добавления ликвидности купили подтверждённых кошельков: {buyers}.",
+    deep_v_og_tail_sol: "из пула ушло {pct} предложения (нетто) · слоты с {from} по {to}",
+    deep_reason_opening_group: "Концентрированные покупки в первых блоках",
+    deep_v_partial_sample: "{value} (частичная выборка)",
+    deep_v_from_quick: "{value} (из Quick Scan, не перепроверено)",
+    deep_found_launch_zero: "По доступной истории не удалось определить ни одного покупателя при запуске. Это не чистый результат.",
+    deep_found_launch_few: "Определено покупателей при запуске: {early}. Этого слишком мало для надёжного вывода о запуске.",
+    deep_found_wallet_few: "Общее финансирование удалось проверить только у {checked} кошельков. Этого слишком мало, чтобы исключить скоординированные кошельки.",
+    deep_found_wallet_none_sample: "Среди {checked} проверенных кошельков кластер общего финансирования не найден. Ещё {rest} ранних кошельков не проверялись.",
+    deep_found_wallet_not_checked: "Связи финансирования не анализировались, потому что не было выборки ранних кошельков. Это не чистый результат.",
+    deep_found_not_checked: "Этот раздел не удалось проверить для данного токена. Это не чистый результат.",
+    deep_found_na: "Эта проверка не применима к данному токену.",
+    deep_cr_zero_buyers: "Покупатели при запуске не определены",
+    deep_cr_too_few_buyers: "Определено слишком мало покупателей при запуске",
+    deep_cr_too_few_wallets: "Удалось проверить слишком мало кошельков",
+    deep_cr_sample_limited: "Проверенные кошельки не покрывают большую часть полученного предложения, или этапы запуска не подтверждены",
+    deep_cr_no_sample: "Нет кошельков, получивших предложение",
+    deep_cr_no_address: "Адрес деплоера или создателя не найден",
+    deep_cr_no_records: "Записи периода запуска не найдены",
+    deep_cr_not_run: "Эта проверка не выполнялась",
     deep_what_found: "ЧТО НАЙДЕНО",
     deep_why_matters: "ПОЧЕМУ ЭТО ВАЖНО",
     deep_evidence: "ДАННЫЕ",
@@ -7545,7 +8283,7 @@ const translations = {
     deep_found_deployer_ok: "Проанализированы личность деплоера / создателя и доступная история финансирования.",
     deep_found_deployer_partial: "По доступным индексированным данным не удалось полностью подтвердить личность деплоера / создателя или историю финансирования.",
     deep_why_deployer: "История создателя и деплоера может показать прошлые запуски, связи финансирования и необычно новые кошельки.",
-    deep_found_launch: "Проанализировано ранних покупателей: {early}; кошельков в окне немедленного запуска: {immediate}.",
+    deep_found_launch: "Проанализировано ранних покупателей: {early}. Кошельков в окне немедленного запуска: {immediate}.",
     deep_found_launch_partial: "По доступной истории удалось восстановить только часть ранней активности запуска.",
     deep_why_launch: "Сильно концентрированные ранние покупки могут указывать на координированный запуск или агрессивное sniper-поведение.",
     deep_found_wallet_clusters: "Обнаружено кластеров общего финансирования: {clusters} среди {checked} проверенных кошельков.",
@@ -7556,7 +8294,7 @@ const translations = {
     deep_found_liquidity_partial: "Ликвидность обнаружена, но данные о владении / блокировке LP подтверждены не полностью.",
     deep_why_liquidity: "Владение LP, сжигание, блокировки и история изъятий помогают оценить контроль над доступной ликвидностью.",
     deep_found_control: "В выборке обнаружено: передач владения — {ownership}, обновлений Proxy — {upgrades}, изменений администратора — {admin}.",
-    deep_found_control_solana: "Текущие полномочия Solana проверены; исторических изменений полномочий: {authority}.",
+    deep_found_control_solana: "Текущие полномочия Solana проверены. Исторических изменений полномочий: {authority}.",
     deep_found_control_partial: "По доступным логам историю контроля и обновлений удалось восстановить только частично.",
     deep_why_control: "Передача владения, обновления Proxy и изменения администратора могут существенно менять контроль над контрактом после деплоя.",
     deep_found_simulation: "Путь, похожий на покупку: {buy}. Путь, похожий на продажу: {sell}. Перевод кошелька: {wallet}.",
@@ -11686,15 +12424,45 @@ async function qsLiqCheckBasic(net, token, provider) {
   }
   function cxDeepValueLink(net, hash){ if(!hash) return "—"; const u=cxDeepTxUrl(net,hash), label=cxDeepShort(hash,8,6); return u ? `<a href="${cxDeepEsc(u)}" target="_blank" rel="noopener" style="color:#7ef5ff">${cxDeepEsc(label)} ↗</a>` : cxDeepEsc(label); }
   function cxDeepKV(k,v,mono=false){ return `<div class="cx-deep-kv"><div class="cx-deep-k">${cxDeepEsc(k)}</div><div class="cx-deep-v${mono?' mono':''}">${v==null||v===""?'—':v}</div></div>`; }
-  function cxDeepStatusLabel(status){ return cxDeepTr(status==="review"?"deep_status_review":status==="partial"?"deep_status_partial":status==="context"?"deep_status_context":"deep_status_verified"); }
-  function cxDeepDetail(key,title,rows,{open=false,status="verified",preview="",found="",why=""}={}){
+  // v1.14: unknown statuses fail closed to NOT CHECKED, never to VERIFIED.
+  function cxDeepStatusLabel(status){ const k={verified:"deep_status_verified",review:"deep_status_review",partial:"deep_status_partial",context:"deep_status_context",insufficient:"deep_status_insufficient",notchecked:"deep_status_notchecked",na:"deep_status_na"}[status]||"deep_status_notchecked"; return cxDeepTr(k); }
+  // v1.14: results from schema < 7 get the same evidence gates the new Worker applies.
+  function cxDeepNormalizeCoverage(r){
+    const c={...(r?.coverage||{})};
+    if((Number(r?.schemaVersion)||0)>=7) return c;
+    const n=cxDeepFinite(r?.earlyActivity?.earlyBuyerCount), checked=cxDeepFinite(r?.clusters?.checkedWallets)||0;
+    if(c.earlyActivity==="ok"&&(n==null||n<10)) c.earlyActivity=n==null?"not_checked":"insufficient_sample";
+    if(checked===0) c.clusters="not_checked"; else if(c.clusters==="ok") c.clusters="partial";
+    if(c.deployer==="ok"&&(r?.deployer?.walletAgeVerified!==true||!r?.deployer?.fundingSource)) c.deployer="partial";
+    if(c.liquidity==="ok") c.liquidity="partial";
+    if(c.earlyActivity==="ok"&&r?.earlyActivity?.earlyBuyerCountCapped===true) c.earlyActivity="partial";
+    if(c.history==="ok"&&r?.history?.windowCovered!==true) c.history="partial";
+    if(c.controlHistory==="ok"&&r?.net!=="solana"&&[r?.controlHistory?.ownershipTransferCount,r?.controlHistory?.proxyUpgradeCount,r?.controlHistory?.adminChangeCount].some(v=>cxDeepFinite(v)==null)) c.controlHistory="partial";
+    for(const k of Object.keys(c)) if(c[k]==="not_applicable") c[k]="not_checked";
+    return c;
+  }
+  function cxDeepUiStatus(v){ return v==="ok"?"verified":v==="partial"?"partial":v==="insufficient_sample"?"insufficient":v==="not_applicable"?"na":"notchecked"; }
+  const CX_DEEP_CORE_KEYS=Object.freeze(["deployer","earlyActivity","clusters"]);
+  const CX_DEEP_CORE_STAGE_I18N=Object.freeze({deployer:"deep_stage_deployer",earlyActivity:"deep_stage_buyers",clusters:"deep_stage_clusters"});
+  function cxDeepCoreState(r,cov){
+    const vc=r?.verdict?.core;
+    if(vc&&Array.isArray(vc.incomplete)) return {complete:vc.complete===true,done:cxDeepFinite(vc.done),total:cxDeepFinite(vc.total),incomplete:vc.incomplete};
+    const keys=CX_DEEP_CORE_KEYS.filter(k=>cov[k]!=="not_applicable"), bad=keys.filter(k=>cov[k]!=="ok");
+    return {complete:bad.length===0,done:keys.length-bad.length,total:keys.length,incomplete:bad};
+  }
+  // v1.14: a risk finding never hides an incomplete check. Risk (REVIEW / CONTEXT)
+  // and coverage are rendered as two separate badges.
+  function cxDeepDetail(key,title,rows,{open=false,status="notchecked",coverage=null,preview="",found="",why="",scope=""}={}){
+    const risk=(status==="review"||status==="context")?status:null, covSt=risk?(coverage||"notchecked"):status;
+    const badge=(st,tk)=>`<span class="cx-deep-detail-status" data-status="${cxDeepEsc(st)}" title="${cxDeepEsc(cxDeepTr(tk))}">${cxDeepEsc(cxDeepStatusLabel(st))}</span>`;
     const body=(rows||[]).filter(Boolean).join("") || cxDeepKV(cxDeepTr("deep_evidence"),cxDeepEsc(cxDeepTr("deep_no_additional_evidence")));
     return `<details data-deep-detail="${cxDeepEsc(key)}"${open?' open':''}>
       <summary>
         <span class="cx-deep-detail-title-wrap"><span class="cx-deep-detail-title">${cxDeepEsc(title)}</span>${preview?`<span class="cx-deep-detail-preview">${cxDeepEsc(preview)}</span>`:""}</span>
-        <span class="cx-deep-detail-status" data-status="${cxDeepEsc(status)}">${cxDeepEsc(cxDeepStatusLabel(status))}</span>
+        <span class="cx-deep-detail-badges${risk?" two":""}">${risk?badge(risk,"deep_badge_risk_title"):""}${badge(covSt,"deep_badge_coverage_title")}</span>
       </summary>
       <div class="cx-deep-detail-body">
+        ${scope?`<div class="cx-deep-explain cx-deep-scope"><div class="cx-deep-explain-label">${cxDeepEsc(cxDeepTr("deep_scope_label"))}</div><div class="cx-deep-explain-text">${cxDeepEsc(scope)}</div></div>`:""}
         ${found?`<div class="cx-deep-explain"><div class="cx-deep-explain-label">${cxDeepEsc(cxDeepTr("deep_what_found"))}</div><div class="cx-deep-explain-text">${cxDeepEsc(found)}</div></div>`:""}
         ${why?`<div class="cx-deep-explain"><div class="cx-deep-explain-label">${cxDeepEsc(cxDeepTr("deep_why_matters"))}</div><div class="cx-deep-explain-text">${cxDeepEsc(why)}</div></div>`:""}
         <div class="cx-deep-evidence-label">${cxDeepEsc(cxDeepTr("deep_evidence"))}</div>
@@ -11750,26 +12518,31 @@ async function qsLiqCheckBasic(net, token, provider) {
   }
   function cxDeepApplyCoverage(result){
     const map={market:"market",identity:"identity",history:"history",deployer:"deployer",earlyActivity:"buyers",clusters:"clusters",liquidity:"liquidity",controlHistory:"changes",entityIntelligence:"entity"};
-    const coverage=result?.coverage||{}, signals=Array.isArray(result?.signals)?result.signals:[], signalCodes=new Set(signals.map(s=>s?.code).filter(Boolean));
+    const coverage=cxDeepNormalizeCoverage(result), signals=Array.isArray(result?.signals)?result.signals:[], signalCodes=new Set(signals.map(s=>s?.code).filter(Boolean));
+    const stageClass=v=>v==="ok"?"done":v==="partial"?"partial":v==="not_applicable"?"na":"notchecked";
     for(const [k,id] of Object.entries(map)){
       const v=coverage[k]; if(!v) continue;
       const el=document.querySelector(`#cx-deep-stages [data-deep-stage="${id}"]`); if(!el) continue;
-      el.classList.remove("running","done","partial"); el.classList.add(v==="ok"?"done":"partial");
+      el.classList.remove("running","done","partial","notchecked","na"); el.classList.add(stageClass(v));
     }
+    const gen=(k,partialKey)=>{const v=coverage[k]; if(v==="partial")return cxDeepTr(partialKey); if(v==="insufficient_sample")return cxDeepTr("deep_reason_insufficient"); if(v==="not_checked")return cxDeepTr("deep_reason_not_checked"); if(v==="not_applicable")return cxDeepTr("deep_reason_na"); return "";};
+    const why=k=>Array.isArray(result?.coverageReasons?.[k])?result.coverageReasons[k][0]:null;
+    const n=cxDeepFinite(result?.earlyActivity?.earlyBuyerCount), checked=cxDeepFinite(result?.clusters?.checkedWallets)||0;
+    const of=cxDeepFinite(result?.scope?.clusters?.of)??n;
     const reasons={
-      market:coverage.market==="partial"?"deep_reason_market_partial":null,
-      identity:coverage.identity==="partial"?"deep_reason_identity_partial":null,
-      history:coverage.history==="partial"?"deep_reason_history_partial":null,
-      deployer:signalCodes.has("fresh_deployer_wallet")?"deep_reason_fresh_wallet":(signalCodes.has("fresh_deployer_funding")||signalCodes.has("recent_deployer_topup"))?"deep_reason_fresh_funding":coverage.deployer==="partial"?"deep_reason_deployer_partial":null,
-      buyers:signalCodes.has("immediate_launch_activity")?"deep_reason_immediate_launch":coverage.earlyActivity==="partial"?"deep_reason_early_partial":null,
-      clusters:(signalCodes.has("shared_funding_risk")||signalCodes.has("shared_funding_context"))?"deep_reason_shared_clusters":coverage.clusters==="partial"?"deep_reason_clusters_partial":null,
-      liquidity:coverage.liquidity==="partial"?"deep_reason_liquidity_partial":null,
-      changes:signalCodes.has("proxy_upgrade_history")?"deep_reason_proxy_history":coverage.controlHistory==="partial"?"deep_reason_control_partial":null,
-      entity:coverage.entityIntelligence==="partial"?"deep_reason_entity_partial":null
+      market:gen("market","deep_reason_market_partial"),
+      identity:gen("identity","deep_reason_identity_partial"),
+      history:gen("history","deep_reason_history_partial"),
+      deployer:signalCodes.has("fresh_deployer_wallet")?cxDeepTr("deep_reason_fresh_wallet"):(signalCodes.has("fresh_deployer_funding")||signalCodes.has("recent_deployer_topup"))?cxDeepTr("deep_reason_fresh_funding"):gen("deployer","deep_reason_deployer_partial"),
+      buyers:signalCodes.has("opening_block_concentration")?cxDeepTr("deep_reason_opening_group"):signalCodes.has("immediate_launch_activity")?cxDeepTr("deep_reason_immediate_launch"):coverage.earlyActivity==="insufficient_sample"?cxDeepTr((why("earlyActivity")==="zero_buyers"||n===0)?"deep_reason_early_zero":"deep_reason_early_few"):gen("earlyActivity","deep_reason_early_partial"),
+      clusters:(signalCodes.has("shared_funding_risk")||signalCodes.has("shared_funding_context"))?cxDeepTr("deep_reason_shared_clusters"):coverage.clusters==="not_checked"?cxDeepTr("deep_reason_clusters_none"):((coverage.clusters==="partial"||coverage.clusters==="insufficient_sample")&&of!=null&&of>checked)?cxDeepTr("deep_reason_clusters_sample",{checked,total:of}):gen("clusters","deep_reason_clusters_partial"),
+      liquidity:gen("liquidity","deep_reason_liquidity_partial"),
+      changes:signalCodes.has("proxy_upgrade_history")?cxDeepTr("deep_reason_proxy_history"):gen("controlHistory","deep_reason_control_partial"),
+      entity:gen("entityIntelligence","deep_reason_entity_partial")
     };
-    for(const [id,key] of Object.entries(reasons)) cxDeepSetStageReason(id,key?cxDeepTr(key):"");
+    for(const [id,txt] of Object.entries(reasons)) cxDeepSetStageReason(id,txt||"");
     const fin=document.querySelector('#cx-deep-stages [data-deep-stage="finalize"]');
-    if(fin){fin.classList.remove("running","partial");fin.classList.add("done");}
+    if(fin){fin.classList.remove("running","partial","notchecked","na");fin.classList.add("done");}
     cxDeepSetProgress(CX_DEEP_STAGE_IDS.length);
   }
 
@@ -11793,6 +12566,9 @@ async function qsLiqCheckBasic(net, token, provider) {
       trade_tax_high:["deep_sig_trade_tax_high_title","deep_sig_trade_tax_detail",{buy:cxDeepTaxTxt(p.buy),sell:cxDeepTaxTxt(p.sell),transfer:cxDeepTaxTxt(p.transfer)}],
       trade_ok:["deep_sig_trade_ok_title","deep_sig_trade_ok_detail",{dex:p.dex||"DEX",buy:cxDeepTaxTxt(p.buy),sell:cxDeepTaxTxt(p.sell)}],
       immediate_launch_activity:["deep_sig_immediate_title","deep_sig_immediate_detail",{count:p.count}],
+      linked_supply_group:["deep_sig_linked_title",p.deployer?"deep_sig_linked_detail_dep":"deep_sig_linked_detail",{wallets:p.wallets,pct:p.pct}],
+      deployer_funded_wallets:["deep_sig_depfund_title","deep_sig_depfund_detail",{count:p.count}],
+      pre_launch_concentration:["deep_sig_prelaunch_title",p.complete===false?"deep_sig_prelaunch_detail_partial":"deep_sig_prelaunch_detail",{wallets:p.wallets,pct:p.pct}],
       shared_funding_risk:["deep_sig_shared_risk_title","deep_sig_shared_risk_detail",{count:p.count}],
       shared_funding_context:["deep_sig_shared_context_title","deep_sig_shared_context_detail",{count:p.count}],
       lp_burn_strong:["deep_sig_lp_burn_title","deep_sig_lp_burn_detail",{pct:p.pct}],
@@ -11801,10 +12577,20 @@ async function qsLiqCheckBasic(net, token, provider) {
       simulation_reverted:["deep_sig_sim_revert_title","deep_sig_sim_revert_detail",{path}],
       known_historical_incident:["deep_sig_incident_title","deep_sig_incident_detail",{}]
     };
+    // v1.15: verified buyers, bundled recipients, other recipients and wallets
+    // with an uncertain token source are reported as separate groups.
+    if(s?.code==="opening_block_concentration"){
+      const sep=currentLang==="zh"?"":" ", parts=[cxDeepTr(p.unit==="slots"?"deep_sig_opening_p1_sol":"deep_sig_opening_p1",{blocks:p.blocks,buyers:p.buyers??p.wallets})];
+      if((p.bundled||0)>0)parts.push(cxDeepTr("deep_sig_opening_f_bundled",{bundled:p.bundled}));
+      if((p.others||0)>0)parts.push(cxDeepTr("deep_sig_opening_f_others",{others:p.others}));
+      if((p.uncertain||0)>0)parts.push(cxDeepTr("deep_sig_opening_f_uncertain",{uncertain:p.uncertain}));
+      parts.push(cxDeepTr(p.unit==="slots"?"deep_sig_opening_p2_sol":"deep_sig_opening_p2",{pct:p.pct}));
+      return {title:cxDeepTr("deep_sig_opening_title"),detail:parts.join(sep)};
+    }
     const x=map[s?.code]; if(x) return {title:cxDeepTr(x[0],x[2]),detail:cxDeepTr(x[1],x[2])};
     return {title:s?.title||cxDeepTr("deep_signal_default"),detail:s?.detail||""};
   }
-  function cxDeepVerdictLabel(v){ const code=v?.code; if(code==="deep_review_recommended") return cxDeepTr("deep_verdict_review"); if(code==="additional_context_found") return cxDeepTr("deep_verdict_context"); if(code==="deep_intelligence_partial") return cxDeepTr("deep_verdict_partial"); if(code==="deep_intelligence_complete") return cxDeepTr("deep_verdict_complete"); return v?.label||cxDeepTr("deep_verdict_complete"); }
+  function cxDeepVerdictLabel(v){ const code=v?.code; if(code==="deep_review_recommended") return cxDeepTr("deep_verdict_review"); if(code==="additional_context_found") return cxDeepTr("deep_verdict_context"); if(code==="deep_intelligence_partial") return cxDeepTr("deep_verdict_partial"); if(code==="deep_intelligence_complete") return cxDeepTr("deep_verdict_complete"); if(code==="deep_core_incomplete") return cxDeepTr("deep_verdict_incomplete"); return v?.label||cxDeepTr("deep_verdict_partial"); }
 
   function cxDeepEntityRole(role){
     const key="deep_entity_role_"+String(role||"unknown").replace(/[^a-z0-9_]/gi,"_").toLowerCase();
@@ -11818,10 +12604,17 @@ async function qsLiqCheckBasic(net, token, provider) {
   function cxDeepRenderResult(r){
     const host=cxDeepEl("cx-deep-results"); if(!host||!r) return; _cxDeepLastResult=r;
     const rawLevel=String(r?.verdict?.level||"partial"), coverage=cxDeepFinite(r?.verdict?.coveragePct);
-    const level=rawLevel==="attention"?"elevated":rawLevel==="review"?"review":coverage!=null&&coverage<100?"partial":"clear";
+    const cov=cxDeepNormalizeCoverage(r), deepCore=cxDeepCoreState(r,cov), scope=r?.scope||null;
+    const level=rawLevel==="attention"?"elevated":rawLevel==="review"?"review":(rawLevel==="incomplete"||!deepCore.complete)?"incomplete":coverage!=null&&coverage<100?"partial":"clear";
+    const verdictCode=String(r?.verdict?.code||"");
+    const verdictTitle=(!deepCore.complete&&(verdictCode==="deep_intelligence_partial"||verdictCode==="deep_intelligence_complete"))?cxDeepTr("deep_verdict_incomplete"):cxDeepVerdictLabel(r?.verdict);
     const signals=Array.isArray(r?.signals)?r.signals:[]; const market=r?.market||{}, hist=r?.history||{}, dep=r?.deployer||{}, early=r?.earlyActivity||{}, clusters=r?.clusters||{}, liq=r?.liquidity||{}, changes=r?.controlHistory||{}, ent=r?.entityIntelligence||{}, sim=r?.simulation||{}, reputation=r?.reputation||{};
     const clusterList=Array.isArray(clusters?.sharedFundingClusters)?clusters.sharedFundingClusters:[]; const topCluster=clusters?.topCluster||clusterList[0]||null; const clusterCount=clusters?.sharedFundingClusterCount ?? clusterList.length;
-    const signalHtml=signals.length ? signals.slice(0,10).map(s=>{ const st=cxDeepSignalText(s); return `<div class="cx-deep-signal" data-severity="${cxDeepEsc(s?.severity||"context")}"><div class="cx-deep-signal-title"><i class="cx-deep-signal-dot"></i>${cxDeepEsc(st.title)}</div><div class="cx-deep-signal-detail">${cxDeepEsc(st.detail)}</div></div>`; }).join("") : `<div class="cx-deep-signal" data-severity="context"><div class="cx-deep-signal-title"><i class="cx-deep-signal-dot"></i>${cxDeepEsc(cxDeepTr("deep_signal_none_title"))}</div><div class="cx-deep-signal-detail">${cxDeepEsc(cxDeepTr("deep_signal_none_detail"))}</div></div>`;
+    const groupList=Array.isArray(clusters?.groups)?clusters.groups:[];
+    // v1.14: "No major warning" appears only when every core check really ran.
+    const incompleteStages=(deepCore.incomplete||[]).map(k=>cxDeepTr(CX_DEEP_CORE_STAGE_I18N[k]||"deep_status_running")).join(" · ");
+    const incompleteHtml=!deepCore.complete?`<div class="cx-deep-signal" data-severity="incomplete"><div class="cx-deep-signal-title"><i class="cx-deep-signal-dot"></i>${cxDeepEsc(cxDeepTr("deep_signal_incomplete_title"))}</div><div class="cx-deep-signal-detail">${cxDeepEsc(cxDeepTr("deep_signal_incomplete_detail",{stages:incompleteStages}))}</div></div>`:"";
+    const signalHtml=incompleteHtml+(signals.length ? signals.slice(0,10).map(s=>{ const st=cxDeepSignalText(s); return `<div class="cx-deep-signal" data-severity="${cxDeepEsc(s?.severity||"context")}"><div class="cx-deep-signal-title"><i class="cx-deep-signal-dot"></i>${cxDeepEsc(st.title)}</div><div class="cx-deep-signal-detail">${cxDeepEsc(st.detail)}</div></div>`; }).join("") : (deepCore.complete?`<div class="cx-deep-signal" data-severity="context"><div class="cx-deep-signal-title"><i class="cx-deep-signal-dot"></i>${cxDeepEsc(cxDeepTr("deep_signal_none_title"))}</div><div class="cx-deep-signal-detail">${cxDeepEsc(cxDeepTr("deep_signal_none_detail"))}</div></div>`:""));
 
     const marketRows=[
       market.pairCount!=null?cxDeepKV(cxDeepTr("deep_k_market_pairs"),cxDeepEsc(market.pairCount)):null,
@@ -11874,10 +12667,30 @@ async function qsLiqCheckBasic(net, token, provider) {
       covDetail("deployer")||covDetail("identity")
     ];
     const immediateCount=early.immediateLaunchWalletCount, immediatePct=early.immediateWindowSupplyPct;
+    const earlyVerified=cov.earlyActivity==="ok";
+    const sampleMark=(txt)=>earlyVerified?txt:cxDeepTr("deep_v_partial_sample",{value:txt});
+    const solMode=early.method==="balance_deltas", swapMode=early.method==="swap_events"||solMode, og=early.openingGroup||null, cat=early.categories||{}, an=early.anchor||null;
+    const shortW=a=>cxDeepEsc(cxDeepShort(a,6,4));
+    const topTxt=(Array.isArray(early.topBuyers)?early.topBuyers:[]).slice(0,3).map(x=>`${shortW(x.wallet)} (${cxDeepPct(x.supplyPct,2)}) · #${cxDeepEsc(x.firstBlock)}`).join("<br>");
+    const unattributed=(cxDeepFinite(cat.unknown)||0)+(cxDeepFinite(cat.notAttributed)||0);
+    const verifiedTotal=swapMode&&cxDeepFinite(cat.verifiedBuy)!=null?cat.verifiedBuy:early.earlyBuyerCount, verifiedMore=early.earlyBuyerCountCapped&&(!swapMode||unattributed>0);
     const earlyRows=[
-      early.earlyBuyerCount!=null?cxDeepKV(cxDeepTr("deep_k_early_buyers"),cxDeepEsc(countTxt(early.earlyBuyerCount,early.earlyBuyerCountCapped))):null,
+      an&&an.launchBlock!=null?cxDeepKV(cxDeepTr("deep_k_launch_anchor"),cxDeepEsc(cxDeepTr(solMode?(an.anchorVerified?"deep_v_anchor_slot_verified":an.liquiditySource==="pool_deposit_unverified"?"deep_v_anchor_slot_deposit":"deep_v_anchor_slot_unverified"):(an.anchorVerified?"deep_v_anchor_verified":"deep_v_anchor_unverified"),{block:an.launchBlock}))):null,
+      swapMode&&early.swapsObserved?cxDeepKV(cxDeepTr(solMode?"deep_k_buy_txs":"deep_k_buy_swaps"),cxDeepEsc(cxDeepTr("deep_v_buy_sell",{buys:early.swapsObserved.buys??0,sells:early.swapsObserved.sells??0}))):null,
+      swapMode&&og&&og.wallets>0?cxDeepKV(cxDeepTr("deep_k_opening_group"),cxDeepEsc([cxDeepTr("deep_v_og_buyers",{buyers:og.verifiedWallets??0}),(og.bundledWallets||0)>0?cxDeepTr("deep_v_og_bundled",{bundled:og.bundledWallets}):"",(og.otherRecipients||0)>0?cxDeepTr("deep_v_og_others",{others:og.otherRecipients}):"",(og.uncertainSourceWallets||0)>0?cxDeepTr("deep_v_og_uncertain",{uncertain:og.uncertainSourceWallets}):"",cxDeepTr(solMode?"deep_v_og_tail_sol":"deep_v_og_tail",{pct:og.supplyPct!=null?cxDeepPct(og.supplyPct,1):cxDeepTr("deep_unknown"),from:og.fromBlock,to:og.toBlock})].filter(Boolean).join(" · "))):null,
+      swapMode&&og&&og.sameBlockMax>1?cxDeepKV(cxDeepTr("deep_k_same_block_max"),cxDeepEsc(cxDeepTr("deep_v_same_block",{count:og.sameBlockMax,block:og.sameBlockMaxBlock}))):null,
+      swapMode&&topTxt?cxDeepKV(cxDeepTr("deep_k_top_buyers"),topTxt,true):null,
+      swapMode&&early.supplyBasis==="current"?cxDeepKV(cxDeepTr("deep_k_supply_basis"),cxDeepEsc(cxDeepTr("deep_v_basis_current"))):null,
+      swapMode&&cat.swapRecipient>0?cxDeepKV(cxDeepTr("deep_k_swap_recipients"),cxDeepEsc(cat.swapRecipient)):null,
+      swapMode&&cat.distributionRecipient>0?cxDeepKV(cxDeepTr("deep_k_distribution"),cxDeepEsc(cat.distributionRecipient)):null,
+      swapMode&&unattributed>0?cxDeepKV(cxDeepTr("deep_k_unattributed"),cxDeepEsc(unattributed)):null,
+      swapMode&&cat.deployerBuys>0?cxDeepKV(cxDeepTr("deep_k_deployer_buys"),cxDeepEsc(cat.deployerBuys)):null,
+      cxDeepFinite(early.v4PoolsSkipped)>0?cxDeepKV(cxDeepTr("deep_k_v4_skipped"),cxDeepEsc(early.v4PoolsSkipped)):null,
+      swapMode&&!solMode&&Array.isArray(early.poolsVerified)&&early.poolsVerified.length?cxDeepKV(cxDeepTr("deep_k_pool_types"),cxDeepEsc([...new Set(early.poolsVerified.map(p=>p?.kind==="v4"?(p.hooked===true?cxDeepTr("deep_v_pool_v4_hooks"):"V4"):({v2:"V2",v3:"V3",algebra:"Algebra"})[p?.kind]).filter(Boolean))].join(", "))):null,
+      swapMode&&cxDeepFinite(early.v4Reversals)>0?cxDeepKV(cxDeepTr("deep_k_v4_reversed"),cxDeepEsc(early.v4Reversals)):null,
+      early.earlyBuyerCount!=null?cxDeepKV(cxDeepTr(swapMode?"deep_k_verified_buyers":"deep_k_early_buyers"),cxDeepEsc(sampleMark(countTxt(verifiedTotal,verifiedMore)))):null,
       immediateCount!=null?cxDeepKV(cxDeepTr("deep_k_immediate_wallets"),cxDeepEsc(countTxt(immediateCount,early.immediateCountCapped))):null,
-      early.earlyBuyerCount?cxDeepKV(cxDeepTr("deep_k_early_supply"),pctTxt(early.earlyBuyerSupplyPct,early.earlyBuyerCountCapped)):null,
+      early.earlyBuyerCount?cxDeepKV(cxDeepTr("deep_k_early_supply"),earlyVerified?pctTxt(early.earlyBuyerSupplyPct,early.earlyBuyerCountCapped):cxDeepTr("deep_v_partial_sample",{value:pctTxt(early.earlyBuyerSupplyPct,early.earlyBuyerCountCapped)})):null,
       immediateCount?cxDeepKV(cxDeepTr("deep_k_immediate_supply"),pctTxt(immediatePct,early.immediateCountCapped)):null,
       early.programOwnedExcluded>0?cxDeepKV(cxDeepTr("deep_k_program_excluded"),cxDeepEsc(early.programOwnedExcluded)):null,
       early.firstTradeAt?cxDeepKV(cxDeepTr("deep_k_first_activity"),cxDeepEsc(cxDeepWhen(early.firstTradeAt))):null,
@@ -11887,30 +12700,42 @@ async function qsLiqCheckBasic(net, token, provider) {
       covDetail("earlyActivity")||covDetail("history")
     ];
     const holderCtx=clusters?.holderContext||null;
+    // v1.14: holder context comes from the Quick Scan snapshot and is labelled as such.
+    const fromQuick=(v)=>cxDeepTr("deep_v_from_quick",{value:v});
+    const clusterOf=cxDeepFinite(scope?.clusters?.of)??cxDeepFinite(early.earlyBuyerCount);
     const clusterRows=[
-      holderCtx?.holderCount!=null?cxDeepKV(cxDeepTr("deep_k_holder_count"),cxDeepEsc(Number(holderCtx.holderCount).toLocaleString(cxDeepLocale()))):null,
+      holderCtx?.holderCount!=null?cxDeepKV(cxDeepTr("deep_k_holder_count"),fromQuick(cxDeepEsc(Number(holderCtx.holderCount).toLocaleString(cxDeepLocale())))):null,
       holderCtx?.classificationCoveragePct!=null
-        ?cxDeepKV(cxDeepTr("deep_k_holder_classification"),cxDeepPct(holderCtx.classificationCoveragePct,1))
+        ?cxDeepKV(cxDeepTr("deep_k_holder_classification"),fromQuick(cxDeepPct(holderCtx.classificationCoveragePct,1)))
         :(holderCtx?.trackedCount!=null&&holderCtx?.classifiedCount!=null
-          ?cxDeepKV(cxDeepTr("deep_k_holder_classification"),cxDeepTr("deep_unit_classified",{classified:holderCtx.classifiedCount,tracked:holderCtx.trackedCount})):null),
-      holderCtx?.walletTopHolderPct!=null?cxDeepKV(cxDeepTr("deep_k_top_wallet"),`${cxDeepPct(holderCtx.walletTopHolderPct,2)}${holderCtx?.topWalletAddress?` · ${cxDeepEsc(cxDeepShort(holderCtx.topWalletAddress,8,6))}`:""}`):null,
-      holderCtx?.walletTop10Pct!=null?cxDeepKV(cxDeepTr("deep_k_top10_wallets"),cxDeepPct(holderCtx.walletTop10Pct,1)):null,
-      clusters.checkedWallets!=null?cxDeepKV(cxDeepTr("deep_k_early_wallets_checked"),cxDeepEsc(clusters.checkedWallets)):null,
-      clusterCount!=null?cxDeepKV(cxDeepTr("deep_k_shared_clusters"),cxDeepEsc(clusterCount)):null,
-      topCluster?cxDeepKV(cxDeepTr("deep_k_largest_cluster"),cxDeepTr("deep_unit_wallets_pct",{count:topCluster.walletCount,pct:cxDeepPct(topCluster.observedSupplyPct,2)})):null,
-      topCluster?.funder?cxDeepKV(cxDeepTr("deep_k_cluster_funder"),`${cxDeepEsc(cxDeepShort(topCluster.funder,8,6))}${topCluster.funderLabel?` · ${cxDeepEsc(topCluster.funderLabel)}`:""}`,true):null,
+          ?cxDeepKV(cxDeepTr("deep_k_holder_classification"),fromQuick(cxDeepTr("deep_unit_classified",{classified:holderCtx.classifiedCount,tracked:holderCtx.trackedCount}))):null),
+      holderCtx?.walletTopHolderPct!=null?cxDeepKV(cxDeepTr("deep_k_top_wallet"),fromQuick(`${cxDeepPct(holderCtx.walletTopHolderPct,2)}${holderCtx?.topWalletAddress?` · ${cxDeepEsc(cxDeepShort(holderCtx.topWalletAddress,8,6))}`:""}`)):null,
+      holderCtx?.walletTop10Pct!=null?cxDeepKV(cxDeepTr("deep_k_top10_wallets"),fromQuick(cxDeepPct(holderCtx.walletTop10Pct,1))):null,
+      // v1.17: wallets are chosen by acquired supply, linked groups carry their link types.
+      clusters.checkedWallets!=null&&clusters.attemptedWallets!=null&&clusters.sampleCoveragePct!=null
+        ?cxDeepKV(cxDeepTr("deep_k_wallets_checked"),cxDeepEsc(cxDeepTr("deep_v_wallets_checked",{checked:clusters.checkedWallets,attempted:clusters.attemptedWallets,cov:cxDeepPct(clusters.sampleCoveragePct,1)})))
+        :(clusters.checkedWallets!=null?cxDeepKV(cxDeepTr("deep_k_early_wallets_checked"),cxDeepEsc(clusterOf!=null&&clusterOf>clusters.checkedWallets?`${clusters.checkedWallets} / ${clusterOf}`:clusters.checkedWallets)):null),
+      clusters.candidateSources?cxDeepKV(cxDeepTr("deep_k_wallet_sample"),cxDeepEsc(cxDeepTr("deep_v_wallet_sample",{pre:clusters.candidateSources.preLaunch??0,buy:clusters.candidateSources.launchBuy??0,bundled:clusters.candidateSources.bundled??0}))):null,
+      ...groupList.slice(0,3).map((g,i)=>cxDeepKV(cxDeepTr("deep_k_linked_group",{n:i+1}),cxDeepEsc(cxDeepTr("deep_v_linked_group",{count:g.walletCount,pct:cxDeepPct(g.supplyPct,1),links:Object.keys(g.linkTypes||{}).map(k=>cxDeepTr("deep_link_"+k)).join(", ")})+(g.includesDeployer?" · "+cxDeepTr("deep_v_with_deployer"):"")+((g.strongWallets||0)>0&&g.strongWallets<g.walletCount?" · "+cxDeepTr("deep_v_strong_core",{n:g.strongWallets}):"")))),
+      (clusters.deployerFundedWallets||0)>0?cxDeepKV(cxDeepTr("deep_k_deployer_funded"),cxDeepEsc(cxDeepTr("deep_v_deployer_funded",{count:clusters.deployerFundedWallets,pct:cxDeepPct(clusters.deployerFundedPct,1)}))):null,
+      groupList.length?cxDeepKV(cxDeepTr("deep_k_link_basis"),cxDeepEsc(cxDeepTr("deep_v_link_basis"))):null,
+      clusters.fundingScope==="native"&&(clusters.checkedWallets||0)>0?cxDeepKV(cxDeepTr("deep_k_funding_scope"),cxDeepEsc(cxDeepTr("deep_v_funding_scope_native"))):null,
+      !groupList.length&&clusterCount!=null?cxDeepKV(cxDeepTr("deep_k_shared_clusters"),cxDeepEsc(clusterCount)):null,
+      !groupList.length&&topCluster?cxDeepKV(cxDeepTr("deep_k_largest_cluster"),cxDeepTr("deep_unit_wallets_pct",{count:topCluster.walletCount,pct:cxDeepPct(topCluster.observedSupplyPct,2)})):null,
+      !groupList.length&&topCluster?.funder?cxDeepKV(cxDeepTr("deep_k_cluster_funder"),`${cxDeepEsc(cxDeepShort(topCluster.funder,8,6))}${topCluster.funderLabel?` · ${cxDeepEsc(topCluster.funderLabel)}`:""}`,true):null,
       topCluster?.serviceLikeFunder===true?cxDeepKV(cxDeepTr("deep_k_funding_context"),cxDeepTr("deep_v_service_context")):null
     ];
+    const lpQ=(k,v)=>liq?.lpSource?.[k]==="quick-scan"?cxDeepTr("deep_v_from_quick",{value:v}):v;
     const liqRows=[
       liq.liquidityType?cxDeepKV(cxDeepTr("deep_k_liq_type"),cxDeepEsc(liq.liquidityType)):null,
       liq.liquidityUsd!=null?cxDeepKV(cxDeepTr("deep_k_liq_observed"),cxDeepEsc(cxDeepMoney(liq.liquidityUsd))):null,
       liq.poolCount!=null?cxDeepKV(cxDeepTr("deep_k_pool_count"),cxDeepEsc(liq.poolCount)):null,
-      liq.providerTrackedPct!=null?cxDeepKV(cxDeepTr("deep_k_lp_tracked"),cxDeepPct(liq.providerTrackedPct,1)):null,
+      liq.providerTrackedPct!=null?cxDeepKV(cxDeepTr("deep_k_lp_tracked"),lpQ("tracked",cxDeepPct(liq.providerTrackedPct,1))):null,
       r.net==="solana"&&liq.lockCheckedPoolCount!=null?cxDeepKV(cxDeepTr("deep_k_lock_checked_pools"),cxDeepEsc(liq.lockCheckedPoolCount)):null,
       r.net==="solana"&&liq.lockedPoolCount!=null?cxDeepKV(cxDeepTr("deep_k_locked_pool_signals"),cxDeepEsc(liq.lockedPoolCount)):null,
       r.net==="solana"&&liq.lockNotDetectedPoolCount!=null?cxDeepKV(cxDeepTr("deep_k_no_lock_signals"),cxDeepEsc(liq.lockNotDetectedPoolCount)):null,
-      liq.providerLockedPct!=null?cxDeepKV(cxDeepTr("deep_k_provider_lock"),cxDeepPct(liq.providerLockedPct,2)):null,
-      liq.directBurnedPct!=null?cxDeepKV(cxDeepTr("deep_k_direct_burn"),cxDeepPct(liq.directBurnedPct,2)):null,
+      liq.providerLockedPct!=null?cxDeepKV(cxDeepTr("deep_k_provider_lock"),lpQ("locked",cxDeepPct(liq.providerLockedPct,2))):null,
+      liq.directBurnedPct!=null?cxDeepKV(cxDeepTr("deep_k_direct_burn"),lpQ("burn",cxDeepPct(liq.directBurnedPct,2))):null,
       liq.providerBurnTaggedPct!=null?cxDeepKV(cxDeepTr("deep_k_provider_burn"),cxDeepPct(liq.providerBurnTaggedPct,2)):null,
       liq.lockerCount!=null?cxDeepKV(cxDeepTr("deep_k_lockers"),cxDeepEsc(liq.lockerCount)):null,
       liq.earliestUnlock?cxDeepKV(cxDeepTr("deep_k_earliest_unlock"),cxDeepEsc(cxDeepWhen(liq.earliestUnlock))):null,
@@ -12022,47 +12847,82 @@ async function qsLiqCheckBasic(net, token, provider) {
       }):[])
     ];
     const signalCodes=new Set(signals.map(s=>s?.code).filter(Boolean));
-    const cov=r?.coverage||{};
-    const sectionStatus=(coverageKey,{review=false,context=false}={})=>review?"review":context?"context":cov?.[coverageKey]==="partial"?"partial":"verified";
+    // v1.14: five-state mapping with a conservative default (unknown -> NOT CHECKED).
+    const sectionStatus=(coverageKey,{review=false,context=false}={})=>review?"review":context?"context":cxDeepUiStatus(cov?.[coverageKey]);
+    const covWhy=k=>Array.isArray(r?.coverageReasons?.[k])?r.coverageReasons[k][0]:null;
+    const stateFound=(k,normal,partialTxt)=>{const v=cov?.[k]; if(v==="not_applicable")return cxDeepTr("deep_found_na"); if(v==="not_checked"||!v)return cxDeepTr("deep_found_not_checked"); if(v==="partial"||v==="insufficient_sample")return partialTxt; return normal;};
 
+    const simCoverage=r.net==="solana"?"partial":(trade?.attempted?((trade.buy?.ok!=null&&trade.sell?.ok!=null)?"verified":"partial"):(simAllPassed&&!trade?"verified":"partial"));
+    // v1.16: holdings when trading opened.
+    const pl=r?.preLaunch||null, plSig=signals.find(x=>x?.code==="pre_launch_concentration");
+    const plStatus=sectionStatus("preLaunch",{review:plSig?.severity==="attention",context:plSig?.severity==="context"});
+    const plMin=pl?.largeHolderPct??1, plPct=v=>v!=null?cxDeepPct(v,1):cxDeepTr("deep_unknown");
+    const plKind=h=>cxDeepTr(h.isDeployer?"deep_v_kind_deployer":h.kind==="contract"?"deep_v_kind_contract":h.kind==="wallet"?"deep_v_kind_wallet":"deep_v_kind_unknown");
+    const plTop=(Array.isArray(pl?.topHolders)?pl.topHolders:[]).slice(0,5).map(h=>`${cxDeepEsc(cxDeepShort(h.address||"",6,4))} · ${cxDeepPct(h.pct,2)} · ${cxDeepEsc(plKind(h))}`).join("<br>");
+    const plRows=pl?[
+      cxDeepKV(cxDeepTr("deep_k_pl_transfers"),cxDeepEsc(pl.transfersAnalysed??0)),
+      cxDeepKV(cxDeepTr("deep_k_pl_recipients"),cxDeepEsc(pl.recipients??0)),
+      cxDeepKV(cxDeepTr("deep_k_pl_large",{min:plMin}),cxDeepEsc(cxDeepTr("deep_v_pl_large",{count:pl.largeWallets??0,pct:plPct(pl.largeWalletsPct)}))),
+      cxDeepKV(cxDeepTr("deep_k_pl_deployer"),plPct(pl.deployerPct)),
+      cxDeepKV(cxDeepTr("deep_k_pl_contracts"),plPct(pl.contractsPct)),
+      pl.historyComplete!=null&&pl.consistencyVerified!=null?cxDeepKV(cxDeepTr("deep_k_pl_history"),cxDeepEsc((pl.historyComplete?cxDeepTr("deep_v_pl_hist_complete"):pl.materiallyComplete?cxDeepTr("deep_v_pl_hist_material",{pct:cxDeepPct(pl.historyCoveragePct,2)}):cxDeepTr(pl.consistencyVerified?"deep_v_pl_hist_consistent":"deep_v_pl_hist_inconsistent")+((pl.unaccountedPct||0)>0?" · "+cxDeepTr("deep_v_pl_unaccounted",{pct:plPct(pl.unaccountedPct)}):"")))):null,
+      pl.supplyBasis?cxDeepKV(cxDeepTr("deep_k_supply_basis"),cxDeepEsc(cxDeepTr(pl.supplyBasis==="launch"?"deep_v_basis_launch":"deep_v_basis_current"))):null,
+      plTop?cxDeepKV(cxDeepTr("deep_k_pl_top"),plTop,true):null,
+      covDetail("preLaunch")
+    ]:[covDetail("preLaunch")];
+    const plFound=!pl||cov.preLaunch==="not_checked"?cxDeepTr("deep_found_prelaunch_notchecked"):((pl.largeWallets||0)>0?cxDeepTr("deep_found_prelaunch",{wallets:pl.largeWallets,min:plMin,pct:plPct(pl.largeWalletsPct),dep:plPct(pl.deployerPct),contracts:plPct(pl.contractsPct)}):cxDeepTr("deep_found_prelaunch_none",{min:plMin,dep:plPct(pl.deployerPct),contracts:plPct(pl.contractsPct)}))+(pl.complete===false?" "+cxDeepTr("deep_found_prelaunch_incomplete"):"");
+    const plScope=scope?.preLaunch&&pl?cxDeepTr("deep_scope_prelaunch",{transfers:scope.preLaunch.transfers??0,recipients:scope.preLaunch.recipients??0}):"";
+    const plHtml=()=>cov.preLaunch?cxDeepDetail("prelaunch",cxDeepTr("deep_section_prelaunch"),plRows,{status:plStatus,coverage:cxDeepUiStatus(cov.preLaunch),preview:plStatus==="review"||plStatus==="context"?cxDeepTr("deep_reason_prelaunch_conc"):previewFor(plStatus,"deep_reason_insufficient"),found:plFound,why:cxDeepTr("deep_why_prelaunch"),open:plStatus==="review",scope:plScope}):"";
     const marketStatus=sectionStatus("market");
     const historyStatus=sectionStatus("history");
     const depStatus=sectionStatus("deployer",{review:signalCodes.has("fresh_deployer_wallet")||signalCodes.has("deployer_prior_low_score"),context:signalCodes.has("fresh_deployer_funding")||signalCodes.has("recent_deployer_topup")});
-    const launchStatus=sectionStatus("earlyActivity",{review:signalCodes.has("immediate_launch_activity")});
-    const walletStatus=sectionStatus("clusters",{review:signalCodes.has("shared_funding_risk"),context:signalCodes.has("shared_funding_context")&&!signalCodes.has("shared_funding_risk")});
+    const openingSig=signals.find(x=>x?.code==="opening_block_concentration");
+    const launchStatus=sectionStatus("earlyActivity",{review:signalCodes.has("immediate_launch_activity")||openingSig?.severity==="attention",context:openingSig?.severity==="context"});
+    const linkedSig=signals.find(x=>x?.code==="linked_supply_group");
+    const walletReview=signalCodes.has("shared_funding_risk")||signalCodes.has("deployer_funded_wallets")||linkedSig?.severity==="attention";
+    const walletStatus=sectionStatus("clusters",{review:walletReview,context:!walletReview&&(signalCodes.has("shared_funding_context")||linkedSig?.severity==="context")});
     const liqStatus=sectionStatus("liquidity");
     const controlStatus=sectionStatus("controlHistory",{review:signalCodes.has("proxy_upgrade_history")});
     const entityStatus=sectionStatus("entityIntelligence",{review:signalCodes.has("known_historical_incident")});
 
-    const marketFound=cov.market==="partial"
-      ?cxDeepTr("deep_found_market_partial")
-      :cxDeepTr("deep_found_market",{pools:market.pairCount??unknownTxt,liquidity:cxDeepMoney(market.liquidityUsd)});
-    const historyFound=cov.history==="partial"
-      ?cxDeepTr("deep_found_history_partial")
-      :cxDeepTr("deep_found_history",{count:hist.observedTransactions??0});
-    const depFound=(cov.deployer==="partial"||cov.identity==="partial"||!depAddr)
-      ?cxDeepTr("deep_found_deployer_partial")
-      :cxDeepTr("deep_found_deployer_ok");
-    const launchFound=cov.earlyActivity==="partial"
-      ?cxDeepTr("deep_found_launch_partial")
-      :cxDeepTr("deep_found_launch",{early:countTxt(early.earlyBuyerCount,early.earlyBuyerCountCapped),immediate:countTxt(immediateCount,early.immediateCountCapped)});
+    const marketFound=stateFound("market",cxDeepTr("deep_found_market",{pools:market.pairCount??unknownTxt,liquidity:cxDeepMoney(market.liquidityUsd)}),cxDeepTr("deep_found_market_partial"));
+    const historyFound=stateFound("history",cxDeepTr("deep_found_history",{count:hist.observedTransactions??0}),cxDeepTr("deep_found_history_partial"));
+    const depFound=cov.deployer==="not_checked"
+      ?cxDeepTr("deep_found_not_checked")
+      :(cov.deployer==="partial"||cov.identity==="partial"||cov.identity==="not_checked"||!depAddr)
+        ?cxDeepTr("deep_found_deployer_partial")
+        :cxDeepTr("deep_found_deployer_ok");
+    const launchSpecial=cov.earlyActivity==="not_checked"?({launch_pool_unknown:"deep_found_launch_pool_unknown",v4_unsupported:"deep_found_launch_v4",anchor_unavailable:"deep_found_launch_no_anchor"})[covWhy("earlyActivity")]:null;
+    const swapFound=swapMode?(og&&og.wallets>0&&og.supplyPct!=null?cxDeepTr(solMode?((og.bundledWallets??0)>0?"deep_found_launch_sol":"deep_found_launch_sol_nobundle"):((og.bundledWallets??0)>0?"deep_found_launch_swap":"deep_found_launch_swap_nobundle"),{early:countTxt(verifiedTotal,verifiedMore),group:og.wallets,buyers:og.verifiedWallets??0,bundled:og.bundledWallets??0,blocks:(og.toBlock-og.fromBlock+1),pct:cxDeepPct(og.supplyPct,1)}):cxDeepTr(solMode?"deep_found_launch_sol_plain":"deep_found_launch_swap_plain",{early:countTxt(verifiedTotal,verifiedMore)})):null;
+    const launchFound=launchSpecial?cxDeepTr(launchSpecial):cov.earlyActivity==="insufficient_sample"
+      ?((covWhy("earlyActivity")==="zero_buyers"||early.earlyBuyerCount===0)?cxDeepTr("deep_found_launch_zero"):cxDeepTr("deep_found_launch_few",{early:countTxt(early.earlyBuyerCount,early.earlyBuyerCountCapped)}))
+      :stateFound("earlyActivity",swapFound||cxDeepTr("deep_found_launch",{early:countTxt(early.earlyBuyerCount,early.earlyBuyerCountCapped),immediate:countTxt(immediateCount,early.immediateCountCapped)}),swapFound||cxDeepTr("deep_found_launch_partial"));
     const checked=clusters.checkedWallets??0;
-    const walletFound=checked<=0
-      ?cxDeepTr("deep_found_wallet_no_sample")
+    const walletRest=clusterOf!=null?Math.max(0,clusterOf-checked):0;
+    const walletFound=(checked<=0||cov.clusters==="not_checked")
+      ?cxDeepTr("deep_found_wallet_not_checked")
+      :groupList.length>0
+        ?cxDeepTr("deep_found_wallet_groups",{groups:groupList.length,checked,pct:cxDeepPct(groupList[0].supplyPct,1)})
       :clusterCount>0
         ?cxDeepTr("deep_found_wallet_clusters",{clusters:clusterCount,checked})
-        :cxDeepTr("deep_found_wallet_none",{checked});
-    const liqFound=cov.liquidity==="partial"
-      ?cxDeepTr("deep_found_liquidity_partial")
-      :cxDeepTr("deep_found_liquidity",{liquidity:cxDeepMoney(liq.liquidityUsd),locked:liq.providerLockedPct!=null?cxDeepPct(liq.providerLockedPct,2):cxDeepTr("deep_unknown")});
-    const controlFound=cov.controlHistory==="partial"
-      ?cxDeepTr("deep_found_control_partial")
-      :r.net==="solana"
+        :cov.clusters==="insufficient_sample"
+          ?cxDeepTr("deep_found_wallet_few",{checked})
+          :walletRest>0
+            ?cxDeepTr("deep_found_wallet_none_sample",{checked,rest:walletRest})
+            :cxDeepTr("deep_found_wallet_none",{checked});
+    const liqFound=stateFound("liquidity",cxDeepTr("deep_found_liquidity",{liquidity:cxDeepMoney(liq.liquidityUsd),locked:liq.providerLockedPct!=null?cxDeepPct(liq.providerLockedPct,2):cxDeepTr("deep_unknown")}),cxDeepTr("deep_found_liquidity_partial"));
+    const controlFound=stateFound("controlHistory",r.net==="solana"
         ?cxDeepTr("deep_found_control_solana",{authority:changes.authorityChangeCount??changes.adminChangeCount??unknownTxt})
-        :cxDeepTr("deep_found_control",{ownership:changes.ownershipTransferCount??unknownTxt,upgrades:changes.proxyUpgradeCount??unknownTxt,admin:changes.adminChangeCount??unknownTxt});
-    const entityFound=cov.entityIntelligence==="partial"
-      ?cxDeepTr("deep_found_entity_partial",{classified:ent.classifiedCount??0,checked:ent.checkedCount??0})
-      :cxDeepTr("deep_found_entity",{classified:ent.classifiedCount??0,checked:ent.checkedCount??0,labeled:ent.labeledCount??0});
+        :cxDeepTr("deep_found_control",{ownership:changes.ownershipTransferCount??unknownTxt,upgrades:changes.proxyUpgradeCount??unknownTxt,admin:changes.adminChangeCount??unknownTxt}),cxDeepTr("deep_found_control_partial"));
+    const entityFound=stateFound("entityIntelligence",cxDeepTr("deep_found_entity",{classified:ent.classifiedCount??0,checked:ent.checkedCount??0,labeled:ent.labeledCount??0}),cxDeepTr("deep_found_entity_partial",{classified:ent.classifiedCount??0,checked:ent.checkedCount??0}));
+    // v1.14: per-section scope ("what was checked"). Only present on schema 7+.
+    const winTxt=(()=>{const w=cxDeepTr(scope?.earlyActivity?.windowCovered?"deep_v_window_covered":"deep_v_window_partial");return (currentLang==="en"||currentLang==="ru")?w.toLocaleLowerCase(cxDeepLocale()):w;})();
+    const se=scope?.earlyActivity||{}, sc=scope?.clusters||{};
+    const poolLine=!(cxDeepFinite(se.poolsIdentified)>0)?"":se.poolsObserved!=null?cxDeepTr("deep_scope_pools_observed",{observed:se.poolsObserved,identified:se.poolsIdentified}):cxDeepTr("deep_scope_pools_identified",{identified:se.poolsIdentified,trades:se.tradesObserved??0});
+    const scopeLaunch=!scope?"":[se.method==="balance_deltas"&&se.launchBlock!=null?cxDeepTr("deep_scope_sol_trades",{verified:se.verifiedBuyers??0,buys:se.buySwaps??0,block:se.launchBlock,window:winTxt}):se.method==="swap_events"&&se.launchBlock!=null?cxDeepTr("deep_scope_swaps",{verified:se.verifiedBuyers??0,buys:se.buySwaps??0,block:se.launchBlock,window:winTxt}):se.recipientsIdentified!=null?cxDeepTr("deep_scope_early",{wallets:se.walletsAccepted??0,recipients:se.recipientsIdentified,window:winTxt}):"",poolLine].filter(Boolean).join(" · ")||cxDeepTr("deep_scope_none");
+    const scopeWallets=!scope?"":cxDeepFinite(sc.attempted)>0?cxDeepTr("deep_scope_clusters",{checked:sc.checked??0,attempted:sc.attempted,identified:sc.identified??sc.of??0}):cxDeepTr("deep_scope_none");
+    const scopeHistory=!scope?"":scope.history?.records!=null?cxDeepTr("deep_scope_history",{records:scope.history.records}):cxDeepTr("deep_scope_none");
+    const scopeDeployer=!scope?"":scope.deployer?.transactions!=null?cxDeepTr("deep_scope_deployer",{transactions:scope.deployer.transactions}):"";
     const entityWhy=reputation?.knownIncident
       ?cxDeepTr("deep_why_entity_incident")
       :reputation?.knownIssuer
@@ -12071,18 +12931,30 @@ async function qsLiqCheckBasic(net, token, provider) {
 
     const genAt=cxDeepFinite(r?.generatedAt);
     const agoTxt=(()=>{ if(genAt==null) return null; const ms=Math.max(0,Date.now()-genAt); if(ms<60000) return cxDeepTr("deep_ago_now"); if(ms<3600000) return cxDeepTr("deep_ago_min",{n:Math.round(ms/60000)}); return cxDeepTr("deep_ago_hr",{n:Math.round(ms/3600000)}); })();
+    // v1.19: the address entered was a pair or a V4 pool id, resolved to its token by the Worker.
+    const rf=r?.resolvedFrom&&typeof r.resolvedFrom==="object"?r.resolvedFrom:null;
+    const resolvedHtml=rf&&rf.input&&r?.token?`<div class="cx-deep-coverage-explainer" data-deep-resolved="${rf.kind==="v4_pool"?"v4":"pair"}">${cxDeepEsc(cxDeepTr(rf.kind==="v4_pool"?"deep_resolved_v4":"deep_resolved_pair",{input:cxDeepShort(rf.input,8,6),token:cxDeepShort(r.token,8,6)}))}</div>`:"";
     const freshHtml=agoTxt?`<div class="cx-deep-coverage-explainer" data-deep-fresh="${r?.cached?"cached":"live"}">${cxDeepEsc(cxDeepTr(r?.cached?"deep_fresh_cached":"deep_fresh_live",{ago:agoTxt}))}${r?.cached?` · ${cxDeepEsc(cxDeepTr("deep_fresh_rerun_hint"))}`:""}</div>`:"";
-    const previewFor=(status,partialKey,reviewKey=null)=>{
+    const previewFor=(status,partialKey,reviewKey=null,over={})=>{
       if(status==="review"&&reviewKey) return cxDeepTr(reviewKey);
+      if(over[status]) return over[status];
       if(status==="partial") return cxDeepTr(partialKey);
+      if(status==="insufficient") return cxDeepTr("deep_reason_insufficient");
+      if(status==="notchecked") return cxDeepTr("deep_reason_not_checked");
+      if(status==="na") return cxDeepTr("deep_reason_na");
       return "";
     };
+    const launchOver={insufficient:cxDeepTr((covWhy("earlyActivity")==="zero_buyers"||early.earlyBuyerCount===0)?"deep_reason_early_zero":"deep_reason_early_few")};
+    const walletSampleTxt=(clusterOf!=null&&clusterOf>checked)?cxDeepTr("deep_reason_clusters_sample",{checked,total:clusterOf}):"";
+    const walletOver={notchecked:cxDeepTr("deep_reason_clusters_none"),...(walletSampleTxt?{partial:walletSampleTxt,insufficient:walletSampleTxt}:{})};
 
     host.innerHTML=`
       <div class="cx-deep-verdict" data-level="${cxDeepEsc(level)}">
-        <div class="cx-deep-verdict-top"><div class="cx-deep-verdict-title">${cxDeepEsc(cxDeepVerdictLabel(r?.verdict))}</div><div class="cx-deep-verdict-score">${coverage!=null?cxDeepEsc(cxDeepTr("deep_coverage",{pct:coverage})):cxDeepEsc(cxDeepTr("deep_partial_coverage"))}</div></div>
+        <div class="cx-deep-verdict-top"><div class="cx-deep-verdict-title">${cxDeepEsc(verdictTitle)}</div><div class="cx-deep-verdict-score">${coverage!=null?cxDeepEsc(cxDeepTr("deep_coverage",{pct:coverage})):cxDeepEsc(cxDeepTr("deep_partial_coverage"))}</div></div>
+        ${deepCore.total?`<div class="cx-deep-core-line">${cxDeepEsc(cxDeepTr("deep_core_line",{done:deepCore.done??0,total:deepCore.total}))}</div>`:""}
         <div class="cx-deep-note">${cxDeepEsc(cxDeepTr("deep_result_note"))}</div>
         <div class="cx-deep-coverage-explainer">${cxDeepEsc(cxDeepTr("deep_coverage_explainer"))}</div>
+        ${resolvedHtml}
         ${freshHtml}
       </div>
       <div class="cx-deep-signal-list">${signalHtml}</div>
@@ -12092,14 +12964,15 @@ async function qsLiqCheckBasic(net, token, provider) {
       </div>
       <div class="cx-deep-details">
         ${cxDeepDetail("market",cxDeepTr("deep_section_market"),marketRows,{status:marketStatus,preview:previewFor(marketStatus,"deep_reason_market_partial"),found:marketFound,why:cxDeepTr("deep_why_market")})}
-        ${cxDeepDetail("history",cxDeepTr("deep_section_history"),historyRows,{status:historyStatus,preview:previewFor(historyStatus,"deep_reason_history_partial"),found:historyFound,why:cxDeepTr("deep_why_history")})}
-        ${cxDeepDetail("deployer",cxDeepTr(r.net==="solana"?"deep_section_creator":"deep_section_deployer"),depRows,{status:depStatus,preview:(depStatus==="context"?cxDeepTr("deep_reason_fresh_funding"):previewFor(depStatus,"deep_reason_deployer_partial",signalCodes.has("deployer_prior_low_score")?"deep_reason_dep_low":"deep_reason_fresh_wallet")),found:depFound,why:cxDeepTr("deep_why_deployer"),open:depStatus==="review"})}
-        ${cxDeepDetail("launch",cxDeepTr("deep_section_launch"),earlyRows,{status:launchStatus,preview:previewFor(launchStatus,"deep_reason_early_partial","deep_reason_immediate_launch"),found:launchFound,why:cxDeepTr("deep_why_launch"),open:launchStatus==="review"})}
-        ${cxDeepDetail("wallets",cxDeepTr("deep_section_wallets"),clusterRows,{status:walletStatus,preview:walletStatus==="review"||walletStatus==="context"?cxDeepTr("deep_reason_shared_clusters"):walletStatus==="partial"?cxDeepTr("deep_reason_clusters_partial"):"",found:walletFound,why:cxDeepTr("deep_why_wallets"),open:walletStatus==="review"})}
+        ${cxDeepDetail("history",cxDeepTr("deep_section_history"),historyRows,{status:historyStatus,preview:previewFor(historyStatus,"deep_reason_history_partial"),found:historyFound,why:cxDeepTr("deep_why_history"),scope:scopeHistory})}
+        ${cxDeepDetail("deployer",cxDeepTr(r.net==="solana"?"deep_section_creator":"deep_section_deployer"),depRows,{status:depStatus,coverage:cxDeepUiStatus(cov.deployer),preview:(depStatus==="context"?cxDeepTr("deep_reason_fresh_funding"):previewFor(depStatus,"deep_reason_deployer_partial",signalCodes.has("deployer_prior_low_score")?"deep_reason_dep_low":"deep_reason_fresh_wallet")),found:depFound,why:cxDeepTr("deep_why_deployer"),open:depStatus==="review",scope:scopeDeployer})}
+        ${cxDeepDetail("launch",cxDeepTr("deep_section_launch"),earlyRows,{status:launchStatus,coverage:cxDeepUiStatus(cov.earlyActivity),preview:(launchStatus==="context"?cxDeepTr("deep_reason_opening_group"):previewFor(launchStatus,"deep_reason_early_partial",openingSig?"deep_reason_opening_group":"deep_reason_immediate_launch",launchOver)),found:launchFound,why:cxDeepTr("deep_why_launch"),open:launchStatus==="review",scope:scopeLaunch})}
+        ${plHtml()}
+        ${cxDeepDetail("wallets",cxDeepTr("deep_section_wallets"),clusterRows,{status:walletStatus,coverage:cxDeepUiStatus(cov.clusters),preview:walletStatus==="review"||walletStatus==="context"?cxDeepTr(linkedSig||signalCodes.has("deployer_funded_wallets")?"deep_reason_linked":"deep_reason_shared_clusters"):previewFor(walletStatus,"deep_reason_clusters_partial",null,walletOver),found:walletFound,why:cxDeepTr("deep_why_wallets"),open:walletStatus==="review",scope:scopeWallets})}
         ${cxDeepDetail("liquidity",cxDeepTr("deep_section_liquidity"),liqRows,{status:liqStatus,preview:previewFor(liqStatus,"deep_reason_liquidity_partial"),found:liqFound,why:cxDeepTr("deep_why_liquidity")})}
-        ${cxDeepDetail("control",cxDeepTr("deep_section_control"),changeRows,{status:controlStatus,preview:previewFor(controlStatus,"deep_reason_control_partial","deep_reason_proxy_history"),found:controlFound,why:cxDeepTr("deep_why_control"),open:controlStatus==="review"})}
-        ${cxDeepDetail("simulation",cxDeepTr("deep_section_simulation"),simRows,{status:simStatus,preview:simStatus==="review"?cxDeepTr(trade?.attempted?"deep_reason_trade_issue":"deep_reason_sim_reverted"):simStatus==="partial"?cxDeepTr("deep_reason_simulation_partial"):"",found:simFound,why:cxDeepTr(trade?.attempted?"deep_why_trade":"deep_why_simulation"),open:simStatus==="review"})}
-        ${cxDeepDetail("entity",cxDeepTr("deep_section_entity"),entityRows,{status:entityStatus,preview:previewFor(entityStatus,"deep_reason_entity_partial"),found:entityFound,why:entityWhy})}
+        ${cxDeepDetail("control",cxDeepTr("deep_section_control"),changeRows,{status:controlStatus,coverage:cxDeepUiStatus(cov.controlHistory),preview:previewFor(controlStatus,"deep_reason_control_partial","deep_reason_proxy_history"),found:controlFound,why:cxDeepTr("deep_why_control"),open:controlStatus==="review"})}
+        ${cxDeepDetail("simulation",cxDeepTr("deep_section_simulation"),simRows,{status:simStatus,coverage:simCoverage,preview:simStatus==="review"?cxDeepTr(trade?.attempted?"deep_reason_trade_issue":"deep_reason_sim_reverted"):simStatus==="partial"?cxDeepTr("deep_reason_simulation_partial"):"",found:simFound,why:cxDeepTr(trade?.attempted?"deep_why_trade":"deep_why_simulation"),open:simStatus==="review"})}
+        ${cxDeepDetail("entity",cxDeepTr("deep_section_entity"),entityRows,{status:entityStatus,coverage:cxDeepUiStatus(cov.entityIntelligence),preview:previewFor(entityStatus,"deep_reason_entity_partial"),found:entityFound,why:entityWhy})}
       </div>`;
     host.classList.add("show"); cxDeepApplyCoverage(r);
   }
@@ -12206,7 +13079,7 @@ async function qsLiqCheckBasic(net, token, provider) {
   }
 
   async function cxRunDeepScan(rep,{force=false}={}){
-    const net=String(rep?.net||"").toLowerCase(), token=String(rep?.token||"").trim(); const valid=net==="solana" ? /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(token) : /^0x[a-fA-F0-9]{40}$/.test(token); if(!valid) return;
+    const net=String(rep?.net||"").toLowerCase(), token=String(rep?.token||"").trim(); const valid=net==="solana" ? /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(token) : /^0x(?:[a-fA-F0-9]{40}|[a-fA-F0-9]{64})$/.test(token); if(!valid) return;
     _cxDeepLastRep=rep; if(_cxDeepPrimeTimeout){clearTimeout(_cxDeepPrimeTimeout);_cxDeepPrimeTimeout=null;}
     const runId=++_cxDeepRunSeq;
     const controller=new AbortController(); _cxDeepController=controller;
@@ -12225,7 +13098,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       if(!res.ok){ let errCode=""; try{errCode=(await res.json())?.error||"";}catch{} throw new Error(errCode==="rate_limited"?cxDeepTr("deep_error_rate_limited"):cxDeepTr("deep_error_unavailable")); }
       if(!res.body) throw new Error("Streaming response unavailable");
       reader=res.body.getReader(); _cxDeepReader=reader; const dec=new TextDecoder(); let buf="", finalResult=null;
-      const consume=(line)=>{ if(!isCurrent()||!line.trim()) return; let evt; try{evt=JSON.parse(line);}catch{return;} if(evt.type==="stage"){ if(evt.id==="cache") cxDeepCurrent(cxDeepTr("deep_status_cache")); else cxDeepHandleStage(evt); } else if(evt.type==="result"&&evt.result){ finalResult=evt.result; cxDeepRenderResult(finalResult); } else if(evt.type==="error") throw new Error(evt.error||cxDeepTr("deep_error_unavailable")); };
+      const consume=(line)=>{ if(!isCurrent()||!line.trim()) return; let evt; try{evt=JSON.parse(line);}catch{return;} if(evt.type==="stage"){ if(evt.id==="cache") cxDeepCurrent(cxDeepTr("deep_status_cache")); else cxDeepHandleStage(evt); } else if(evt.type==="result"&&evt.result){ finalResult=evt.result; cxDeepRenderResult(finalResult); } else if(evt.type==="error"){ const ek=({pair_ambiguous:"deep_error_pair_ambiguous",pair_unresolved:"deep_error_pair_unresolved"})[evt.code]; throw new Error(ek?cxDeepTr(ek):(evt.error||cxDeepTr("deep_error_unavailable"))); } };
       while(isCurrent()){ const {value,done}=await reader.read(); if(done) break; if(!isCurrent()) return null; bumpIdle(); buf+=dec.decode(value,{stream:true}); const lines=buf.split("\n"); buf=lines.pop()||""; for(const line of lines) consume(line); }
       if(!isCurrent()) return null;
       if(buf.trim()) consume(buf); if(!finalResult) throw new Error(cxDeepTr("deep_error_unavailable")); cxDeepStopClock(); cxDeepSetState("done"); cxDeepBadge(cxDeepTr("deep_badge_complete")); cxDeepCurrent(cxDeepVerdictLabel(finalResult?.verdict)); const elapsed=cxDeepEl("cx-deep-elapsed"); if(elapsed) elapsed.textContent=`${(Number(finalResult?.durationMs||0)/1000).toFixed(1)}s`; return finalResult;
