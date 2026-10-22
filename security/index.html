@@ -4520,11 +4520,11 @@ twq('config','r4v6v');
       <div class="hero-kicker" data-i18n="hero_kicker">Elofid Security Hub</div>
       <h1 class="hero-title" data-i18n="hero_title">Understand any token<br>before you interact.</h1>
       <p class="hero-sub" data-i18n="hero_subtitle">
-        Quick Scan tokens, verify RPC health, decode transactions, and build dev tools — no wallet connection required.
+        Run Quick or Deep scans across 12 chains, with contract, liquidity, market and trading-risk analysis. No wallet connection required.
       </p>
       <form class="hub-scan" id="hubScanForm" autocomplete="off" novalidate>
         <span class="hub-scan-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-        <input id="hubToken" class="mono" type="text" inputmode="text" spellcheck="false" placeholder="Paste a token address (0x… or Solana mint)" data-i18n-placeholder="hub_scan_ph" aria-label="Token address" />
+        <input id="hubToken" class="mono" type="text" inputmode="text" spellcheck="false" placeholder="Paste a token address (0x… or Solana mint)" data-i18n-placeholder="hub_scan_ph" aria-label="Token address" data-i18n-aria-label="aria_token_address" />
         <button type="button" class="hub-paste" id="hubPasteBtn" data-i18n="hub_paste" hidden>Paste</button>
         <button type="submit" class="eui-btn eui-btn-primary hub-scan-btn"><span data-i18n="btn_scan">Scan</span></button>
       </form>
@@ -4532,7 +4532,7 @@ twq('config','r4v6v');
       <p class="fw-hero-tagline" data-i18n="hero_actions_hint">Also included: RPC Health, Transaction Decoder and Developer Tools.</p>
       <button type="button" class="hero-quick-btn" id="heroQuickScanBtn" hidden aria-hidden="true" tabindex="-1"><span data-i18n="hero_quick_btn">Scan a token</span></button>
       <p class="hero-note-small" data-i18n="hero_note">
-        Informational checks only — no signatures, no transactions. Always verify independently.
+        Note: These checks are informational and do not guarantee safety. No signatures. No transactions. Always verify contracts and URLs independently.
       </p>
     </div>
 
@@ -4540,21 +4540,21 @@ twq('config','r4v6v');
       <div class="hx-kicker" data-i18n="hx_sec_kicker">What you get</div>
       <h2 class="hx-title" id="hxTitle" data-i18n="hx_title">Everything a scan checks.</h2>
       <div class="hx-grid">
-        <div class="hx-card-wrap"><div class="hm-card" aria-label="Scan preview"><div class="hm-card-top"><div class="hm-card-kicker" data-i18n="hx_kicker">Security Hub · Quick Scan</div><div class="hm-card-time" data-i18n="hx_scanned">Example scan</div></div><div class="hm-card-id"><span class="hm-tok">T1</span><div><b>Token 1</b><span>BNB Smart Chain · <code>0x0000…0000</code></span></div><div class="hm-score"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" class="trk"/><circle cx="22" cy="22" r="19" class="val" style="stroke-dasharray:98 120"/></svg><b>82</b></div></div><div class="hm-card-scorelabel"><span data-i18n="hx_score">Elofid Score</span><b>82 / 100</b></div><div class="hm-rows"><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_honeypot">Honeypot</span><small data-i18n="hx_honeypot_s">Sell simulation passed</small></div><div class="hm-row-val"><b data-i18n="hx_honeypot_v">Not detected</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_tax">Buy and sell tax</span><small data-i18n="hx_tax_s">Measured through simulation</small></div><div class="hm-row-val"><b>0% · 0%</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_owner">Owner</span><small data-i18n="hx_owner_s">No mint or pause control</small></div><div class="hm-row-val"><b data-i18n="hx_owner_v">Renounced</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_liq">Liquidity</span><small data-i18n="hx_liq_s">LP locked</small></div><div class="hm-row-val"><b>$1.2M</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_contract">Contract</span><small data-i18n="hx_contract_s">Source code verified</small></div><div class="hm-row-val"><b data-i18n="hx_contract_v">Verified</b></div></div><div class="hm-row warn"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v5"/><path d="M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg></span><div class="hm-row-main"><span data-i18n="hx_holders">Top 10 holders</span><small data-i18n="hx_holders_s">Higher than usual concentration</small></div><div class="hm-row-val"><b>38%</b></div></div></div><div class="hm-card-note" data-i18n="hx_note">Illustrative preview</div></div></div>
+        <div class="hx-card-wrap"><div class="hm-card" aria-label="Scan preview" data-i18n-aria-label="aria_scan_preview"><div class="hm-card-top"><div class="hm-card-kicker" data-i18n="hx_kicker">Security Hub · Quick Scan</div><div class="hm-card-time" data-i18n="hx_scanned">Example scan</div></div><div class="hm-card-id"><span class="hm-tok">T1</span><div><b>Token 1</b><span>BNB Smart Chain · <code>0x0000…0000</code></span></div><div class="hm-score"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" class="trk"/><circle cx="22" cy="22" r="19" class="val" style="stroke-dasharray:98 120"/></svg><b>82</b></div></div><div class="hm-card-scorelabel"><span data-i18n="hx_score">Elofid Score</span><b>82 / 100</b></div><div class="hm-rows"><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_honeypot">Honeypot</span><small data-i18n="hx_honeypot_s">Sell simulation passed</small></div><div class="hm-row-val"><b data-i18n="hx_honeypot_v">Not detected</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_tax">Buy and sell tax</span><small data-i18n="hx_tax_s">Measured through simulation</small></div><div class="hm-row-val"><b>0% · 0%</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_owner">Owner</span><small data-i18n="hx_owner_s">No mint or pause control</small></div><div class="hm-row-val"><b data-i18n="hx_owner_v">Renounced</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_liq">Liquidity</span><small data-i18n="hx_liq_s">LP locked</small></div><div class="hm-row-val"><b>$1.2M</b></div></div><div class="hm-row ok"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.2 4L19 7"/></svg></span><div class="hm-row-main"><span data-i18n="hx_contract">Contract</span><small data-i18n="hx_contract_s">Source code verified</small></div><div class="hm-row-val"><b data-i18n="hx_contract_v">Verified</b></div></div><div class="hm-row warn"><span class="hm-row-ic"><svg class="hm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v5"/><path d="M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg></span><div class="hm-row-main"><span data-i18n="hx_holders">Top 10 holders</span><small data-i18n="hx_holders_s">Higher than usual concentration</small></div><div class="hm-row-val"><b>38%</b></div></div></div><div class="hm-card-note" data-i18n="hx_note">Illustrative preview</div></div></div>
         <div class="hx-feats"><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="M12 8v4"/><path d="M12 15.5h.01"/></svg></span><div><b data-i18n="hx_f1_t">Contract controls</b><p data-i18n="hx_f1">Owner, mint, pause and proxy controls, read from the contract.</p></div></div><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17 9 12l4 4 7-8"/><path d="M15 8h5v5"/></svg></span><div><b data-i18n="hx_f2_t">Trading simulation</b><p data-i18n="hx_f2">Buy and sell paths are simulated to measure tax and catch honeypots.</p></div></div><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c3 3.6 6 7 6 10.5a6 6 0 0 1-12 0c0-3.5 3-6.9 6-10.5Z"/></svg></span><div><b data-i18n="hx_f3_t">Liquidity and holders</b><p data-i18n="hx_f3">Observed liquidity, LP lock or burn evidence, and holder concentration.</p></div></div><div class="hx-feat"><span class="hx-feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span><div><b data-i18n="hx_f4_t">Deep Intelligence</b><p data-i18n="hx_f4">Deployer funding, early buyers, wallet clusters and control changes over time.</p></div></div></div>
       </div>
     </section>
 
     <!-- TOOLS GRID -->
     <div class="tools-section">
-      <div class="section-label" data-i18n="tools_kicker">CHOOSE A TOOL</div>
+      <div class="section-label" data-i18n="tools_kicker">More tools</div>
       <div id="toolGrid">
 
         <!-- Quick Scan -->
         <div class="tool-card tc-quick" data-tool="quick" hidden>
           <div class="tc-header"><div class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
           <div class="tc-name" data-i18n="cube_quick_title">Quick / Deep Scan</div>
-          <span class="tc-featured" data-i18n="quick_start_here">Open Scan</span></div>
+          <span class="tc-featured" data-i18n="quick_start_here">Open</span></div>
           <div class="tc-desc" data-i18n="cube_quick_desc">Quick token scan + Deep Intelligence context + shareable report + cache.</div>
           <div class="tc-badges">
             <span class="tc-badge" data-i18n="badge_fast">Fast</span>
@@ -4569,7 +4569,7 @@ twq('config','r4v6v');
           <div class="tc-name" data-i18n="cube_rpc_title">RPC Health Checker</div></div>
           <div class="tc-desc" data-i18n="cube_rpc_desc">Latency + chainId + block + eth_call + read logs + dev custom test.</div>
           <div class="tc-badges">
-            <span class="tc-badge">Latency</span>
+            <span class="tc-badge" data-i18n="badge_latency">Latency</span>
             <span class="tc-badge">ChainId</span>
             <span class="tc-badge" data-i18n="badge_dev">Dev</span>
           </div>
@@ -4612,7 +4612,7 @@ twq('config','r4v6v');
 
     <!-- MODAL BACKDROP (shared) -->
     <div class="modal-backdrop" id="modalBackdrop">
-      <button type="button" class="mobile-quick-close" id="mobileQuickClose" aria-label="Close">✕</button>
+      <button type="button" class="mobile-quick-close" id="mobileQuickClose" aria-label="Close" data-i18n-aria-label="btn_close">✕</button>
 
     <!-- Quick Scan Panel -->
     <section class="panel-shell hidden" id="panel-quick" data-qs-mode="input">
@@ -4623,7 +4623,7 @@ twq('config','r4v6v');
           <div class="panel-sub" data-i18n="p_quick_sub">Paste a token address, run Quick Scan, and get Deep Intelligence context automatically. Cached 10 min · shareable report · no wallet connection.</div>
         </div>
         <div class="panel-actions">
-          <button class="btn-close-modal" id="btnCloseQuick" aria-label="Close">✕</button>
+          <button class="btn-close-modal" id="btnCloseQuick" aria-label="Close" data-i18n-aria-label="btn_close">✕</button>
         </div>
       </div>
 
@@ -4649,7 +4649,7 @@ twq('config','r4v6v');
             </select>
           </div>
           <div class="field qs-scan-field">
-            <div class="label" data-i18n="addr_label">Token address</div>
+            <div class="label" data-i18n="addr_label">Token contract</div>
             <input id="qs-token" class="mono" placeholder="Paste 0x… or Solana mint" data-i18n-placeholder="qs_token_placeholder" autocomplete="off" spellcheck="false" />
           </div>
           <div class="qs-scan-btn-wrap">
@@ -4667,12 +4667,12 @@ twq('config','r4v6v');
           <div class="qs-advanced-body">
             <label class="toggle qs-json-advanced">
               <input type="checkbox" id="qs-show-json" checked>
-              <span class="small" data-i18n="opt_show_json">Enable JSON report</span>
+              <span class="small" data-i18n="opt_show_json">Enable JSON report (copy)</span>
             </label>
             <div class="field" id="qs-solana-rpc-field" style="display:none">
               <div class="label" data-i18n="quick_solana_rpc_label">Solana RPC <span class="label-muted">(optional — improves reliability)</span></div>
               <div class="input-btn-row">
-                <input id="qs-solana-rpc" class="mono" placeholder="https://mainnet.helius-rpc.com/?api-key=... (optional)" />
+                <input id="qs-solana-rpc" class="mono" placeholder="https://mainnet.helius-rpc.com/?api-key=... (optional)" data-i18n-placeholder="ph_solana_rpc" />
                 <button class="btn btn-ghost" id="qs-solana-rpc-save" style="padding:8px 10px;font-size:11px;flex-shrink:0" data-i18n="btn_save">Save</button>
               </div>
             </div>
@@ -4690,9 +4690,9 @@ twq('config','r4v6v');
                 </select>
               </div>
               <div class="api-block-row2">
-                <input id="api-bscscan" class="mono" placeholder="Paste API key…" />
-                <input id="api-unified" class="mono" placeholder="Paste API key…" style="display:none" />
-                <input id="api-etherscan" class="mono" placeholder="Paste API key…" style="display:none" />
+                <input id="api-bscscan" class="mono" placeholder="Paste API key…" data-i18n-placeholder="ph_api_key" />
+                <input id="api-unified" class="mono" placeholder="Paste API key…" data-i18n-placeholder="ph_api_key" style="display:none" />
+                <input id="api-etherscan" class="mono" placeholder="Paste API key…" data-i18n-placeholder="ph_api_key" style="display:none" />
                 <button class="btn btn-ghost api-sm-btn" id="api-save" data-i18n="btn_save">Save</button>
                 <button class="btn btn-ghost api-sm-btn" id="api-clear">×</button>
               </div>
@@ -4731,7 +4731,7 @@ twq('config','r4v6v');
       <!-- Full-width fast result summary -->
       <div class="qs-summary-wrap">
         <div id="qs-out" class="status info" style="display:block;" data-i18n="qs_ready_html">
-          <strong>Ready.</strong><br>Paste a token address and click <b>Scan</b>.
+          <strong>Ready.</strong><br>Paste a token address, run Quick Scan, and Deep Intelligence will add extra context automatically.
         </div>
       </div>
 
@@ -4765,7 +4765,7 @@ twq('config','r4v6v');
                 <div class="cx-deep-radar-core"></div>
               </div>
               <div class="cx-deep-current">
-                <div class="cx-deep-current-label" data-i18n="deep_current_label">Deep scan status</div>
+                <div class="cx-deep-current-label" data-i18n="deep_current_label">Deep Scan status</div>
                 <div class="cx-deep-current-stage" id="cx-deep-current-stage" data-i18n="deep_ready">Runs automatically after a valid Quick Scan.</div>
                 <div class="cx-deep-progress"><div class="cx-deep-progress-bar" id="cx-deep-progress-bar"></div></div>
                 <div class="cx-deep-progress-meta"><span id="cx-deep-progress-text">0 / 10 stages</span><span id="cx-deep-elapsed" data-i18n="deep_progress_waiting">waiting</span></div>
@@ -4813,11 +4813,11 @@ twq('config','r4v6v');
       <div class="panel-head">
         <div>
           <div class="panel-kicker" style="color:var(--green)" data-i18n="p_rpc_kicker">RPC Health Checker</div>
-          <div class="panel-title" data-i18n="p_rpc_title">Find the fastest endpoint</div>
-          <div class="panel-sub" data-i18n="p_rpc_sub">Tests latency · chainId · block · eth_call · getLogs for each RPC.</div>
+          <div class="panel-title" data-i18n="p_rpc_title">Find the best endpoint</div>
+          <div class="panel-sub" data-i18n="p_rpc_sub">We test RPCs with latency + chainId + block + eth_call + read logs. Includes a developer custom logs test and saves the best RPC locally.</div>
         </div>
         <div class="panel-actions">
-          <button class="btn-close-modal" id="btnCloseRpc" aria-label="Close">✕</button>
+          <button class="btn-close-modal" id="btnCloseRpc" aria-label="Close" data-i18n-aria-label="btn_close">✕</button>
         </div>
       </div>
       <div class="grid-2">
@@ -4844,13 +4844,13 @@ twq('config','r4v6v');
             <div class="label" data-i18n="rpc_private_label">Private RPC <span class="label-muted">(saved locally)</span></div>
             <div class="input-btn-row">
               <input id="rpc-private" class="mono" placeholder="https://..." />
-              <button class="btn btn-ghost" id="rpc-private-save" style="padding:8px 10px;font-size:11px;flex-shrink:0">Save</button>
+              <button class="btn btn-ghost" id="rpc-private-save" style="padding:8px 10px;font-size:11px;flex-shrink:0" data-i18n="btn_save">Save</button>
               <button class="btn btn-ghost" id="rpc-private-clear" style="padding:8px 10px;font-size:11px;flex-shrink:0">×</button>
             </div>
           </div>
           <!-- Custom RPC -->
           <div class="field">
-            <div class="label" data-i18n="rpc_custom_label">Custom RPC <span class="label-muted">(top priority)</span></div>
+            <div class="label" data-i18n="rpc_custom_label">Optional custom RPC <span class="label-muted">(top priority)</span></div>
             <input id="rpc-custom" class="mono" placeholder="https://..." />
           </div>
           <!-- CTA -->
@@ -4859,29 +4859,29 @@ twq('config','r4v6v');
           </div>
           <div class="rpc-2btn-row">
             <button class="btn btn-ghost" id="rpc-copy-best" data-i18n="rpc_copy_best">Copy Best RPC</button>
-            <button class="btn btn-ghost" id="rpc-share-x" data-i18n="btn_share_x">Share 𝕏</button>
+            <button class="btn btn-ghost" id="rpc-share-x" data-i18n="btn_share_x">𝕏 Share</button>
           </div>
           <div id="rpc-status" class="status info" style="margin-top:10px"></div>
           <!-- Dev logs test (collapsible) -->
           <details class="api-accordion" style="margin-top:10px">
-            <summary class="api-accordion-summary">🛠 Dev: custom logs test</summary>
+            <summary class="api-accordion-summary">🛠 <span data-i18n="rpc_dev_title">Developer custom logs test</span></summary>
             <div class="api-accordion-body">
               <div class="field">
-                <div class="label" data-i18n="rpc_dev_addr">Contract address</div>
+                <div class="label" data-i18n="rpc_dev_addr">Contract address (optional)</div>
                 <input id="rpc-dev-addr" class="mono" placeholder="0x..." />
               </div>
               <div class="field">
-                <div class="label" data-i18n="rpc_dev_topic">Topic0</div>
+                <div class="label" data-i18n="rpc_dev_topic">Topic0 (optional)</div>
                 <input id="rpc-dev-topic" class="mono" placeholder="0xddf252ad..." />
               </div>
-              <button class="btn btn-ghost" id="rpc-dev-run" style="margin-top:8px;padding:8px 14px;font-size:11px">Run test</button>
+              <button class="btn btn-ghost" id="rpc-dev-run" style="margin-top:8px;padding:8px 14px;font-size:11px" data-i18n="rpc_dev_run">Run custom test</button>
             </div>
           </details>
         </div>
         <div class="card">
           <h3 data-i18n="rpc_results">Results</h3>
           <div id="rpc-table" class="rpc-cards"></div>
-          <div class="small" style="margin-top:10px" data-i18n="rpc_tip">Some RPCs fail due to CORS/timeouts — pick the stable fastest.</div>
+          <div class="small" style="margin-top:10px" data-i18n="rpc_tip">Tip: Some RPCs fail due to CORS/timeouts. Run the test and pick the stable fastest.</div>
         </div>
       </div>
     </section>
@@ -4892,10 +4892,10 @@ twq('config','r4v6v');
         <div>
           <div class="panel-kicker" style="color:var(--yellow)" data-i18n="p_tx_kicker">Tx Decoder</div>
           <div class="panel-title" data-i18n="p_tx_title">Decode a transaction</div>
-          <div class="panel-sub" data-i18n="p_tx_sub">Paste a tx hash. We fetch tx + receipt and decode common inputs and events.</div>
+          <div class="panel-sub" data-i18n="p_tx_sub">Paste a tx hash. We fetch tx + receipt and decode common inputs and events (Transfer / Approval + common swap calls).</div>
         </div>
         <div class="panel-actions">
-          <button class="btn-close-modal" id="btnCloseTx" aria-label="Close">✕</button>
+          <button class="btn-close-modal" id="btnCloseTx" aria-label="Close" data-i18n-aria-label="btn_close">✕</button>
         </div>
       </div>
       <div class="grid-2">
@@ -4964,16 +4964,16 @@ twq('config','r4v6v');
         <div>
           <div class="panel-kicker" style="color:#b09fff" data-i18n="p_dev_kicker">Dev Tools</div>
           <div class="panel-title" data-i18n="p_dev_title">Bookmarklet + Local Monitor</div>
-          <div class="panel-sub" data-i18n="p_dev_sub">Generate a bookmarklet that sends token/tx from explorers to the Elofid Security Hub. Also includes a local contract monitor.</div>
+          <div class="panel-sub" data-i18n="p_dev_sub">Generate a bookmarklet that sends token/tx from explorers to the Elofid Security Hub. Also includes a local contract monitor (watchlist stored in your browser).</div>
         </div>
         <div class="panel-actions">
-          <button class="btn-close-modal" id="btnCloseDev" aria-label="Close">✕</button>
+          <button class="btn-close-modal" id="btnCloseDev" aria-label="Close" data-i18n-aria-label="btn_close">✕</button>
         </div>
       </div>
       <div class="grid-2">
         <div class="card">
           <h3 data-i18n="bm_title">Bookmarklet Generator</h3>
-          <div class="small" style="margin-bottom:12px" data-i18n="bm_hint">Drag to bookmarks bar or copy the generated bookmarklet. Use it on BscScan, Etherscan, CoinMarketCap &amp; CoinGecko pages.</div>
+          <div class="small" style="margin-bottom:12px" data-i18n="bm_hint">Drag to bookmarks bar or copy the generated bookmarklet. Use it on BscScan/Etherscan pages.</div>
           <div class="field">
             <div class="label" data-i18n="bm_base_label">Hub URL (this page)</div>
             <input id="bm-base" class="mono" />
@@ -5011,14 +5011,14 @@ twq('config','r4v6v');
             </select>
           </div>
           <div class="field">
-            <div class="label" data-i18n="addr_label">Contract address</div>
+            <div class="label" data-i18n="addr_label">Token contract</div>
             <input id="mon-addr" class="mono" placeholder="0x..." data-i18n-placeholder="ph_0x" />
           </div>
           <div class="field">
             <div class="row">
               <button class="btn btn-primary" id="mon-add" data-i18n="mon_add">Add</button>
               <button class="btn btn-ghost" id="mon-check" data-i18n="mon_check">Check all</button>
-              <button class="btn btn-ghost" id="mon-export" data-i18n="mon_export">📦 JSON</button>
+              <button class="btn btn-ghost" id="mon-export" data-i18n="mon_export">Copy JSON</button>
             </div>
           </div>
           <div id="mon-status" class="status info"></div>
@@ -5146,7 +5146,7 @@ const translations = {
     qs_auto_detected: "✓ {network} detected{evidence}",
     qs_auto_market_hint: "Market match found on {network} · press Scan to verify the contract across all supported EVM networks.",
     qs_auto_seen_multi: "Seen on {networks} · press Scan to verify on-chain, or choose the intended network manually.",
-    qs_auto_no_market: "No market match yet. Solana mints are recognized immediately; for this 0x token, press Scan and Elofid will verify on-chain across supported EVM networks.",
+    qs_auto_no_market: "No market match yet. Solana mints are recognized immediately. For this 0x token, press Scan and Elofid will verify on-chain across supported EVM networks.",
     qs_auto_verified_multi: "Verified on multiple networks ({networks}) · choose the intended network below.",
     qs_auto_not_found: "Elofid could not verify a supported EVM network for this contract · choose a network manually if you know it.",
     qs_auto_manual: "Manual network · {network}",
@@ -5247,7 +5247,7 @@ const translations = {
     deep_kicker: "Protected Analysis",
     deep_title: "Elofid Deep Intelligence",
     deep_sub: "Behavior, history and relationships beyond the contract.",
-    deep_current_label: "Deep scan status",
+    deep_current_label: "Deep Scan status",
     deep_ready: "Runs automatically after a valid Quick Scan.",
     deep_rerun: "Re-run Deep Scan",
     deep_note: "Deep Intelligence is an evidence layer. It does not change the existing Elofid Overall Score.",
@@ -5342,11 +5342,11 @@ const translations = {
     deep_error_quick_unaffected: "Quick Scan remains unaffected.",
     deep_error_run_quick_first: "Run a valid Quick Scan first.",
     deep_progress_stages: "{done} / {total} stages",
-    deep_reject_no_code: "Deep scan not started — no token contract code was found.",
-    deep_reject_invalid_erc20: "Deep scan not started — the address did not validate as an ERC-20 token.",
-    deep_reject_market: "Deep scan paused — protected market verification was unavailable.",
-    deep_reject_score: "Deep scan paused — the protected Quick Scan score was unavailable.",
-    deep_reject_solana_data: "Deep scan not started — the Solana Quick Scan returned no usable security or market data.",
+    deep_reject_no_code: "Deep Scan not started — no token contract code was found.",
+    deep_reject_invalid_erc20: "Deep Scan not started — the address did not validate as an ERC-20 token.",
+    deep_reject_market: "Deep Scan paused — protected market verification was unavailable.",
+    deep_reject_score: "Deep Scan paused — the protected Quick Scan score was unavailable.",
+    deep_reject_solana_data: "Deep Scan not started — the Solana Quick Scan returned no usable security or market data.",
     deep_error_rate_limited: "Deep Intelligence rate limit reached. Try again later.",
     deep_sim_reason_evm: "Dynamic transfer-path diagnostics. No transaction is broadcast.",
     deep_sim_reason_solana: "No transaction is broadcast. Full router swap simulation is not claimed for Solana in this version.",
@@ -5433,7 +5433,7 @@ const translations = {
     deep_scope_none: "Nothing could be checked in this section",
     deep_scope_pools_observed: "Launch activity observed in {observed} of {identified} pool(s)",
     deep_scope_pools_identified: "{identified} pool(s) identified · {trades} launch-window trade(s) observed",
-    deep_scope_pools_identified_later: "{identified} pool(s) identified · {trades} trade(s) observed in the analysed pool window",
+    deep_scope_pools_identified_later: "{identified} pool(s) identified · {trades} trade(s) observed in the analyzed pool window",
     deep_badge_risk_title: "Risk finding",
     deep_badge_coverage_title: "Check coverage",
     deep_cr_no_pools: "No trading pool was found, so launch checks could not run",
@@ -5535,22 +5535,22 @@ const translations = {
     deep_v_sol_start_delayed: "Set to open {minutes} min after liquidity · the window was not moved to it",
     deep_v_sol_start_unverified: "Not verified · this pool type can open later, and no trade came right at liquidity",
     deep_cr_trading_start_unverified: "Trading may have started later than liquidity, so the window may not cover the real launch",
-    deep_v_sol_start_earlier: "Not verified · an earlier pool of this token ({minutes} min before) was not analysed here, so the first trading could not be reconstructed",
+    deep_v_sol_start_earlier: "Not verified · an earlier pool of this token ({minutes} min before) was not analyzed here, so the first trading could not be reconstructed",
     // v1.19.5 UI wording fix: the window was measured on a later pool (an earlier pool was not analysed).
-    deep_v_sol_start_earlier_trade: "Not verified · activity consistent with trading was observed {minutes} min before the analysed window. The original trading venue and launch time could not be verified",
-    deep_k_launch_anchor_later: "Analysed pool anchor",
-    deep_v_anchor_slot_verified_later: "Slot {block} · liquidity instruction verified for the analysed pool only. Token activity was observed before it, so this is not proof of where or when trading first started",
-    deep_found_launch_sol_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analysed pool. Token activity was observed before this window, so it is not necessarily the original launch window. In that pool's first {blocks} slots, {buyers} verified buyer(s) bought and {bundled} wallet(s) received tokens without paying, inside a pool trade. {pct} of supply left the pool there, net of sells.",
-    deep_found_launch_sol_nobundle_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analysed pool. Token activity was observed before this window, so it is not necessarily the original launch window. In that pool's first {blocks} slots, {buyers} verified buyer(s) bought and {pct} of supply left the pool, net of sells.",
-    deep_found_launch_sol_plain_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analysed pool. Token activity was observed before this window, so it is not necessarily the original launch window.",
-    deep_k_opening_group_later: "First slots of the analysed pool",
-    deep_k_immediate_wallets_later: "Wallets right after the analysed pool opened (activity was seen before it)",
-    deep_k_immediate_supply_later: "Supply in that window (analysed pool)",
-    deep_k_top_buyers_later: "Largest buyers in the analysed pool window",
-    deep_k_first_activity_later: "First activity in the analysed pool",
-    deep_scope_sol_trades_later: "{verified} verified buyer wallet(s) from {buys} paid buy(s) · analysed pool from slot {block}, token activity was observed before it · window {window}",
-    deep_cr_earlier_pool_unverified: "An earlier pool of this token could not be analysed, so the window may not cover the real launch",
-    deep_cr_earlier_activity_unverified: "Activity consistent with trading was observed before the analysed window, so the window may not cover the real launch",
+    deep_v_sol_start_earlier_trade: "Not verified · activity consistent with trading was observed {minutes} min before the analyzed window. The original trading venue and launch time could not be verified",
+    deep_k_launch_anchor_later: "Analyzed pool anchor",
+    deep_v_anchor_slot_verified_later: "Slot {block} · liquidity instruction verified for the analyzed pool only. Token activity was observed before it, so this is not proof of where or when trading first started",
+    deep_found_launch_sol_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analyzed pool. Token activity was observed before this window, so it is not necessarily the original launch window. In that pool's first {blocks} slots, {buyers} verified buyer(s) bought and {bundled} wallet(s) received tokens without paying, inside a pool trade. {pct} of supply left the pool there, net of sells.",
+    deep_found_launch_sol_nobundle_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analyzed pool. Token activity was observed before this window, so it is not necessarily the original launch window. In that pool's first {blocks} slots, {buyers} verified buyer(s) bought and {pct} of supply left the pool, net of sells.",
+    deep_found_launch_sol_plain_later: "Balance changes show {early} buyer wallet(s) that paid for the token in the window of the analyzed pool. Token activity was observed before this window, so it is not necessarily the original launch window.",
+    deep_k_opening_group_later: "First slots of the analyzed pool",
+    deep_k_immediate_wallets_later: "Wallets right after the analyzed pool opened (activity was seen before it)",
+    deep_k_immediate_supply_later: "Supply in that window (analyzed pool)",
+    deep_k_top_buyers_later: "Largest buyers in the analyzed pool window",
+    deep_k_first_activity_later: "First activity in the analyzed pool",
+    deep_scope_sol_trades_later: "{verified} verified buyer wallet(s) from {buys} paid buy(s) · analyzed pool from slot {block}, token activity was observed before it · window {window}",
+    deep_cr_earlier_pool_unverified: "An earlier pool of this token could not be analyzed, so the window may not cover the real launch",
+    deep_cr_earlier_activity_unverified: "Activity consistent with trading was observed before the analyzed window, so the window may not cover the real launch",
     deep_cr_prelaunch_cut_unverified: "An earlier pool of this token was not observed on-chain, so the point before launch is approximate",
     deep_resolved_pair: "The address entered ({input}) is a trading pair. Deep Intelligence analyzed its token {token}.",
     deep_resolved_v4: "The address entered ({input}) is a V4 pool id. Deep Intelligence analyzed its token {token}.",
@@ -5578,7 +5578,7 @@ const translations = {
     deep_found_prelaunch: "Before liquidity was first added, {wallets} wallet(s) other than the deployer each held at least {min}% of supply, {pct} together. The deployer held {dep} and contracts held {contracts}.",
     deep_found_prelaunch_none: "Before liquidity was first added, no wallet other than the deployer held {min}% or more of supply. The deployer held {dep} and contracts held {contracts}.",
     deep_found_prelaunch_notchecked: "Holdings at launch could not be measured because the launch point was not established. This is not a clean result.",
-    deep_k_pl_transfers: "Transfers before launch analysed",
+    deep_k_pl_transfers: "Transfers before launch analyzed",
     deep_k_pl_recipients: "Recipients before launch",
     deep_k_pl_large: "Wallets holding {min}% or more",
     deep_v_pl_large: "{count} · {pct} of supply",
@@ -5616,7 +5616,7 @@ const translations = {
     deep_v_pl_unaccounted: "{pct} of supply passed through accounts that were not read",
     deep_v_anchor_slot_unverified: "Slot {block} · first trade, no pool deposit found",
     deep_k_buy_txs: "Pool trades in launch window",
-    deep_k_buy_txs_later: "Pool trades in the analysed pool window",
+    deep_k_buy_txs_later: "Pool trades in the analyzed pool window",
     deep_scope_sol_trades: "{verified} verified buyer wallet(s) from {buys} paid buy(s) · launch slot {block} · launch window {window}",
     deep_found_launch_sol: "Balance changes show {early} buyer wallet(s) that paid for the token in the launch window. In the first {blocks} slots, {buyers} verified buyer(s) bought and {bundled} wallet(s) received tokens without paying, inside a pool trade. {pct} of supply left the pool there, net of sells.",
     deep_found_launch_sol_nobundle: "Balance changes show {early} buyer wallet(s) that paid for the token in the launch window. In the first {blocks} slots, {buyers} verified buyer(s) bought and {pct} of supply left the pool, net of sells.",
@@ -6010,7 +6010,7 @@ const translations = {
     th_block: "block",
     th_call: "call",
     th_logs: "logs",
-    th_status: "status",
+    th_status: "Status",
     th_contract: "Contract",
     th_network: "Network",
     th_last_seen: "Last seen",
@@ -6028,7 +6028,74 @@ const translations = {
     ph_etherscan_key: "Etherscan API key (stored locally)",
     ph_rpc_private: "https://... (stored locally only)",
     ph_rpc_custom: "https://...",
-    ph_rpc_dev_topic: "0xddf252ad... (Transfer) or leave empty"
+    ph_rpc_dev_topic: "0xddf252ad... (Transfer) or leave empty",
+    aria_token_address: "Token address",
+    aria_scan_preview: "Scan preview",
+    badge_latency: "Latency",
+    ph_solana_rpc: "https://mainnet.helius-rpc.com/?api-key=... (optional)",
+    ph_api_key: "Paste API key…",
+    st_keys_saved: "Keys saved.",
+    st_keys_cleared: "Keys cleared.",
+    st_scanning_html: "<strong>Scanning…</strong><br>Checking contract, liquidity, and market data — usually a few seconds.",
+    st_no_code: "No contract code detected.",
+    st_not_erc20: "Contract found, but it does not validate as an ERC-20 token.",
+    st_market_engine_down: "Protected market engine temporarily unavailable. Please try again.",
+    st_market_unverified_html: "<strong>Market verification unavailable.</strong><br>Provider data was collected, but Elofid did not reconcile cross-provider liquidity because the protected engine could not be reached.",
+    st_score_engine_down: "Secure scoring engine temporarily unavailable. Please try again.",
+    st_score_unavailable_html: "<strong>Security scoring unavailable.</strong><br>The public on-chain checks completed, but Elofid did not generate a score because the protected scoring engine could not be reached.",
+    st_score_unavailable_sol_html: "<strong>Security scoring unavailable.</strong><br>Solana checks completed, but Elofid did not generate a score because the protected scoring engine could not be reached.",
+    st_invalid_solana: "Please paste a valid Solana token address (base58).",
+    st_no_data: "No data returned — check the address or try again.",
+    st_solana_rpc_saved: "Saved custom Solana RPC locally.",
+    st_save_blocked: "Could not save (localStorage blocked).",
+    st_enter_token: "Enter token address first.",
+    st_run_scan_first: "Run scan first.",
+    st_copied_link: "Copied share link.",
+    st_copy_failed: "Copy failed.",
+    st_copied_json: "Copied JSON.",
+    st_copied_md: "Copied Markdown report.",
+    st_copied_xtext: "Copied X text.",
+    liq_no_pairs: "No pairs/pools detected",
+    liq_th_pair: "PAIR/POOL",
+    liq_th_type: "TYPE",
+    liq_th_target: "TARGET",
+    liq_th_result: "RESULT",
+    qs_thin_liq_warn: "⚠️ Thin liquidity — price impact/slippage may be extreme",
+    qs_issuer_context: "Issuer context:",
+    qs_sol_lp_note: "LP-lock status isn't shown for most pools above — Solana's major DEXes (Meteora, Orca) use NFT-based liquidity positions rather than simple burnable/lockable LP tokens, so there's no single reliable on-chain check the way there is for BSC/Ethereum.",
+    rpc_best_badge: "⭐ Best",
+    rpc_failed: "failed",
+    st_no_rpcs: "No RPCs available.",
+    st_testing_rpcs: "Testing {count} RPC(s)…",
+    st_best_rpc: "Best RPC:",
+    st_all_rpcs_failed: "All RPCs failed (CORS/timeout/blocked). Try adding a custom RPC.",
+    st_no_best_rpc: "No saved best RPC yet. Run test first.",
+    st_copied_best_rpc: "Copied best RPC.",
+    st_private_rpc_saved: "Saved private RPC locally.",
+    st_private_rpc_cleared: "Cleared private RPC.",
+    st_dev_enter_addr: "Enter a contract address for the dev test.",
+    st_invalid_contract: "Invalid contract address.",
+    st_dev_running: "Running custom logs test…",
+    st_block_read_failed: "Failed to read block number:",
+    st_dev_ok: "Custom logs test OK ({count} logs) — RPC:",
+    st_dev_failed: "Custom logs test failed:",
+    st_invalid_tx: "Please paste a valid tx hash.",
+    st_no_rpc: "No RPC available.",
+    st_fetching_tx: "Fetching tx + receipt…",
+    st_tx_not_found: "Tx not found (wrong network / unsynced RPC).",
+    st_rpc_failed: "RPC failed:",
+    st_done: "Done.",
+    st_decode_failed: "Decode failed:",
+    st_copied: "Copied.",
+    st_bm_generated: "Bookmarklet generated. <span class=\"mono\">(copy it)</span>",
+    st_generate_first: "Generate first.",
+    st_copied_bm: "Copied bookmarklet.",
+    st_mon_invalid: "Enter a valid 0x contract address (42 chars).",
+    st_mon_added: "Added to monitor list (local).",
+    st_mon_empty: "Monitor list is empty.",
+    st_mon_checking: "Checking {count} contract(s)…",
+    st_mon_done: "Monitor check done.",
+    st_mon_removed: "Removed."
   },
   zh: {
     hx_honeypot_s: "卖出模拟通过",
@@ -6062,7 +6129,7 @@ const translations = {
     hx_f2: "模拟买入和卖出路径，以测量税率并识别蜜罐。",
     hx_f3_t: "流动性与持有人",
     hx_f3: "观察到的流动性、LP 锁定或销毁证据，以及持有人集中度。",
-    hx_f4_t: "深度情报",
+    hx_f4_t: "Deep Intelligence",
     hx_f4: "部署者资金来源、早期买家、钱包集群以及控制权的历史变化。",
     brand_sub: "链上安全",
     hero_kicker: "Elofid 安全中心",
@@ -6084,14 +6151,14 @@ const translations = {
     qs_auto_detect: "自动检测",
     qs_token_placeholder: "粘贴 0x… 或 Solana Mint",
     qs_token_intelligence: "代币智能分析",
-    qs_auto_idle: "粘贴 EVM 代币合约或 Solana Mint。Elofid 会在能够验证时自动识别网络；如果该地址存在于多个网络，你可以选择目标网络。",
+    qs_auto_idle: "粘贴 EVM 代币合约或 Solana Mint。Elofid 会在能够验证时自动识别网络。如果该地址存在于多个网络，你可以选择目标网络。",
     qs_auto_partial: "粘贴完整的 0x 代币合约或 Solana Mint 以开始自动检测。",
     qs_auto_checking_evm: "正在检查支持的 EVM 网络…",
     qs_auto_verifying_evm: "正在链上验证 EVM 网络…",
     qs_auto_detected: "✓ 已检测到 {network}{evidence}",
     qs_auto_market_hint: "在 {network} 找到市场匹配 · 点击“扫描”将在所有支持的 EVM 网络上验证该合约。",
     qs_auto_seen_multi: "在 {networks} 上发现该地址 · 点击“扫描”进行链上验证，或手动选择目标网络。",
-    qs_auto_no_market: "暂未找到市场匹配。Solana Mint 会立即识别；对于这个 0x 代币，请点击“扫描”，Elofid 将在支持的 EVM 网络上进行链上验证。",
+    qs_auto_no_market: "暂未找到市场匹配。Solana Mint 会立即识别。对于这个 0x 代币，请点击“扫描”，Elofid 将在支持的 EVM 网络上进行链上验证。",
     qs_auto_verified_multi: "已在多个网络验证（{networks}）· 请在下方选择目标网络。",
     qs_auto_not_found: "Elofid 无法在支持的 EVM 网络中验证该合约 · 如果你知道所在网络，请手动选择。",
     qs_auto_manual: "手动选择网络 · {network}",
@@ -6133,7 +6200,7 @@ const translations = {
     hero_micro_quick: "从这里开始 — 无需连接钱包。",
     hero_micro_access: "解锁高级授权分析 + 撤销工具。",
     tools_kicker: "更多工具",
-    cube_quick_title: "快速扫描",
+    cube_quick_title: "快速 / 深度扫描",
     cube_quick_desc: "快速代币扫描 + Deep Intelligence 上下文 + 可分享报告 + 缓存。",
     cube_liq_title: "代币 + 流动性扫描",
     cube_liq_desc: "DEX 检查（Pancake/Uni）：代币 vs WBNB/WETH 与 USDT。",
@@ -6186,16 +6253,16 @@ const translations = {
     btn_copy_link: "🔗 分享链接",
     btn_copy_json: "📦 JSON",
     btn_copy_xtext: "✍️ X 文案",
-    p_quick_kicker: "快速扫描",
-    p_quick_title: "几秒内给代币打分",
-    p_quick_sub: "粘贴代币地址，扫描。缓存10分钟 · 可分享报告。",
+    p_quick_kicker: "快速 / 深度扫描",
+    p_quick_title: "结合快速与深度分析扫描代币",
+    p_quick_sub: "粘贴代币地址并运行快速扫描，即可自动获得 Deep Intelligence 背景信息。缓存 10 分钟 · 可分享报告 · 无需连接钱包。",
     deep_kicker: "受保护分析",
-    deep_title: "Elofid 深度智能",
+    deep_title: "Elofid Deep Intelligence",
     deep_sub: "超越合约本身，分析行为、历史与地址关系。",
     deep_current_label: "深度扫描状态",
     deep_ready: "有效的快速扫描后会自动运行。",
     deep_rerun: "重新运行深度扫描",
-    deep_note: "深度智能是独立的证据层，不会改变现有的 Elofid 总体评分。",
+    deep_note: "Deep Intelligence 是独立的证据层，不会改变现有的 Elofid 总体评分。",
     deep_mobile_open: "完整 Deep Intelligence 报告 — 点击展开",
     deep_mobile_close: "收起 Deep Intelligence 报告",
     quick_advanced: "⚙ 高级设置",
@@ -6822,7 +6889,7 @@ const translations = {
     deep_ago_now: "刚刚",
     deep_ago_min: "{n} 分钟前",
     deep_ago_hr: "{n} 小时前",
-    deep_error_timeout: "深度情报响应时间过长。请稍后重新运行。",
+    deep_error_timeout: "Deep Intelligence 响应时间过长。请稍后重新运行。",
     deep_sim_code_passed: "通过 — 转账在模拟中成功执行",
     deep_sim_code_reverted: "回滚 — 转账在模拟中失败",
     deep_sim_code_no_pool: "未测试 — 没有已验证的池",
@@ -6962,7 +7029,7 @@ const translations = {
     th_remove: "移除",
     bm_tip: "将书签小工具添加到浏览器，然后一键从任何网站检查任何合约。",
     bm_drag_label: "Elofid – 安全中心",
-    qs_ready_html: "<strong>准备就绪。</strong><br>粘贴代币地址并点击 <b>扫描</b>。",
+    qs_ready_html: "<strong>准备就绪。</strong><br>粘贴代币地址并运行快速扫描，Deep Intelligence 会自动补充更多背景信息。",
     liq_ready_html: "<strong>准备就绪。</strong><br>粘贴代币地址并点击 <b>扫描</b>。",
     tx_ready_html: "<strong>准备就绪。</strong><br>粘贴交易哈希并点击 <b>解码</b>。",
     ph_0x: "0x...",
@@ -6973,7 +7040,74 @@ const translations = {
     ph_etherscan_key: "Etherscan API Key（本地保存）",
     ph_rpc_private: "https://...（仅本地保存）",
     ph_rpc_custom: "https://...",
-    ph_rpc_dev_topic: "0xddf252ad...（Transfer）或留空"
+    ph_rpc_dev_topic: "0xddf252ad...（Transfer）或留空",
+    aria_token_address: "代币地址",
+    aria_scan_preview: "扫描预览",
+    badge_latency: "延迟",
+    ph_solana_rpc: "https://mainnet.helius-rpc.com/?api-key=...（可选）",
+    ph_api_key: "粘贴 API Key…",
+    st_keys_saved: "Key 已保存。",
+    st_keys_cleared: "Key 已清除。",
+    st_scanning_html: "<strong>扫描中…</strong><br>正在检查合约、流动性和市场数据，通常只需几秒。",
+    st_no_code: "未检测到合约代码。",
+    st_not_erc20: "已找到合约，但未通过 ERC-20 代币验证。",
+    st_market_engine_down: "受保护的市场引擎暂时不可用。请重试。",
+    st_market_unverified_html: "<strong>市场验证不可用。</strong><br>已收集数据源信息，但由于无法连接受保护引擎，Elofid 未核对跨数据源的流动性。",
+    st_score_engine_down: "安全评分引擎暂时不可用。请重试。",
+    st_score_unavailable_html: "<strong>安全评分不可用。</strong><br>公开链上检查已完成，但由于无法连接受保护的评分引擎，Elofid 未生成评分。",
+    st_score_unavailable_sol_html: "<strong>安全评分不可用。</strong><br>Solana 检查已完成，但由于无法连接受保护的评分引擎，Elofid 未生成评分。",
+    st_invalid_solana: "请粘贴有效的 Solana 代币地址（base58）。",
+    st_no_data: "未返回数据 — 请检查地址或重试。",
+    st_solana_rpc_saved: "已在本地保存自定义 Solana RPC。",
+    st_save_blocked: "无法保存（localStorage 被阻止）。",
+    st_enter_token: "请先输入代币地址。",
+    st_run_scan_first: "请先运行扫描。",
+    st_copied_link: "已复制分享链接。",
+    st_copy_failed: "复制失败。",
+    st_copied_json: "已复制 JSON。",
+    st_copied_md: "已复制 Markdown 报告。",
+    st_copied_xtext: "已复制 X 文案。",
+    liq_no_pairs: "未检测到交易对/池",
+    liq_th_pair: "交易对/池",
+    liq_th_type: "类型",
+    liq_th_target: "目标",
+    liq_th_result: "结果",
+    qs_thin_liq_warn: "⚠️ 流动性薄弱 — 价格冲击/滑点可能极高",
+    qs_issuer_context: "发行方背景：",
+    qs_sol_lp_note: "上方大多数池未显示 LP 锁定状态 — Solana 主要 DEX（Meteora、Orca）使用基于 NFT 的流动性头寸，而不是可销毁/可锁定的简单 LP 代币，因此无法像 BSC/Ethereum 那样进行单一可靠的链上检查。",
+    rpc_best_badge: "⭐ 最佳",
+    rpc_failed: "失败",
+    st_no_rpcs: "没有可用的 RPC。",
+    st_testing_rpcs: "正在测试 {count} 个 RPC…",
+    st_best_rpc: "最佳 RPC：",
+    st_all_rpcs_failed: "所有 RPC 均失败（CORS/超时/被阻止）。请尝试添加自定义 RPC。",
+    st_no_best_rpc: "尚未保存最佳 RPC。请先运行测试。",
+    st_copied_best_rpc: "已复制最佳 RPC。",
+    st_private_rpc_saved: "已在本地保存私有 RPC。",
+    st_private_rpc_cleared: "已清除私有 RPC。",
+    st_dev_enter_addr: "请输入用于开发者测试的合约地址。",
+    st_invalid_contract: "合约地址无效。",
+    st_dev_running: "正在运行自定义 logs 测试…",
+    st_block_read_failed: "读取区块高度失败：",
+    st_dev_ok: "自定义 logs 测试成功（{count} 条 logs）— RPC：",
+    st_dev_failed: "自定义 logs 测试失败：",
+    st_invalid_tx: "请粘贴有效的交易哈希。",
+    st_no_rpc: "没有可用的 RPC。",
+    st_fetching_tx: "正在获取交易与回执…",
+    st_tx_not_found: "未找到交易（网络错误或 RPC 未同步）。",
+    st_rpc_failed: "RPC 失败：",
+    st_done: "完成。",
+    st_decode_failed: "解码失败：",
+    st_copied: "已复制。",
+    st_bm_generated: "书签脚本已生成。<span class=\"mono\">（请复制）</span>",
+    st_generate_first: "请先生成。",
+    st_copied_bm: "已复制书签脚本。",
+    st_mon_invalid: "请输入有效的 0x 合约地址（42 个字符）。",
+    st_mon_added: "已添加到监控列表（本地）。",
+    st_mon_empty: "监控列表为空。",
+    st_mon_checking: "正在检查 {count} 个合约…",
+    st_mon_done: "监控检查完成。",
+    st_mon_removed: "已移除。"
   },
   ar: {
     hx_honeypot_s: "نجحت محاكاة البيع",
@@ -6995,7 +7129,7 @@ const translations = {
     hx_note: "معاينة توضيحية",
     hx_liq: "السيولة",
     hx_tax: "ضريبة الشراء والبيع",
-    hub_scan_ph: "الصق عنوان التوكن (0x… أو Solana mint)",
+    hub_scan_ph: "ألصق عنوان التوكن (0x… أو Solana mint)",
     hub_paste: "لصق",
     hub_trust: "مجاني. بلا ربط محفظة. لا يتم توقيع أي شيء.",
     hub_wallet_link: "افحص محفظة عبر الجدار الناري",
@@ -7036,7 +7170,7 @@ const translations = {
     qs_auto_detected: "✓ تم اكتشاف {network}{evidence}",
     qs_auto_market_hint: "تم العثور على مطابقة سوقية على {network} · اضغط “فحص” للتحقق من العقد عبر جميع شبكات EVM المدعومة.",
     qs_auto_seen_multi: "تم العثور عليه على {networks} · اضغط “فحص” للتحقق على السلسلة، أو اختر الشبكة المقصودة يدويًا.",
-    qs_auto_no_market: "لا توجد مطابقة سوقية بعد. يتم التعرف على عناوين Mint في Solana فورًا؛ لهذا التوكن 0x اضغط “فحص” وسيقوم Elofid بالتحقق على السلسلة عبر شبكات EVM المدعومة.",
+    qs_auto_no_market: "لا توجد مطابقة سوقية بعد. يتم التعرف على عناوين Mint في Solana فورًا. لهذا التوكن 0x اضغط “فحص” وسيقوم Elofid بالتحقق على السلسلة عبر شبكات EVM المدعومة.",
     qs_auto_verified_multi: "تم التحقق على عدة شبكات ({networks}) · اختر الشبكة المقصودة أدناه.",
     qs_auto_not_found: "تعذر على Elofid التحقق من شبكة EVM مدعومة لهذا العقد · اختر الشبكة يدويًا إذا كنت تعرفها.",
     qs_auto_manual: "شبكة مختارة يدويًا · {network}",
@@ -7078,8 +7212,8 @@ const translations = {
     hero_micro_quick: "ابدأ من هنا — لا حاجة لربط المحفظة.",
     hero_micro_access: "افتح تحليلات أذونات متقدمة + أدوات الإلغاء.",
     tools_kicker: "أدوات أخرى",
-    cube_quick_title: "فحص سريع",
-    cube_quick_desc: "فحص سريع للتوكن + تقرير قابل للمشاركة + كاش.",
+    cube_quick_title: "فحص سريع / عميق",
+    cube_quick_desc: "فحص سريع للتوكن + سياق Deep Intelligence + تقرير قابل للمشاركة + كاش.",
     cube_liq_title: "فحص التوكن + السيولة",
     cube_liq_desc: "فحص DEX (Pancake/Uni): التوكن مقابل WBNB/WETH و USDT.",
     cube_approvals_title: "حارس الصلاحيات",
@@ -7115,7 +7249,7 @@ const translations = {
     badge_safe: "آمن",
     badge_copy: "نسخ",
     badge_dev: "مطوّر",
-    badge_decode: "فك",
+    badge_decode: "فك التشفير",
     badge_receipt: "إيصال",
     badge_events: "أحداث",
     badge_tools: "أدوات",
@@ -7131,16 +7265,16 @@ const translations = {
     btn_copy_link: "🔗 رابط المشاركة",
     btn_copy_json: "📦 JSON",
     btn_copy_xtext: "✍️ نص X",
-    p_quick_kicker: "فحص سريع",
-    p_quick_title: "قيّم توكن خلال ثوانٍ",
-    p_quick_sub: "ألصق عنوان التوكن وشغّل الفحص. كاش 10 دقائق · تقرير قابل للمشاركة.",
+    p_quick_kicker: "فحص سريع / عميق",
+    p_quick_title: "افحص توكن بسياق الفحص السريع والعميق",
+    p_quick_sub: "ألصق عنوان التوكن وشغّل الفحص السريع لتحصل تلقائيًا على سياق Deep Intelligence. كاش 10 دقائق · تقرير قابل للمشاركة · بدون ربط محفظة.",
     deep_kicker: "تحليل محمي",
     deep_title: "Elofid Deep Intelligence",
     deep_sub: "السلوك والتاريخ والعلاقات — أبعد من مجرد العقد.",
     deep_current_label: "حالة الفحص العميق",
     deep_ready: "يعمل تلقائيًا بعد فحص سريع صالح.",
     deep_rerun: "إعادة الفحص العميق",
-    deep_note: "التحليل العميق طبقة أدلة مستقلة ولا يغيّر تقييم Elofid الإجمالي الحالي.",
+    deep_note: "Deep Intelligence طبقة أدلة مستقلة ولا يغيّر تقييم Elofid الإجمالي الحالي.",
     deep_mobile_open: "تقرير Deep Intelligence الكامل — اضغط للفتح",
     deep_mobile_close: "إخفاء تقرير Deep Intelligence",
     quick_advanced: "⚙ إعدادات متقدمة",
@@ -7767,7 +7901,7 @@ const translations = {
     deep_ago_now: "الآن",
     deep_ago_min: "قبل {n} دقيقة",
     deep_ago_hr: "قبل {n} ساعة",
-    deep_error_timeout: "استغرق التحليل العميق وقتًا طويلًا للرد. أعد التشغيل بعد دقيقة.",
+    deep_error_timeout: "استغرق Deep Intelligence وقتًا طويلًا للرد. أعد التشغيل بعد دقيقة.",
     deep_sim_code_passed: "نجح — نُفّذ التحويل في المحاكاة",
     deep_sim_code_reverted: "مُرتد — فشل التحويل في المحاكاة",
     deep_sim_code_no_pool: "لم يُختبر — لا يوجد مجمع مُتحقق",
@@ -7843,7 +7977,7 @@ const translations = {
     dna_table_note: "نصيحة: ألغِ الصلاحيات \u201cغير المحدودة\u201d التي لا تثق بها تماماً. حالة Verified و Flags معلوماتية فقط.",
     dna_meta_approvals_detected: "عدد الموافقات المكتشفة:",
     p_rpc_kicker: "فحص صحة RPC",
-    p_rpc_title: "اعثر على أفضل Endpoint",
+    p_rpc_title: "اعثر على أفضل نقطة اتصال",
     p_rpc_sub: "نختبر RPC: زمن الاستجابة + chainId + بلوك + eth_call + قراءة logs. يتضمن اختبار logs للمطور ويحفظ أفضل RPC محلياً.",
     rpc_inputs: "المدخلات",
     rpc_private_label: "RPC خاص (محفوظ محلياً)",
@@ -7907,7 +8041,7 @@ const translations = {
     th_remove: "إزالة",
     bm_tip: "أضِف أداة الإشارة المرجعية إلى متصفحك، ثم افحص أي عقد من أي موقع بنقرة واحدة.",
     bm_drag_label: "Elofid – مركز الأمان",
-    qs_ready_html: "<strong>جاهز.</strong><br>ألصق عنوان التوكن ثم اضغط <b>فحص</b>.",
+    qs_ready_html: "<strong>جاهز.</strong><br>ألصق عنوان التوكن وشغّل الفحص السريع، وسيضيف Deep Intelligence سياقًا إضافيًا تلقائيًا.",
     liq_ready_html: "<strong>جاهز.</strong><br>ألصق عنوان التوكن ثم اضغط <b>فحص</b>.",
     tx_ready_html: "<strong>جاهز.</strong><br>ألصق tx hash ثم اضغط <b>فك التشفير</b>.",
     ph_0x: "0x...",
@@ -7918,7 +8052,74 @@ const translations = {
     ph_etherscan_key: "مفتاح Etherscan API (محفوظ محلياً)",
     ph_rpc_private: "https://... (محفوظ محلياً فقط)",
     ph_rpc_custom: "https://...",
-    ph_rpc_dev_topic: "0xddf252ad... (Transfer) أو اتركه فارغاً"
+    ph_rpc_dev_topic: "0xddf252ad... (Transfer) أو اتركه فارغاً",
+    aria_token_address: "عنوان التوكن",
+    aria_scan_preview: "معاينة الفحص",
+    badge_latency: "زمن الاستجابة",
+    ph_solana_rpc: "https://mainnet.helius-rpc.com/?api-key=... (اختياري)",
+    ph_api_key: "ألصق مفتاح API…",
+    st_keys_saved: "تم حفظ المفاتيح.",
+    st_keys_cleared: "تم مسح المفاتيح.",
+    st_scanning_html: "<strong>جارٍ الفحص…</strong><br>نتحقق من العقد والسيولة وبيانات السوق — يستغرق ذلك عادةً بضع ثوانٍ.",
+    st_no_code: "لم يتم العثور على كود عقد.",
+    st_not_erc20: "تم العثور على العقد، لكنه لم يجتز التحقق كتوكن ERC-20.",
+    st_market_engine_down: "محرك السوق المحمي غير متاح مؤقتًا. يرجى المحاولة مرة أخرى.",
+    st_market_unverified_html: "<strong>التحقق من السوق غير متاح.</strong><br>تم جمع بيانات المزودين، لكن Elofid لم يطابق السيولة بين المصادر لأنه تعذّر الوصول إلى المحرك المحمي.",
+    st_score_engine_down: "محرك التقييم الآمن غير متاح مؤقتًا. يرجى المحاولة مرة أخرى.",
+    st_score_unavailable_html: "<strong>التقييم الأمني غير متاح.</strong><br>اكتملت الفحوصات العامة على السلسلة، لكن Elofid لم يُصدر نتيجة لأنه تعذّر الوصول إلى محرك التقييم المحمي.",
+    st_score_unavailable_sol_html: "<strong>التقييم الأمني غير متاح.</strong><br>اكتملت فحوصات Solana، لكن Elofid لم يُصدر نتيجة لأنه تعذّر الوصول إلى محرك التقييم المحمي.",
+    st_invalid_solana: "يرجى لصق عنوان توكن Solana صالح (base58).",
+    st_no_data: "لم تُرجَع أي بيانات — تحقّق من العنوان أو حاول مرة أخرى.",
+    st_solana_rpc_saved: "تم حفظ Solana RPC المخصص محليًا.",
+    st_save_blocked: "تعذّر الحفظ (localStorage محظور).",
+    st_enter_token: "أدخل عنوان التوكن أولًا.",
+    st_run_scan_first: "شغّل الفحص أولًا.",
+    st_copied_link: "تم نسخ رابط المشاركة.",
+    st_copy_failed: "فشل النسخ.",
+    st_copied_json: "تم نسخ JSON.",
+    st_copied_md: "تم نسخ تقرير Markdown.",
+    st_copied_xtext: "تم نسخ نص X.",
+    liq_no_pairs: "لم يتم رصد أزواج/مجمعات",
+    liq_th_pair: "الزوج/المجمع",
+    liq_th_type: "النوع",
+    liq_th_target: "الهدف",
+    liq_th_result: "النتيجة",
+    qs_thin_liq_warn: "⚠️ سيولة ضعيفة — قد يكون تأثير السعر/الانزلاق كبيرًا جدًا",
+    qs_issuer_context: "سياق جهة الإصدار:",
+    qs_sol_lp_note: "لا تظهر حالة قفل LP لمعظم المجمعات أعلاه — تستخدم منصات DEX الرئيسية على Solana (Meteora وOrca) مراكز سيولة قائمة على NFT بدلًا من رموز LP بسيطة قابلة للحرق أو القفل، لذلك لا يوجد فحص واحد موثوق على السلسلة كما هو الحال في BSC/Ethereum.",
+    rpc_best_badge: "⭐ الأفضل",
+    rpc_failed: "فشل",
+    st_no_rpcs: "لا تتوفر أي RPC.",
+    st_testing_rpcs: "جارٍ اختبار {count} RPC…",
+    st_best_rpc: "أفضل RPC:",
+    st_all_rpcs_failed: "فشلت جميع RPC (CORS/مهلة/حظر). جرّب إضافة RPC مخصص.",
+    st_no_best_rpc: "لا يوجد أفضل RPC محفوظ بعد. شغّل الاختبار أولًا.",
+    st_copied_best_rpc: "تم نسخ أفضل RPC.",
+    st_private_rpc_saved: "تم حفظ RPC الخاص محليًا.",
+    st_private_rpc_cleared: "تم مسح RPC الخاص.",
+    st_dev_enter_addr: "أدخل عنوان عقد لاختبار المطوّر.",
+    st_invalid_contract: "عنوان العقد غير صالح.",
+    st_dev_running: "جارٍ تشغيل اختبار logs المخصص…",
+    st_block_read_failed: "تعذّرت قراءة رقم البلوك:",
+    st_dev_ok: "نجح اختبار logs المخصص ({count} سجلات) — RPC:",
+    st_dev_failed: "فشل اختبار logs المخصص:",
+    st_invalid_tx: "يرجى لصق tx hash صالح.",
+    st_no_rpc: "لا يتوفر RPC.",
+    st_fetching_tx: "جارٍ جلب tx + receipt…",
+    st_tx_not_found: "لم يتم العثور على المعاملة (شبكة خاطئة / RPC غير متزامن).",
+    st_rpc_failed: "فشل RPC:",
+    st_done: "تم.",
+    st_decode_failed: "فشل فك التشفير:",
+    st_copied: "تم النسخ.",
+    st_bm_generated: "تم إنشاء Bookmarklet. <span class=\"mono\">(انسخه)</span>",
+    st_generate_first: "أنشئه أولًا.",
+    st_copied_bm: "تم نسخ Bookmarklet.",
+    st_mon_invalid: "أدخل عنوان عقد 0x صالحًا (42 حرفًا).",
+    st_mon_added: "تمت الإضافة إلى قائمة المراقبة (محليًا).",
+    st_mon_empty: "قائمة المراقبة فارغة.",
+    st_mon_checking: "جارٍ فحص {count} عقد…",
+    st_mon_done: "اكتمل فحص المراقبة.",
+    st_mon_removed: "تمت الإزالة."
   },
   ru: {
     hx_honeypot_s: "Симуляция продажи пройдена",
@@ -7929,7 +8130,7 @@ const translations = {
     hx_contract: "Контракт",
     hx_honeypot: "Honeypot",
     hx_scanned: "Пример сканирования",
-    hx_owner_v: "Отказался",
+    hx_owner_v: "Отказ от прав",
     hx_owner_s: "Нет контроля выпуска и паузы",
     hx_holders: "Топ-10 держателей",
     hx_kicker: "Security Hub · Быстрый скан",
@@ -7981,7 +8182,7 @@ const translations = {
     qs_auto_detected: "✓ Обнаружена сеть {network}{evidence}",
     qs_auto_market_hint: "Рыночное совпадение найдено в {network} · нажмите «Сканировать», чтобы проверить контракт во всех поддерживаемых EVM-сетях.",
     qs_auto_seen_multi: "Адрес найден в {networks} · нажмите «Сканировать» для ончейн-проверки или выберите нужную сеть вручную.",
-    qs_auto_no_market: "Рыночного совпадения пока нет. Solana mint определяется сразу; для этого 0x-токена нажмите «Сканировать», и Elofid проверит его ончейн в поддерживаемых EVM-сетях.",
+    qs_auto_no_market: "Рыночного совпадения пока нет. Solana mint определяется сразу. Для этого 0x-токена нажмите «Сканировать», и Elofid проверит его ончейн в поддерживаемых EVM-сетях.",
     qs_auto_verified_multi: "Подтверждено в нескольких сетях ({networks}) · выберите нужную сеть ниже.",
     qs_auto_not_found: "Elofid не смог подтвердить поддерживаемую EVM-сеть для этого контракта · выберите сеть вручную, если она вам известна.",
     qs_auto_manual: "Сеть выбрана вручную · {network}",
@@ -8023,17 +8224,17 @@ const translations = {
     hero_micro_quick: "Начните здесь — кошелёк не нужен.",
     hero_micro_access: "Откройте продвинутый анализ approvals + инструменты revoke.",
     tools_kicker: "Другие инструменты",
-    cube_quick_title: "Быстрый скан",
-    cube_quick_desc: "Быстрая проверка токена + шаримый отчёт + кэш.",
+    cube_quick_title: "Быстрый / глубокий скан",
+    cube_quick_desc: "Быстрая проверка токена + контекст Deep Intelligence + шаримый отчёт + кэш.",
     cube_liq_title: "Токен + ликвидность",
     cube_liq_desc: "Проверка DEX (Pancake/Uni): токен vs WBNB/WETH и USDT.",
     cube_approvals_title: "Approval Guardian",
     cube_approvals_desc: "Проверка и безопасный отзыв ERC-20 allowance (approve → 0).",
     cube_rpc_title: "Проверка RPC",
-    cube_rpc_desc: "Latency + chainId + block + eth_call + чтение logs + dev custom test.",
+    cube_rpc_desc: "Задержка + chainId + блок + eth_call + чтение logs + тест для разработчиков.",
     cube_tx_title: "Декодер Tx",
     cube_tx_desc: "Декодирует input и события (Transfer/Approval) по tx hash.",
-    cube_dev_title: "Dev Tools",
+    cube_dev_title: "Инструменты разработчика",
     cube_dev_desc: "Генератор bookmarklet + локальный монитор контрактов (без сервера).",
     api_strip_kicker: "Мониторинг и API",
     api_strip_title: "Наблюдение не заканчивается после скана.",
@@ -8059,7 +8260,7 @@ const translations = {
     badge_wallet: "Кошелёк",
     badge_safe: "Безопасно",
     badge_copy: "Копировать",
-    badge_dev: "Dev",
+    badge_dev: "Разработка",
     badge_decode: "Декодирование",
     badge_receipt: "Квитанция",
     badge_events: "События",
@@ -8076,9 +8277,9 @@ const translations = {
     btn_copy_link: "🔗 Ссылка",
     btn_copy_json: "📦 JSON",
     btn_copy_xtext: "✍️ Текст для X",
-    p_quick_kicker: "Быстрый скан",
+    p_quick_kicker: "Быстрый / глубокий скан",
     p_quick_title: "Сканируйте токен с контекстом Quick + Deep",
-    p_quick_sub: "Вставьте адрес токена и запустите скан. Кэш 10 минут · шаринг отчёта.",
+    p_quick_sub: "Вставьте адрес токена, запустите Quick Scan и автоматически получите контекст Deep Intelligence. Кэш 10 минут · шаринг отчёта · без подключения кошелька.",
     deep_kicker: "Защищённый анализ",
     deep_title: "Elofid Deep Intelligence",
     deep_sub: "Поведение, история и связи — за пределами самого контракта.",
@@ -8188,7 +8389,7 @@ const translations = {
     deep_unknown: "Неизвестно",
     deep_unavailable: "Недоступно",
     deep_not_simulated: "Не симулировалось",
-    deep_reverted: "Revert",
+    deep_reverted: "Откат",
     deep_passed: "Пройдено",
     deep_simulated: "Симулировано",
     deep_signal_default: "Глубокий сигнал",
@@ -8200,7 +8401,7 @@ const translations = {
     deep_verdict_partial: "Анализ завершён · частичное покрытие",
     deep_coverage: "Покрытие {pct}%",
     deep_partial_coverage: "частичное покрытие",
-    deep_result_note: "Защищённый исторический анализ · только слой доказательств · не меняет текущий Overall Score.",
+    deep_result_note: "Защищённый исторический анализ · только слой доказательств · не меняет текущий общий балл.",
     deep_section_creator: "Аналитика создателя",
     deep_section_deployer: "Аналитика деплоера",
     deep_section_launch: "Запуск и ранняя активность",
@@ -8480,7 +8681,7 @@ const translations = {
     deep_why_matters: "ПОЧЕМУ ЭТО ВАЖНО",
     deep_evidence: "ДАННЫЕ",
     deep_no_additional_evidence: "Для этого раздела нет дополнительных подтверждённых данных.",
-    deep_coverage_explainer: "Coverage отражает объём проверенных данных, а не безопасность токена.",
+    deep_coverage_explainer: "Покрытие отражает объём проверенных данных, а не безопасность токена.",
     deep_reason_identity_partial: "Личность создателя / деплоера подтверждена не полностью",
     deep_reason_history_partial: "Историческое покрытие неполное",
     deep_reason_deployer_partial: "Историю финансирования удалось подтвердить не полностью",
@@ -8493,7 +8694,7 @@ const translations = {
     deep_reason_immediate_launch: "Активность сразу после запуска требует проверки",
     deep_reason_shared_clusters: "Связи общего финансирования требуют проверки",
     deep_reason_proxy_history: "Обнаружена активность обновления Proxy",
-    deep_reason_sim_reverted: "Один из симулированных путей перевода завершился revert",
+    deep_reason_sim_reverted: "Один из симулированных путей перевода завершился откатом",
     deep_found_deployer_ok: "Проанализированы личность деплоера / создателя и доступная история финансирования.",
     deep_found_deployer_partial: "По доступным индексированным данным не удалось полностью подтвердить личность деплоера / создателя или историю финансирования.",
     deep_why_deployer: "История создателя и деплоера может показать прошлые запуски, связи финансирования и необычно новые кошельки.",
@@ -8575,7 +8776,7 @@ const translations = {
     deep_k_liq_observed: "Наблюдаемая ликвидность",
     deep_k_provider_lock: "Подтверждённая провайдером блокировка",
     deep_k_direct_burn: "Прямое доказательство сжигания LP",
-    deep_k_provider_burn: "LP с меткой burn у провайдера",
+    deep_k_provider_burn: "LP с меткой сжигания у провайдера",
     deep_k_lockers: "Обнаружено локеров",
     deep_k_earliest_unlock: "Самая ранняя разблокировка",
     deep_k_additions: "Наблюдаемые добавления ликвидности",
@@ -8616,13 +8817,13 @@ const translations = {
     deep_sig_shared_context_title: "Обнаружена связь по общему финансированию",
     deep_sig_shared_context_detail: "{count} ранних кошельков имеют общий наблюдаемый источник. Классификация сервиса/биржи недоступна, поэтому это только контекст.",
     deep_sig_lp_burn_title: "Сильное прямое доказательство сжигания LP",
-    deep_sig_lp_burn_detail: "Около {pct}% наблюдаемого предложения V2 LP находится на известных burn-адресах.",
+    deep_sig_lp_burn_detail: "Около {pct}% наблюдаемого предложения V2 LP находится на известных адресах сжигания.",
     deep_sig_lp_lock_title: "Высокая блокировка LP по данным провайдера",
     deep_sig_lp_lock_detail: "По данным провайдера заблокировано около {pct}% предложения LP.",
     deep_sig_proxy_title: "Обнаружена история обновлений прокси",
     deep_sig_proxy_detail: "В ограниченной on-chain истории обнаружено событий обновления: {count}.",
-    deep_sig_sim_revert_title: "Симуляция {path} завершилась revert",
-    deep_sig_sim_revert_detail: "Ограниченный путь перевода {path} через eth_call завершился revert. Это диагностический сигнал, а не полное доказательство honeypot на уровне роутера.",
+    deep_sig_sim_revert_title: "Симуляция {path} завершилась откатом",
+    deep_sig_sim_revert_detail: "Ограниченный путь перевода {path} через eth_call завершился откатом. Это диагностический сигнал, а не полное доказательство honeypot на уровне роутера.",
     deep_path_buy: "покупки",
     deep_path_sell: "продажи",
     deep_path_wallet: "перевода кошелька",
@@ -8789,7 +8990,7 @@ const translations = {
     dna_meta_approvals_detected: "Обнаружено разрешений:",
     p_rpc_kicker: "Проверка RPC",
     p_rpc_title: "Найдите лучший endpoint",
-    p_rpc_sub: "Тестируем RPC: latency + chainId + block + eth_call + чтение logs. Есть dev custom logs test, лучший RPC сохраняется локально.",
+    p_rpc_sub: "Тестируем RPC: задержка + chainId + блок + eth_call + чтение logs. Есть тест логов для разработчиков, лучший RPC сохраняется локально.",
     rpc_inputs: "Ввод",
     rpc_private_label: "Приватный RPC (локально)",
     rpc_private_tip: "Не встраивается в HTML. Хранится только в вашем браузере (localStorage).",
@@ -8797,22 +8998,22 @@ const translations = {
     rpc_test: "Тестировать RPC",
     rpc_copy_best: "Копировать лучший RPC",
     rpc_results: "Результаты",
-    rpc_tip: "Совет: некоторые RPC падают из-за CORS/timeout. Запустите тест и выберите стабильный и быстрый.",
-    rpc_dev_title: "Dev custom logs test",
+    rpc_tip: "Совет: некоторые RPC не отвечают из-за CORS/таймаута. Запустите тест и выберите стабильный и быстрый.",
+    rpc_dev_title: "Тест логов для разработчиков",
     rpc_dev_hint: "Опционально: тест logs по контракту, чтобы проверить стабильность RPC.",
     rpc_dev_addr: "Адрес контракта (опционально)",
     rpc_dev_topic: "Topic0 (опционально)",
     rpc_dev_run: "Запустить тест",
-    p_tx_kicker: "Tx Decoder",
+    p_tx_kicker: "Декодер Tx",
     p_tx_title: "Декодировать транзакцию",
     p_tx_sub: "Вставьте tx hash. Получим tx + receipt и декодируем input и события (Transfer / Approval + популярные swap вызовы).",
     tx_input_title: "Ввод Tx",
     tx_hash_label: "Хэш транзакции",
     tx_tip: 'Совет: откройте <span class="mono">?tool=tx&net=bsc&tx=0x...</span> для авто-старта.',
     tx_results_title: "Декодированный вывод",
-    p_dev_kicker: "Dev Tools",
+    p_dev_kicker: "Инструменты разработчика",
     p_dev_title: "Bookmarklet + локальный монитор",
-    p_dev_sub: "Создайте bookmarklet, который отправляет token/tx со страниц explorer в Elofid Security Hub. Также есть локальный монитор контрактов (список хранится в браузере).",
+    p_dev_sub: "Создайте bookmarklet, который отправляет токен или транзакцию со страниц обозревателя в Elofid Security Hub. Также есть локальный монитор контрактов (список хранится в браузере).",
     bm_title: "Генератор Bookmarklet",
     bm_hint: "Перетащите в панель закладок или скопируйте bookmarklet. Используйте на BscScan/Etherscan.",
     bm_base_label: "Hub URL (эта страница)",
@@ -8845,14 +9046,14 @@ const translations = {
     th_block: "блок",
     th_call: "вызов",
     th_logs: "логи",
-    th_status: "статус",
+    th_status: "Статус",
     th_contract: "Контракт",
     th_network: "Сеть",
     th_last_seen: "Последний раз",
     th_remove: "Удалить",
     bm_tip: "Добавьте букмарклет в браузер и проверяйте любой контракт с любого сайта одним кликом.",
     bm_drag_label: "Elofid – Центр безопасности",
-    qs_ready_html: "<strong>Готово.</strong><br>Вставьте адрес токена и нажмите <b>Сканировать</b>.",
+    qs_ready_html: "<strong>Готово.</strong><br>Вставьте адрес токена, запустите Quick Scan, и Deep Intelligence автоматически добавит дополнительный контекст.",
     liq_ready_html: "<strong>Готово.</strong><br>Вставьте адрес токена и нажмите <b>Сканировать</b>.",
     tx_ready_html: "<strong>Готово.</strong><br>Вставьте tx hash и нажмите <b>Декодировать</b>.",
     ph_0x: "0x...",
@@ -8863,7 +9064,74 @@ const translations = {
     ph_etherscan_key: "Etherscan API key (локально)",
     ph_rpc_private: "https://... (только локально)",
     ph_rpc_custom: "https://...",
-    ph_rpc_dev_topic: "0xddf252ad... (Transfer) или оставьте пустым"
+    ph_rpc_dev_topic: "0xddf252ad... (Transfer) или оставьте пустым",
+    aria_token_address: "Адрес токена",
+    aria_scan_preview: "Предпросмотр скана",
+    badge_latency: "Задержка",
+    ph_solana_rpc: "https://mainnet.helius-rpc.com/?api-key=... (необязательно)",
+    ph_api_key: "Вставьте API-ключ…",
+    st_keys_saved: "Ключи сохранены.",
+    st_keys_cleared: "Ключи удалены.",
+    st_scanning_html: "<strong>Сканирование…</strong><br>Проверяем контракт, ликвидность и рыночные данные — обычно это занимает несколько секунд.",
+    st_no_code: "Код контракта не обнаружен.",
+    st_not_erc20: "Контракт найден, но не прошёл проверку как ERC-20 токен.",
+    st_market_engine_down: "Защищённый рыночный движок временно недоступен. Попробуйте ещё раз.",
+    st_market_unverified_html: "<strong>Проверка рынка недоступна.</strong><br>Данные провайдеров собраны, но Elofid не сверил ликвидность между источниками, так как защищённый движок недоступен.",
+    st_score_engine_down: "Защищённый движок оценки временно недоступен. Попробуйте ещё раз.",
+    st_score_unavailable_html: "<strong>Оценка безопасности недоступна.</strong><br>Публичные ончейн-проверки завершены, но Elofid не сформировал оценку, так как защищённый движок оценки недоступен.",
+    st_score_unavailable_sol_html: "<strong>Оценка безопасности недоступна.</strong><br>Проверки Solana завершены, но Elofid не сформировал оценку, так как защищённый движок оценки недоступен.",
+    st_invalid_solana: "Вставьте корректный адрес токена Solana (base58).",
+    st_no_data: "Данные не получены — проверьте адрес или попробуйте ещё раз.",
+    st_solana_rpc_saved: "Пользовательский Solana RPC сохранён локально.",
+    st_save_blocked: "Не удалось сохранить (localStorage заблокирован).",
+    st_enter_token: "Сначала введите адрес токена.",
+    st_run_scan_first: "Сначала запустите скан.",
+    st_copied_link: "Ссылка скопирована.",
+    st_copy_failed: "Не удалось скопировать.",
+    st_copied_json: "JSON скопирован.",
+    st_copied_md: "Отчёт Markdown скопирован.",
+    st_copied_xtext: "Текст для X скопирован.",
+    liq_no_pairs: "Пары/пулы не обнаружены",
+    liq_th_pair: "ПАРА/ПУЛ",
+    liq_th_type: "ТИП",
+    liq_th_target: "ЦЕЛЬ",
+    liq_th_result: "РЕЗУЛЬТАТ",
+    qs_thin_liq_warn: "⚠️ Низкая ликвидность — влияние на цену и проскальзывание могут быть экстремальными",
+    qs_issuer_context: "Контекст эмитента:",
+    qs_sol_lp_note: "Статус блокировки LP не показан для большинства пулов выше — основные DEX в Solana (Meteora, Orca) используют позиции ликвидности на основе NFT, а не простые LP-токены, которые можно сжечь или заблокировать, поэтому единой надёжной ончейн-проверки, как в BSC/Ethereum, нет.",
+    rpc_best_badge: "⭐ Лучший",
+    rpc_failed: "ошибка",
+    st_no_rpcs: "Нет доступных RPC.",
+    st_testing_rpcs: "Тестируем RPC: {count}…",
+    st_best_rpc: "Лучший RPC:",
+    st_all_rpcs_failed: "Все RPC не ответили (CORS/таймаут/блокировка). Попробуйте добавить свой RPC.",
+    st_no_best_rpc: "Лучший RPC ещё не сохранён. Сначала запустите тест.",
+    st_copied_best_rpc: "Лучший RPC скопирован.",
+    st_private_rpc_saved: "Приватный RPC сохранён локально.",
+    st_private_rpc_cleared: "Приватный RPC удалён.",
+    st_dev_enter_addr: "Введите адрес контракта для теста.",
+    st_invalid_contract: "Некорректный адрес контракта.",
+    st_dev_running: "Выполняется тест логов…",
+    st_block_read_failed: "Не удалось прочитать номер блока:",
+    st_dev_ok: "Тест логов пройден (логов: {count}) — RPC:",
+    st_dev_failed: "Тест логов не пройден:",
+    st_invalid_tx: "Вставьте корректный tx hash.",
+    st_no_rpc: "Нет доступного RPC.",
+    st_fetching_tx: "Получаем tx + receipt…",
+    st_tx_not_found: "Транзакция не найдена (не та сеть / RPC не синхронизирован).",
+    st_rpc_failed: "Ошибка RPC:",
+    st_done: "Готово.",
+    st_decode_failed: "Ошибка декодирования:",
+    st_copied: "Скопировано.",
+    st_bm_generated: "Bookmarklet создан. <span class=\"mono\">(скопируйте его)</span>",
+    st_generate_first: "Сначала сгенерируйте.",
+    st_copied_bm: "Bookmarklet скопирован.",
+    st_mon_invalid: "Введите корректный 0x-адрес контракта (42 символа).",
+    st_mon_added: "Добавлено в список мониторинга (локально).",
+    st_mon_empty: "Список мониторинга пуст.",
+    st_mon_checking: "Проверяем контракты: {count}…",
+    st_mon_done: "Проверка мониторинга завершена.",
+    st_mon_removed: "Удалено."
   }
 };
 // =========================
@@ -8885,6 +9153,11 @@ function setDirForLang(lang) {
   html.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
 }
 
+function tf(key, vars) {
+  let s = String(t(currentLang, key) || "");
+  for (const [k, v] of Object.entries(vars || {})) s = s.split(`{${k}}`).join(String(v ?? ""));
+  return s;
+}
 function t(lang, key) {
   return (translations?.[lang]?.[key] ?? translations?.en?.[key] ?? "");
 }
@@ -9518,7 +9791,7 @@ function initApiKeysUi() {
       etherscan: ($("#api-etherscan")?.value || "").trim()
     };
     saveApiKeys(nk);
-    setStatus($("#qs-status"), "ok", "Keys saved.");
+    setStatus($("#qs-status"), "ok", tf("st_keys_saved"));
     gtagEvent("sec_keys_saved", { use: nk.use ? 1 : 0 });
   });
 
@@ -9526,7 +9799,7 @@ function initApiKeysUi() {
     saveApiKeys({ use: false, unified: "", bscscan: "", etherscan: "" });
     Object.values(inputs).forEach(el => { if (el) el.value = ""; });
     const u = $("#api-use"); if (u) u.checked = false;
-    setStatus($("#qs-status"), "ok", "Keys cleared.");
+    setStatus($("#qs-status"), "ok", tf("st_keys_cleared"));
     gtagEvent("sec_keys_cleared");
   });
 }
@@ -10898,7 +11171,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         <div class="cell muted">—</div>
         <div class="cell muted">—</div>
         <div class="cell muted">—</div>
-        <div class="cell muted">No pairs/pools detected</div>
+        <div class="cell muted">${qsEscapeHtml(tf("liq_no_pairs"))}</div>
       </div>
     `;
     // ✅ NEW: optional footer caption — used on Solana to make explicit
@@ -10914,10 +11187,10 @@ async function qsLiqCheckBasic(net, token, provider) {
     container.innerHTML = `
       <div id="qsLiqTable" class="table">
         <div class="trow head">
-          <div class="cell">PAIR/POOL</div>
-          <div class="cell">TYPE</div>
-          <div class="cell">TARGET</div>
-          <div class="cell">RESULT</div>
+          <div class="cell">${qsEscapeHtml(tf("liq_th_pair"))}</div>
+          <div class="cell">${qsEscapeHtml(tf("liq_th_type"))}</div>
+          <div class="cell">${qsEscapeHtml(tf("liq_th_target"))}</div>
+          <div class="cell">${qsEscapeHtml(tf("liq_th_result"))}</div>
         </div>
         ${body}
       </div>
@@ -10949,7 +11222,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       ru:"Сильный контроль эмитента"
     };
     const templates = {
-      en:`Known issuer: ${known.issuer} · ${known.category}. This score reflects powerful on-chain issuer controls; it is not a scam determination.`,
+      en:`Known issuer: ${known.issuer} · ${known.category}. This score reflects powerful on-chain issuer controls. It is not a scam determination.`,
       zh:`已知发行方：${known.issuer} · ${known.category === "regulated stablecoin" ? "受监管稳定币" : "中心化管理的稳定币"}。该评分反映强大的链上发行方控制权限，并不代表其被判定为骗局。`,
       ar:`جهة إصدار معروفة: ${known.issuer} · ${known.category === "regulated stablecoin" ? "عملة مستقرة خاضعة للتنظيم" : "عملة مستقرة مُدارة مركزياً"}. تعكس الدرجة صلاحيات قوية للجهة المُصدِرة على السلسلة، وليست حكماً بأنها عملية احتيال.`,
       ru:`Известный эмитент: ${known.issuer} · ${known.category === "regulated stablecoin" ? "регулируемый стейблкоин" : "централизованно управляемый стейблкоин"}. Оценка отражает сильные полномочия эмитента в сети и не означает, что токен признан мошенническим.`
@@ -13398,7 +13671,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     cxQsSetScanning(true);
     if (out) {
       out.className = "status info";
-      out.innerHTML = "<strong>Scanning…</strong><br>Checking contract, liquidity, and market data — usually a few seconds.";
+      out.innerHTML = tf("st_scanning_html");
     }
     // ✅ FIX (real bug, reported live): only #qs-out was being replaced with
     // the "Scanning…" state — the risk-chip grid, pool table, and red-flags
@@ -13472,7 +13745,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       cache[ckey] = { ts: qsNowTs(), rep };
       saveQsCache(cache);
       addQsHistory(net, token);
-      setStatus(st, "bad", "No contract code detected.");
+      setStatus(st, "bad", tf("st_no_code"));
       render(rep);
       return;
     }
@@ -13487,7 +13760,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       cache[ckey] = { ts: qsNowTs(), rep };
       saveQsCache(cache);
       addQsHistory(net, token);
-      setStatus(st, "warn", "Contract found, but it does not validate as an ERC-20 token.");
+      setStatus(st, "warn", tf("st_not_erc20"));
       render(rep);
       return;
     }
@@ -13681,10 +13954,10 @@ async function qsLiqCheckBasic(net, token, provider) {
         newEvmMarketAgg = await qsProtectedMarketReconcile(net, dexscreener, geckoterminal);
       } catch (marketEngineErr) {
         console.error("Elofid protected market engine unavailable:", marketEngineErr?.message || marketEngineErr);
-        setStatus(st, "bad", "Protected market engine temporarily unavailable. Please try again.");
+        setStatus(st, "bad", tf("st_market_engine_down"));
         if (out) {
           out.className = "status bad";
-          out.innerHTML = "<strong>Market verification unavailable.</strong><br>Provider data was collected, but Elofid did not reconcile cross-provider liquidity because the protected engine could not be reached.";
+          out.innerHTML = tf("st_market_unverified_html");
         }
         cxDeepCoreRejected(cxDeepTr("deep_reject_market"));
         return;
@@ -13784,7 +14057,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
       if (newEvmMarketAgg?.liquiditySanityAdjusted) {
         rep.meta.liquiditySanityAdjusted = true;
-        rep.redFlags.push("Market providers disagreed sharply on liquidity; using a conservative cross-source estimate instead of the outlier.");
+        rep.redFlags.push("Market providers disagreed sharply on liquidity. A conservative cross-source estimate was used instead of the outlier.");
       }
     } else {
       const dsBestLiquidityUsd = Number(dexscreener?.liquidityUsd);
@@ -13950,7 +14223,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       : pauseConfirmed
         ? "Pausable — confirmed by verified source/ABI (not active now)"
         : (controlMeta?.abiVerified === true && pauseAbi === false && pausePossible)
-          ? "Possible selector match; not exposed in verified ABI"
+          ? "Possible selector match. Not exposed in verified ABI"
           : pausePossible
             ? "Possibly pausable (selector/source not fully verified)"
             : "No pause function found";
@@ -13974,11 +14247,11 @@ async function qsLiqCheckBasic(net, token, provider) {
       : mintConfirmed
         ? "Confirmed by verified source / ABI"
         : (controlMeta?.abiVerified === true && mintAbi === false && mintPossible)
-          ? "Possible selector match; not exposed in verified ABI"
+          ? "Possible selector match. Not exposed in verified ABI"
           : mintPossible
-            ? (mintImplementationBytecodeDetected && !mintProxyBytecodeDetected ? "Possible in implementation (bytecode selector; unverified)" : "Possible (bytecode selector; unverified)")
+            ? (mintImplementationBytecodeDetected && !mintProxyBytecodeDetected ? "Possible in implementation (bytecode selector · unverified)" : "Possible (bytecode selector · unverified)")
             : mintProviderOnly
-              ? (goplus?.b20?.mintable ? "Provider-reported (GoPlus B20; not independently confirmed)" : "Provider-reported (GoPlus; not independently confirmed)")
+              ? (goplus?.b20?.mintable ? "Provider-reported (GoPlus B20 · not independently confirmed)" : "Provider-reported (GoPlus · not independently confirmed)")
               : "Not detected";
     const mintType = mintConfirmed ? "bad" : mintRiskDetected ? "warn" : "ok";
     const mintOnChain = !wrappedNativeProviderMintExpected && (mintConfirmed || mintPossible || !mintProviderOnly);
@@ -14227,10 +14500,10 @@ async function qsLiqCheckBasic(net, token, provider) {
       });
     } catch (engineErr) {
       console.error("Elofid secure engine unavailable:", engineErr?.message || engineErr);
-      setStatus(st, "bad", "Secure scoring engine temporarily unavailable. Please try again.");
+      setStatus(st, "bad", tf("st_score_engine_down"));
       if (out) {
         out.className = "status bad";
-        out.innerHTML = "<strong>Security scoring unavailable.</strong><br>The public on-chain checks completed, but Elofid did not generate a score because the protected scoring engine could not be reached.";
+        out.innerHTML = tf("st_score_unavailable_html");
       }
       cxDeepCoreRejected(cxDeepTr("deep_reject_score"));
       return;
@@ -14394,7 +14667,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         value: evmHolderAnalysisReliable && evmWalletTopHolderPct != null
           ? `${evmWalletTopHolderPct.toFixed(1)}% (${Number(evmHolderAnalysis.classifiedCount||0)}/${Number(evmHolderAnalysis.trackedCount||0)} tracked classified via ${evmHolderAnalysis.source || "source"})`
           : evmHolderAnalysisReliable
-            ? `Unknown (${Number(evmHolderAnalysis.classifiedCount||0)}/${Number(evmHolderAnalysis.trackedCount||0)} tracked classified; no ordinary wallet in tracked window)`
+            ? `Unknown (${Number(evmHolderAnalysis.classifiedCount||0)}/${Number(evmHolderAnalysis.trackedCount||0)} tracked classified · no ordinary wallet in tracked window)`
             : "Unknown (holder-account classification incomplete)"
       }] : []),
       ...(evmHolderAnalysis ? [{
@@ -14623,7 +14896,7 @@ async function qsLiqCheckBasic(net, token, provider) {
 
     const token = String(tokenRaw || "").trim();
     if (!qsIsSolanaAddr(token)) {
-      setStatus(st, "warn", "Please paste a valid Solana token address (base58).");
+      setStatus(st, "warn", tf("st_invalid_solana"));
       return;
     }
 
@@ -14631,7 +14904,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     cxQsSetScanning(true);
     if (out) {
       out.className = "status info";
-      out.innerHTML = "<strong>Scanning…</strong><br>Checking contract, liquidity, and market data — usually a few seconds.";
+      out.innerHTML = tf("st_scanning_html");
     }
     if (chipsWrap) chipsWrap.innerHTML = "";
     if (pairsWrap) pairsWrap.innerHTML = "";
@@ -14708,7 +14981,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       cache[ckey] = { ts: qsNowTs(), rep };
       saveQsCache(cache);
       addQsHistory("solana", token);
-      setStatus(st, "bad", "No data returned — check the address or try again.");
+      setStatus(st, "bad", tf("st_no_data"));
       render(rep);
       cxDeepCoreRejected(cxDeepTr("deep_reject_solana_data"));
       return;
@@ -14771,7 +15044,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     // closable, transfer fee/hook, and trusted-token status.
     rep.meta.goplusUnavailable = !gp;
     if (!gp) {
-      rep.redFlags.push("GoPlus security data isn't available yet for this token. Mint/Freeze and Token-2022 extensions are still checked directly on-chain; GoPlus-only reputation/malicious-address signals may be unavailable. Market data remains independently checked.");
+      rep.redFlags.push("GoPlus security data isn't available yet for this token. Mint/Freeze and Token-2022 extensions are still checked directly on-chain. GoPlus-only reputation/malicious-address signals may be unavailable. Market data remains independently checked.");
     }
 
     // Raw token-account concentration and wallet concentration are separate
@@ -14903,10 +15176,10 @@ async function qsLiqCheckBasic(net, token, provider) {
       });
     } catch (engineErr) {
       console.error("Elofid secure engine unavailable:", engineErr?.message || engineErr);
-      setStatus(st, "bad", "Secure scoring engine temporarily unavailable. Please try again.");
+      setStatus(st, "bad", tf("st_score_engine_down"));
       if (out) {
         out.className = "status bad";
-        out.innerHTML = "<strong>Security scoring unavailable.</strong><br>Solana checks completed, but Elofid did not generate a score because the protected scoring engine could not be reached.";
+        out.innerHTML = tf("st_score_unavailable_sol_html");
       }
       cxDeepCoreRejected(cxDeepTr("deep_reject_score"));
       return;
@@ -15193,7 +15466,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         value: holderAnalysisReliable && walletTopHolderPct != null
           ? `${walletTopHolderAmountUi != null ? qsFmtNum(walletTopHolderAmountUi, 4) + " · " : ""}${walletTopHolderPct.toFixed(2)}% (classified on-chain)`
           : (solHolders?.classificationCoveragePct != null
-              ? `Unknown (${Number(solHolders.classificationCoveragePct).toFixed(1)}% classified; below reliability threshold)`
+              ? `Unknown (${Number(solHolders.classificationCoveragePct).toFixed(1)}% classified · below reliability threshold)`
               : "Unknown (wallet classification incomplete)") },
       ...(holderAnalysisReliable && walletTop10Pct != null ? [{
         type: walletTop10Pct>=60?"bad":walletTop10Pct>=40?"warn":"ok",
@@ -15203,12 +15476,12 @@ async function qsLiqCheckBasic(net, token, provider) {
       ...(rawTopTokenAccountPct != null ? [{
         type: rawTopTokenAccountPct >= 30 ? "warn" : "ok",
         title: "Largest Token Account",
-        value: `${rawTopTokenAccountPct.toFixed(1)}% (${rawHolderSourceLabel || "raw"}; may be pool/protocol)`
+        value: `${rawTopTokenAccountPct.toFixed(1)}% (${rawHolderSourceLabel || "raw"} · may be pool/protocol)`
       }] : []),
       ...(rawTop10TokenAccountsPct != null ? [{
         type: rawTop10TokenAccountsPct>=60?"warn":"ok",
         title: "Top 10 Token Accounts",
-        value: `${rawTop10TokenAccountsPct.toFixed(1)}% (${rawHolderSourceLabel || "raw"}; may include pools/protocols)`
+        value: `${rawTop10TokenAccountsPct.toFixed(1)}% (${rawHolderSourceLabel || "raw"} · may include pools/protocols)`
       }] : []),
       // ✅ NEW: Dev/Creator Holds — see devCandidateAddress/devHoldingPct
       // above (this whole feature previously only existed in the bot).
@@ -15364,16 +15637,16 @@ async function qsLiqCheckBasic(net, token, provider) {
         genericTitle:"复核此信号", genericWhy:"该信号为代币风险提供额外背景。请结合流动性、所有权、市场活动和总评分一起判断。",
         proxyTitle:"可升级 / 代理合约", proxyWhy:"代币地址可以保持不变，但实现逻辑可能被替换，因此未来行为可能与当前不同。",
         mintTitle:"增发权限 / 能力", mintWhy:"如果仍可增发，未来可以创建新的供应量，可能稀释持有人或改变代币经济。",
-        pauseTitle:"暂停控制", pauseWhy:"暂停权限可以停止转账或其他代币操作；若已启用，正常转移可能已经受限。",
+        pauseTitle:"暂停控制", pauseWhy:"暂停权限可以停止转账或其他代币操作。若已启用，正常转移可能已经受限。",
         honeypotTitle:"卖出 / 转账限制", honeypotWhy:"卖出或转账限制可能阻止持有人正常退出，这是需要优先核实的高风险信号。",
         taxTitle:"交易税", taxWhy:"高额或可修改的税费会提高买卖成本，极端情况下可能让退出变得困难。",
-        adminTitle:"管理权限", adminWhy:"特权控制可能在上线后改变交易条件或合约行为；控制越强，对管理员的信任要求越高。",
+        adminTitle:"管理权限", adminWhy:"特权控制可能在上线后改变交易条件或合约行为。控制越强，对管理员的信任要求越高。",
         balanceTitle:"持有人余额控制", balanceWhy:"能够修改持有人余额的权限非常强，应重点核实。",
         destroyTitle:"合约销毁能力", destroyWhy:"自毁能力可能显著改变或终止合约行为，需要确认触发条件和控制者。",
         concentrationTitle:"持币集中度", concentrationWhy:"供应量高度集中会让少数钱包拥有更大影响力，并增加集中抛售或治理风险。",
         liquidityTitle:"流动性 / 市场深度", liquidityWhy:"流动性薄弱、缺失或不确定会增加滑点，并可能让用户难以按显示价格退出。",
         verificationTitle:"源码验证", verificationWhy:"未验证源码更难独立审查并与链上字节码核对，透明度更低。",
-        marketTitle:"市场行为模式", marketWhy:"异常价格、成交量或交易数量可能反映不稳定交易、刷量或操纵；模式本身并不是骗局证明。",
+        marketTitle:"市场行为模式", marketWhy:"异常价格、成交量或交易数量可能反映不稳定交易、刷量或操纵。模式本身并不是骗局证明。",
         dataTitle:"数据覆盖", dataWhy:"关键市场/持有人数据缺失或数据源冲突时，评估置信度会下降。",
         token2022Title:"Token-2022 权限", token2022Why:"Token-2022 扩展可赋予转账、费用、冻结或账户方面的额外权限，需要确认哪些控制仍然有效。",
         delegateTitle:"Permanent Delegate", delegateWhy:"Permanent Delegate 对持有人账户可能拥有非常强的权限，使用该代币前应明确理解其能力。",
@@ -15389,15 +15662,15 @@ async function qsLiqCheckBasic(net, token, provider) {
         pauseTitle:"صلاحية الإيقاف", pauseWhy:"يمكن لصلاحية الإيقاف تعطيل التحويلات أو وظائف أخرى، وقد تكون الحركة الطبيعية مقيدة إذا كان الإيقاف نشطًا.",
         honeypotTitle:"قيود البيع / التحويل", honeypotWhy:"قد تمنع قيود البيع أو التحويل المالكين من الخروج بشكل طبيعي، وهي من أهم الإشارات التي يجب التحقق منها.",
         taxTitle:"ضريبة التداول", taxWhy:"الضرائب العالية أو القابلة للتعديل قد تجعل الشراء أو البيع مكلفًا، وقد تجعل الخروج صعبًا عند المستويات القصوى.",
-        adminTitle:"تحكم إداري", adminWhy:"الصلاحيات المميزة قد تغيّر شروط التداول أو سلوك العقد بعد الإطلاق؛ كلما زادت القوة زادت الحاجة للثقة بالمشرف.",
+        adminTitle:"تحكم إداري", adminWhy:"الصلاحيات المميزة قد تغيّر شروط التداول أو سلوك العقد بعد الإطلاق. كلما زادت القوة زادت الحاجة للثقة بالمشرف.",
         balanceTitle:"التحكم بأرصدة المالكين", balanceWhy:"القدرة على تعديل أرصدة المالكين صلاحية قوية جدًا وتستحق مراجعة دقيقة.",
-        destroyTitle:"إمكانية تدمير العقد", destroyWhy:"قد تغيّر خاصية self-destruct سلوك العقد أو توقفه؛ تحقق ممن يستطيع تفعيلها وكيف.",
+        destroyTitle:"إمكانية تدمير العقد", destroyWhy:"قد تغيّر خاصية self-destruct سلوك العقد أو توقفه. تحقق ممن يستطيع تفعيلها وكيف.",
         concentrationTitle:"تركيز الحيازة", concentrationWhy:"التركيز العالي يمنح عددًا قليلاً من المحافظ تأثيرًا أكبر على العرض ويزيد مخاطر ضغط البيع أو السيطرة.",
         liquidityTitle:"السيولة / عمق السوق", liquidityWhy:"السيولة الضعيفة أو غير المؤكدة قد تسبب انزلاقًا كبيرًا وتجعل الخروج بالسعر الظاهر أصعب.",
         verificationTitle:"التحقق من المصدر", verificationWhy:"الكود غير الموثق أصعب في المراجعة والمقارنة مع البايت كود المنشور، ما يقلل الشفافية.",
         marketTitle:"نمط سلوك السوق", marketWhy:"أنماط السعر أو الحجم أو عدد الصفقات غير المعتادة قد تشير إلى تداول غير مستقر أو wash trading أو تلاعب، لكنها ليست إثباتًا وحدها.",
         dataTitle:"تغطية البيانات", dataWhy:"عند غياب بيانات مهمة أو اختلاف المصادر تقل الثقة في التقييم حتى تتوفر معلومات أفضل.",
-        token2022Title:"صلاحية Token-2022", token2022Why:"امتدادات Token-2022 قد تمنح سلطات إضافية على التحويلات والرسوم والتجميد والحسابات؛ تحقق من الصلاحيات النشطة.",
+        token2022Title:"صلاحية Token-2022", token2022Why:"امتدادات Token-2022 قد تمنح سلطات إضافية على التحويلات والرسوم والتجميد والحسابات. تحقق من الصلاحيات النشطة.",
         delegateTitle:"Permanent Delegate", delegateWhy:"قد يمتلك Permanent Delegate صلاحيات استثنائية على حسابات المالكين، لذلك يجب فهم هذه القدرة بوضوح.",
         lpBurnTitle:"إشارة حرق السيولة", lpBurnWhy:"حرق LP دليل إيجابي على أن رموز LP المحددة لا يمكن سحبها من مالكها السابق، لكنه لا يضمن أن كل السيولة مقفلة أو آمنة.",
         metadataTitle:"إعدادات توكن قابلة للتعديل", metadataWhy:"تعديل البيانات الوصفية عادة أقل خطورة من التحكم بالتحويلات، لكنه يعني أن بعض خصائص التوكن ما زالت قابلة للتغيير.",
@@ -15408,10 +15681,10 @@ async function qsLiqCheckBasic(net, token, provider) {
         genericTitle:"Проверьте этот сигнал", genericWhy:"Этот сигнал добавляет контекст к риску токена. Оценивайте его вместе с ликвидностью, владением, рыночной активностью и общей оценкой.",
         proxyTitle:"Обновляемый / proxy-контракт", proxyWhy:"Адрес токена может остаться тем же, а логика реализации — измениться. Поэтому поведение в будущем может отличаться от текущего.",
         mintTitle:"Право / возможность минта", mintWhy:"Если минт остаётся доступным, позже можно создать новый объём предложения, что может размыть доли держателей.",
-        pauseTitle:"Контроль паузы", pauseWhy:"Полномочие паузы может остановить переводы или другие действия токена; при активной паузе нормальное движение уже может быть ограничено.",
+        pauseTitle:"Контроль паузы", pauseWhy:"Полномочие паузы может остановить переводы или другие действия токена. При активной паузе нормальное движение уже может быть ограничено.",
         honeypotTitle:"Ограничение продажи / перевода", honeypotWhy:"Ограничения продажи или перевода могут помешать держателям нормально выйти из позиции. Это один из наиболее приоритетных сигналов.",
         taxTitle:"Торговый налог", taxWhy:"Высокие или изменяемые налоги повышают стоимость покупки/продажи и в крайних случаях могут затруднить выход.",
-        adminTitle:"Административный контроль", adminWhy:"Привилегированные функции могут менять условия торговли или поведение контракта после запуска; чем сильнее контроль, тем больше доверия требуется к администратору.",
+        adminTitle:"Административный контроль", adminWhy:"Привилегированные функции могут менять условия торговли или поведение контракта после запуска. Чем сильнее контроль, тем больше доверия требуется к администратору.",
         balanceTitle:"Контроль балансов держателей", balanceWhy:"Возможность изменять балансы держателей — необычно сильное полномочие и требует особой проверки.",
         destroyTitle:"Возможность уничтожения контракта", destroyWhy:"Selfdestruct может существенно изменить или отключить поведение контракта. Проверьте, кто и как может его вызвать.",
         concentrationTitle:"Концентрация держателей", concentrationWhy:"Высокая концентрация предложения усиливает влияние небольшого числа кошельков и повышает риск давления продаж или контроля.",
@@ -15620,7 +15893,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     const displayOverallText = issuerPresentation.label || rep.overallText;
     const scoreCls = issuerPresentation.authorityContext ? "qs-score-warn" : (score >= 85 ? "qs-score-ok" : score >= 50 ? "qs-score-warn" : "qs-score-bad");
     const thinLiqWarn = (rep?.meta?.liqQuality === "tiny")
-      ? `<div style="margin-top:10px;padding:8px 12px;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:10px;font-size:12px;color:#ff8a8a;font-weight:700;">⚠️ Thin liquidity — price impact/slippage may be extreme</div>`
+      ? `<div style="margin-top:10px;padding:8px 12px;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:10px;font-size:12px;color:#ff8a8a;font-weight:700;">${qsEscapeHtml(tf("qs_thin_liq_warn"))}</div>`
       : "";
     const suspiciousMarketWarn = rep?.meta?.suspiciousMarketPattern
       ? `<div style="margin-top:10px;padding:10px 12px;background:rgba(255,76,96,.11);border:1px solid rgba(255,76,96,.42);border-radius:10px;color:#ff7d8d;">
@@ -15630,7 +15903,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       : "";
     const scoreReasonSuffix = (!issuerPresentation.authorityContext && rep?.meta?.scoreReasonSuffix) ? ` — ${qsEscapeHtml(rep.meta.scoreReasonSuffix)}` : "";
     const issuerContextBanner = issuerPresentation.known
-      ? `<div style="margin-top:10px;padding:9px 12px;background:rgba(255,190,70,.08);border:1px solid rgba(255,190,70,.28);border-radius:10px;font-size:11px;line-height:1.45;color:var(--muted);"><strong style="color:#ffd27a;">Issuer context:</strong> ${qsEscapeHtml(issuerPresentation.banner)}</div>`
+      ? `<div style="margin-top:10px;padding:9px 12px;background:rgba(255,190,70,.08);border:1px solid rgba(255,190,70,.28);border-radius:10px;font-size:11px;line-height:1.45;color:var(--muted);"><strong style="color:#ffd27a;">${qsEscapeHtml(tf("qs_issuer_context"))}</strong> ${qsEscapeHtml(issuerPresentation.banner)}</div>`
       : "";
 
     // ✅ NEW: compact age badge for the header card — requested so the
@@ -15705,7 +15978,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         pairsWrap,
         rep.liq,
         rep.net === "solana"
-          ? "LP-lock status isn't shown for most pools above — Solana's major DEXes (Meteora, Orca) use NFT-based liquidity positions rather than simple burnable/lockable LP tokens, so there's no single reliable on-chain check the way there is for BSC/Ethereum."
+          ? tf("qs_sol_lp_note")
           : null
       );
     }
@@ -15901,9 +16174,9 @@ async function qsLiqCheckBasic(net, token, provider) {
       $("#qs-solana-rpc-save")?.addEventListener("click", () => {
         try {
           localStorage.setItem("elofid_sec_solana_custom_rpc", (input.value || "").trim());
-          setStatus($("#qs-status"), "ok", "Saved custom Solana RPC locally.");
+          setStatus($("#qs-status"), "ok", tf("st_solana_rpc_saved"));
         } catch {
-          setStatus($("#qs-status"), "warn", "Could not save (localStorage blocked).");
+          setStatus($("#qs-status"), "warn", tf("st_save_blocked"));
         }
       });
     })();
@@ -15970,17 +16243,17 @@ async function qsLiqCheckBasic(net, token, provider) {
       const net = netFromSelect("#qs-net");
       const tokenVal = ($("#qs-token")?.value || "").trim();
       if (net === "solana") {
-        if (!qsIsSolanaAddr(tokenVal)) return setStatus($("#qs-status"), "warn", "Enter token address first.");
+        if (!qsIsSolanaAddr(tokenVal)) return setStatus($("#qs-status"), "warn", tf("st_enter_token"));
         const link = qsBuildShareLink(net, tokenVal);
         const ok = await copyText(link);
-        setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? "Copied share link." : "Copy failed.");
+        setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? tf("st_copied_link") : tf("st_copy_failed"));
         try { gtagEvent("sec_qs_copy_link"); } catch {}
         return;
       }
-      if (!qsIsAddr(tokenVal)) return setStatus($("#qs-status"), "warn", "Enter token address first.");
+      if (!qsIsAddr(tokenVal)) return setStatus($("#qs-status"), "warn", tf("st_enter_token"));
       const link = qsBuildShareLink(net, qsNormAddr(tokenVal));
       const ok = await copyText(link);
-      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? "Copied share link." : "Copy failed.");
+      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? tf("st_copied_link") : tf("st_copy_failed"));
       try { gtagEvent("sec_qs_copy_link"); } catch {}
     });
 
@@ -15990,14 +16263,14 @@ async function qsLiqCheckBasic(net, token, provider) {
       const tokenVal = ($("#qs-token")?.value || "").trim();
       const isSol = (net === "solana");
       if (isSol ? !qsIsSolanaAddr(tokenVal) : !qsIsAddr(tokenVal)) {
-        return setStatus($("#qs-status"), "warn", "Enter token address first.");
+        return setStatus($("#qs-status"), "warn", tf("st_enter_token"));
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
       const rep = cache?.[key]?.rep;
-      if (!rep) return setStatus($("#qs-status"), "warn", "Run scan first.");
+      if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const ok = await copyText(rep.json || safeJson(rep));
-      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? "Copied JSON." : "Copy failed.");
+      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? tf("st_copied_json") : tf("st_copy_failed"));
       try { gtagEvent("sec_qs_copy_json"); } catch {}
     });
 
@@ -16007,15 +16280,15 @@ async function qsLiqCheckBasic(net, token, provider) {
       const tokenVal = ($("#qs-token")?.value || "").trim();
       const isSol = (net === "solana");
       if (isSol ? !qsIsSolanaAddr(tokenVal) : !qsIsAddr(tokenVal)) {
-        return setStatus($("#qs-status"), "warn", "Enter token address first.");
+        return setStatus($("#qs-status"), "warn", tf("st_enter_token"));
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
       const rep = cache?.[key]?.rep;
-      if (!rep) return setStatus($("#qs-status"), "warn", "Run scan first.");
+      if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const md = qsBuildMarkdownReport(rep);
       const ok = await copyText(md);
-      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? "Copied Markdown report." : "Copy failed.");
+      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? tf("st_copied_md") : tf("st_copy_failed"));
       try { gtagEvent("sec_qs_copy_md"); } catch {}
     });
 
@@ -16025,12 +16298,12 @@ async function qsLiqCheckBasic(net, token, provider) {
       const tokenVal = ($("#qs-token")?.value || "").trim();
       const isSol = (net === "solana");
       if (isSol ? !qsIsSolanaAddr(tokenVal) : !qsIsAddr(tokenVal)) {
-        return setStatus($("#qs-status"), "warn", "Enter token address first.");
+        return setStatus($("#qs-status"), "warn", tf("st_enter_token"));
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
       const rep = cache?.[key]?.rep;
-      if (!rep) return setStatus($("#qs-status"), "warn", "Run scan first.");
+      if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const text = qsBuildXText(rep);
       const u = new URL("https://twitter.com/intent/tweet");
       u.searchParams.set("text", text);
@@ -16044,12 +16317,12 @@ async function qsLiqCheckBasic(net, token, provider) {
       const tokenVal = ($("#qs-token")?.value || "").trim();
       const isSol = (net === "solana");
       if (isSol ? !qsIsSolanaAddr(tokenVal) : !qsIsAddr(tokenVal)) {
-        return setStatus($("#qs-status"), "warn", "Enter token address first.");
+        return setStatus($("#qs-status"), "warn", tf("st_enter_token"));
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
       const rep = cache?.[key]?.rep;
-      if (!rep) return setStatus($("#qs-status"), "warn", "Run scan first.");
+      if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const link = rep.shareLink || (isSol ? qsBuildShareLink(net, tokenVal) : qsBuildShareLink(net, qsNormAddr(tokenVal)));
       const text = qsBuildXText(rep,{includeLink:false});
       const u = new URL("https://t.me/share/url");
@@ -16065,14 +16338,14 @@ async function qsLiqCheckBasic(net, token, provider) {
       const tokenVal = ($("#qs-token")?.value || "").trim();
       const isSol = (net === "solana");
       if (isSol ? !qsIsSolanaAddr(tokenVal) : !qsIsAddr(tokenVal)) {
-        return setStatus($("#qs-status"), "warn", "Enter token address first.");
+        return setStatus($("#qs-status"), "warn", tf("st_enter_token"));
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
       const rep = cache?.[key]?.rep;
-      if (!rep) return setStatus($("#qs-status"), "warn", "Run scan first.");
+      if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const ok = await copyText(qsBuildXText(rep));
-      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? "Copied X text." : "Copy failed.");
+      setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? tf("st_copied_xtext") : tf("st_copy_failed"));
       try { gtagEvent("sec_qs_copy_xtext"); } catch {}
     });
   }
@@ -16119,8 +16392,8 @@ function rpcRowHtml(url, ms, chain, block, callOk, logsOk, status, isBest){
       <div class="rpc-card-top">
         <div class="rpc-card-host">${host}</div>
         <div class="rpc-card-right">
-          ${isBest ? '<span class="rpc-best-badge">⭐ Best</span>' : ""}
-          <span class="rpc-ms ${msCls}">${ok ? msTxt : "failed"}</span>
+          ${isBest ? `<span class="rpc-best-badge">${tf("rpc_best_badge")}</span>` : ""}
+          <span class="rpc-ms ${msCls}">${ok ? msTxt : tf("rpc_failed")}</span>
         </div>
       </div>
       <div class="rpc-checks">
@@ -16185,8 +16458,8 @@ async function runRpcTest(){
   const table = $("#rpc-table");
   if (table) table.innerHTML = "";
   const urls = buildRpcCandidates(net);
-  if (!urls.length) return setStatus(st, "warn", "No RPCs available.");
-  setStatus(st, "info", `Testing ${urls.length} RPC(s)…`);
+  if (!urls.length) return setStatus(st, "warn", tf("st_no_rpcs"));
+  setStatus(st, "info", tf("st_testing_rpcs", { count: urls.length }));
   const results = [];
   for (const url of urls) {
     const r = await rpcTestOne(net, url);
@@ -16212,10 +16485,10 @@ async function runRpcTest(){
         ));
       });
     }
-    setStatus(st, "ok", `Best RPC: <span class="mono" style="font-size:11px">${best.url}</span>`);
+    setStatus(st, "ok", `${tf("st_best_rpc")} <span class="mono" style="font-size:11px">${best.url}</span>`);
     gtagEvent("sec_rpc_best_saved", { net });
   } else {
-    setStatus(st, "bad", "All RPCs failed (CORS/timeout/blocked). Try adding a custom RPC.");
+    setStatus(st, "bad", tf("st_all_rpcs_failed"));
   }
   gtagEvent("sec_rpc_test", { net });
 }
@@ -16223,9 +16496,9 @@ async function runRpcTest(){
 async function rpcCopyBest(){
   const net = netFromSelect("#rpc-net");
   const best = getSavedBestRpc(net);
-  if (!best) return setStatus($("#rpc-status"), "warn", "No saved best RPC yet. Run test first.");
+  if (!best) return setStatus($("#rpc-status"), "warn", tf("st_no_best_rpc"));
   const ok = await copyText(best);
-  setStatus($("#rpc-status"), ok ? "ok" : "warn", ok ? "Copied best RPC." : "Copy failed.");
+  setStatus($("#rpc-status"), ok ? "ok" : "warn", ok ? tf("st_copied_best_rpc") : tf("st_copy_failed"));
 }
 
 function initRpcUi(){
@@ -16243,13 +16516,13 @@ function initRpcUi(){
     const net = netFromSelect("#rpc-net");
     const v = ($("#rpc-private")?.value || "").trim();
     if (v) setSavedPrivateRpc(net, v);
-    setStatus($("#rpc-status"), "ok", "Saved private RPC locally.");
+    setStatus($("#rpc-status"), "ok", tf("st_private_rpc_saved"));
   });
   $("#rpc-private-clear")?.addEventListener("click", () => {
     const net = netFromSelect("#rpc-net");
     setSavedPrivateRpc(net, "");
     if ($("#rpc-private")) $("#rpc-private").value = "";
-    setStatus($("#rpc-status"), "ok", "Cleared private RPC.");
+    setStatus($("#rpc-status"), "ok", tf("st_private_rpc_cleared"));
   });
   $("#rpc-test")?.addEventListener("click", runRpcTest);
   $("#rpc-copy-best")?.addEventListener("click", rpcCopyBest);
@@ -16264,17 +16537,17 @@ function initRpcUi(){
     const net = netFromSelect("#rpc-net");
     const addrRaw = ($("#rpc-dev-addr")?.value || "").trim();
     const topic0 = ($("#rpc-dev-topic")?.value || "").trim() || TRANSFER_TOPIC0;
-    if (!addrRaw) return setStatus($("#rpc-status"), "warn", "Enter a contract address for the dev test.");
-    if (!isAddr(addrRaw)) return setStatus($("#rpc-status"), "warn", "Invalid contract address.");
+    if (!addrRaw) return setStatus($("#rpc-status"), "warn", tf("st_dev_enter_addr"));
+    if (!isAddr(addrRaw)) return setStatus($("#rpc-status"), "warn", tf("st_invalid_contract"));
     const addr = normAddr(addrRaw);
     const urls = buildRpcCandidates(net);
-    if (!urls.length) return setStatus($("#rpc-status"), "warn", "No RPCs available.");
-    setStatus($("#rpc-status"), "info", "Running custom logs test…");
+    if (!urls.length) return setStatus($("#rpc-status"), "warn", tf("st_no_rpcs"));
+    setStatus($("#rpc-status"), "info", tf("st_dev_running"));
     const latest = await withRpcFallback(net, async (provider, url) => {
       const bn = await provider.getBlockNumber();
       return { url, bn };
     }, { timeoutMs: 9500 });
-    if (!latest.ok) return setStatus($("#rpc-status"), "bad", `Failed to read block number: ${String(latest.err?.message || latest.err)}`);
+    if (!latest.ok) return setStatus($("#rpc-status"), "bad", `${tf("st_block_read_failed")} ${String(latest.err?.message || latest.err)}`);
     const bn = latest.res.bn;
     const from = Math.max(0, bn - 2000);
     const r = await withRpcFallback(net, async (provider, url) => {
@@ -16282,9 +16555,9 @@ function initRpcUi(){
       return { url, count: logs.length };
     }, { timeoutMs: 10500 });
     if (r.ok) {
-      setStatus($("#rpc-status"), "ok", `Custom logs test OK (${r.res.count} logs) — RPC: <span class="mono">${r.url}</span>`);
+      setStatus($("#rpc-status"), "ok", `${tf("st_dev_ok", { count: r.res.count })} <span class="mono">${r.url}</span>`);
     } else {
-      setStatus($("#rpc-status"), "bad", `Custom logs test failed: ${String(r.err?.message || r.err)}`);
+      setStatus($("#rpc-status"), "bad", `${tf("st_dev_failed")} ${String(r.err?.message || r.err)}`);
     }
     gtagEvent("sec_rpc_dev_logs", { net });
   });
@@ -16443,12 +16716,12 @@ function initRpcUi(){
     const net = netFromSelect("#tx-net");
     const hash = ($("#tx-hash")?.value || "").trim();
     if (!hash || !/^0x([A-Fa-f0-9]{64})$/.test(hash)) {
-      setStatus(st, "warn", "Please paste a valid tx hash.");
+      setStatus(st, "warn", tf("st_invalid_tx"));
       return;
     }
     const urls = buildRpcCandidates(net);
-    if (!urls.length) return setStatus(st, "bad", "No RPC available.");
-    setStatus(st, "info", "Fetching tx + receipt…");
+    if (!urls.length) return setStatus(st, "bad", tf("st_no_rpc"));
+    setStatus(st, "info", tf("st_fetching_tx"));
 
     try {
       const r = await withRpcFallback(net, async (provider, url) => {
@@ -16462,8 +16735,8 @@ function initRpcUi(){
 
       if (!r.ok) {
         const msg = String(r.err?.message || r.err || "");
-        if (msg.includes("tx_null")) return setStatus(st, "bad", "Tx not found (wrong network / unsynced RPC).");
-        return setStatus(st, "bad", `RPC failed: ${msg}`);
+        if (msg.includes("tx_null")) return setStatus(st, "bad", tf("st_tx_not_found"));
+        return setStatus(st, "bad", `${tf("st_rpc_failed")} ${msg}`);
       }
 
       const read = r.res.provider;
@@ -16741,10 +17014,10 @@ function initRpcUi(){
       }
       evWrap.innerHTML = items.length ? `<div class="grid-2">${items.join("")}</div>` : `<div class="small muted">No common events detected (or log count is zero).</div>`;
 
-      setStatus(st, "ok", "Done.");
+      setStatus(st, "ok", tf("st_done"));
       gtagEvent("sec_tx_decode", { net });
     } catch (e) {
-      setStatus(st, "bad", `Decode failed: ${String(e?.message || e)}`);
+      setStatus(st, "bad", `${tf("st_decode_failed")} ${String(e?.message || e)}`);
     }
   }
 
@@ -16761,7 +17034,7 @@ function initRpcUi(){
       const body = ($("#tx-out")?.innerText || "").trim();
       const txt = ["Tx Decoder Summary", a, r, t, m, "", body].join("\n");
       const ok = await copyText(txt);
-      setStatus($("#tx-status"), ok ? "ok" : "warn", ok ? "Copied." : "Copy failed.");
+      setStatus($("#tx-status"), ok ? "ok" : "warn", ok ? tf("st_copied") : tf("st_copy_failed"));
     });
   }
 
@@ -16852,7 +17125,7 @@ function bmGenerate(){
     }
   })();`;
   const bm = `javascript:${encodeURIComponent(js)}`;
-  setStatus($("#bm-out"), "ok", `Bookmarklet generated. <span class="mono">(copy it)</span>`);
+  setStatus($("#bm-out"), "ok", tf("st_bm_generated"));
   $("#bm-out").dataset.bm = bm;
   const drag = $("#bm-drag");
   if (drag) {
@@ -16866,9 +17139,9 @@ function bmGenerate(){
 
 async function bmCopy(){
   const bm = $("#bm-out")?.dataset?.bm || "";
-  if (!bm) return setStatus($("#bm-out"), "warn", "Generate first.");
+  if (!bm) return setStatus($("#bm-out"), "warn", tf("st_generate_first"));
   const ok = await copyText(bm);
-  setStatus($("#bm-out"), ok ? "ok" : "warn", ok ? "Copied bookmarklet." : "Copy failed.");
+  setStatus($("#bm-out"), ok ? "ok" : "warn", ok ? tf("st_copied_bm") : tf("st_copy_failed"));
 }
 
 function loadMonitor(){
@@ -16905,7 +17178,7 @@ function renderMonitorTable(){
     <div class="cell">${String(item.net || "").toUpperCase()}</div>
     <div class="cell hide-sm">${item.lastSeen ? new Date(item.lastSeen*1000).toLocaleString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}) : "—"}</div>
     <div class="cell">${item.status || "—"}</div>
-    <div class="cell"><button class="mon-remove" type="button" data-action="mon-remove" data-addr="${item.addr}" data-net="${item.net}" title="Remove">×</button></div>
+    <div class="cell"><button class="mon-remove" type="button" data-action="mon-remove" data-addr="${item.addr}" data-net="${item.net}" title="${tf("th_remove")}">×</button></div>
   </div>
 `);
   }
@@ -16917,7 +17190,7 @@ async function monAdd(){
   const net = netFromSelect("#mon-net");
   const addrRaw = ($("#mon-addr")?.value || "").trim();
   const addrOk = /^0x[0-9a-fA-F]{40}$/.test(addrRaw) || (typeof isAddr === 'function' && isAddr(addrRaw));
-  if (!addrOk) return setStatus(st, "warn", "Enter a valid 0x contract address (42 chars).");
+  if (!addrOk) return setStatus(st, "warn", tf("st_mon_invalid"));
   const addr = normAddr(addrRaw);
   const list = loadMonitor();
   const key = `${net}:${safeLower(addr)}`;
@@ -16925,7 +17198,7 @@ async function monAdd(){
   filtered.unshift({ net, addr, status: "added", lastSeen: nowTs() });
   saveMonitor(filtered.slice(0, 50));
   renderMonitorTable();
-  setStatus(st, "ok", "Added to monitor list (local).");
+  setStatus(st, "ok", tf("st_mon_added"));
   gtagEvent("sec_mon_add", { net });
 }
 
@@ -16933,8 +17206,8 @@ async function monCheckAll(){
   const st = $("#mon-status");
   clearStatus(st);
   const list = loadMonitor();
-  if (!list.length) return setStatus(st, "warn", "Monitor list is empty.");
-  setStatus(st, "info", `Checking ${list.length} contract(s)…`);
+  if (!list.length) return setStatus(st, "warn", tf("st_mon_empty"));
+  setStatus(st, "info", tf("st_mon_checking", { count: list.length }));
   for (const item of list) {
     try{
       const codeRes = await getCodeSafe(item.net, item.addr);
@@ -16947,14 +17220,14 @@ async function monCheckAll(){
   }
   saveMonitor(list);
   renderMonitorTable();
-  setStatus(st, "ok", "Monitor check done.");
+  setStatus(st, "ok", tf("st_mon_done"));
   gtagEvent("sec_mon_check");
 }
 
 async function monExport(){
   const list = loadMonitor();
   const ok = await copyText(safeJson(list));
-  setStatus($("#mon-status"), ok ? "ok" : "warn", ok ? "Copied JSON." : "Copy failed.");
+  setStatus($("#mon-status"), ok ? "ok" : "warn", ok ? tf("st_copied_json") : tf("st_copy_failed"));
 }
 function monRemove(addr, net){
   const st = $("#mon-status");
@@ -16964,7 +17237,7 @@ function monRemove(addr, net){
   const next = list.filter(it => !(safeLower(it.net) === netLower && safeLower(it.addr) === addrLower));
   saveMonitor(next);
   renderMonitorTable();
-  setStatus(st, "ok", "Removed.");
+  setStatus(st, "ok", tf("st_mon_removed"));
   gtagEvent("sec_mon_remove", { net: netLower });
 }
 
