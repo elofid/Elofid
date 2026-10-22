@@ -127,9 +127,16 @@
 html[dir="rtl"] .eui-lang-trigger .eui-chev{transform:none}
 
 /* ---------- Phase 3: Firewall and Security Hub, calm background, white titles, quiet details ---------- */
-body.eui-page-hub,body.eui-page-firewall{background:radial-gradient(1000px 560px at 50% -10%,rgba(66,219,255,.09),transparent 64%),linear-gradient(180deg,#06080d 0%,#070a10 50%,#06080d 100%)!important;background-attachment:fixed!important}
-body.eui-page-hub::before{display:none!important}
-.eui-page-firewall .fw-bg-layer{background:radial-gradient(1000px 560px at 50% -10%,rgba(66,219,255,.09),transparent 64%),linear-gradient(180deg,#06080d 0%,#070a10 50%,#06080d 100%)!important}
+/* Smooth background (2026-10-22). The old base was a #06080d to #070a10 gradient, one 8-bit step apart,
+   so Chromium dithered it into visible grain over the whole screen. The base is now one flat color and
+   the cyan glow fades over several eased stops instead of ending in a hard edge at 64%.
+   The glow lives on a fixed, GPU-promoted layer (no background-attachment:fixed, which repaints on scroll). */
+:root{--eui-bg-base:#06080d;--eui-bg-glow:radial-gradient(1000px 560px at 50% -90px,rgba(66,219,255,.09) 0%,rgba(66,219,255,.07) 18%,rgba(66,219,255,.045) 34%,rgba(66,219,255,.022) 50%,rgba(66,219,255,.007) 64%,rgba(66,219,255,0) 78%)}
+/* These two pages paint html themselves (#05060a), so body stays transparent or it would cover the z-index:-1 glow layer */
+html:has(> body.eui-page-hub),html:has(> body.eui-page-firewall){background:var(--eui-bg-base)!important}
+body.eui-page-hub,body.eui-page-firewall{background:transparent!important;background-attachment:scroll!important}
+body.eui-page-hub::before{display:block!important;content:""!important;position:fixed!important;inset:0!important;pointer-events:none!important;z-index:-1!important;opacity:1!important;background:var(--eui-bg-glow)!important;will-change:transform}
+.eui-page-firewall .fw-bg-layer{background:var(--eui-bg-glow),var(--eui-bg-base)!important}
 .eui-page-firewall .fw-bg-layer::after{display:none!important}
 .eui-page-hub .hero-title,.eui-page-firewall .hero-title{font-size:clamp(30px,7vw,60px)!important;line-height:1.05!important;background:none!important;-webkit-text-fill-color:#fff!important;color:#fff!important;animation:none!important;font-weight:760!important;letter-spacing:-.04em!important;font-family:var(--eui-font)!important}
 .eui-page-hub .hero-kicker,.eui-page-firewall .hero-kicker{background:transparent!important;border-color:var(--eui-hair)!important;color:var(--eui-muted)!important;box-shadow:none!important;letter-spacing:.18em!important}
