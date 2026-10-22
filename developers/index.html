@@ -985,6 +985,22 @@ twq('config','r4v6v');
     @media(max-width:760px),(pointer:coarse),(prefers-reduced-motion:reduce){.gx-layer{display:none}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
   </style>
+<style id="elofid-final-cta-style">
+  /* Final CTA (2026-10-23): the closing line is a key message, so it gets hero-level size.
+     body.eui-page-dev raises specificity above the shared elofid-ui.css cap (38px). */
+  body.eui-page-dev .final-cta{position:relative;padding:150px 0 140px;overflow:hidden}
+  body.eui-page-dev .final-cta::before{content:"";position:absolute;left:50%;top:50%;width:1100px;height:520px;transform:translate(-50%,-55%);pointer-events:none;
+    background:radial-gradient(closest-side,rgba(66,219,255,.07) 0%,rgba(66,219,255,.05) 30%,rgba(66,219,255,.025) 55%,rgba(66,219,255,.008) 78%,rgba(66,219,255,0) 100%)}
+  body.eui-page-dev .final-cta .shell{position:relative}
+  body.eui-page-dev .final-cta h2{font-size:clamp(42px,4.6vw,66px)!important;line-height:1.06!important;letter-spacing:-.045em!important;font-weight:760!important;max-width:1080px;margin:0 auto;text-wrap:balance}
+  body.eui-page-dev .final-cta p{margin:24px auto 0;max-width:680px;font-size:18px;line-height:1.6}
+  body.eui-page-dev .final-cta .btn{margin-top:34px;padding:15px 24px;font-size:15px}
+  @media(max-width:560px){
+    body.eui-page-dev .final-cta{padding:90px 0 84px}
+    body.eui-page-dev .final-cta h2{font-size:clamp(32px,9vw,42px)!important}
+    body.eui-page-dev .final-cta p{font-size:15.5px}
+  }
+</style>
 <style id="elofid-logo-style">
   /* Elofid logo: round header mark (elofid-mark.svg), no tile frame */
   .brand img{width:48px!important;height:48px!important;flex:0 0 48px!important;border-radius:50%!important;background:none!important;border:0!important;box-shadow:none!important}
