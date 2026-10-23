@@ -3,20 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script>
+    // Privacy: links like /firewall?wallet=0x… or ?verify=… carry a wallet address.
+    // Keep it out of analytics: Google gets the URL without those params, the X pixel
+    // is skipped, and other pages only see https://elofid.com/ as the referrer.
+    window.__fwPrivateUrl = /[?&](wallet|verify)=/.test(location.search);
+    if (window.__fwPrivateUrl) {
+      var fwRefMeta = document.createElement("meta");
+      fwRefMeta.name = "referrer";
+      fwRefMeta.content = "strict-origin";
+      document.head.appendChild(fwRefMeta);
+    }
+  </script>
     <!-- Google tag (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXDFXJWCNQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-BXDFXJWCNQ');
+    (function () {
+      var u = new URL(location.href);
+      u.searchParams.delete("wallet");
+      u.searchParams.delete("verify");
+      gtag('config', 'G-BXDFXJWCNQ', { page_location: u.href });
+    })();
   </script>
-    <!-- X conversion tracking base code -->
+    <!-- X conversion tracking base code (skipped on links that carry a wallet address) -->
 <script>
+if (window.__fwPrivateUrl) { window.twq = function () {}; } else {
 !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
 },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
 a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
 twq('config','r4v6v');
+}
 </script>
 <!-- End X conversion tracking base code -->
   <title>Wallet Firewall | Elofid</title>
@@ -46,8 +65,12 @@ twq('config','r4v6v');
   <meta name="theme-color" content="#05060a">
 
   <!-- Ethers (same version as main site) -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <link rel="preload" href="/assets/vendor/ethers-6.7.1.umd.min.js" as="script">
+  <script>
+    // ethers is large (~480KB). Download it now, but run it only after the first paint
+    // so the page shows up right away. Code that needs it awaits window.__elofidEthers.
+    window.__elofidEthers = new Promise(function (done) { window.__elofidEthersDone = done; });
+  </script>
 <style>
   :root {
     --bg:#05060a;
@@ -1706,7 +1729,7 @@ body{background:#05060a!important}
       <div class="scan-bar">
         <input id="walletInput" class="mono" placeholder="0x... wallet address" spellcheck="false" autocomplete="off" />
         <button type="button" class="fw-paste" id="fwPasteBtn" data-i18n="fw_paste" hidden>Paste</button>
-        <select id="netSelect" class="scan-net">
+        <select id="netSelect" class="scan-net" aria-label="Network">
           <option value="bsc">BSC</option>
           <option value="eth">ETH</option>
           <option value="polygon">POLYGON</option>
@@ -1757,7 +1780,7 @@ body{background:#05060a!important}
         <strong data-i18n="notice_live_title">Live scan.</strong> <span data-i18n="notice_live_body">Read-only on-chain data. No transactions made.</span>
       </div>
       <div class="notice" id="demoNotice">
-        <strong data-i18n="notice_demo_title">Demo wallet.</strong> <span data-i18n="notice_demo_body">Sample data only. <a href="javascript:void(0)" onclick="document.getElementById('btnNewScan').click()">Scan your wallet</a></span>
+        <strong data-i18n="notice_demo_title">Demo wallet.</strong> <span data-i18n="notice_demo_body">Sample data only. <a href="#" onclick="document.getElementById('btnNewScan').click();return false">Scan your wallet</a></span>
       </div>
 
       <!-- ACCESS GATE OVERLAY -->
@@ -2627,7 +2650,8 @@ function fwSetExportStatus(msg, color) {
 
 window.fwExportCSV = function() {
   if (!fwScanData?.rows?.length){fwSetExportStatus(_t("exp_run_first"),"#ffd166");return;}
-  const q = v=>`"${String(v??"").replace(/"/g,'""')}"`;
+  // Quote CSV cells; prefix text that Excel would run as a formula (= + - @).
+  const q = v=>{ let t=String(v??""); if (typeof v==="string" && t.length > 1 && /^[=+\-@\t\r]/.test(t) && !/^[-+]?[\d.,]+%?$/.test(t)) t="'"+t; return `"${t.replace(/"/g,'""')}"`; };
   const d = fwScanData;
   const dateStr = new Date().toLocaleString();
 
@@ -3229,7 +3253,12 @@ function today() {
   return new Date().toLocaleDateString("en-US", { year:"numeric", month:"short", day:"numeric" });
 }
 function esc(s) {
-  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+// Safe JS string argument for an inline onclick="..." handler.
+// esc() alone is not enough there: the browser decodes &#39; back to ' before the JS runs.
+function jsArg(s) {
+  return esc(JSON.stringify(String(s ?? "")));
 }
 function fwIsAddr(a) {
   try {
@@ -3634,9 +3663,9 @@ function computeMetrics(approvals) {
     contractLabel: r.contractLabel,
     isUnlimited: r.isUnlimited,
     hasApproval: r.hasApproval,
-    // canRevoke: need BOTH addresses present — simple non-empty check
+    // canRevoke: need BOTH to be valid 0x addresses
     // fwNorm() handles address format normalization at revoke time
-    canRevoke:   !!(r.hasApproval && r.token && r.token.length > 5 && r.spender && r.spender.length > 5),
+    canRevoke:   !!(r.hasApproval && /^0x[0-9a-fA-F]{40}$/.test(String(r.token||"")) && /^0x[0-9a-fA-F]{40}$/.test(String(r.spender||""))),
     compositeRisk: r.compositeRisk,
     tokens:      [r.symbol || "TOKEN"],
     lastUpdated: r.lastUpdated || "—"
@@ -4319,7 +4348,7 @@ function fwRenderHistory(wallet, net, currentScore, currentData) {
     const chips = allWallets.map(w => {
       const dotColor = w.lastScore >= 70 ? "#5dffb2" : w.lastScore >= 45 ? "#ffd166" : "#ff7a8a";
       const date = w.lastTs ? fwDate(w.lastTs, { month: "short", day: "numeric" }) : "—";
-      return `<div class="fwh-wallet-chip" onclick="fwHistoryQuickScan('${esc(w.wallet)}','${esc(w.net)}')" title="${esc(_tf("h_chip_title", { s: w.lastScore, d: date }))}">
+      return `<div class="fwh-wallet-chip" onclick="fwHistoryQuickScan(${jsArg(w.wallet)},${jsArg(w.net)})" title="${esc(_tf("h_chip_title", { s: w.lastScore, d: date }))}">
         <span class="fwh-dot" style="background:${dotColor}"></span>
         <span>${fwShort(w.wallet)}</span>
         <span style="color:var(--muted)">${w.net.toUpperCase()}</span>
@@ -4967,15 +4996,15 @@ function _buildThreatCard(t, i, tier) {
   let actionBtn = "";
   if (tier === "full" && t.canRevoke) {
     // Have both addresses — real on-chain revoke
-    actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">${esc(_t("fwg_revoke"))}</button>`;
+    actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender(${jsArg(t.fullSpender)},${jsArg(t.token)},this)">${esc(_t("fwg_revoke"))}</button>`;
   } else if (tier === "free" && t.hasApproval) {
     if (i === 0) {
       if (t.canRevoke) {
         // API returned full addresses — direct revoke
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">${esc(_t("fwg_revoke"))}</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender(${jsArg(t.fullSpender)},${jsArg(t.token)},this)">${esc(_t("fwg_revoke"))}</button>`;
       } else {
         // API returned preview only — lazy on-chain lookup on click
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke('${esc(t.symbol||"")}','${esc(fwNet||"bsc")}',this)">${esc(_t("fwg_revoke"))}</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke(${jsArg(t.symbol||"")},${jsArg(fwNet||"bsc")},this)">${esc(_t("fwg_revoke"))}</button>`;
       }
     } else {
       // All others: prompt upgrade
@@ -5284,7 +5313,7 @@ async function applyFix(step) {
     window.__fwUndoData = window.__fwUndoData || {};
     if (!window.__fwUndoData[step])
       window.__fwUndoData[step] = target
-        ? { spender: target.spender, token: target.token, decimals: Number(target.decimals)||18 }
+        ? { spender: target.spender, token: target.token, decimals: Number(target.decimals)||18, contractRisk: target.contractRisk }
         : null;
   }
 
@@ -5315,10 +5344,19 @@ async function undoFix(step) {
   const MAX_UINT = 2n**256n - 1n;
 
   // Build targets list: step 1 = all array, step 0 = single item
-  const targets = (step === 1 && data?.all?.length) ? data.all
+  const allTargets = (step === 1 && data?.all?.length) ? data.all
     : (data?.token && data?.spender) ? [data] : [];
 
-  if (!targets.length) { showPassportMsg(_t("un_nodata")); return; }
+  if (!allTargets.length) { showPassportMsg(_t("un_nodata")); return; }
+
+  // Never give access back to a spender flagged as malicious (contractRisk 9); it stays revoked.
+  const targets = allTargets.filter(t => !(Number(t.contractRisk) >= 9));
+  const blocked = allTargets.length - targets.length;
+  if (!targets.length) { showPassportMsg(_t("un_blocked_flagged")); return; }
+
+  // Undo re-grants an UNLIMITED approval. Make the user confirm that before any wallet prompt.
+  const confirmText = _tf("un_confirm", { n: targets.length }) + (blocked ? "\n\n" + _tf("un_skip_flagged", { n: blocked }) : "");
+  if (!window.confirm(confirmText)) return;
 
   if (undoBtn) { undoBtn.disabled = true; fwSetT(undoBtn, targets.length === 1 ? "un_restoring_1" : "un_restoring_n", { n: targets.length }); }
   const E = getE();
@@ -6111,7 +6149,7 @@ var RULES = [
   },
   {
     name:"Balanced", k:"rule_balanced",
-    desc:"Cap $200 for unknown spenders. Whitelist major DEXes. Weekly review.",
+    desc:"Cap unknown spenders to 200 tokens. Whitelist major DEXes. Weekly review.",
     action:"balanced",        // cap unknowns at 200
     activeLabel:"Balanced Protection Active"
   },
@@ -6589,8 +6627,8 @@ function fwWatchRender() {
         <span class="fw-watch-score" style="color:${dot}">${scoreStr}</span>${deltaStr}
       </div>
       <div class="fw-watch-actions">
-        <button class="fw-watch-btn scan" onclick="fwHistoryQuickScan('${esc(w.wallet)}','${esc(w.net||"bsc")}')">${esc(_t("w_scan"))}</button>
-        <button class="fw-watch-btn del"  onclick="fwWatchRemove('${esc(w.wallet)}','${esc(w.net||"bsc")}')">✕</button>
+        <button class="fw-watch-btn scan" onclick="fwHistoryQuickScan(${jsArg(w.wallet)},${jsArg(w.net||"bsc")})">${esc(_t("w_scan"))}</button>
+        <button class="fw-watch-btn del"  onclick="fwWatchRemove(${jsArg(w.wallet)},${jsArg(w.net||"bsc")})">✕</button>
       </div>
     </div>`;
   }).join("");
@@ -7201,7 +7239,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"No unlimited. Cap $50 for unknown spenders. Alerts on any new spender.",
     rule_strict_a:"Strict Protection Active",
     rule_balanced:"Balanced",
-    rule_balanced_d:"Cap $200 for unknown spenders. Whitelist major DEXes. Weekly review.",
+    rule_balanced_d:"Cap unknown spenders to 200 tokens. Whitelist major DEXes. Weekly review.",
     rule_balanced_a:"Balanced Protection Active",
     rule_trader:"Trader",
     rule_trader_d:"Allow known DEX unlimited. Alert on fresh/unknown spenders.",
@@ -7251,6 +7289,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ Added to local watchlist",
     un_watch_removed:"↩ Watchlist entry removed.",
     un_nodata:"No undo data for this step.",
+    un_confirm:"Undo gives UNLIMITED access to your tokens back to {n} spender(s).\n\nContinue only if you trust them.",
+    un_blocked_flagged:"Undo is not available for spenders flagged as malicious. Their access stays revoked.",
+    un_skip_flagged:"{n} spender(s) flagged as malicious will stay revoked.",
     un_restoring_1:"Restoring approval…",
     un_restoring_n:"Restoring {n} approvals…",
     un_restoring_i:"Restoring {a}/{b}…",
@@ -7602,7 +7643,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"禁止无限授权。未知授权方上限 $50。任何新授权方都会提醒。",
     rule_strict_a:"严格保护已启用",
     rule_balanced:"平衡",
-    rule_balanced_d:"未知授权方上限 $200。主流 DEX 加入白名单。每周复查。",
+    rule_balanced_d:"未知授权方上限 200 个代币。主流 DEX 加入白名单。每周复查。",
     rule_balanced_a:"平衡保护已启用",
     rule_trader:"交易者",
     rule_trader_d:"允许知名 DEX 无限授权。对新的或未知授权方发出提醒。",
@@ -7652,6 +7693,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ 已加入本地监控列表",
     un_watch_removed:"↩ 已从监控列表移除。",
     un_nodata:"此步骤没有可还原的数据。",
+    un_confirm:"撤销将重新授予 {n} 个授权方对你代币的无限访问权限。\n\n只有在你信任它们时才继续。",
+    un_blocked_flagged:"被标记为恶意的授权方不支持撤销，其访问权限将保持已撤销状态。",
+    un_skip_flagged:"{n} 个被标记为恶意的授权方将保持已撤销状态。",
     un_restoring_1:"正在恢复授权…",
     un_restoring_n:"正在恢复 {n} 个授权…",
     un_restoring_i:"正在恢复 {a}/{b}…",
@@ -8004,7 +8048,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"بلا موافقات غير محدودة. حد 50$ لجهات الصرف غير المعروفة. تنبيه عند أي جهة صرف جديدة.",
     rule_strict_a:"الحماية الصارمة مفعّلة",
     rule_balanced:"متوازن",
-    rule_balanced_d:"حد 200$ لجهات الصرف غير المعروفة. قائمة سماح لمنصات DEX الكبرى. مراجعة أسبوعية.",
+    rule_balanced_d:"حد 200 توكن لجهات الصرف غير المعروفة. قائمة سماح لمنصات DEX الكبرى. مراجعة أسبوعية.",
     rule_balanced_a:"الحماية المتوازنة مفعّلة",
     rule_trader:"متداول",
     rule_trader_d:"السماح بموافقات غير محدودة لمنصات DEX المعروفة. تنبيه عند جهات الصرف الجديدة أو غير المعروفة.",
@@ -8054,6 +8098,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ أُضيفت إلى قائمة المراقبة المحلية",
     un_watch_removed:"↩ تمت الإزالة من قائمة المراقبة.",
     un_nodata:"لا توجد بيانات تراجع لهذه الخطوة.",
+    un_confirm:"التراجع سيمنح {n} من جهات الصرف وصولاً غير محدود إلى توكناتك مرة أخرى.\n\nتابع فقط إذا كنت تثق بها.",
+    un_blocked_flagged:"التراجع غير متاح لجهات الصرف المصنّفة كخبيثة. سيبقى وصولها ملغى.",
+    un_skip_flagged:"ستبقى {n} من جهات الصرف المصنّفة كخبيثة ملغاة.",
     un_restoring_1:"جارٍ استعادة الموافقة…",
     un_restoring_n:"جارٍ استعادة {n} من الموافقات…",
     un_restoring_i:"جارٍ الاستعادة {a}/{b}…",
@@ -8425,7 +8472,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"Без безлимитных разрешений. Лимит $50 для неизвестных получателей. Оповещение о любом новом получателе.",
     rule_strict_a:"Строгая защита включена",
     rule_balanced:"Сбалансированный",
-    rule_balanced_d:"Лимит $200 для неизвестных получателей. Крупные DEX в белом списке. Еженедельная проверка.",
+    rule_balanced_d:"Лимит 200 токенов для неизвестных получателей. Крупные DEX в белом списке. Еженедельная проверка.",
     rule_balanced_a:"Сбалансированная защита включена",
     rule_trader:"Трейдер",
     rule_trader_d:"Безлимит для известных DEX. Оповещения о новых и неизвестных получателях.",
@@ -8475,6 +8522,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ Добавлено в локальный список наблюдения",
     un_watch_removed:"↩ Запись удалена из списка наблюдения.",
     un_nodata:"Для этого шага нет данных для отмены.",
+    un_confirm:"Отмена снова выдаст НЕОГРАНИЧЕННЫЙ доступ к вашим токенам (получателей: {n}).\n\nПродолжайте, только если доверяете им.",
+    un_blocked_flagged:"Отмена недоступна для получателей, помеченных как вредоносные. Их доступ останется отозванным.",
+    un_skip_flagged:"Помеченные как вредоносные получатели останутся отозванными: {n}.",
     un_restoring_1:"Восстановление разрешения…",
     un_restoring_n:"Восстановление разрешений: {n}…",
     un_restoring_i:"Восстановление {a}/{b}…",
@@ -8964,5 +9014,33 @@ async function fwEnsureBsc(provider) {
   </div>
 </div>
 
+<script>
+  // Start ethers after the first paint (see window.__elofidEthers in <head>).
+  // Order: our own copy first; if it cannot be loaded, the same file from jsDelivr,
+  // checked with an integrity hash so a changed CDN file is refused.
+  (function () {
+    var started = false;
+    function add(src, integrity, next) {
+      var s = document.createElement("script");
+      s.src = src;
+      if (integrity) { s.integrity = integrity; s.crossOrigin = "anonymous"; }
+      s.onload = function () { window.__elofidEthersDone(window.ethers); };
+      s.onerror = next;
+      document.head.appendChild(s);
+    }
+    function start() {
+      if (started) return;
+      started = true;
+      add("/assets/vendor/ethers-6.7.1.umd.min.js", "", function () {
+        add("https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js",
+            "sha384-eoEZatO/ymJi+LdBilp3xt/M9N9Lla2JlMVPZuk48Fg1YGl2Mc+vmsky+nkOtlSi",
+            function () { window.__elofidEthersDone(window.ethers); });
+      });
+    }
+    requestAnimationFrame(function () { setTimeout(start, 0); });
+    // Background tabs pause requestAnimationFrame; start anyway after a short wait.
+    setTimeout(start, 1500);
+  })();
+</script>
 </body>
 </html>
