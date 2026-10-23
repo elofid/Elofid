@@ -1431,7 +1431,6 @@ body{background:#05060a!important}
   .fw-export-btns-wrap>div{grid-template-columns:1fr!important}
 }
 
-  .eui-footer .eui-foot-credit{margin-top:4px;padding-top:0;border-top:0}
   /* The page is zoomed 110% on desktop; keep the header and footer at the same size as on every other page.
      Done in CSS so the header is right from the first paint (elofid-nav.js used to fix it only after load). */
   @media(min-width:901px){.eui-header,.eui-footer{zoom:.90909}}
@@ -1701,7 +1700,7 @@ body{background:#05060a!important}
   .brand-logo,.top-bar .brand-logo{width:50px!important;height:50px!important;border-radius:50%!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;object-fit:contain!important}
   @media (max-width:720px){.brand-logo,.top-bar .brand-logo{width:43px!important;height:43px!important}}
 </style>
-<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261023a">
+<link rel="stylesheet" href="/assets/elofid-ui.css?v=20261023b">
 <script src="/assets/elofid-nav.js?v=20261012f" defer></script>
 </head>
 <body class="eui-page-firewall">
@@ -1744,6 +1743,7 @@ body{background:#05060a!important}
 
       <div class="hero-micro fw-trust"><span class="fw-trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span data-i18n="fw_trust">Read-only. Nothing is signed. Connect only if you choose to revoke.</span><span class="micro-dot">·</span><span data-i18n="micro_chains">BSC, Ethereum, Polygon</span></div>
       <span class="demo-hint" id="demoHint" data-i18n="demo_try">Try with a demo wallet</span>
+      <p class="hero-note-small" data-i18n="footer_note">Informational only. Revoke actions happen on-chain, directly from your wallet. Always verify contracts independently.</p>
       <div class="fwg"><div class="fwg-kicker" data-i18n="fwg_kicker">What you get</div><h2 class="fwg-title" data-i18n="fwg_title">Everything the Firewall shows you.</h2><div class="fwg-grid"><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></span><h3 data-i18n="fwg_1_t">Blast Radius</h3><p data-i18n="fwg_1">Every active approval on the wallet and the value each spender could move.</p><div class="fwg-prev"><span><b>Token 1</b><code>0x0000…0000</code></span><em class="bad"><span data-i18n="fwg_unlimited">Unlimited</span></em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.4-.4-2.4 2.4-2.8Z"/></svg></span><h3 data-i18n="fwg_2_t">Fix Mode</h3><p data-i18n="fwg_2">Approvals ordered by exposure, with a guided revoke you review and sign yourself.</p><div class="fwg-prev"><span><b>1.</b><b>Token 1</b></span><em class="act"><span data-i18n="fwg_revoke">Revoke</span></em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span><h3 data-i18n="fwg_3_t">Wallet Watch</h3><p data-i18n="fwg_3">A browser alert when a new approval appears on a wallet you watch.</p><div class="fwg-prev"><span><b data-i18n="fwg_new">New approval</b></span><em class="warn">Token 2</em></div></div><div class="fwg-card"><span class="fwg-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3Z"/><path d="m9.5 12 1.7 1.7 3.5-4"/></svg></span><h3 data-i18n="fwg_4_t">Wallet Passport</h3><p data-i18n="fwg_4">A signed, wallet-bound security record you can share.</p><div class="fwg-prev"><span><b>86</b><code>0x0000…0000</code></span><em class="ok"><span data-i18n="fwg_signed">Signed</span></em></div></div></div><div class="fwg-note" data-i18n="fwg_note">Illustrative preview</div></div>
     </section>
 
@@ -2218,10 +2218,8 @@ body{background:#05060a!important}
       <div class="eui-foot-col"><b data-eui="f_community">Community</b><a href="https://x.com/ElofidNetwork" target="_blank" rel="noopener">X</a><a href="https://t.me/elofid_official" target="_blank" rel="noopener">Telegram</a><a href="https://elofid.com/whitepaper.pdf" target="_blank" rel="noopener" data-eui="f_whitepaper">Whitepaper</a><a href="https://elofid.com/FAQ.pdf" target="_blank" rel="noopener" data-eui="f_faq">FAQ</a></div>
       <div class="eui-foot-col"><b data-eui="f_legal">Legal</b><a href="/terms.html" data-eui="f_terms">Terms</a><a href="/privacy.html" data-eui="f_privacy">Privacy</a><a href="/refund.html" data-eui="f_refund">Refund Policy</a></div>
     </div>
-    <p class="eui-foot-note" data-i18n="footer_note">Informational only. Revoke actions happen on-chain, directly from your wallet. Always verify contracts independently.</p>
-    <p class="eui-foot-note eui-foot-credit"><span dir="ltr">© 2026 Elofid. All rights reserved.</span></p>
-    <!-- Required by the Reown Community License (wallet connection, assets/vendor/appkit-*) -->
-    <p class="eui-foot-note eui-foot-credit"><span dir="ltr">Wallet connection by Reown AppKit. Portions © 2025 Reown, Inc. All Rights Reserved.</span></p>
+    <!-- The Reown credit is required by the Reown Community License (wallet connection, assets/vendor/appkit-*) -->
+    <p class="eui-foot-note"><span dir="ltr">© 2026 Elofid. All rights reserved.</span><span class="eui-foot-sep" aria-hidden="true">·</span><span dir="ltr">Wallet connection by Reown AppKit. Portions © 2025 Reown, Inc. All Rights Reserved.</span></p>
   </footer>
 
 </div><!-- .page-shell -->
