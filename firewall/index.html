@@ -1432,8 +1432,9 @@ body{background:#05060a!important}
 }
 
   .eui-footer .eui-foot-credit{margin-top:4px;padding-top:0;border-top:0}
-  /* The page is zoomed 110% on desktop; keep the footer at the same size as on every other page. */
-  @media(min-width:901px){.eui-footer{zoom:.90909}}
+  /* The page is zoomed 110% on desktop; keep the header and footer at the same size as on every other page.
+     Done in CSS so the header is right from the first paint (elofid-nav.js used to fix it only after load). */
+  @media(min-width:901px){.eui-header,.eui-footer{zoom:.90909}}
 </style>
 
 <style id="fw-size-polish-v2">
