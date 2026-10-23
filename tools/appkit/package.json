@@ -1,0 +1,17 @@
+{
+  "name": "elofid-appkit-bundle",
+  "private": true,
+  "description": "Builds the self-hosted Reown AppKit bundle in /assets/vendor. Not part of the site.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@reown/appkit": "1.8.24",
+    "@reown/appkit-adapter-ethers": "1.8.24",
+    "ethers": "^6.13.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
