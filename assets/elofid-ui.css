@@ -424,3 +424,66 @@ body.eui-page-dev{font-family:var(--eui-font)!important}
 .eui-page-firewall .pp-logo-shield{width:26px!important;height:26px!important;background:none!important;border:0!important;box-shadow:none!important;border-radius:50%!important}
 .eui-page-firewall .pp-logo-shield::before{display:none!important;content:none!important}
 .eui-page-firewall .pp-logo-shield img{display:block;width:26px;height:26px;border-radius:50%}
+
+/* ───────────── Security Hub + Firewall: one hero design, headings at the homepage sizes ─────────────
+   Both pages zoom the whole document to 110% on desktop (html{zoom:1.10} in the page, 901px and up).
+   --eui-pz is that factor, so the sizes below are written in on-screen pixels, with the same numbers
+   as the homepage (.hm-h1, .hm-sub, .hm-kicker, .hm-title). Keep it in step with the page zoom. */
+.eui-page-hub,.eui-page-firewall{--eui-pz:1}
+@media(min-width:901px){.eui-page-hub,.eui-page-firewall{--eui-pz:1.1}}
+
+/* same spacing at the top of both pages */
+.eui-page-hub .hero,.eui-page-firewall .hero{margin-top:4px;padding-top:6px}
+.eui-page-hub .hero{margin-bottom:0;padding-bottom:0}
+.eui-page-hub .hx-what,.eui-page-firewall .fwg{margin-top:56px}
+
+/* label above the title */
+.eui-page-hub .hero .hero-kicker,.eui-page-firewall .hero .hero-kicker{display:inline-flex;align-items:center;justify-content:center;gap:0;margin:0 0 18px;padding:calc(7px / var(--eui-pz)) calc(16px / var(--eui-pz));border:1px solid var(--eui-hair)!important;border-radius:999px;background:transparent!important;box-shadow:none!important;color:var(--eui-muted)!important;font:700 calc(11px / var(--eui-pz))/1.4 var(--eui-font)!important;letter-spacing:.18em!important;text-transform:uppercase}
+/* title and subtitle */
+.eui-page-hub .hero .hero-title,.eui-page-firewall .hero .hero-title{max-width:none;margin:0 auto 18px!important;font-size:calc(clamp(36px,4.5vw,58px) / var(--eui-pz))!important;line-height:1.04!important;letter-spacing:-.04em!important;font-weight:760!important}
+.eui-page-hub .hero .hero-sub,.eui-page-firewall .hero .hero-sub{max-width:calc(640px / var(--eui-pz));margin:0 auto!important;padding:0!important;font-size:calc(17px / var(--eui-pz))!important;line-height:1.65!important;color:#aab5c2!important;text-wrap:balance}
+
+/* search bar: one shape on both pages */
+.eui-page-hub .hub-scan,.eui-page-firewall .scan-bar{margin:28px auto 0;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(10,14,21,.92);box-shadow:0 18px 60px rgba(0,0,0,.35)}
+.eui-page-hub .hub-scan:focus-within,.eui-page-firewall .scan-bar:focus-within{border-color:rgba(66,219,255,.45)}
+.eui-page-firewall .scan-bar input::placeholder{color:#6b7684}
+.eui-page-firewall .scan-bar .scan-ic{display:flex;flex:0 0 auto;color:#7d8896}
+.eui-page-firewall .scan-bar .scan-ic svg{width:18px;height:18px}
+.eui-page-firewall #btnRunFirewall{font:650 15px/1 var(--eui-font)!important;letter-spacing:0!important;text-transform:none!important}
+@media(min-width:641px){
+  .eui-page-hub .hub-scan,.eui-page-firewall .scan-bar{display:flex;align-items:center;gap:8px;width:100%;max-width:760px;padding:7px 7px 7px 16px}
+  .eui-page-firewall .scan-bar input{flex:1 1 auto;min-width:0;height:44px;padding:0 12px;border:0;outline:0;background:transparent;color:#f4f7fa;font:500 14.5px/1 var(--eui-mono,ui-monospace,SFMono-Regular,Menlo,monospace)}
+  .eui-page-firewall .scan-bar .fw-paste{height:34px;margin:0;padding:0 13px!important;border-radius:10px;font:600 12.5px/1 var(--eui-font)}
+  .eui-page-firewall .scan-bar .scan-net{flex:0 0 auto;height:34px;min-height:0;margin:0;padding:0 10px;border:1px solid rgba(255,255,255,.12);border-radius:10px;background-color:rgba(255,255,255,.04);color:#c9d3df;font:600 12.5px/1 var(--eui-font)}
+  .eui-page-firewall #btnRunFirewall{flex:0 0 auto;min-height:44px;height:auto;padding:0 26px!important;border-radius:var(--eui-radius)!important}
+}
+@media(max-width:640px){
+  .eui-page-firewall .scan-bar{padding:10px;border-radius:16px}
+  .eui-page-firewall .scan-bar .scan-ic{display:none}
+  .eui-page-firewall .scan-bar input{font-size:13px}
+  .eui-page-firewall .scan-bar .scan-net{border-radius:12px}
+}
+
+/* lines under the search bar */
+.eui-page-hub .hub-trust,.eui-page-firewall .fw-trust{gap:8px;margin:14px auto 0;color:#8b96a5;font-size:13px}
+.eui-page-firewall .fw-trust>span:not(.micro-dot):not(.fw-trust-ic){font-size:13px}
+.eui-page-firewall .fw-trust .micro-dot{color:#4b5562}
+.eui-page-firewall .demo-hint{display:block;margin:10px auto 0;color:#42dbff;font-size:13px;font-weight:600;letter-spacing:0;cursor:pointer}
+.eui-page-firewall .demo-hint:hover{text-decoration:underline}
+
+/* "What you get" heading */
+.eui-page-hub .hx-kicker,.eui-page-firewall .fwg-kicker{margin:0 0 12px;text-align:center;color:#42dbff;font:800 calc(11px / var(--eui-pz))/1.3 var(--eui-font);letter-spacing:.18em;text-transform:uppercase}
+.eui-page-hub .hx-title,.eui-page-firewall .fwg-title{margin:0 0 28px;text-align:center;color:#fff;font:740 calc(clamp(30px,3.6vw,46px) / var(--eui-pz))/1.08 var(--eui-font);letter-spacing:-.035em}
+
+/* Firewall cards: icon and title on one line, same surface as the Security Hub cards */
+.eui-page-firewall .fwg-card{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto 1fr;column-gap:12px;row-gap:10px;align-items:center;padding:18px;border-color:rgba(255,255,255,.075);border-radius:16px;background:rgba(11,16,23,.92)}
+.eui-page-firewall .fwg-card .fwg-ic{grid-column:1;grid-row:1;width:38px;height:38px;border-radius:11px}
+.eui-page-firewall .fwg-card h3{grid-column:2;grid-row:1;margin:0;font-size:15px;font-weight:720;line-height:1.3}
+.eui-page-firewall .fwg-card p{grid-column:1/-1;grid-row:2;align-self:start;color:#8b96a5}
+.eui-page-firewall .fwg-card .fwg-prev{grid-column:1/-1;grid-row:3;align-self:end;margin-top:4px}
+
+@media(max-width:560px){
+  .eui-page-hub .hero .hero-title,.eui-page-firewall .hero .hero-title{font-size:clamp(26px,7.6vw,36px)!important}
+  .eui-page-hub .hero .hero-sub,.eui-page-firewall .hero .hero-sub{font-size:15.5px!important}
+  .eui-page-hub .hx-title,.eui-page-firewall .fwg-title{font-size:clamp(26px,7.6vw,32px)}
+}
