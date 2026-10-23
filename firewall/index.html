@@ -3,20 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script>
+    // Privacy: links like /firewall?wallet=0x… or ?verify=… carry a wallet address.
+    // Keep it out of analytics: Google gets the URL without those params, the X pixel
+    // is skipped, and other pages only see https://elofid.com/ as the referrer.
+    window.__fwPrivateUrl = /[?&](wallet|verify)=/.test(location.search);
+    if (window.__fwPrivateUrl) {
+      var fwRefMeta = document.createElement("meta");
+      fwRefMeta.name = "referrer";
+      fwRefMeta.content = "strict-origin";
+      document.head.appendChild(fwRefMeta);
+    }
+  </script>
     <!-- Google tag (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXDFXJWCNQ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-BXDFXJWCNQ');
+    (function () {
+      var u = new URL(location.href);
+      u.searchParams.delete("wallet");
+      u.searchParams.delete("verify");
+      gtag('config', 'G-BXDFXJWCNQ', { page_location: u.href });
+    })();
   </script>
-    <!-- X conversion tracking base code -->
+    <!-- X conversion tracking base code (skipped on links that carry a wallet address) -->
 <script>
+if (window.__fwPrivateUrl) { window.twq = function () {}; } else {
 !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
 },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
 a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
 twq('config','r4v6v');
+}
 </script>
 <!-- End X conversion tracking base code -->
   <title>Wallet Firewall | Elofid</title>
@@ -5294,7 +5313,7 @@ async function applyFix(step) {
     window.__fwUndoData = window.__fwUndoData || {};
     if (!window.__fwUndoData[step])
       window.__fwUndoData[step] = target
-        ? { spender: target.spender, token: target.token, decimals: Number(target.decimals)||18 }
+        ? { spender: target.spender, token: target.token, decimals: Number(target.decimals)||18, contractRisk: target.contractRisk }
         : null;
   }
 
@@ -5325,14 +5344,19 @@ async function undoFix(step) {
   const MAX_UINT = 2n**256n - 1n;
 
   // Build targets list: step 1 = all array, step 0 = single item
-  const targets = (step === 1 && data?.all?.length) ? data.all
+  const allTargets = (step === 1 && data?.all?.length) ? data.all
     : (data?.token && data?.spender) ? [data] : [];
 
-  if (!targets.length) { showPassportMsg(_t("un_nodata")); return; }
+  if (!allTargets.length) { showPassportMsg(_t("un_nodata")); return; }
 
-  // Undo re-grants an UNLIMITED approval to spenders that were just revoked as risky.
-  // Make the user confirm that explicitly before any wallet prompt.
-  if (!window.confirm(_tf("un_confirm", { n: targets.length }))) return;
+  // Never give access back to a spender flagged as malicious (contractRisk 9); it stays revoked.
+  const targets = allTargets.filter(t => !(Number(t.contractRisk) >= 9));
+  const blocked = allTargets.length - targets.length;
+  if (!targets.length) { showPassportMsg(_t("un_blocked_flagged")); return; }
+
+  // Undo re-grants an UNLIMITED approval. Make the user confirm that before any wallet prompt.
+  const confirmText = _tf("un_confirm", { n: targets.length }) + (blocked ? "\n\n" + _tf("un_skip_flagged", { n: blocked }) : "");
+  if (!window.confirm(confirmText)) return;
 
   if (undoBtn) { undoBtn.disabled = true; fwSetT(undoBtn, targets.length === 1 ? "un_restoring_1" : "un_restoring_n", { n: targets.length }); }
   const E = getE();
@@ -6125,7 +6149,7 @@ var RULES = [
   },
   {
     name:"Balanced", k:"rule_balanced",
-    desc:"Cap $200 for unknown spenders. Whitelist major DEXes. Weekly review.",
+    desc:"Cap unknown spenders to 200 tokens. Whitelist major DEXes. Weekly review.",
     action:"balanced",        // cap unknowns at 200
     activeLabel:"Balanced Protection Active"
   },
@@ -7215,7 +7239,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"No unlimited. Cap $50 for unknown spenders. Alerts on any new spender.",
     rule_strict_a:"Strict Protection Active",
     rule_balanced:"Balanced",
-    rule_balanced_d:"Cap $200 for unknown spenders. Whitelist major DEXes. Weekly review.",
+    rule_balanced_d:"Cap unknown spenders to 200 tokens. Whitelist major DEXes. Weekly review.",
     rule_balanced_a:"Balanced Protection Active",
     rule_trader:"Trader",
     rule_trader_d:"Allow known DEX unlimited. Alert on fresh/unknown spenders.",
@@ -7265,7 +7289,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ Added to local watchlist",
     un_watch_removed:"↩ Watchlist entry removed.",
     un_nodata:"No undo data for this step.",
-    un_confirm:"Undo gives UNLIMITED access to your tokens back to {n} spender(s), including any flagged as risky.\n\nContinue only if you trust them.",
+    un_confirm:"Undo gives UNLIMITED access to your tokens back to {n} spender(s).\n\nContinue only if you trust them.",
+    un_blocked_flagged:"Undo is not available for spenders flagged as malicious. Their access stays revoked.",
+    un_skip_flagged:"{n} spender(s) flagged as malicious will stay revoked.",
     un_restoring_1:"Restoring approval…",
     un_restoring_n:"Restoring {n} approvals…",
     un_restoring_i:"Restoring {a}/{b}…",
@@ -7617,7 +7643,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"禁止无限授权。未知授权方上限 $50。任何新授权方都会提醒。",
     rule_strict_a:"严格保护已启用",
     rule_balanced:"平衡",
-    rule_balanced_d:"未知授权方上限 $200。主流 DEX 加入白名单。每周复查。",
+    rule_balanced_d:"未知授权方上限 200 个代币。主流 DEX 加入白名单。每周复查。",
     rule_balanced_a:"平衡保护已启用",
     rule_trader:"交易者",
     rule_trader_d:"允许知名 DEX 无限授权。对新的或未知授权方发出提醒。",
@@ -7667,7 +7693,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ 已加入本地监控列表",
     un_watch_removed:"↩ 已从监控列表移除。",
     un_nodata:"此步骤没有可还原的数据。",
-    un_confirm:"撤销将重新授予 {n} 个授权方对你代币的无限访问权限，包括被标记为有风险的授权方。\n\n只有在你信任它们时才继续。",
+    un_confirm:"撤销将重新授予 {n} 个授权方对你代币的无限访问权限。\n\n只有在你信任它们时才继续。",
+    un_blocked_flagged:"被标记为恶意的授权方不支持撤销，其访问权限将保持已撤销状态。",
+    un_skip_flagged:"{n} 个被标记为恶意的授权方将保持已撤销状态。",
     un_restoring_1:"正在恢复授权…",
     un_restoring_n:"正在恢复 {n} 个授权…",
     un_restoring_i:"正在恢复 {a}/{b}…",
@@ -8020,7 +8048,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"بلا موافقات غير محدودة. حد 50$ لجهات الصرف غير المعروفة. تنبيه عند أي جهة صرف جديدة.",
     rule_strict_a:"الحماية الصارمة مفعّلة",
     rule_balanced:"متوازن",
-    rule_balanced_d:"حد 200$ لجهات الصرف غير المعروفة. قائمة سماح لمنصات DEX الكبرى. مراجعة أسبوعية.",
+    rule_balanced_d:"حد 200 توكن لجهات الصرف غير المعروفة. قائمة سماح لمنصات DEX الكبرى. مراجعة أسبوعية.",
     rule_balanced_a:"الحماية المتوازنة مفعّلة",
     rule_trader:"متداول",
     rule_trader_d:"السماح بموافقات غير محدودة لمنصات DEX المعروفة. تنبيه عند جهات الصرف الجديدة أو غير المعروفة.",
@@ -8070,7 +8098,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ أُضيفت إلى قائمة المراقبة المحلية",
     un_watch_removed:"↩ تمت الإزالة من قائمة المراقبة.",
     un_nodata:"لا توجد بيانات تراجع لهذه الخطوة.",
-    un_confirm:"التراجع سيمنح {n} من جهات الصرف وصولاً غير محدود إلى توكناتك مرة أخرى، بما فيها الجهات المصنّفة كخطرة.\n\nتابع فقط إذا كنت تثق بها.",
+    un_confirm:"التراجع سيمنح {n} من جهات الصرف وصولاً غير محدود إلى توكناتك مرة أخرى.\n\nتابع فقط إذا كنت تثق بها.",
+    un_blocked_flagged:"التراجع غير متاح لجهات الصرف المصنّفة كخبيثة. سيبقى وصولها ملغى.",
+    un_skip_flagged:"ستبقى {n} من جهات الصرف المصنّفة كخبيثة ملغاة.",
     un_restoring_1:"جارٍ استعادة الموافقة…",
     un_restoring_n:"جارٍ استعادة {n} من الموافقات…",
     un_restoring_i:"جارٍ الاستعادة {a}/{b}…",
@@ -8442,7 +8472,7 @@ const FW_TRANSLATIONS = {
     rule_strict_d:"Без безлимитных разрешений. Лимит $50 для неизвестных получателей. Оповещение о любом новом получателе.",
     rule_strict_a:"Строгая защита включена",
     rule_balanced:"Сбалансированный",
-    rule_balanced_d:"Лимит $200 для неизвестных получателей. Крупные DEX в белом списке. Еженедельная проверка.",
+    rule_balanced_d:"Лимит 200 токенов для неизвестных получателей. Крупные DEX в белом списке. Еженедельная проверка.",
     rule_balanced_a:"Сбалансированная защита включена",
     rule_trader:"Трейдер",
     rule_trader_d:"Безлимит для известных DEX. Оповещения о новых и неизвестных получателях.",
@@ -8492,7 +8522,9 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ Добавлено в локальный список наблюдения",
     un_watch_removed:"↩ Запись удалена из списка наблюдения.",
     un_nodata:"Для этого шага нет данных для отмены.",
-    un_confirm:"Отмена снова выдаст НЕОГРАНИЧЕННЫЙ доступ к вашим токенам (получателей: {n}), включая помеченных как опасные.\n\nПродолжайте, только если доверяете им.",
+    un_confirm:"Отмена снова выдаст НЕОГРАНИЧЕННЫЙ доступ к вашим токенам (получателей: {n}).\n\nПродолжайте, только если доверяете им.",
+    un_blocked_flagged:"Отмена недоступна для получателей, помеченных как вредоносные. Их доступ останется отозванным.",
+    un_skip_flagged:"Помеченные как вредоносные получатели останутся отозванными: {n}.",
     un_restoring_1:"Восстановление разрешения…",
     un_restoring_n:"Восстановление разрешений: {n}…",
     un_restoring_i:"Восстановление {a}/{b}…",
