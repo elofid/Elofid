@@ -5061,11 +5061,8 @@ async function loadAppKit() {
   if (window.CxAppKitModal) return window.CxAppKitModal;
   if (_appkitLoadPromise) return _appkitLoadPromise;
   _appkitLoadPromise = (async () => {
-    const [{ createAppKit }, { EthersAdapter }, { bsc, mainnet }] = await Promise.all([
-      import("https://esm.sh/@reown/appkit@1.8.24"),
-      import("https://esm.sh/@reown/appkit-adapter-ethers@1.8.24"),
-      import("https://esm.sh/@reown/appkit@1.8.24/networks"),
-    ]);
+    // Self-hosted, fixed build of Reown AppKit 1.8.24 (see tools/appkit). Loaded only when connecting.
+    const { createAppKit, EthersAdapter, bsc, mainnet } = await import("/assets/vendor/appkit-1.8.24/appkit.js");
     const appkit = createAppKit({
       adapters: [new EthersAdapter()],
       networks: [bsc, mainnet],
