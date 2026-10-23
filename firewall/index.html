@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <script>
     // Privacy: links like /firewall?wallet=0x… or ?verify=… carry a wallet address.
-    // Keep it out of analytics: Google gets the URL without those params, the X pixel
-    // is skipped, and other pages only see https://elofid.com/ as the referrer.
+    // Keep it out of analytics: Google gets the URL without those params, and other
+    // pages only see https://elofid.com/ as the referrer.
     window.__fwPrivateUrl = /[?&](wallet|verify)=/.test(location.search);
     if (window.__fwPrivateUrl) {
       var fwRefMeta = document.createElement("meta");
