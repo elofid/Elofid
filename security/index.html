@@ -47,7 +47,12 @@ twq('config','r4v6v');
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
   <meta name="theme-color" content="#05060a">
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js" defer></script>
+  <link rel="preload" href="/assets/vendor/ethers-6.7.1.umd.min.js" as="script">
+  <script>
+    // ethers is large (~480KB). Download it now, but run it only after the first paint
+    // so the page shows up right away. Code that needs it awaits window.__elofidEthers.
+    window.__elofidEthers = new Promise(function (done) { window.__elofidEthersDone = done; });
+  </script>
 <style>
   :root {
     --bg:#05060a;
@@ -4985,7 +4990,7 @@ twq('config','r4v6v');
             </div>
           </div>
           <a id="bm-drag" class="bm-drag" href="#">
-            <img class="bm-drag-icon" src="/logo.png" alt="Elofid">
+            <img class="bm-drag-icon" src="/logo.webp" width="22" height="22" loading="lazy" decoding="async" alt="Elofid">
             <span data-i18n="bm_drag_label">Elofid – Security Hub</span>
           </a>
           <div id="bm-out" class="status info"></div>
@@ -5051,6 +5056,7 @@ twq('config','r4v6v');
 
 <script type="module">
 "use strict";
+await window.__elofidEthers;
 var E = window.E || window.ethers;
 window.E = E;
 window.CX = window.CX || {};
@@ -9303,6 +9309,15 @@ async function copyText(text) {
       return false;
     }
   }
+}
+
+// Escapes text that comes from outside (RPC errors, user-entered URLs) before it goes into HTML.
+function escHtml(s) {
+  return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+// Only http(s)/ws(s) URLs may be saved or used as an RPC endpoint.
+function isSafeRpcUrl(u) {
+  try { return /^(https?|wss?):$/.test(new URL(u).protocol); } catch { return false; }
 }
 
 function setStatus(el, type, html) {
@@ -16390,7 +16405,7 @@ function rpcRowHtml(url, ms, chain, block, callOk, logsOk, status, isBest){
   return `
     <div class="rpc-card ${ok ? "rpc-card-ok" : "rpc-card-fail"}${isBest ? " rpc-card-best" : ""}">
       <div class="rpc-card-top">
-        <div class="rpc-card-host">${host}</div>
+        <div class="rpc-card-host">${escHtml(host)}</div>
         <div class="rpc-card-right">
           ${isBest ? `<span class="rpc-best-badge">${tf("rpc_best_badge")}</span>` : ""}
           <span class="rpc-ms ${msCls}">${ok ? msTxt : tf("rpc_failed")}</span>
@@ -16485,7 +16500,7 @@ async function runRpcTest(){
         ));
       });
     }
-    setStatus(st, "ok", `${tf("st_best_rpc")} <span class="mono" style="font-size:11px">${best.url}</span>`);
+    setStatus(st, "ok", `${tf("st_best_rpc")} <span class="mono" style="font-size:11px">${escHtml(best.url)}</span>`);
     gtagEvent("sec_rpc_best_saved", { net });
   } else {
     setStatus(st, "bad", tf("st_all_rpcs_failed"));
@@ -16515,6 +16530,7 @@ function initRpcUi(){
   $("#rpc-private-save")?.addEventListener("click", () => {
     const net = netFromSelect("#rpc-net");
     const v = ($("#rpc-private")?.value || "").trim();
+    if (v && !isSafeRpcUrl(v)) return setStatus($("#rpc-status"), "warn", "RPC URL must start with https:// or wss://");
     if (v) setSavedPrivateRpc(net, v);
     setStatus($("#rpc-status"), "ok", tf("st_private_rpc_saved"));
   });
@@ -16528,7 +16544,10 @@ function initRpcUi(){
   $("#rpc-copy-best")?.addEventListener("click", rpcCopyBest);
   $("#rpc-share-x")?.addEventListener("click", () => {
     const net = netFromSelect("#rpc-net");
-    const best = getSavedBestRpc(net) || "—";
+    // Share only the host: the full URL can hold a private API key.
+    const saved = getSavedBestRpc(net);
+    let best = "—";
+    try { if (saved) best = new URL(saved).host || "—"; } catch {}
     const u = new URL("https://twitter.com/intent/tweet");
     u.searchParams.set("text", `RPC Health (${CHAINS[net].name})\nBest: ${best}\nElofid Security Hub`);
     window.open(u.toString(), "_blank", "noopener,noreferrer");
@@ -16547,7 +16566,7 @@ function initRpcUi(){
       const bn = await provider.getBlockNumber();
       return { url, bn };
     }, { timeoutMs: 9500 });
-    if (!latest.ok) return setStatus($("#rpc-status"), "bad", `${tf("st_block_read_failed")} ${String(latest.err?.message || latest.err)}`);
+    if (!latest.ok) return setStatus($("#rpc-status"), "bad", `${tf("st_block_read_failed")} ${escHtml(latest.err?.message || latest.err)}`);
     const bn = latest.res.bn;
     const from = Math.max(0, bn - 2000);
     const r = await withRpcFallback(net, async (provider, url) => {
@@ -16555,9 +16574,9 @@ function initRpcUi(){
       return { url, count: logs.length };
     }, { timeoutMs: 10500 });
     if (r.ok) {
-      setStatus($("#rpc-status"), "ok", `${tf("st_dev_ok", { count: r.res.count })} <span class="mono">${r.url}</span>`);
+      setStatus($("#rpc-status"), "ok", `${tf("st_dev_ok", { count: r.res.count })} <span class="mono">${escHtml(r.url)}</span>`);
     } else {
-      setStatus($("#rpc-status"), "bad", `${tf("st_dev_failed")} ${String(r.err?.message || r.err)}`);
+      setStatus($("#rpc-status"), "bad", `${tf("st_dev_failed")} ${escHtml(r.err?.message || r.err)}`);
     }
     gtagEvent("sec_rpc_dev_logs", { net });
   });
@@ -16736,7 +16755,7 @@ function initRpcUi(){
       if (!r.ok) {
         const msg = String(r.err?.message || r.err || "");
         if (msg.includes("tx_null")) return setStatus(st, "bad", tf("st_tx_not_found"));
-        return setStatus(st, "bad", `${tf("st_rpc_failed")} ${msg}`);
+        return setStatus(st, "bad", `${tf("st_rpc_failed")} ${escHtml(msg)}`);
       }
 
       const read = r.res.provider;
@@ -17017,7 +17036,7 @@ function initRpcUi(){
       setStatus(st, "ok", tf("st_done"));
       gtagEvent("sec_tx_decode", { net });
     } catch (e) {
-      setStatus(st, "bad", `${tf("st_decode_failed")} ${String(e?.message || e)}`);
+      setStatus(st, "bad", `${tf("st_decode_failed")} ${escHtml(e?.message || e)}`);
     }
   }
 
@@ -17065,7 +17084,7 @@ function bmGenerate(){
   const js = `(function(){
     try{
       var href=location.href,u=new URL(href),host=(u.host||"").toLowerCase();
-      var hub=new URL("${base}");
+      var hub=new URL(${JSON.stringify(base)});
       if(host.endsWith("coinmarketcap.com")){
         var addr=null;
         var mPath=u.pathname.match(/\\b(0x[0-9a-fA-F]{40})\\b/);
@@ -17175,10 +17194,10 @@ function renderMonitorTable(){
     table.insertAdjacentHTML("beforeend", `
   <div class="trow" style="grid-template-columns:2fr 1fr 1.2fr 1.5fr auto">
     <div class="cell mono"><a href="${chain.addressUrl(item.addr)}" target="_blank" rel="noopener">${shortAddr(item.addr)}</a></div>
-    <div class="cell">${String(item.net || "").toUpperCase()}</div>
+    <div class="cell">${escHtml(String(item.net || "").toUpperCase())}</div>
     <div class="cell hide-sm">${item.lastSeen ? new Date(item.lastSeen*1000).toLocaleString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}) : "—"}</div>
-    <div class="cell">${item.status || "—"}</div>
-    <div class="cell"><button class="mon-remove" type="button" data-action="mon-remove" data-addr="${item.addr}" data-net="${item.net}" title="${tf("th_remove")}">×</button></div>
+    <div class="cell">${escHtml(item.status || "—")}</div>
+    <div class="cell"><button class="mon-remove" type="button" data-action="mon-remove" data-addr="${escHtml(item.addr)}" data-net="${escHtml(item.net)}" title="${tf("th_remove")}">×</button></div>
   </div>
 `);
   }
@@ -17428,6 +17447,17 @@ if (typeof window.cxActivitySend !== "function") {
     });
   }
 })();
+</script>
+<script>
+  // Start ethers after the first paint (see window.__elofidEthers in <head>).
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      var s = document.createElement("script");
+      s.src = "/assets/vendor/ethers-6.7.1.umd.min.js";
+      s.onload = s.onerror = function () { window.__elofidEthersDone(window.ethers); };
+      document.head.appendChild(s);
+    }, 0);
+  });
 </script>
 </body>
 </html>

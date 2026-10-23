@@ -46,8 +46,12 @@ twq('config','r4v6v');
   <meta name="theme-color" content="#05060a">
 
   <!-- Ethers (same version as main site) -->
-  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <link rel="preload" href="/assets/vendor/ethers-6.7.1.umd.min.js" as="script">
+  <script>
+    // ethers is large (~480KB). Download it now, but run it only after the first paint
+    // so the page shows up right away. Code that needs it awaits window.__elofidEthers.
+    window.__elofidEthers = new Promise(function (done) { window.__elofidEthersDone = done; });
+  </script>
 <style>
   :root {
     --bg:#05060a;
@@ -1706,7 +1710,7 @@ body{background:#05060a!important}
       <div class="scan-bar">
         <input id="walletInput" class="mono" placeholder="0x... wallet address" spellcheck="false" autocomplete="off" />
         <button type="button" class="fw-paste" id="fwPasteBtn" data-i18n="fw_paste" hidden>Paste</button>
-        <select id="netSelect" class="scan-net">
+        <select id="netSelect" class="scan-net" aria-label="Network">
           <option value="bsc">BSC</option>
           <option value="eth">ETH</option>
           <option value="polygon">POLYGON</option>
@@ -1757,7 +1761,7 @@ body{background:#05060a!important}
         <strong data-i18n="notice_live_title">Live scan.</strong> <span data-i18n="notice_live_body">Read-only on-chain data. No transactions made.</span>
       </div>
       <div class="notice" id="demoNotice">
-        <strong data-i18n="notice_demo_title">Demo wallet.</strong> <span data-i18n="notice_demo_body">Sample data only. <a href="javascript:void(0)" onclick="document.getElementById('btnNewScan').click()">Scan your wallet</a></span>
+        <strong data-i18n="notice_demo_title">Demo wallet.</strong> <span data-i18n="notice_demo_body">Sample data only. <a href="#" onclick="document.getElementById('btnNewScan').click();return false">Scan your wallet</a></span>
       </div>
 
       <!-- ACCESS GATE OVERLAY -->
@@ -2627,7 +2631,8 @@ function fwSetExportStatus(msg, color) {
 
 window.fwExportCSV = function() {
   if (!fwScanData?.rows?.length){fwSetExportStatus(_t("exp_run_first"),"#ffd166");return;}
-  const q = v=>`"${String(v??"").replace(/"/g,'""')}"`;
+  // Quote CSV cells; prefix text that Excel would run as a formula (= + - @).
+  const q = v=>{ let t=String(v??""); if (typeof v==="string" && /^[=+\-@\t\r]/.test(t)) t="'"+t; return `"${t.replace(/"/g,'""')}"`; };
   const d = fwScanData;
   const dateStr = new Date().toLocaleString();
 
@@ -3229,7 +3234,12 @@ function today() {
   return new Date().toLocaleDateString("en-US", { year:"numeric", month:"short", day:"numeric" });
 }
 function esc(s) {
-  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+// Safe JS string argument for an inline onclick="..." handler.
+// esc() alone is not enough there: the browser decodes &#39; back to ' before the JS runs.
+function jsArg(s) {
+  return esc(JSON.stringify(String(s ?? "")));
 }
 function fwIsAddr(a) {
   try {
@@ -3634,9 +3644,9 @@ function computeMetrics(approvals) {
     contractLabel: r.contractLabel,
     isUnlimited: r.isUnlimited,
     hasApproval: r.hasApproval,
-    // canRevoke: need BOTH addresses present — simple non-empty check
+    // canRevoke: need BOTH to be valid 0x addresses
     // fwNorm() handles address format normalization at revoke time
-    canRevoke:   !!(r.hasApproval && r.token && r.token.length > 5 && r.spender && r.spender.length > 5),
+    canRevoke:   !!(r.hasApproval && /^0x[0-9a-fA-F]{40}$/.test(String(r.token||"")) && /^0x[0-9a-fA-F]{40}$/.test(String(r.spender||""))),
     compositeRisk: r.compositeRisk,
     tokens:      [r.symbol || "TOKEN"],
     lastUpdated: r.lastUpdated || "—"
@@ -4319,7 +4329,7 @@ function fwRenderHistory(wallet, net, currentScore, currentData) {
     const chips = allWallets.map(w => {
       const dotColor = w.lastScore >= 70 ? "#5dffb2" : w.lastScore >= 45 ? "#ffd166" : "#ff7a8a";
       const date = w.lastTs ? fwDate(w.lastTs, { month: "short", day: "numeric" }) : "—";
-      return `<div class="fwh-wallet-chip" onclick="fwHistoryQuickScan('${esc(w.wallet)}','${esc(w.net)}')" title="${esc(_tf("h_chip_title", { s: w.lastScore, d: date }))}">
+      return `<div class="fwh-wallet-chip" onclick="fwHistoryQuickScan(${jsArg(w.wallet)},${jsArg(w.net)})" title="${esc(_tf("h_chip_title", { s: w.lastScore, d: date }))}">
         <span class="fwh-dot" style="background:${dotColor}"></span>
         <span>${fwShort(w.wallet)}</span>
         <span style="color:var(--muted)">${w.net.toUpperCase()}</span>
@@ -4967,15 +4977,15 @@ function _buildThreatCard(t, i, tier) {
   let actionBtn = "";
   if (tier === "full" && t.canRevoke) {
     // Have both addresses — real on-chain revoke
-    actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">${esc(_t("fwg_revoke"))}</button>`;
+    actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender(${jsArg(t.fullSpender)},${jsArg(t.token)},this)">${esc(_t("fwg_revoke"))}</button>`;
   } else if (tier === "free" && t.hasApproval) {
     if (i === 0) {
       if (t.canRevoke) {
         // API returned full addresses — direct revoke
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender('${esc(t.fullSpender)}','${esc(t.token)}',this)">${esc(_t("fwg_revoke"))}</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="revokeSpender(${jsArg(t.fullSpender)},${jsArg(t.token)},this)">${esc(_t("fwg_revoke"))}</button>`;
       } else {
         // API returned preview only — lazy on-chain lookup on click
-        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke('${esc(t.symbol||"")}','${esc(fwNet||"bsc")}',this)">${esc(_t("fwg_revoke"))}</button>`;
+        actionBtn = `<button class="btn-fix-small" style="border-color:rgba(93,255,178,.4);color:var(--green)" onclick="fwFetchTopSpenderAndRevoke(${jsArg(t.symbol||"")},${jsArg(fwNet||"bsc")},this)">${esc(_t("fwg_revoke"))}</button>`;
       }
     } else {
       // All others: prompt upgrade
@@ -5319,6 +5329,10 @@ async function undoFix(step) {
     : (data?.token && data?.spender) ? [data] : [];
 
   if (!targets.length) { showPassportMsg(_t("un_nodata")); return; }
+
+  // Undo re-grants an UNLIMITED approval to spenders that were just revoked as risky.
+  // Make the user confirm that explicitly before any wallet prompt.
+  if (!window.confirm(`Undo will give ${targets.length === 1 ? "this spender" : targets.length + " spenders"} UNLIMITED access to your tokens again, including spenders flagged as risky.\n\nOnly continue if you trust ${targets.length === 1 ? "it" : "them"}. Continue?`)) return;
 
   if (undoBtn) { undoBtn.disabled = true; fwSetT(undoBtn, targets.length === 1 ? "un_restoring_1" : "un_restoring_n", { n: targets.length }); }
   const E = getE();
@@ -6589,8 +6603,8 @@ function fwWatchRender() {
         <span class="fw-watch-score" style="color:${dot}">${scoreStr}</span>${deltaStr}
       </div>
       <div class="fw-watch-actions">
-        <button class="fw-watch-btn scan" onclick="fwHistoryQuickScan('${esc(w.wallet)}','${esc(w.net||"bsc")}')">${esc(_t("w_scan"))}</button>
-        <button class="fw-watch-btn del"  onclick="fwWatchRemove('${esc(w.wallet)}','${esc(w.net||"bsc")}')">✕</button>
+        <button class="fw-watch-btn scan" onclick="fwHistoryQuickScan(${jsArg(w.wallet)},${jsArg(w.net||"bsc")})">${esc(_t("w_scan"))}</button>
+        <button class="fw-watch-btn del"  onclick="fwWatchRemove(${jsArg(w.wallet)},${jsArg(w.net||"bsc")})">✕</button>
       </div>
     </div>`;
   }).join("");
@@ -8964,5 +8978,16 @@ async function fwEnsureBsc(provider) {
   </div>
 </div>
 
+<script>
+  // Start ethers after the first paint (see window.__elofidEthers in <head>).
+  requestAnimationFrame(function () {
+    setTimeout(function () {
+      var s = document.createElement("script");
+      s.src = "/assets/vendor/ethers-6.7.1.umd.min.js";
+      s.onload = s.onerror = function () { window.__elofidEthersDone(window.ethers); };
+      document.head.appendChild(s);
+    }, 0);
+  });
+</script>
 </body>
 </html>
