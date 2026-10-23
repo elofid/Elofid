@@ -6078,6 +6078,7 @@ const translations = {
     st_no_best_rpc: "No saved best RPC yet. Run test first.",
     st_copied_best_rpc: "Copied best RPC.",
     st_private_rpc_saved: "Saved private RPC locally.",
+    st_rpc_url_invalid: "RPC URL must start with https:// or wss://",
     st_private_rpc_cleared: "Cleared private RPC.",
     st_dev_enter_addr: "Enter a contract address for the dev test.",
     st_invalid_contract: "Invalid contract address.",
@@ -7090,6 +7091,7 @@ const translations = {
     st_no_best_rpc: "尚未保存最佳 RPC。请先运行测试。",
     st_copied_best_rpc: "已复制最佳 RPC。",
     st_private_rpc_saved: "已在本地保存私有 RPC。",
+    st_rpc_url_invalid: "RPC 地址必须以 https:// 或 wss:// 开头",
     st_private_rpc_cleared: "已清除私有 RPC。",
     st_dev_enter_addr: "请输入用于开发者测试的合约地址。",
     st_invalid_contract: "合约地址无效。",
@@ -8102,6 +8104,7 @@ const translations = {
     st_no_best_rpc: "لا يوجد أفضل RPC محفوظ بعد. شغّل الاختبار أولًا.",
     st_copied_best_rpc: "تم نسخ أفضل RPC.",
     st_private_rpc_saved: "تم حفظ RPC الخاص محليًا.",
+    st_rpc_url_invalid: "يجب أن يبدأ عنوان RPC بـ https:// أو wss://",
     st_private_rpc_cleared: "تم مسح RPC الخاص.",
     st_dev_enter_addr: "أدخل عنوان عقد لاختبار المطوّر.",
     st_invalid_contract: "عنوان العقد غير صالح.",
@@ -9114,6 +9117,7 @@ const translations = {
     st_no_best_rpc: "Лучший RPC ещё не сохранён. Сначала запустите тест.",
     st_copied_best_rpc: "Лучший RPC скопирован.",
     st_private_rpc_saved: "Приватный RPC сохранён локально.",
+    st_rpc_url_invalid: "Адрес RPC должен начинаться с https:// или wss://",
     st_private_rpc_cleared: "Приватный RPC удалён.",
     st_dev_enter_addr: "Введите адрес контракта для теста.",
     st_invalid_contract: "Некорректный адрес контракта.",
@@ -16530,7 +16534,7 @@ function initRpcUi(){
   $("#rpc-private-save")?.addEventListener("click", () => {
     const net = netFromSelect("#rpc-net");
     const v = ($("#rpc-private")?.value || "").trim();
-    if (v && !isSafeRpcUrl(v)) return setStatus($("#rpc-status"), "warn", "RPC URL must start with https:// or wss://");
+    if (v && !isSafeRpcUrl(v)) return setStatus($("#rpc-status"), "warn", tf("st_rpc_url_invalid"));
     if (v) setSavedPrivateRpc(net, v);
     setStatus($("#rpc-status"), "ok", tf("st_private_rpc_saved"));
   });
@@ -17450,14 +17454,31 @@ if (typeof window.cxActivitySend !== "function") {
 </script>
 <script>
   // Start ethers after the first paint (see window.__elofidEthers in <head>).
-  requestAnimationFrame(function () {
-    setTimeout(function () {
+  // Order: our own copy first; if it cannot be loaded, the same file from jsDelivr,
+  // checked with an integrity hash so a changed CDN file is refused.
+  (function () {
+    var started = false;
+    function add(src, integrity, next) {
       var s = document.createElement("script");
-      s.src = "/assets/vendor/ethers-6.7.1.umd.min.js";
-      s.onload = s.onerror = function () { window.__elofidEthersDone(window.ethers); };
+      s.src = src;
+      if (integrity) { s.integrity = integrity; s.crossOrigin = "anonymous"; }
+      s.onload = function () { window.__elofidEthersDone(window.ethers); };
+      s.onerror = next;
       document.head.appendChild(s);
-    }, 0);
-  });
+    }
+    function start() {
+      if (started) return;
+      started = true;
+      add("/assets/vendor/ethers-6.7.1.umd.min.js", "", function () {
+        add("https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js",
+            "sha384-eoEZatO/ymJi+LdBilp3xt/M9N9Lla2JlMVPZuk48Fg1YGl2Mc+vmsky+nkOtlSi",
+            function () { window.__elofidEthersDone(window.ethers); });
+      });
+    }
+    requestAnimationFrame(function () { setTimeout(start, 0); });
+    // Background tabs pause requestAnimationFrame; start anyway after a short wait.
+    setTimeout(start, 1500);
+  })();
 </script>
 </body>
 </html>

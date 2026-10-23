@@ -2632,7 +2632,7 @@ function fwSetExportStatus(msg, color) {
 window.fwExportCSV = function() {
   if (!fwScanData?.rows?.length){fwSetExportStatus(_t("exp_run_first"),"#ffd166");return;}
   // Quote CSV cells; prefix text that Excel would run as a formula (= + - @).
-  const q = v=>{ let t=String(v??""); if (typeof v==="string" && /^[=+\-@\t\r]/.test(t)) t="'"+t; return `"${t.replace(/"/g,'""')}"`; };
+  const q = v=>{ let t=String(v??""); if (typeof v==="string" && t.length > 1 && /^[=+\-@\t\r]/.test(t) && !/^[-+]?[\d.,]+%?$/.test(t)) t="'"+t; return `"${t.replace(/"/g,'""')}"`; };
   const d = fwScanData;
   const dateStr = new Date().toLocaleString();
 
@@ -5332,7 +5332,7 @@ async function undoFix(step) {
 
   // Undo re-grants an UNLIMITED approval to spenders that were just revoked as risky.
   // Make the user confirm that explicitly before any wallet prompt.
-  if (!window.confirm(`Undo will give ${targets.length === 1 ? "this spender" : targets.length + " spenders"} UNLIMITED access to your tokens again, including spenders flagged as risky.\n\nOnly continue if you trust ${targets.length === 1 ? "it" : "them"}. Continue?`)) return;
+  if (!window.confirm(_tf("un_confirm", { n: targets.length }))) return;
 
   if (undoBtn) { undoBtn.disabled = true; fwSetT(undoBtn, targets.length === 1 ? "un_restoring_1" : "un_restoring_n", { n: targets.length }); }
   const E = getE();
@@ -7265,6 +7265,7 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ Added to local watchlist",
     un_watch_removed:"↩ Watchlist entry removed.",
     un_nodata:"No undo data for this step.",
+    un_confirm:"Undo gives UNLIMITED access to your tokens back to {n} spender(s), including any flagged as risky.\n\nContinue only if you trust them.",
     un_restoring_1:"Restoring approval…",
     un_restoring_n:"Restoring {n} approvals…",
     un_restoring_i:"Restoring {a}/{b}…",
@@ -7666,6 +7667,7 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ 已加入本地监控列表",
     un_watch_removed:"↩ 已从监控列表移除。",
     un_nodata:"此步骤没有可还原的数据。",
+    un_confirm:"撤销将重新授予 {n} 个授权方对你代币的无限访问权限，包括被标记为有风险的授权方。\n\n只有在你信任它们时才继续。",
     un_restoring_1:"正在恢复授权…",
     un_restoring_n:"正在恢复 {n} 个授权…",
     un_restoring_i:"正在恢复 {a}/{b}…",
@@ -8068,6 +8070,7 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ أُضيفت إلى قائمة المراقبة المحلية",
     un_watch_removed:"↩ تمت الإزالة من قائمة المراقبة.",
     un_nodata:"لا توجد بيانات تراجع لهذه الخطوة.",
+    un_confirm:"التراجع سيمنح {n} من جهات الصرف وصولاً غير محدود إلى توكناتك مرة أخرى، بما فيها الجهات المصنّفة كخطرة.\n\nتابع فقط إذا كنت تثق بها.",
     un_restoring_1:"جارٍ استعادة الموافقة…",
     un_restoring_n:"جارٍ استعادة {n} من الموافقات…",
     un_restoring_i:"جارٍ الاستعادة {a}/{b}…",
@@ -8489,6 +8492,7 @@ const FW_TRANSLATIONS = {
     rv_watch_added:"✓ Добавлено в локальный список наблюдения",
     un_watch_removed:"↩ Запись удалена из списка наблюдения.",
     un_nodata:"Для этого шага нет данных для отмены.",
+    un_confirm:"Отмена снова выдаст НЕОГРАНИЧЕННЫЙ доступ к вашим токенам (получателей: {n}), включая помеченных как опасные.\n\nПродолжайте, только если доверяете им.",
     un_restoring_1:"Восстановление разрешения…",
     un_restoring_n:"Восстановление разрешений: {n}…",
     un_restoring_i:"Восстановление {a}/{b}…",
@@ -8980,14 +8984,31 @@ async function fwEnsureBsc(provider) {
 
 <script>
   // Start ethers after the first paint (see window.__elofidEthers in <head>).
-  requestAnimationFrame(function () {
-    setTimeout(function () {
+  // Order: our own copy first; if it cannot be loaded, the same file from jsDelivr,
+  // checked with an integrity hash so a changed CDN file is refused.
+  (function () {
+    var started = false;
+    function add(src, integrity, next) {
       var s = document.createElement("script");
-      s.src = "/assets/vendor/ethers-6.7.1.umd.min.js";
-      s.onload = s.onerror = function () { window.__elofidEthersDone(window.ethers); };
+      s.src = src;
+      if (integrity) { s.integrity = integrity; s.crossOrigin = "anonymous"; }
+      s.onload = function () { window.__elofidEthersDone(window.ethers); };
+      s.onerror = next;
       document.head.appendChild(s);
-    }, 0);
-  });
+    }
+    function start() {
+      if (started) return;
+      started = true;
+      add("/assets/vendor/ethers-6.7.1.umd.min.js", "", function () {
+        add("https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js",
+            "sha384-eoEZatO/ymJi+LdBilp3xt/M9N9Lla2JlMVPZuk48Fg1YGl2Mc+vmsky+nkOtlSi",
+            function () { window.__elofidEthersDone(window.ethers); });
+      });
+    }
+    requestAnimationFrame(function () { setTimeout(start, 0); });
+    // Background tabs pause requestAnimationFrame; start anyway after a short wait.
+    setTimeout(start, 1500);
+  })();
 </script>
 </body>
 </html>
