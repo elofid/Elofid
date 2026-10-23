@@ -987,6 +987,13 @@ twq('config','r4v6v');
     /* Shared site footer (assets/elofid-ui.css); this page has 4 link columns. */
     .dev-foot .eui-foot-grid{grid-template-columns:minmax(0,1.6fr) repeat(4,minmax(0,1fr))}
     .dev-foot .eui-footer{margin-top:0;padding-bottom:88px}
+    /* Feature cards: icon and title on one line, description below (mobile already puts the icon beside the text). */
+    @media(min-width:561px){
+      .feat-grid .feat-card{display:grid;grid-template-columns:36px minmax(0,1fr);grid-template-rows:auto 1fr;column-gap:12px;row-gap:10px;align-items:center;align-content:start}
+      .feat-grid .feat-icon{grid-column:1;grid-row:1}
+      .feat-grid .feat-name{grid-column:2;grid-row:1;margin-top:0}
+      .feat-grid .feat-copy{grid-column:1/-1;grid-row:2;align-self:start}
+    }
     @media(max-width:760px){.dev-foot .eui-foot-grid{grid-template-columns:1fr 1fr}}
   </style>
 <style id="elofid-final-cta-style">
