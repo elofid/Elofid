@@ -381,7 +381,6 @@ body.eui-page-hub::before{display:block!important;content:""!important;position:
 /* three more tools */
 @media(min-width:901px){.eui-page-hub #toolGrid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
 .eui-page-hub #toolGrid .tool-card[hidden]{display:none!important}
-.eui-page-hub .eui-footer{margin-top:64px}
 .eui-page-hub #heroQuickScanBtn[hidden],.eui-page-hub .hub-paste[hidden],.eui-page-firewall .fw-paste[hidden]{display:none!important}
 @media(max-width:640px){.eui-page-hub #toolGrid{grid-template-columns:1fr!important}}
 .eui-page-hub .hero .fw-hero-tagline{text-align:center;margin-left:auto;margin-right:auto;max-width:640px}
@@ -468,7 +467,7 @@ body.eui-page-dev{font-family:var(--eui-font)!important}
 .eui-page-hub .hub-trust,.eui-page-firewall .fw-trust{gap:8px;margin:14px auto 0;color:#8b96a5;font-size:13px}
 .eui-page-firewall .fw-trust>span:not(.micro-dot):not(.fw-trust-ic){font-size:13px}
 .eui-page-firewall .fw-trust .micro-dot{color:#4b5562}
-.eui-page-firewall .demo-hint{display:block;margin:10px auto 0;color:#42dbff;font-size:13px;font-weight:600;letter-spacing:0;cursor:pointer}
+.eui-page-firewall .demo-hint{display:block;margin:10px auto 0;color:#42dbff;font-size:13px;line-height:1.62;font-weight:600;letter-spacing:0;cursor:pointer}
 .eui-page-firewall .demo-hint:hover{text-decoration:underline}
 
 /* "What you get" heading */
@@ -487,3 +486,11 @@ body.eui-page-dev{font-family:var(--eui-font)!important}
   .eui-page-hub .hero .hero-sub,.eui-page-firewall .hero .hero-sub{font-size:15.5px!important}
   .eui-page-hub .hx-title,.eui-page-firewall .fwg-title{font-size:clamp(26px,7.6vw,32px)}
 }
+
+/* ───────────── Footer: the same on every page ─────────────
+   One fine-print line (© Elofid; on Firewall also the Reown credit), the same space above and below. */
+.eui-foot-sep{margin:0 8px;color:#4b5562}
+@media(max-width:560px){.eui-foot-sep{display:none}.eui-foot-note>span[dir]{display:block}}
+.eui-page-hub .eui-footer,.eui-page-firewall .eui-footer{padding-bottom:0}
+/* Security Hub and Firewall: the same small note under the search area */
+.eui-page-hub .hero .hero-note-small,.eui-page-firewall .hero .hero-note-small{margin:12px auto 0;color:rgba(255,255,255,.35);font-size:11px;line-height:1.6;letter-spacing:.01em;text-align:center}
