@@ -4495,6 +4495,8 @@ twq('config','r4v6v');
      flow-root keeps that margin inside .page-shell. The header position does not change. */
   .eui-page-hub .page-shell{display:flow-root}
   .eui-footer .eui-foot-credit{margin-top:4px;padding-top:0;border-top:0}
+  /* The page is zoomed 110% on desktop; keep the footer at the same size as on every other page. */
+  @media(min-width:901px){.eui-footer{zoom:.90909}}
 </style>
 <style id="elofid-logo-style">
   /* Elofid logo: round header mark (elofid-mark.svg), no tile frame */
