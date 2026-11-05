@@ -14516,7 +14516,11 @@ async function qsLiqCheckBasic(net, token, provider) {
       pauseConfirmed: pauseConfirmed === true,
       pausePossible: pausePossible === true,
       blacklistAbi: typeof controlMeta?.blacklistAbi === "boolean" ? controlMeta.blacklistAbi : null,
+      // Selector match without an authoritative ABI (control-meta v1.19.7). Shown by the engine as possible, never confirmed.
+      blacklistPossible: controlMeta?.blacklistPossible === true,
       tradingParamsAbi: typeof controlMeta?.tradingParamsAbi === "boolean" ? controlMeta.tradingParamsAbi : null,
+      // Fee/tax amount and trading-limit setters only (control-meta v1.19.7). Penalised by the engine on its own.
+      tradingSetterAbi: typeof controlMeta?.tradingSetterAbi === "boolean" ? controlMeta.tradingSetterAbi : null,
       sourceProvider: controlMeta?.sourceProvider || null
     };
 
