@@ -15955,9 +15955,11 @@ async function qsLiqCheckBasic(net, token, provider) {
       set("review", c.pauseTitle, c.pauseWhy);
     } else if (/sell tax|buy tax|transfer fee|fee schedule/.test(l)) {
       set(/very high|high .*tax|exit may be impossible/.test(l) ? "high" : "review", c.taxTitle, c.taxWhy);
-    } else if (/blacklist|denylist/.test(l)) {
-      // Wallet-level block / freeze lists (EVM engine texts). The bare word "freeze" is not matched here,
-      // so Solana freeze-authority flags keep their own classification.
+    } else if (/blacklist|denylist|freeze authority is active/.test(l)) {
+      // Wallet-level block / freeze controls: EVM blacklist texts and the active Solana freeze authority.
+      // It sits before the holder-account concentration branch, which would otherwise catch
+      // "holder accounts can be frozen". The bare word "freeze" is not matched, so the other Solana
+      // freeze texts (created FROZEN by default, malicious freeze authority) keep their classification.
       set("review", c.blacklistTitle, c.blacklistWhy);
     } else if (/trading\/tax parameter|trading\/slippage parameters/.test(l)) {
       // Fee, tax and trading-limit setters (verified ABI or provider-reported).
