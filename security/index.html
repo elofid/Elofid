@@ -15726,6 +15726,10 @@ async function qsLiqCheckBasic(net, token, provider) {
       taxWhy: "High or changeable taxes can make buying or selling expensive and, at extreme levels, can make a practical exit difficult.",
       adminTitle: "Administrative control",
       adminWhy: "Privileged controls can change trading conditions or contract behavior after launch. The more powerful the control, the more trust is placed in the administrator.",
+      blacklistTitle: "Blacklist / freeze control",
+      blacklistWhy: "The issuer or an admin can block or freeze specific wallets. A blocked wallet may be unable to transfer or sell its tokens. This is common in regulated stablecoins, but it places full trust in whoever holds this power.",
+      tradingTitle: "Adjustable fees or limits",
+      tradingWhy: "An admin can change fees, taxes or transaction limits after launch. Higher fees or tighter limits can make selling expensive or impossible.",
       balanceTitle: "Holder-balance control",
       balanceWhy: "An authority that can modify holder balances has unusually strong control over user funds and deserves very close review.",
       destroyTitle: "Contract destruction capability",
@@ -15766,6 +15770,8 @@ async function qsLiqCheckBasic(net, token, provider) {
         honeypotTitle:"卖出 / 转账限制", honeypotWhy:"卖出或转账限制可能阻止持有人正常退出，这是需要优先核实的高风险信号。",
         taxTitle:"交易税", taxWhy:"高额或可修改的税费会提高买卖成本，极端情况下可能让退出变得困难。",
         adminTitle:"管理权限", adminWhy:"特权控制可能在上线后改变交易条件或合约行为。控制越强，对管理员的信任要求越高。",
+        blacklistTitle:"黑名单 / 冻结控制", blacklistWhy:"发行方或管理员可以封禁或冻结特定钱包。被封禁的钱包可能无法转账或卖出代币。这在受监管的稳定币中很常见，但意味着要完全信任掌握这项权限的一方。",
+        tradingTitle:"可调整的费用或限制", tradingWhy:"管理员可以在上线后修改费用、税率或交易限额。更高的费用或更严格的限制可能让卖出变得昂贵，甚至无法卖出。",
         balanceTitle:"持有人余额控制", balanceWhy:"能够修改持有人余额的权限非常强，应重点核实。",
         destroyTitle:"合约销毁能力", destroyWhy:"自毁能力可能显著改变或终止合约行为，需要确认触发条件和控制者。",
         concentrationTitle:"持币集中度", concentrationWhy:"供应量高度集中会让少数钱包拥有更大影响力，并增加集中抛售或治理风险。",
@@ -15788,6 +15794,8 @@ async function qsLiqCheckBasic(net, token, provider) {
         honeypotTitle:"قيود البيع / التحويل", honeypotWhy:"قد تمنع قيود البيع أو التحويل المالكين من الخروج بشكل طبيعي، وهي من أهم الإشارات التي يجب التحقق منها.",
         taxTitle:"ضريبة التداول", taxWhy:"الضرائب العالية أو القابلة للتعديل قد تجعل الشراء أو البيع مكلفًا، وقد تجعل الخروج صعبًا عند المستويات القصوى.",
         adminTitle:"تحكم إداري", adminWhy:"الصلاحيات المميزة قد تغيّر شروط التداول أو سلوك العقد بعد الإطلاق. كلما زادت القوة زادت الحاجة للثقة بالمشرف.",
+        blacklistTitle:"تحكم بالقائمة السوداء / التجميد", blacklistWhy:"يمكن للجهة المُصدِرة أو للمشرف حظر محافظ معيّنة أو تجميدها. قد لا تتمكن المحفظة المحظورة من تحويل توكناتها أو بيعها. هذا شائع في العملات المستقرة الخاضعة للتنظيم، لكنه يضع ثقة كاملة في من يملك هذه الصلاحية.",
+        tradingTitle:"رسوم أو حدود قابلة للتعديل", tradingWhy:"يمكن للمشرف تغيير الرسوم أو الضرائب أو حدود المعاملات بعد الإطلاق. الرسوم الأعلى أو الحدود الأشد قد تجعل البيع مكلفًا أو مستحيلًا.",
         balanceTitle:"التحكم بأرصدة المالكين", balanceWhy:"القدرة على تعديل أرصدة المالكين صلاحية قوية جدًا وتستحق مراجعة دقيقة.",
         destroyTitle:"إمكانية تدمير العقد", destroyWhy:"قد تغيّر خاصية self-destruct سلوك العقد أو توقفه. تحقق ممن يستطيع تفعيلها وكيف.",
         concentrationTitle:"تركيز الحيازة", concentrationWhy:"التركيز العالي يمنح عددًا قليلاً من المحافظ تأثيرًا أكبر على العرض ويزيد مخاطر ضغط البيع أو السيطرة.",
@@ -15810,6 +15818,8 @@ async function qsLiqCheckBasic(net, token, provider) {
         honeypotTitle:"Ограничение продажи / перевода", honeypotWhy:"Ограничения продажи или перевода могут помешать держателям нормально выйти из позиции. Это один из наиболее приоритетных сигналов.",
         taxTitle:"Торговый налог", taxWhy:"Высокие или изменяемые налоги повышают стоимость покупки/продажи и в крайних случаях могут затруднить выход.",
         adminTitle:"Административный контроль", adminWhy:"Привилегированные функции могут менять условия торговли или поведение контракта после запуска. Чем сильнее контроль, тем больше доверия требуется к администратору.",
+        blacklistTitle:"Чёрный список / заморозка", blacklistWhy:"Эмитент или администратор может заблокировать или заморозить отдельные кошельки. Заблокированный кошелёк может не суметь перевести или продать свои токены. Это обычно для регулируемых стейблкоинов, но требует полного доверия к тому, у кого есть это полномочие.",
+        tradingTitle:"Изменяемые комиссии или лимиты", tradingWhy:"Администратор может менять комиссии, налоги или лимиты транзакций после запуска. Более высокие комиссии или жёсткие лимиты могут сделать продажу дорогой или невозможной.",
         balanceTitle:"Контроль балансов держателей", balanceWhy:"Возможность изменять балансы держателей — необычно сильное полномочие и требует особой проверки.",
         destroyTitle:"Возможность уничтожения контракта", destroyWhy:"Selfdestruct может существенно изменить или отключить поведение контракта. Проверьте, кто и как может его вызвать.",
         concentrationTitle:"Концентрация держателей", concentrationWhy:"Высокая концентрация предложения усиливает влияние небольшого числа кошельков и повышает риск давления продаж или контроля.",
@@ -15945,6 +15955,13 @@ async function qsLiqCheckBasic(net, token, provider) {
       set("review", c.pauseTitle, c.pauseWhy);
     } else if (/sell tax|buy tax|transfer fee|fee schedule/.test(l)) {
       set(/very high|high .*tax|exit may be impossible/.test(l) ? "high" : "review", c.taxTitle, c.taxWhy);
+    } else if (/blacklist|denylist/.test(l)) {
+      // Wallet-level block / freeze lists (EVM engine texts). The bare word "freeze" is not matched here,
+      // so Solana freeze-authority flags keep their own classification.
+      set("review", c.blacklistTitle, c.blacklistWhy);
+    } else if (/trading\/tax parameter|trading\/slippage parameters/.test(l)) {
+      // Fee, tax and trading-limit setters (verified ABI or provider-reported).
+      set("review", c.tradingTitle, c.tradingWhy);
     } else if (/hidden owner|reclaim ownership|blacklist|whitelist|slippage|administrative|powerful controls|active token-2022 authorities/.test(l)) {
       set("review", c.adminTitle, c.adminWhy);
     } else if (/extreme concentration|very few holders/.test(l)) {
