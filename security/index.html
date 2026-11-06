@@ -12295,18 +12295,22 @@ async function qsLiqCheckBasic(net, token, provider) {
   //      the two providers legitimately compute concentrated-liquidity pools differently.
   //   2. Pool with a GeckoTerminal value and no DexScreener value (listed only by GeckoTerminal, or listed
   //      by DexScreener without a value) that alone is more than 10x the largest priced DexScreener pool:
-  //      flag only. It keeps counting exactly as before, because new tokens often trade on a pool that
-  //      DexScreener does not index yet (the PancakeSwap Infinity case).
+  //      a. if its 24h volume is below 0.1% of its reserve (or the volume is missing or 0), it is removed
+  //         from liquidity, the top pool and the sums, and flagged as unverified. This is the live USDC on
+  //         Solana case: raydium-clmm pools pairing USDC with spoofed tokens, priced by GeckoTerminal at the
+  //         spoofed price (reserve $1.25B to $8.05B, 24h volume $130K to $390K).
+  //      b. otherwise it keeps counting exactly as before, with a flag only, because new tokens often trade
+  //         on a pool that DexScreener does not index yet (the PancakeSwap Infinity case).
   //   3. DexScreener has no priced pool: GeckoTerminal is used as before, no flag.
-  // Values only go down (rule 1). Volume, price, the DexScreener pair identity (LP and market anchor) and pool
+  // Values only go down (rule 1) or a pool is removed (rule 2a). Volume, price, the DexScreener pair identity (LP and market anchor) and pool
   // ages are left as they were. No new request. The inputs are never mutated (DexScreener answers can be
-  // cached), copies are returned. When rule 1 does not fire, the original objects are returned unchanged.
+  // cached), copies are returned. When neither rule 1 nor rule 2a fires, the original objects are returned unchanged.
   function qsReconcileLiquiditySources(ds, gt){
-    const flags = [], disagreements = [], uncrossed = [];
+    const flags = [], disagreements = [], uncrossed = [], excluded = [];
     const fin = v => { const n = Number(v); return Number.isFinite(n) && n > 0 ? n : null; };
     const key = p => String(p?.pairAddress || "").trim().toLowerCase();
     const usd = v => Math.round(Number(v)).toLocaleString("en-US");
-    if (!ds || !gt || !Array.isArray(gt.allPairs) || !gt.allPairs.length) return { ds, gt, flags, disagreements, uncrossed, applied:false };
+    if (!ds || !gt || !Array.isArray(gt.allPairs) || !gt.allPairs.length) return { ds, gt, flags, disagreements, uncrossed, excluded, applied:false };
     const dsPairs = Array.isArray(ds.allPairs) ? ds.allPairs.map(p => ({ ...p })) : [];
     const gtPairs = gt.allPairs.map(p => ({ ...p }));
     const dsBy = new Map();
@@ -12322,24 +12326,28 @@ async function qsLiqCheckBasic(net, token, provider) {
         d.liquidityUsd = low; g.liquidityUsd = low;
       }
     }
-    // Rule 2 (flag only) and rule 3: a GeckoTerminal value with no DexScreener value for that pool.
+    // Rule 2 and rule 3: a GeckoTerminal value with no DexScreener value for that pool.
     const dsMax = Math.max(0, ...dsPairs.map(p => fin(p.liquidityUsd) || 0));
-    if (dsMax > 0) for (const g of gtPairs) {
+    const kept = dsMax > 0 ? gtPairs.filter(g => {
       const d = dsBy.get(key(g)), b = fin(g.liquidityUsd);
-      if (b == null || (d && fin(d.liquidityUsd) != null)) continue;
-      if (b > dsMax * 10) uncrossed.push({ pairAddress: g.pairAddress || "", dex: g.dex || null, geckoTerminalUsd: b, largestDexScreenerUsd: dsMax });
-    }
+      if (b == null || (d && fin(d.liquidityUsd) != null) || !(b > dsMax * 10)) return true;
+      const v = Number(g.volumeUsd24h); const vol = Number.isFinite(v) && v > 0 ? v : null;
+      const x = { pairAddress: g.pairAddress || "", dex: g.dex || null, geckoTerminalUsd: b, volumeUsd24h: vol, largestDexScreenerUsd: dsMax };
+      if (vol == null || vol / b < 0.001) { excluded.push(x); return false; }   // rule 2a
+      uncrossed.push(x); return true;                                            // rule 2b
+    }) : gtPairs;
     for (const x of disagreements.slice(0, 3)) flags.push(`Providers disagree on liquidity for a pool (DexScreener ~$${usd(x.dexScreenerUsd)}, GeckoTerminal ~$${usd(x.geckoTerminalUsd)}). The lower figure is used.`);
+    for (const x of excluded.slice(0, 3)) flags.push(`A pool reported only by GeckoTerminal (~$${usd(x.geckoTerminalUsd)}) is far larger than any pool DexScreener lists and has almost no trading (24h volume ${x.volumeUsd24h == null ? "not reported" : "~$" + usd(x.volumeUsd24h)}). It is treated as unverified and not used for the score.`);
     for (const x of uncrossed.slice(0, 3)) flags.push(`A pool reported only by GeckoTerminal (~$${usd(x.geckoTerminalUsd)}) is much larger than any pool DexScreener lists. It is counted, but it could not be cross-checked.`);
-    if (!disagreements.length) return { ds, gt, flags, disagreements, uncrossed, applied:false };
+    if (!disagreements.length && !excluded.length) return { ds, gt, flags, disagreements, uncrossed, excluded, applied:false };
     const sum = xs => xs.reduce((a, p) => a + (Number(p?.liquidityUsd) || 0), 0);
     // DexScreener: values only. Its best pool stays the LP and market anchor (pairAddress, dexId, market fields).
     const dsBest = Math.max(0, ...dsPairs.map(p => fin(p.liquidityUsd) || 0));
     const dsOut = { ...ds, allPairs: dsPairs, liquidityUsd: dsBest > 0 ? Math.min(dsBest, fin(ds.liquidityUsd) ?? dsBest) : (ds.liquidityUsd ?? null), sumLiquidityUsd: sum(dsPairs) };
-    // GeckoTerminal: the top pool is recomputed from the adjusted values.
-    const gtBest = [...gtPairs].filter(p => fin(p.liquidityUsd) != null).sort((a, b) => fin(b.liquidityUsd) - fin(a.liquidityUsd))[0] || null;
-    const gtOut = { ...gt, allPairs: gtPairs, liquidityUsd: gtBest ? fin(gtBest.liquidityUsd) : null, pairAddress: gtBest?.pairAddress || null, dexId: gtBest?.dex || null, sumLiquidityUsd: sum(gtPairs) };
-    return { ds: dsOut, gt: gtOut, flags, disagreements, uncrossed, applied:true };
+    // GeckoTerminal: the top pool is recomputed from the pools that remain, with the adjusted values.
+    const gtBest = [...kept].filter(p => fin(p.liquidityUsd) != null).sort((a, b) => fin(b.liquidityUsd) - fin(a.liquidityUsd))[0] || null;
+    const gtOut = { ...gt, allPairs: kept, pairCount: kept.length, liquidityUsd: gtBest ? fin(gtBest.liquidityUsd) : null, pairAddress: gtBest?.pairAddress || null, dexId: gtBest?.dex || null, sumLiquidityUsd: sum(kept) };
+    return { ds: dsOut, gt: gtOut, flags, disagreements, uncrossed, excluded, applied:true };
   }
 
   // ✅ NEW: real circulating supply, wider coverage than CoinGecko's
