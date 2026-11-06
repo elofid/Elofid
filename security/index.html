@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12644,8 +12645,14 @@ async function qsLiqCheckBasic(net, token, provider) {
   // added to the UI below (mirrors the existing EVM "Custom RPC" pattern in
   // the RPC Health Checker panel) — a free Helius API key is the most
   // reliable option if a visitor wants stronger redundancy.
+  // ✅ FIX (2026-11-06, confirmed in the browser console): rpc.solanatracker.io/public now refuses
+  // browser requests too (CORS, no Access-Control-Allow-Origin). Every Solana read from the page
+  // failed silently, so the mint account (token program, mint/freeze authority, supply, Token-2022
+  // extensions) fell back to GoPlus and Token Program showed "Unknown". The reads now go through the
+  // site API Worker (same origin, read-only allowlist, Helius first when configured, public Solana
+  // RPCs server-side as fallback). A custom RPC entered by the visitor still comes first.
   const SOLANA_RPCS = [
-    "https://rpc.solanatracker.io/public"
+    `${location.origin}/api/rpc?net=solana`
   ];
   function getSolanaCustomRpc(){
     try { return (localStorage.getItem("elofid_sec_solana_custom_rpc") || "").trim(); } catch { return ""; }
@@ -15702,7 +15709,14 @@ async function qsLiqCheckBasic(net, token, provider) {
         const cgCirc = cex?.circulatingSupplyReal;
         const gtCirc = gtInfo?.circulatingSupplyReal;
         const realCirc = (Number.isFinite(cgCirc) && cgCirc > 0) ? cgCirc : (Number.isFinite(gtCirc) && gtCirc > 0 ? gtCirc : null);
+        const realCircSource = (Number.isFinite(cgCirc) && cgCirc > 0) ? "CoinGecko" : "GeckoTerminal";
         const supplyKnown = solHolders?.supplyUi ?? mintInfo?.supplyUi ?? null;
+        // ✅ FIX: CoinGecko / GeckoTerminal give the circulating supply across every chain (USDC: ~70B
+        // while ~8.7B exist on Solana). When it is larger than the Solana mint supply it is not a
+        // Solana figure, so it is labelled Global, as the EVM path already does.
+        if (realCirc != null && Number.isFinite(Number(supplyKnown)) && Number(supplyKnown) > 0 && realCirc > Number(supplyKnown) * 1.01) {
+          return [{ type: "warn", title: "Global Circulating Supply", value: `${realCirc.toLocaleString(undefined, { maximumFractionDigits: 4 })} (${realCircSource}, not chain-local)` }];
+        }
         let text = null, isReal = false;
         if (realCirc != null) {
           text = realCirc.toLocaleString(undefined, { maximumFractionDigits: 4 });
