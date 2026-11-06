@@ -10445,6 +10445,14 @@ function initPanels() {
   }
 
 
+  // ✅ FIX (2026-11-06): Number(null) and Number("") are 0, so "unknown" from a provider or the Worker
+  // turned into a measured 0 (Solana holders showed "Token Account Owners 0", "0.0% classified",
+  // "Dev/Creator 0.00%"). Only a real number, or a numeric string, stays a number. Everything else is null.
+  function qsNumOrNull(v){
+    if (typeof v === "number") return Number.isFinite(v) ? v : null;
+    if (typeof v === "string" && v.trim() !== "") { const n = Number(v); return Number.isFinite(n) ? n : null; }
+    return null;
+  }
   function qsShortAddr(a){
     try { if (typeof shortAddr === "function") return shortAddr(a); } catch {}
     const s = String(a || "");
@@ -11492,12 +11500,12 @@ async function qsLiqCheckBasic(net, token, provider) {
         return {
           status, listed: status === "listed", displayListed: j.displayListed === true || status === "listed" || status === "lower_trust_only",
           exchanges: Array.isArray(j.exchanges) ? j.exchanges : [],
-          exchangeCount: Number.isFinite(Number(j.exchangeCount)) ? Number(j.exchangeCount) : null,
-          trustedExchangeCount: Number.isFinite(Number(j.trustedExchangeCount)) ? Number(j.trustedExchangeCount) : null,
-          lowTrustExchangeCount: Number.isFinite(Number(j.lowTrustExchangeCount)) ? Number(j.lowTrustExchangeCount) : null,
-          totalVolume24hUsd: Number.isFinite(Number(j.totalVolume24hUsd)) ? Number(j.totalVolume24hUsd) : null,
-          circulatingSupplyReal: Number.isFinite(Number(j.circulatingSupplyReal)) ? Number(j.circulatingSupplyReal) : null,
-          totalSupplyFromCg: Number.isFinite(Number(j.totalSupplyFromCg)) ? Number(j.totalSupplyFromCg) : null,
+          exchangeCount: qsNumOrNull(j.exchangeCount),
+          trustedExchangeCount: qsNumOrNull(j.trustedExchangeCount),
+          lowTrustExchangeCount: qsNumOrNull(j.lowTrustExchangeCount),
+          totalVolume24hUsd: qsNumOrNull(j.totalVolume24hUsd),
+          circulatingSupplyReal: qsNumOrNull(j.circulatingSupplyReal),
+          totalSupplyFromCg: qsNumOrNull(j.totalSupplyFromCg),
           // Same allowlist + semantics as Scanner v44.25 (served by Deep worker v1.12).
           canonicalSymbol: (j.canonicalAsset && typeof j.canonicalAsset.symbol === "string") ? j.canonicalAsset.symbol.slice(0, 12) : null
         };
@@ -12603,18 +12611,21 @@ async function qsLiqCheckBasic(net, token, provider) {
         transferFeeUpgradable: active(d?.transfer_fee_upgradable),
         defaultAccountStateFrozen: String(d?.default_account_state ?? "") === "2",
         transferFeePct: (() => {
-          const bp = Number(d?.transfer_fee?.current_fee_rate?.fee_rate);
-          return Number.isFinite(bp) ? (bp / 100) : null;
+          const bp = qsNumOrNull(d?.transfer_fee?.current_fee_rate?.fee_rate);
+          return bp != null ? (bp / 100) : null;
         })(),
         topHolderPct: (() => {
           const h = Array.isArray(d?.holders) ? d.holders[0] : null;
-          const p = Number(h?.percent);
-          return Number.isFinite(p) ? p : null;
+          const p = qsNumOrNull(h?.percent);
+          return p;
         })(),
         top10ConcentrationPct: (() => {
           const arr = Array.isArray(d?.holders) ? d.holders : [];
           if (!arr.length) return null;
-          const sum = arr.slice(0, 10).reduce((acc, h) => acc + (Number(h?.percent) || 0), 0);
+          // ✅ FIX (2026-11-06): holders without a percent no longer add up to a measured 0%.
+          const known = arr.slice(0, 10).map(h => qsNumOrNull(h?.percent)).filter(v => v != null);
+          if (!known.length) return null;
+          const sum = known.reduce((acc, v) => acc + v, 0);
           return Number.isFinite(sum) ? sum : null;
         })(),
         holdersReturned: Array.isArray(d?.holders) ? d.holders.length : 0,
@@ -12912,7 +12923,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         if (res.ok) {
           const j = await res.json().catch(() => null);
           if (j && j.token === token) {
-            const num = v => { const n = Number(v); return Number.isFinite(n) ? n : null; };
+            const num = qsNumOrNull;
             return {
               supplyUi: num(j.supplyUi) ?? (Number.isFinite(knownSupplyUi) ? knownSupplyUi : null),
               largestTokenAccountPct: num(j.largestTokenAccountPct),
@@ -14484,8 +14495,8 @@ async function qsLiqCheckBasic(net, token, provider) {
       const n = Number(E.formatUnits(totalSupplyBI, decForSupply));
       if (Number.isFinite(n) && n > 0) totalSupplyUi = n;
     } catch {}
-    const cgCirculating = Number(cexResult?.circulatingSupplyReal);
-    const gtCirculating = Number(gtInfo?.circulatingSupplyReal);
+    const cgCirculating = qsNumOrNull(cexResult?.circulatingSupplyReal);
+    const gtCirculating = qsNumOrNull(gtInfo?.circulatingSupplyReal);
 
     let verified = controlMeta?.sourceVerified === true ? true : controlMeta?.sourceVerified === false ? false : null;
     let blockscoutProfile = null;
@@ -14720,11 +14731,11 @@ async function qsLiqCheckBasic(net, token, provider) {
     const score = Number(secureEval.score ?? 0);
     const overallText = String(secureEval.overallText || "Unknown");
     const evmDataBlackout = !!secureEval.dataBlackout;
-    const evmAgeDays = Number.isFinite(Number(secureEval.ageDays)) ? Number(secureEval.ageDays) : null;
+    const evmAgeDays = qsNumOrNull(secureEval.ageDays);
 
     const circ = secureEval.circulating || {};
-    const localCirc = Number(circ.localCirculatingSupply);
-    const globalCirc = Number(circ.globalCirculatingSupply);
+    const localCirc = qsNumOrNull(circ.localCirculatingSupply);
+    const globalCirc = qsNumOrNull(circ.globalCirculatingSupply);
     const estCirculatingSupplyText = Number.isFinite(localCirc) && localCirc >= 0
       ? localCirc.toLocaleString(undefined,{maximumFractionDigits:4}) : null;
     const circSupplyIsReal = !!circ.localIsReal;
@@ -15275,8 +15286,8 @@ async function qsLiqCheckBasic(net, token, provider) {
 
     const devCandidateAddress = heliusCreator || gp?.creatorAddress || null;
     const devSupplyForPct = solHolders?.supplyUi ?? mintInfo?.supplyUi ?? null;
-    const apiDevHoldingPct = Number.isFinite(Number(solHolders?.creatorHoldingPct)) ? Number(solHolders.creatorHoldingPct) : null;
-    const apiDevHoldingAmountUi = Number.isFinite(Number(solHolders?.creatorHoldingAmountUi)) ? Number(solHolders.creatorHoldingAmountUi) : null;
+    const apiDevHoldingPct = qsNumOrNull(solHolders?.creatorHoldingPct);
+    const apiDevHoldingAmountUi = qsNumOrNull(solHolders?.creatorHoldingAmountUi);
     let devHoldingPct = apiDevHoldingPct;
     if (devHoldingPct == null && devCandidateAddress && devSupplyForPct) {
       devHoldingPct = await qsFetchSolanaWalletHoldingPct(devCandidateAddress, token, devSupplyForPct);
@@ -15396,8 +15407,8 @@ async function qsLiqCheckBasic(net, token, provider) {
 
     const contractScore = Number(secureEval.contractScore ?? 0);
     const marketScore = Number(secureEval.marketScore ?? 0);
-    const liqUsd = Number.isFinite(Number(secureEval.liquidityUsd)) ? Number(secureEval.liquidityUsd) : null;
-    const solAgeDays = Number.isFinite(Number(secureEval.ageDays)) ? Number(secureEval.ageDays) : null;
+    const liqUsd = qsNumOrNull(secureEval.liquidityUsd);
+    const solAgeDays = qsNumOrNull(secureEval.ageDays);
     const dataBlackout = !!secureEval.dataBlackout;
     const overallText = String(secureEval.overallText || "Unknown");
     const solDataCoverage = secureEval.dataCoverage || "low";
@@ -15670,7 +15681,12 @@ async function qsLiqCheckBasic(net, token, provider) {
         value: holderAnalysisReliable
           ? `${Number(solHolders.classificationCoveragePct).toFixed(1)}% classified (wallet vs protocol)`
           : `${Number(solHolders.classificationCoveragePct).toFixed(1)}% classified${solHolders?.unknownAuthorityPct != null ? ` • ${Number(solHolders.unknownAuthorityPct).toFixed(1)}% unresolved` : ""}`
-      }] : []),
+      }] : (solHolders && solHolders.ownerAnalysisComplete !== true ? [{
+        // ✅ FIX (2026-11-06): the Worker answers a partial token-account list with nulls. Say so instead of hiding the row.
+        type: "warn",
+        title: "Holder Analysis",
+        value: solHolders.source === "browser-rpc-raw" ? "Unknown (holder API unavailable · raw RPC only)" : "Unknown (partial token-account list)"
+      }] : [])),
       { type: !holderAnalysisReliable ? "warn" : walletTopHolderPct>=30 ? "bad" : walletTopHolderPct>=15 ? "warn" : "ok",
         title: "Largest Wallet Holder",
         value: holderAnalysisReliable && walletTopHolderPct != null
