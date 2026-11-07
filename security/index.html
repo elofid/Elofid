@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12570,6 +12569,22 @@ async function qsLiqCheckBasic(net, token, provider) {
   // console whether GoPlus genuinely has no data for a token (common for
   // very new/low-cap Solana tokens — a real coverage gap, not a bug) versus
   // a network error, bad status, or malformed response.
+  // ✅ FIX (2026-11-06, confirmed in the browser console on USDC): GoPlus Solana holders[].percent is a
+  // fraction of the supply (0.1214 = 12.14%), like the EVM API. It was shown as a percentage, 100x too small
+  // (USDC largest token account 0.1% instead of 12.1%). The share is now computed from balance / total_supply
+  // when both are known, otherwise from percent x 100. Clamped to 0-100. Missing values stay null.
+  function qsGoPlusSolanaHolderPct(h, totalSupply) {
+    const bal = qsNumOrNull(h?.balance);
+    const tot = qsNumOrNull(totalSupply);
+    let pct = null;
+    if (bal != null && tot != null && tot > 0) pct = (bal / tot) * 100;
+    else {
+      const frac = qsNumOrNull(h?.percent);
+      if (frac != null) pct = frac * 100;
+    }
+    return pct == null ? null : qsClamp(pct, 0, 100);
+  }
+
   async function qsFetchGoPlusSolana(token) {
     const addr = String(token || "").trim();
     if (!addr) return null;
@@ -12616,17 +12631,16 @@ async function qsLiqCheckBasic(net, token, provider) {
         })(),
         topHolderPct: (() => {
           const h = Array.isArray(d?.holders) ? d.holders[0] : null;
-          const p = qsNumOrNull(h?.percent);
-          return p;
+          return h ? qsGoPlusSolanaHolderPct(h, d?.total_supply) : null;
         })(),
         top10ConcentrationPct: (() => {
           const arr = Array.isArray(d?.holders) ? d.holders : [];
           if (!arr.length) return null;
           // ✅ FIX (2026-11-06): holders without a percent no longer add up to a measured 0%.
-          const known = arr.slice(0, 10).map(h => qsNumOrNull(h?.percent)).filter(v => v != null);
+          const known = arr.slice(0, 10).map(h => qsGoPlusSolanaHolderPct(h, d?.total_supply)).filter(v => v != null);
           if (!known.length) return null;
           const sum = known.reduce((acc, v) => acc + v, 0);
-          return Number.isFinite(sum) ? sum : null;
+          return Number.isFinite(sum) ? qsClamp(sum, 0, 100) : null;
         })(),
         holdersReturned: Array.isArray(d?.holders) ? d.holders.length : 0,
         dex: Array.isArray(d?.dex) ? d.dex : [],
@@ -12933,6 +12947,9 @@ async function qsLiqCheckBasic(net, token, provider) {
               walletTopHolderAddress: String(j.topWalletAddress || j.walletTopHolderAddress || "").trim() || null,
               walletTop10Pct: num(j.walletTop10Pct),
               holderAnalysisReliable: j.holderAnalysisReliable === true,
+              // ✅ 2026-11-06: exact wallet figures below 99% classified (Worker v25 r4). Only true is trusted.
+              walletTopHolderExact: j.walletTopHolderExact === true,
+              walletTop10Exact: j.walletTop10Exact === true,
               ownerAnalysisComplete: j.ownerAnalysisComplete === true,
               classificationCoveragePct: num(j.classificationCoveragePct),
               nonWalletAuthorityPct: num(j.nonWalletAuthorityPct),
@@ -12988,6 +13005,8 @@ async function qsLiqCheckBasic(net, token, provider) {
         walletTopHolderAddress: null,
         walletTop10Pct: null,
         holderAnalysisReliable: false,
+        walletTopHolderExact: false,
+        walletTop10Exact: false,
         ownerAnalysisComplete: false,
         classificationCoveragePct: null,
         nonWalletAuthorityPct: null,
@@ -15278,9 +15297,13 @@ async function qsLiqCheckBasic(net, token, provider) {
       : rawHolderSource === "solana-public" ? "Solana RPC"
       : rawHolderSource === "publicnode" ? "PublicNode RPC"
       : rawHolderSource;
-    const walletTopHolderPct = solHolders?.holderAnalysisReliable ? (solHolders?.walletTopHolderPct ?? null) : null;
-    const walletTopHolderAmountUi = solHolders?.holderAnalysisReliable ? (solHolders?.walletTopHolderAmountUi ?? null) : null;
-    const walletTop10Pct = solHolders?.holderAnalysisReliable ? (solHolders?.walletTop10Pct ?? null) : null;
+    // ✅ 2026-11-06: a wallet figure is used when the analysis is reliable (>= 99% classified) or when the Worker
+    // proves it exact on a complete owner list (every larger owner classified). holderAnalysisReliable is unchanged.
+    const walletTopHolderExact = solHolders?.holderAnalysisReliable !== true && solHolders?.walletTopHolderExact === true && solHolders?.ownerAnalysisComplete === true && solHolders?.walletTopHolderPct != null;
+    const walletTop10Exact = solHolders?.holderAnalysisReliable !== true && solHolders?.walletTop10Exact === true && solHolders?.ownerAnalysisComplete === true && solHolders?.walletTop10Pct != null;
+    const walletTopHolderPct = (solHolders?.holderAnalysisReliable || walletTopHolderExact) ? (solHolders?.walletTopHolderPct ?? null) : null;
+    const walletTopHolderAmountUi = (solHolders?.holderAnalysisReliable || walletTopHolderExact) ? (solHolders?.walletTopHolderAmountUi ?? null) : null;
+    const walletTop10Pct = (solHolders?.holderAnalysisReliable || walletTop10Exact) ? (solHolders?.walletTop10Pct ?? null) : null;
     const holderAnalysisReliable = solHolders?.holderAnalysisReliable === true;
     const effHoldersKnown = rawTopTokenAccountPct != null || rawTop10TokenAccountsPct != null || !!(gp?.holdersReturned > 0);
 
@@ -15347,6 +15370,8 @@ async function qsLiqCheckBasic(net, token, provider) {
         walletTopHolderPct,
         walletTop10Pct,
         holderAnalysisReliable,
+        walletTopHolderExact: walletTopHolderExact && walletTopHolderPct != null,
+        walletTop10Exact: walletTop10Exact && walletTop10Pct != null,
         // Backward-compatible bridge: if the HTML is deployed before the
         // protected engine, the old engine's legacy fields receive ONLY the
         // classified wallet metrics — never raw token-account concentration.
@@ -15687,17 +15712,17 @@ async function qsLiqCheckBasic(net, token, provider) {
         title: "Holder Analysis",
         value: solHolders.source === "browser-rpc-raw" ? "Unknown (holder API unavailable · raw RPC only)" : "Unknown (partial token-account list)"
       }] : [])),
-      { type: !holderAnalysisReliable ? "warn" : walletTopHolderPct>=30 ? "bad" : walletTopHolderPct>=15 ? "warn" : "ok",
+      { type: !(holderAnalysisReliable || walletTopHolderExact) ? "warn" : walletTopHolderPct>=30 ? "bad" : walletTopHolderPct>=15 ? "warn" : "ok",
         title: "Largest Wallet Holder",
-        value: holderAnalysisReliable && walletTopHolderPct != null
-          ? `${walletTopHolderAmountUi != null ? qsFmtNum(walletTopHolderAmountUi, 4) + " · " : ""}${walletTopHolderPct.toFixed(2)}% (classified on-chain)`
+        value: (holderAnalysisReliable || walletTopHolderExact) && walletTopHolderPct != null
+          ? `${walletTopHolderAmountUi != null ? qsFmtNum(walletTopHolderAmountUi, 4) + " · " : ""}${walletTopHolderPct.toFixed(2)}% (classified on-chain${walletTopHolderExact ? " · all larger owners classified" : ""})`
           : (solHolders?.classificationCoveragePct != null
               ? `Unknown (${Number(solHolders.classificationCoveragePct).toFixed(1)}% classified · below reliability threshold)`
               : "Unknown (wallet classification incomplete)") },
-      ...(holderAnalysisReliable && walletTop10Pct != null ? [{
+      ...((holderAnalysisReliable || walletTop10Exact) && walletTop10Pct != null ? [{
         type: walletTop10Pct>=60?"bad":walletTop10Pct>=40?"warn":"ok",
         title: "Top 10 Wallet Holders",
-        value: `${walletTop10Pct.toFixed(1)}% (classified on-chain)`
+        value: `${walletTop10Pct.toFixed(1)}% (classified on-chain${walletTop10Exact ? " · all larger owners classified" : ""})`
       }] : []),
       ...(rawTopTokenAccountPct != null ? [{
         type: rawTopTokenAccountPct >= 30 ? "warn" : "ok",
@@ -16076,7 +16101,8 @@ async function qsLiqCheckBasic(net, token, provider) {
       set("review", c.adminTitle, c.adminWhy);
     } else if (/extreme concentration|very few holders/.test(l)) {
       set("high", c.concentrationTitle, c.concentrationWhy);
-    } else if (/token-account concentration|top token accounts|holder-account concentration|holder accounts/.test(l)) {
+    } else if (/token-account concentration|largest token account holds|top 10 token accounts hold|top token accounts|holder-account concentration|holder accounts/.test(l)) {
+      // "Largest token account holds X%..." and "Top 10 token accounts hold X%..." (engine v7.8, wallet figure exact) are the same context.
       // Raw account concentration may be a pool/PDA/vault/CEX/protocol, so do
       // not explain it as if a small number of human wallets were proven.
       set("context", c.genericTitle, c.genericWhy);
