@@ -5780,7 +5780,7 @@ const translations = {
     deep_k_latest_authority_tx: "Latest authority-change tx",
     deep_k_authority_types: "Authority types observed",
     deep_k_unclassified_transfers: "Excluded unclassified transfers",
-    deep_k_sim_provider: "Simulation provider",
+    deep_k_sim_provider: "Simulation method",
     deep_k_buy_path: "Buy-like transfer path",
     deep_k_sell_path: "Sell-like transfer path",
     deep_k_wallet_path: "Wallet transfer path",
@@ -5808,7 +5808,7 @@ const translations = {
     deep_sig_proxy_title: "Proxy upgrade history observed",
     deep_sig_proxy_detail: "{count} upgrade event(s) were observed in bounded on-chain history.",
     deep_sig_sim_revert_title: "{path} simulation reverted",
-    deep_sig_sim_revert_detail: "A bounded eth_call {path} transfer path reverted. This is a diagnostic signal, not a complete router-level honeypot proof.",
+    deep_sig_sim_revert_detail: "A bounded read-only {path} transfer test reverted. This is a diagnostic signal, not a complete router-level honeypot proof.",
     deep_path_buy: "buy-like",
     deep_path_sell: "sell-like",
     deep_path_wallet: "wallet-transfer",
@@ -5907,6 +5907,14 @@ const translations = {
     deep_sim_code_rpc_unavailable: "Not tested — network data unavailable",
     deep_sim_code_no_path: "Not tested — no suitable path",
     deep_sim_code_unknown: "Not tested",
+    deep_v_csrc_launchpad: "Launchpad record",
+    deep_v_csrc_metadata: "Token metadata index",
+    deep_v_csrc_mint_init: "On-chain mint initialization",
+    deep_v_csrc_elofid: "Elofid creator lookup",
+    deep_v_csrc_security: "External security data",
+    deep_v_csrc_quick: "Quick Scan result",
+    deep_v_csrc_other: "Other data source",
+    deep_v_sim_method_call: "Read-only on-chain call (nothing is sent)",
     deep_sim_short_passed: "passed",
     deep_sim_short_reverted: "reverted",
     deep_sim_short_untested: "not tested",
@@ -6816,7 +6824,7 @@ const translations = {
     deep_k_latest_authority_tx: "最新权限变更交易",
     deep_k_authority_types: "观察到的权限类型",
     deep_k_unclassified_transfers: "已排除的未归类转账",
-    deep_k_sim_provider: "模拟提供方",
+    deep_k_sim_provider: "模拟方式",
     deep_k_buy_path: "类似买入的转账路径",
     deep_k_sell_path: "类似卖出的转账路径",
     deep_k_wallet_path: "钱包转账路径",
@@ -6844,7 +6852,7 @@ const translations = {
     deep_sig_proxy_title: "观察到代理升级历史",
     deep_sig_proxy_detail: "在有限的链上历史中观察到 {count} 次升级事件。",
     deep_sig_sim_revert_title: "{path} 模拟回退",
-    deep_sig_sim_revert_detail: "有限的 eth_call {path} 转账路径发生回退。这是诊断信号，不是完整的路由级蜜罐证明。",
+    deep_sig_sim_revert_detail: "有限的只读 {path} 转账测试发生回退。这是诊断信号，不是完整的路由级蜜罐证明。",
     deep_path_buy: "类似买入",
     deep_path_sell: "类似卖出",
     deep_path_wallet: "钱包转账",
@@ -6943,6 +6951,14 @@ const translations = {
     deep_sim_code_rpc_unavailable: "未测试 — 网络数据不可用",
     deep_sim_code_no_path: "未测试 — 没有合适的路径",
     deep_sim_code_unknown: "未测试",
+    deep_v_csrc_launchpad: "发射平台记录",
+    deep_v_csrc_metadata: "代币元数据索引",
+    deep_v_csrc_mint_init: "链上铸币初始化",
+    deep_v_csrc_elofid: "Elofid 创建者查询",
+    deep_v_csrc_security: "外部安全数据",
+    deep_v_csrc_quick: "快速扫描结果",
+    deep_v_csrc_other: "其他数据来源",
+    deep_v_sim_method_call: "只读链上调用（不发送任何交易）",
     deep_sim_short_passed: "通过",
     deep_sim_short_reverted: "回滚",
     deep_sim_short_untested: "未测试",
@@ -7852,7 +7868,7 @@ const translations = {
     deep_k_latest_authority_tx: "أحدث معاملة لتغيير الصلاحية",
     deep_k_authority_types: "أنواع الصلاحيات المرصودة",
     deep_k_unclassified_transfers: "التحويلات غير المصنفة المستبعدة",
-    deep_k_sim_provider: "مزود المحاكاة",
+    deep_k_sim_provider: "طريقة المحاكاة",
     deep_k_buy_path: "مسار تحويل شبيه بالشراء",
     deep_k_sell_path: "مسار تحويل شبيه بالبيع",
     deep_k_wallet_path: "مسار تحويل المحفظة",
@@ -7880,7 +7896,7 @@ const translations = {
     deep_sig_proxy_title: "تم رصد سجل ترقيات بروكسي",
     deep_sig_proxy_detail: "تم رصد {count} حدث ترقية ضمن سجل on-chain محدود.",
     deep_sig_sim_revert_title: "فشلت محاكاة {path}",
-    deep_sig_sim_revert_detail: "فشل مسار تحويل {path} محدود عبر eth_call. هذه إشارة تشخيصية وليست إثبات honeypot كاملًا على مستوى الراوتر.",
+    deep_sig_sim_revert_detail: "فشل اختبار تحويل {path} محدود للقراءة فقط. هذه إشارة تشخيصية وليست إثبات honeypot كاملًا على مستوى الراوتر.",
     deep_path_buy: "شبيه بالشراء",
     deep_path_sell: "شبيه بالبيع",
     deep_path_wallet: "تحويل المحفظة",
@@ -7979,6 +7995,14 @@ const translations = {
     deep_sim_code_rpc_unavailable: "لم يُختبر — بيانات الشبكة غير متاحة",
     deep_sim_code_no_path: "لم يُختبر — لا يوجد مسار مناسب",
     deep_sim_code_unknown: "لم يُختبر",
+    deep_v_csrc_launchpad: "سجل منصة الإطلاق",
+    deep_v_csrc_metadata: "فهرس البيانات الوصفية للتوكن",
+    deep_v_csrc_mint_init: "تهيئة السك على السلسلة",
+    deep_v_csrc_elofid: "بحث Elofid عن المنشئ",
+    deep_v_csrc_security: "بيانات أمنية خارجية",
+    deep_v_csrc_quick: "نتيجة الفحص السريع",
+    deep_v_csrc_other: "مصدر بيانات آخر",
+    deep_v_sim_method_call: "استدعاء للقراءة فقط على السلسلة (لا يُرسل أي شيء)",
     deep_sim_short_passed: "نجح",
     deep_sim_short_reverted: "مُرتد",
     deep_sim_short_untested: "لم يُختبر",
@@ -8888,7 +8912,7 @@ const translations = {
     deep_k_latest_authority_tx: "Последняя транзакция изменения полномочий",
     deep_k_authority_types: "Наблюдаемые типы полномочий",
     deep_k_unclassified_transfers: "Исключённые неклассифицированные переводы",
-    deep_k_sim_provider: "Провайдер симуляции",
+    deep_k_sim_provider: "Метод симуляции",
     deep_k_buy_path: "Путь, похожий на покупку",
     deep_k_sell_path: "Путь, похожий на продажу",
     deep_k_wallet_path: "Путь перевода кошелька",
@@ -8916,7 +8940,7 @@ const translations = {
     deep_sig_proxy_title: "Обнаружена история обновлений прокси",
     deep_sig_proxy_detail: "В ограниченной on-chain истории обнаружено событий обновления: {count}.",
     deep_sig_sim_revert_title: "Симуляция {path} завершилась откатом",
-    deep_sig_sim_revert_detail: "Ограниченный путь перевода {path} через eth_call завершился откатом. Это диагностический сигнал, а не полное доказательство honeypot на уровне роутера.",
+    deep_sig_sim_revert_detail: "Ограниченный тест перевода {path} только для чтения завершился откатом. Это диагностический сигнал, а не полное доказательство honeypot на уровне роутера.",
     deep_path_buy: "покупки",
     deep_path_sell: "продажи",
     deep_path_wallet: "перевода кошелька",
@@ -9015,6 +9039,14 @@ const translations = {
     deep_sim_code_rpc_unavailable: "Не проверено — сетевые данные недоступны",
     deep_sim_code_no_path: "Не проверено — нет подходящего пути",
     deep_sim_code_unknown: "Не проверено",
+    deep_v_csrc_launchpad: "Запись лаунчпада",
+    deep_v_csrc_metadata: "Индекс метаданных токена",
+    deep_v_csrc_mint_init: "Ончейн-инициализация минта",
+    deep_v_csrc_elofid: "Поиск создателя Elofid",
+    deep_v_csrc_security: "Внешние данные безопасности",
+    deep_v_csrc_quick: "Результат быстрого сканирования",
+    deep_v_csrc_other: "Другой источник данных",
+    deep_v_sim_method_call: "Ончейн-вызов только для чтения (ничего не отправляется)",
     deep_sim_short_passed: "успешно",
     deep_sim_short_reverted: "откат",
     deep_sim_short_untested: "не проверено",
@@ -10568,7 +10600,9 @@ function initPanels() {
     // Keep Solana's existing holder schema. EVM gets a new suffix so a cached
     // pre-wallet-classification report cannot hide the holder upgrade for 10m.
     const holderSchema = net === "solana" ? ":holders-v4-deep7:score-v7-1-provider-parity" : ":evm-holders-v33-parity:score-v7-1-provider-parity";
-    return `${net}:${qsLower(token)}:${useApis ? 1 : 0}${holderSchema}`;
+    // WS-1 r2: reports cached before the evidence fields existed are never read back (both networks).
+    const evidenceSchema = ":ws1-evidence-v1";
+    return `${net}:${qsLower(token)}:${useApis ? 1 : 0}${holderSchema}${evidenceSchema}`;
   }
   function addQsHistory(net, token){
     try{
@@ -10632,6 +10666,174 @@ function initPanels() {
     }
   }
 
+  // WS-3 (2026-11-15): customer text names no third-party data provider. Only what is drawn, copied or shared passes
+  // through qsCustomerText. rep, rep.json and the engine flags keep the original wording, so the source stays in the
+  // raw/developer data. Known phrases are rewritten first. Any other provider name falls back to its data category.
+  const QS_CUSTOMER_PHRASES = [
+    [/Likely \(GoPlus, unconfirmed\)/g, "Likely (external data · not confirmed by Elofid)"],
+    [/Unknown \(GoPlus unavailable\)/g, "Unknown (security data unavailable)"],
+    [/Unknown \(not returned by GoPlus\)/g, "Unknown (not reported by security data)"],
+    [/Provider-reported \(GoPlus B20 · not independently confirmed\)/g, "Reported by external security data (B20 · not independently confirmed)"],
+    [/Provider-reported \(GoPlus · not independently confirmed\)/g, "Reported by external security data (not independently confirmed)"],
+    [/^Yes \(GoPlus\)$/, "Yes (external trusted-token list · not verified by Elofid)"],
+    [/Not on GoPlus's trusted list/g, "Not on the external trusted-token list"],
+    [/Renounced\/None \(verified GoPlus\)/g, "Renounced/None (reported by external security data · on-chain read unavailable)"],
+    [/\((?:CoinGecko|GeckoTerminal|external), not chain-local\)/g, "(cross-chain market data, not chain-local)"],
+    [/ • via (?:GeckoTerminal|DexScreener)\b/g, " • market data"],
+    [/\(via DexScreener\)/g, "(market data)"],
+    [/\(([^()·]+) · (may be pool\/protocol|may include pools\/protocols)\)/g, (m, src, tail) => `(${/goplus|external security data/i.test(src) ? "external security data" : "on-chain token accounts"} · ${tail})`],
+    [/ tracked classified via [^)]*\)/g, " tracked classified)"],
+    [/provider-reported by GoPlus B20 and not/g, "reported by external security data (B20) and not"],
+    [/could not be confirmed by GoPlus/g, "could not be confirmed by external security data"],
+    [/ \(GoPlus B20\)\./g, " (external security data, B20)."],
+    [/ \(per GoPlus\)\./g, " (per external security data)."],
+    [/flagged as malicious by GoPlus/g, "flagged as malicious by external security data"],
+    [/\(DexScreener, CEX, explorer\)/g, "(DEX market data, CEX, explorer)"],
+    [/\(DexScreener, CEX\)/g, "(DEX market data, CEX)"],
+    [/GeckoTerminal shows higher liquidity \(([^)]*)\) than DexScreener found/g, "One market data source shows higher liquidity ($1) than another source found"],
+    [/Providers disagree on liquidity for a pool \(DexScreener (~\$[^,]*), GeckoTerminal (~\$[^)]*)\)/g, "Market data sources disagree on liquidity for a pool ($1 vs $2)"],
+    [/A pool reported only by GeckoTerminal/g, "A pool reported by only one market data source"],
+    [/than any pool DexScreener lists/g, "than any pool the other source lists"],
+    [/GoPlus security data isn't available yet/g, "External security data isn't available yet"],
+    [/GoPlus-only reputation\/malicious-address signals/g, "Reputation and malicious-address signals from external security data"]
+  ];
+  const QS_PROVIDER_FALLBACK = [
+    [/\bHoneypot\.is\b/gi, "external security data"],
+    [/\bGoPlus\b/gi, "external security data"],
+    [/\b(?:Dex ?Screener|Gecko ?Terminal|CoinGecko|Birdeye|CoinMarketCap)\b/gi, "market data"],
+    [/\b(?:Blockscout|Etherscan|BscScan|BaseScan|Arbiscan|PolygonScan|Solscan|SolanaFM)\b/gi, "explorer data"],
+    [/\b(?:Helius|Alchemy|Infura|NodeReal|PublicNode|SolanaTracker|QuickNode|Ankr|Moralis)\b/gi, "RPC data"]
+  ];
+  function qsCustomerText(s){
+    let t = String(s ?? "");
+    for (const [re, to] of QS_CUSTOMER_PHRASES) t = t.replace(re, to);
+    for (const [re, to] of QS_PROVIDER_FALLBACK) t = t.replace(re, to);
+    return t;
+  }
+  // WS-2: engine review text calls the owner a "wallet". The site knows the owner type from on-chain code, so the
+  // displayed sentence names it. The engine flag itself, its classification and the score are unchanged.
+  function qsCustomerFlagText(rep, raw){
+    let s = qsCustomerText(raw);
+    const k = String(rep?.meta?.ownerKind || "");
+    if (k && k !== "eoa") {
+      const noun = k === "multisig" ? "multisig" : k === "timelock" ? "timelock" : (k === "contract" || k === "contract_owned") ? "contract" : "address (type not verified)";
+      s = s.replace(/^Owner wallet concentration (is high|is elevated) \(/, (m, a) => `Owner ${noun} concentration ${a} (`);
+    }
+    return s;
+  }
+  function qsOwnerHoldingLabel(k){
+    const kind = String(k?.kind || "");
+    if (kind === "eoa") return "owner wallet";
+    if (kind === "multisig") return "owner multisig";
+    if (kind === "timelock") return "owner timelock";
+    if (kind === "contract" || kind === "contract_owned") return "owner contract";
+    return "owner address · type not verified";
+  }
+
+  // WS-1 (2026-11-15): Honeypot evidence. A provider "not a honeypot" verdict is not a sell test, and a provider error
+  // or an untested path is never "blocked". ev = {available, isHoneypot, isHoneypotKnown, sellTaxKnown} from Quick Scan.
+  // deep = the Deep result (EVM). Display only: the score and the engine input never read this.
+  function qsHoneypotView(ev, deep){
+    let quick;
+    if (!ev || ev.available !== true) quick = { state:"not_checked", type:"warn", value:"Unknown — check not performed (security data unavailable)" };
+    else if (ev.isHoneypot === true) quick = { state:"detected", type:"bad", value:"⚠️ Detected (external security check)" };
+    else if (ev.isHoneypotKnown !== true) quick = { state:"not_checked", type:"warn", value:"Unknown — not reported by security data" };
+    else if (ev.sellTaxKnown === true) quick = { state:"not_detected", type:"ok", value:"Not detected (external check · sell not simulated)" };
+    else quick = { state:"not_detected_unconfirmed", type:"warn", value:"Not detected by external check · unconfirmed (sell tax unknown · sell not simulated)" };
+    const sim = deep && typeof deep === "object" ? (deep.simulation || null) : null, trade = sim?.trade || null;
+    let s = null;
+    if (trade?.attempted === true) {
+      const sell = trade.sell || {};
+      const tax = Number.isFinite(Number(sell.taxPct)) && sell.taxPct !== null ? `${Number(sell.taxPct).toFixed(1)}%` : null;
+      if (sell.ok === false && sell.holderChecked === true) s = { state:"sell_blocked", type:"bad", value:"⚠️ Sell blocked in simulation (failed after a buy and from an existing holder)" };
+      else if (sell.ok === false) s = { state:"sell_failed", type:"warn", value:"Could not confirm — sell failed right after a simulated buy (no holder available to re-check)" };
+      else if (sell.ok === true && sell.sameBlockBlocked === true) s = { state:"sell_ok_delayed", type:"warn", value:"Sell succeeded from an existing holder in simulation · selling right after buying failed (cooldown)" };
+      else if (sell.ok === true) s = { state:"sell_ok", type:"ok", value:`Not detected · sell succeeded in simulation${tax ? ` (sell tax ${tax})` : ""}` };
+    } else if (sim?.sellPath?.simulated === true && sim.sellPath.reverted === true) {
+      s = { state:"sell_path_reverted", type:"warn", value:"Could not confirm — sell-path test reverted (diagnostic, not a full sale)" };
+    }
+    if (!s) return quick;
+    if (quick.state === "detected") {
+      if (s.state === "sell_blocked") return s;
+      if (s.state === "sell_ok") return { state:"conflict", type:"bad", value:"⚠️ Reported by external check · sell succeeded in simulation (conflicting evidence)" };
+      return { state:"detected", type:"bad", value:`⚠️ Detected (external security check) · ${s.value.replace(/^Could not confirm — /, "")}` };
+    }
+    return s;
+  }
+  // Deep evidence is shown next to the Quick Scan row without touching rep.mini, the cache or rep.json.
+  // r2: the overlay is keyed by the report id, so a copy of the same report read back from the cache (export, share)
+  // shows the same row as the screen. A report without an id (older version) is keyed by the object itself.
+  const _qsDeepOverlay = new Map();
+  let _qsRenderedRep = null;
+  function qsReportKey(rep){
+    if (!rep || typeof rep !== "object") return null;
+    const id = rep?.meta?.wsReportId;
+    return id ? `${String(rep.net || "").toLowerCase()}:${String(rep.token || "").toLowerCase()}:${id}` : rep;
+  }
+  function qsSameReport(a, b){ return !!a && !!b && (a === b || qsReportKey(a) === qsReportKey(b)); }
+  function qsMiniForDisplay(rep){
+    const mini = Array.isArray(rep?.mini) ? rep.mini : [];
+    const k = qsReportKey(rep), o = k ? _qsDeepOverlay.get(k) : null;
+    // r2 fail-closed: an EVM report built before WS-1 has no honeypot evidence. Its green Honeypot row is not shown green.
+    const legacyEvm = !!rep && String(rep.net || "").toLowerCase() !== "solana" && !rep?.meta?.honeypotEvidence;
+    return mini.map(x => {
+      if (!x) return x;
+      if (o && o[x.title]) return { ...x, ...o[x.title] };
+      if (legacyEvm && x.title === "Honeypot" && x.type === "ok") return { ...x, type: "warn", value: "Not confirmed — report from an earlier version · run the scan again", onChain: false };
+      return x;
+    });
+  }
+  function qsChipsHtml(rep){
+    const ip = qsKnownIssuerPresentation(rep);
+    const overall = ip.label || rep.overallText;
+    return qsMiniForDisplay(rep).map(x => {
+      if (String(x?.title || "") === "Overall" && ip.authorityContext) return qsMiniChip("warn", x.title, overall, x.onChain);
+      return qsMiniChip(x.type, x.title, x.value, x.onChain);
+    }).join("");
+  }
+  function qsRefreshChips(rep){
+    try { const w = $("#qs-risk"); if (w && rep && qsSameReport(_qsRenderedRep, rep)) w.innerHTML = qsChipsHtml(_qsRenderedRep); } catch {}
+  }
+  function qsClearDeepOverlay(rep){
+    const k = qsReportKey(rep);
+    if (k && _qsDeepOverlay.has(k)) { _qsDeepOverlay.delete(k); qsRefreshChips(rep); }
+  }
+  function qsApplyDeepToQuick(rep, r){
+    try {
+      if (!rep || !r || typeof rep !== "object") return;
+      const net = String(rep.net || "").toLowerCase();
+      if (net === "solana" || String(r.net || "").toLowerCase() !== net || String(r.token || "").toLowerCase() !== String(rep.token || "").toLowerCase()) return;
+      const base = (Array.isArray(rep.mini) ? rep.mini : []).find(x => x?.title === "Honeypot"); if (!base) return;
+      // An older report keeps a provider detection it already shows (red), so Deep cannot turn it green.
+      const ev = rep?.meta?.honeypotEvidence || (base.type === "bad" ? { available: true, isHoneypot: true, isHoneypotKnown: true, sellTaxKnown: false, legacy: true } : null), k = qsReportKey(rep);
+      const v = qsHoneypotView(ev, r);
+      // r2: a report without WS-1 evidence (older version) still takes real Deep sell evidence. Without it, it keeps
+      // the fail-closed row from qsMiniForDisplay.
+      if (!ev && !/^sell_/.test(v.state)) { _qsDeepOverlay.delete(k); qsRefreshChips(rep); return; }
+      if (ev && !ev.legacy && v.type === base.type && v.value === base.value) _qsDeepOverlay.delete(k);
+      else {
+        _qsDeepOverlay.delete(k);
+        _qsDeepOverlay.set(k, { Honeypot: { type: v.type, value: v.value, hpState: v.state, onChain: /^sell_/.test(v.state) } });
+        while (_qsDeepOverlay.size > 50) _qsDeepOverlay.delete(_qsDeepOverlay.keys().next().value);
+      }
+      qsRefreshChips(rep);
+    } catch {}
+  }
+  // WS-1 GREEN audit (display only).
+  function qsProxyReadFailed(pc, isProxyFallback){ return !!pc && pc.type === "none" && !isProxyFallback && Number(pc.readErrors || 0) > 0; }
+  function qsProxyCardValueShown(pc, isProxyFallback){ return qsProxyReadFailed(pc, isProxyFallback) ? "Unknown (proxy storage could not be read)" : qsProxyCardValue(pc, isProxyFallback); }
+  function qsProxyChipType(pc, isProxy){
+    const legacy = ((pc && (pc.upgradeable === true || pc.type === "possible_custom")) || (isProxy && pc?.type !== "clone")) ? "warn" : "ok";
+    if (legacy === "ok" && /^Unknown\b/.test(qsProxyCardValueShown(pc, isProxy))) return "warn";
+    return legacy;
+  }
+  function qsLiquidityControlChipType(lc){
+    const st = String(lc?.liquidityControlStatus || "");
+    if (st === "burned") return "ok";
+    if (st === "locked") return (lc?.lpLockedPct != null && Number(lc.lpLockedPct) >= 80) ? "ok" : "warn";
+    return "warn";
+  }
+
   function qsMiniChip(type, title, value, onChain){
     const map = { ok:"ok", warn:"warn", bad:"bad", info:"warn" };
     const cls = map[type] || "warn";
@@ -10640,7 +10842,7 @@ function initPanels() {
     // read this scan (not GoPlus/DexScreener/CoinGecko/explorer API).
     // Mirrors the bot's onChainTag() helper — same rule, same wording.
     const tag = onChain ? ` <i style="opacity:.65;font-weight:400;">🔗 on-chain</i>` : "";
-    return `<div class="risk ${cls}"><span class="dot"></span><span><b>${qsEscapeHtml(title)}</b><span style="opacity:.7;font-weight:400;"> — ${qsEscapeHtml(value)}</span>${tag}</span></div>`;
+    return `<div class="risk ${cls}"><span class="dot"></span><span><b>${qsEscapeHtml(qsCustomerText(title))}</b><span style="opacity:.7;font-weight:400;"> — ${qsEscapeHtml(qsCustomerText(value))}</span>${tag}</span></div>`;
   }
 
   function codeHasSelector(bytecode, selHex){
@@ -10787,15 +10989,16 @@ function initPanels() {
     return { effective: k.kind === "unknown" ? "unknown" : "contract" };
   }
   async function qsProxyControl(net, token, code, eip1967Impl, owner){
-    const out = { type: "unknown", upgradeable: null, authority: null, ownerAuthority: null, pendingOwner: null, ownerSource: null };
+    const out = { type: "unknown", upgradeable: null, authority: null, ownerAuthority: null, pendingOwner: null, ownerSource: null, readErrors: 0 };
     const read = qsCtlRead(net);
+    const slotFail = () => { out.readErrors += 1; return null; };
     if (!read) return out;
     try {
       const [admin, beacon, legacy, u1822, pending] = await Promise.all([
-        read.getStorage(token, QS_CTL_SLOTS.admin).then(qsCtlAddr).catch(() => null),
-        read.getStorage(token, QS_CTL_SLOTS.beacon).then(qsCtlAddr).catch(() => null),
-        read.getStorage(token, QS_CTL_SLOTS.ozLegacy).then(qsCtlAddr).catch(() => null),
-        read.getStorage(token, QS_CTL_SLOTS.eip1822).then(qsCtlAddr).catch(() => null),
+        read.getStorage(token, QS_CTL_SLOTS.admin).then(qsCtlAddr).catch(slotFail),
+        read.getStorage(token, QS_CTL_SLOTS.beacon).then(qsCtlAddr).catch(slotFail),
+        read.getStorage(token, QS_CTL_SLOTS.ozLegacy).then(qsCtlAddr).catch(slotFail),
+        read.getStorage(token, QS_CTL_SLOTS.eip1822).then(qsCtlAddr).catch(slotFail),
         qsCtlCallRaw(read, token, "0xe30c3978")
       ]);
       const p = qsCtlAddr(pending); out.pendingOwner = p && !DEAD_ADDRESSES.has(p) ? p : null;
@@ -11273,9 +11476,9 @@ async function qsLiqCheckBasic(net, token, provider) {
     const body = rows.length ? rows.map(r => `
       <div class="trow ${r.ok ? "highlight" : ""}">
         <div class="cell wrap"><span class="mono">${r.addr ? qsEscapeHtml(qsShortAddr(r.addr)) : "—"}</span></div>
-        <div class="cell wrap">${qsEscapeHtml(r.type)}</div>
-        <div class="cell">${qsEscapeHtml(r.target)}</div>
-        <div class="cell wrap">${r.ok ? "✅" : "—"} ${qsEscapeHtml(r.note || "")}</div>
+        <div class="cell wrap">${qsEscapeHtml(qsCustomerText(r.type))}</div>
+        <div class="cell">${qsEscapeHtml(qsCustomerText(r.target))}</div>
+        <div class="cell wrap">${r.ok ? "✅" : "—"} ${qsEscapeHtml(qsCustomerText(r.note || ""))}</div>
       </div>
     `).join("") : `
       <div class="trow">
@@ -11293,7 +11496,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     // simple fungible LP tokens, so there's no single universal on-chain
     // check the way there is for BSC/EVM V2 pairs (see qsCheckLpBurned).
     const footerHtml = footerNote
-      ? `<div class="small muted" style="padding:8px 4px 2px;">${qsEscapeHtml(footerNote)}</div>`
+      ? `<div class="small muted" style="padding:8px 4px 2px;">${qsEscapeHtml(qsCustomerText(footerNote))}</div>`
       : "";
     container.innerHTML = `
       <div id="qsLiqTable" class="table">
@@ -11358,11 +11561,11 @@ async function qsLiqCheckBasic(net, token, provider) {
     if (scorePresentation.known) lines.push(`Issuer context: ${scorePresentation.banner}`);
     lines.push("");
     lines.push(`### Signals`);
-    for (const c of (rep.mini || [])) lines.push(`- ${c.title}: ${c.value}`);
+    for (const c of qsMiniForDisplay(rep)) lines.push(`- ${qsCustomerText(c.title)}: ${qsCustomerText(c.value)}`);
     if (rep.redFlags?.length) {
       lines.push("");
       lines.push(`### Red Flags`);
-      for (const f of rep.redFlags) lines.push(`- ❗ ${f}`);
+      for (const f of rep.redFlags) lines.push(`- ❗ ${qsCustomerFlagText(rep, f)}`);
     }
     lines.push("");
     lines.push(`> ${rep.disclaimer}`);
@@ -11370,13 +11573,13 @@ async function qsLiqCheckBasic(net, token, provider) {
   }
 
   function qsShareCleanValue(value, max=74){
-    let s = String(value ?? "").replace(/\s+/g," ").trim();
+    let s = qsCustomerText(String(value ?? "")).replace(/\s+/g," ").trim();
     s = s.replace(/\s*\((?:classified|tracked|may include|may be|how much info)[^)]*\)/gi,"").trim();
     if (s.length > max) s = s.slice(0,max-1).trimEnd() + "…";
     return s || "—";
   }
   function qsSharePickPoint(rep, kind){
-    const mini = Array.isArray(rep?.mini) ? rep.mini : [];
+    const mini = qsMiniForDisplay(rep);
     const skip = new Set(["Overall","Data Coverage","Circulating Supply","Est. Circulating Supply","Global Circulating Supply"]);
     const goodPriority = [
       "Mint Authority","Freeze Authority","Permanent Delegate","Transfer Hook","Global Pause","Mint","Pause","Proxy",
@@ -11398,7 +11601,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     });
     if (matching[0]) return { title:String(matching[0].title||"Signal"), value:qsShareCleanValue(matching[0].value,52) };
     if (kind === "review" && Array.isArray(rep?.redFlags) && rep.redFlags.length) {
-      return { title:"Review", value:qsShareCleanValue(rep.redFlags[0],82) };
+      return { title:"Review", value:qsShareCleanValue(qsCustomerFlagText(rep, rep.redFlags[0]),82) };
     }
     return null;
   }
@@ -12047,9 +12250,11 @@ async function qsLiqCheckBasic(net, token, provider) {
     if(status==="not_applicable") return "N/A — no verified DEX liquidity";
     if(status==="burned") return lc?.lpBurnedPct!=null ? `Burned — ~${Number(lc.lpBurnedPct).toFixed(0)}% tracked LP` : "Burned LP evidence";
     if(status==="locked") {
-      if(lc?.lpLockedPct!=null) return `Locked — ~${Number(lc.lpLockedPct).toFixed(0)}% tracked liquidity`;
-      if(lc?.lpUnlockAt) { const n=Number(lc.lpUnlockAt); const d=new Date(n>1e12?n:n*1000); return `Locked${lc?.source?" · "+lc.source:""}${Number.isFinite(d.getTime())?" · until "+d.toISOString().slice(0,7):""}`; }
-      return `Locked${lc?.source?" · "+lc.source:""}`;
+      // WS-1 GREEN audit: a lock is green only when at least 80% of tracked LP is locked. A locker record alone does
+      // not measure the share, so it says so.
+      if(lc?.lpLockedPct!=null) return `${Number(lc.lpLockedPct) >= 80 ? "Locked" : "Partly locked"} — ~${Number(lc.lpLockedPct).toFixed(0)}% tracked liquidity`;
+      if(lc?.lpUnlockAt) { const n=Number(lc.lpUnlockAt); const d=new Date(n>1e12?n:n*1000); return `Locked${lc?.source?" · "+lc.source:""}${Number.isFinite(d.getTime())?" · until "+d.toISOString().slice(0,7):""} · locked share not measured`; }
+      return `Locked${lc?.source?" · "+lc.source:""} · locked share not measured`;
     }
     if(String(lc?.mechanism||"")==="position_or_pool_specific") return "Not verified — position/pool-specific liquidity";
     if(String(lc?.lpLockStatus||"")==="no_tracked_signal") return "No tracked lock signal — not proof of unlocked liquidity";
@@ -13281,8 +13486,15 @@ async function qsLiqCheckBasic(net, token, provider) {
       return {title:cxDeepTr("deep_sig_opening_title"),detail:parts.join(sep)};
     }
     const x=map[s?.code]; if(x) return {title:cxDeepTr(x[0],x[2]),detail:cxDeepTr(x[1],x[2])};
-    return {title:s?.title||cxDeepTr("deep_signal_default"),detail:s?.detail||""};
+    return {title:qsCustomerText(s?.title||cxDeepTr("deep_signal_default")),detail:qsCustomerText(s?.detail||"")};
   }
+  // WS-3: the creator source and the simulation method are shown as categories, never as provider or method names.
+  function cxDeepCreatorSourceText(src){
+    const s=String(src||"").toLowerCase();
+    const k=s.includes("pump")?"launchpad":/(^|[-_ ])das\b|metadata/.test(s)?"metadata":/initiali[sz]/.test(s)?"mint_init":s.includes("elofid")?"elofid":s.includes("goplus")?"security":s.includes("quick-scan")?"quick":"other";
+    return cxDeepTr("deep_v_csrc_"+k);
+  }
+  function cxDeepSimMethodText(p){ const s=String(p||""); return /^eth_call/i.test(s)?cxDeepTr("deep_v_sim_method_call"):qsCustomerText(s); }
   function cxDeepVerdictLabel(v){ const code=v?.code; if(code==="deep_review_recommended") return cxDeepTr("deep_verdict_review"); if(code==="additional_context_found") return cxDeepTr("deep_verdict_context"); if(code==="deep_intelligence_partial") return cxDeepTr("deep_verdict_partial"); if(code==="deep_intelligence_complete") return cxDeepTr("deep_verdict_complete"); if(code==="deep_core_incomplete") return cxDeepTr("deep_verdict_incomplete"); return v?.label||cxDeepTr("deep_verdict_partial"); }
 
   function cxDeepEntityRole(role){
@@ -13296,6 +13508,7 @@ async function qsLiqCheckBasic(net, token, provider) {
 
   function cxDeepRenderResult(r){
     const host=cxDeepEl("cx-deep-results"); if(!host||!r) return; _cxDeepLastResult=r;
+    qsApplyDeepToQuick(_cxDeepLastRep, r); // WS-1: Deep sell evidence on the Quick Scan Honeypot row (display only)
     const rawLevel=String(r?.verdict?.level||"partial"), coverage=cxDeepFinite(r?.verdict?.coveragePct);
     const cov=cxDeepNormalizeCoverage(r), deepCore=cxDeepCoreState(r,cov), scope=r?.scope||null;
     const level=rawLevel==="attention"?"elevated":rawLevel==="review"?"review":(rawLevel==="incomplete"||!deepCore.complete)?"incomplete":coverage!=null&&coverage<100?"partial":"clear";
@@ -13343,7 +13556,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       !depAddr&&dep.creationBlockTxSender?cxDeepKV(cxDeepTr("deep_k_creation_sender"),cxDeepEsc(cxDeepShort(dep.creationBlockTxSender,8,6)),true):null,
       !depAddr&&dep.creationBlockTxSender?cxDeepKV(cxDeepTr("deep_k_listed_pool_limits"),cxDeepEsc(cxDeepTr("deep_v_creation_sender_note"))):null,
       !depAddr&&dep.creationBlockTx?cxDeepKV(cxDeepTr("deep_k_creation_block_tx"),cxDeepValueLink(r.net,dep.creationBlockTx)):null,
-      r.net==="solana"&&dep.creatorSource?cxDeepKV(cxDeepTr("deep_k_creator_source"),cxDeepEsc(dep.creatorSource)):null,
+      r.net==="solana"&&dep.creatorSource?cxDeepKV(cxDeepTr("deep_k_creator_source"),cxDeepEsc(cxDeepCreatorSourceText(dep.creatorSource))):null,
       r.net==="solana"&&dep.creatorHoldingPct!=null?cxDeepKV(cxDeepTr("deep_k_creator_holding"),`${cxDeepPct(dep.creatorHoldingPct,2)}${dep.creatorHoldingAmountUi!=null?` · ${cxDeepEsc(Number(dep.creatorHoldingAmountUi).toLocaleString(cxDeepLocale(),{maximumFractionDigits:4}))} tokens`:""}`):null,
       dep.fundingLeadDays!=null?cxDeepKV(cxDeepTr("deep_k_funding_lead"),cxDeepTr("deep_unit_days",{value:cxDeepFinite(dep.fundingLeadDays).toLocaleString(cxDeepLocale(),{maximumFractionDigits:2})})):null,
       dep.fundingSource?cxDeepKV(cxDeepTr("deep_k_funding_source"),`${cxDeepEsc(cxDeepShort(dep.fundingSource,8,6))}${dep.fundingSourceLabel?` · ${cxDeepEsc(dep.fundingSourceLabel)}`:""}`,true):null,
@@ -13527,7 +13740,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       cxDeepKV(cxDeepTr("deep_k_sell_path"),cxDeepEsc(simTxt(sim.sellPath))),
       cxDeepKV(cxDeepTr("deep_k_wallet_path"),cxDeepEsc(simTxt(sim.walletTransfer))),
       cxDeepKV(cxDeepTr("deep_k_scope"),cxDeepTr("deep_v_sim_scope")),
-      sim.provider?cxDeepKV(cxDeepTr("deep_k_sim_provider"),cxDeepEsc(sim.provider)):null
+      sim.provider?cxDeepKV(cxDeepTr("deep_k_sim_provider"),cxDeepEsc(cxDeepSimMethodText(sim.provider))):null
     ];
     let simStatus=r.net==="solana"?"partial":simAnyRevert?"review":simAllPassed?"verified":"partial";
     let simFound=r.net==="solana"?cxDeepTr("deep_found_simulation_solana"):cxDeepTr("deep_found_simulation",{buy:simShort(sim.buyPath),sell:simShort(sim.sellPath),wallet:simShort(sim.walletTransfer)});
@@ -13815,7 +14028,7 @@ async function qsLiqCheckBasic(net, token, provider) {
 
   async function cxRunDeepScan(rep,{force=false}={}){
     const net=String(rep?.net||"").toLowerCase(), token=String(rep?.token||"").trim(); const valid=net==="solana" ? /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(token) : /^0x(?:[a-fA-F0-9]{40}|[a-fA-F0-9]{64})$/.test(token); if(!valid) return;
-    _cxDeepLastRep=rep; if(_cxDeepPrimeTimeout){clearTimeout(_cxDeepPrimeTimeout);_cxDeepPrimeTimeout=null;}
+    _cxDeepLastRep=rep; qsClearDeepOverlay(rep); if(_cxDeepPrimeTimeout){clearTimeout(_cxDeepPrimeTimeout);_cxDeepPrimeTimeout=null;}
     const runId=++_cxDeepRunSeq;
     const controller=new AbortController(); _cxDeepController=controller;
     let reader=null;
@@ -14403,10 +14616,12 @@ async function qsLiqCheckBasic(net, token, provider) {
     let totalSupplyBI = 0n;
     try { totalSupplyBI = BigInt(rep?.meta?.totalSupply || "0"); } catch { totalSupplyBI = 0n; }
 
+    // WS-1/WS-2 display only: a failed balance read still reaches the engine as before (0), but it is not shown as 0%.
+    let ownerBalReadFailed = false;
     if (owner && !ownerIsRenounced) {
       try{
         const bc = new E.Contract(token, ERC20_BALANCE_ABI, read);
-        ownerBal = BigInt(await bc.balanceOf(owner).catch(()=> 0n));
+        ownerBal = BigInt(await bc.balanceOf(owner).catch(()=> { ownerBalReadFailed = true; return 0n; }));
         ownerPct = qsPctFromBig(ownerBal, totalSupplyBI);
       } catch {}
     }
@@ -14415,11 +14630,13 @@ async function qsLiqCheckBasic(net, token, provider) {
       holderConcText = owner ? "No/Unknown" : "No owner";
       holderConcType = "warn";
     } else {
-      holderConcText = `${qsFmtNum(ownerPct, 2)}% (owner wallet)`;
+      // WS-2: the owner type comes from on-chain code (wallet, contract, multisig, timelock). Not inferred.
+      holderConcText = `${qsFmtNum(ownerPct, 2)}% (${qsOwnerHoldingLabel(proxyControl?.ownerAuthority)})`;
       if (ownerPct >= 35) holderConcType = "bad";
       else if (ownerPct >= 20) holderConcType = "warn";
       else holderConcType = "ok";
     }
+    if (ownerBalReadFailed) { holderConcText = "Unknown (owner balance could not be read)"; holderConcType = "warn"; }
 
     // ✅ NEW: top-holder concentration from GoPlus's holders array — the gap
     // identified in review: we only ever checked the OWNER's balance, never
@@ -14430,11 +14647,14 @@ async function qsLiqCheckBasic(net, token, provider) {
     // Bot parity: concentration should follow the best known deployer/creator,
     // not only the current owner (which may already be renounced/transferred).
     const bestDevAddress = contractAge?.deployerAddress || goplus?.creatorAddress || (owner && !ownerIsRenounced ? owner : null) || null;
+    // WS-2: which address Dev/Owner Holds measures. Same precedence as bestDevAddress. Display only.
+    const bestDevRole = contractAge?.deployerAddress ? "deployer" : goplus?.creatorAddress ? "creator" : (owner && !ownerIsRenounced ? "owner" : null);
+    let devBalReadFailed = false;
     let devHoldingPct = null;
     if (bestDevAddress && totalSupplyBI > 0n) {
       try {
         const bcDev = new E.Contract(token, ERC20_BALANCE_ABI, read);
-        const devBal = BigInt(await bcDev.balanceOf(bestDevAddress).catch(()=> 0n));
+        const devBal = BigInt(await bcDev.balanceOf(bestDevAddress).catch(()=> { devBalReadFailed = true; return 0n; }));
         devHoldingPct = qsPctFromBig(devBal, totalSupplyBI);
       } catch {}
     }
@@ -14840,6 +15060,26 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
     };
 
+    // WS-1/WS-2 display facts. Provenance stays in rep.meta (developer data). Nothing here reaches the engine.
+    rep.meta.honeypotEvidence = { source: goplus ? "GoPlus" : null, available: !!goplus, isHoneypot: goplus?.isHoneypot === true, isHoneypotKnown: goplus?.isHoneypotKnown === true, sellTaxKnown: goplus?.sellTax != null };
+    rep.meta.ownerKind = (owner && !ownerIsRenounced) ? String(proxyControl?.ownerAuthority?.kind || "unknown") : null;
+    rep.meta.wsReportId = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+    const devRoleText = bestDevAddress
+      ? `${bestDevRole === "owner" || (owner && !ownerIsRenounced && qsLower(owner) === qsLower(bestDevAddress)) ? (bestDevRole === "owner" ? "owner" : bestDevRole + " = owner") : bestDevRole} ${qsShortAddr(bestDevAddress)}`
+      : "";
+    const implBytecodeScanned = !!impl && !!implementationCode && implementationCode !== "0x";
+    const proxyLikeForScan = isProxy === true || proxyControl?.type === "possible_custom" || proxyControl?.upgradeable === true;
+    const bytecodeScanGap = proxyLikeForScan && !implBytecodeScanned;
+    const mintShown = (mintType === "ok" && !mintDetected && bytecodeScanGap && !(controlMeta?.abiVerified === true && mintAbi === false))
+      ? { type: "warn", value: "Not found in proxy bytecode · implementation not scanned" }
+      : { type: mintType, value: mintText };
+    const pauseShown = pauseType !== "ok" ? { type: pauseType, value: pauseText }
+      : pausedState === false ? { type: "warn", value: "Pause state readable (not paused now) · pause control not identified" }
+      : (bytecodeScanGap && !(controlMeta?.abiVerified === true && pauseAbi === false)) ? { type: "warn", value: "Not found in proxy bytecode · implementation not scanned" }
+      : { type: pauseType, value: pauseText };
+    const honeypotShown = qsHoneypotView(rep.meta.honeypotEvidence, null);
+    const proxyShownValue = qsProxyCardValueShown(proxyControl, isProxy);
+
     rep.mini = [
       { type: score >= 85 ? "ok" : score >= 70 ? "warn" : score >= 50 ? "warn" : "bad", title: "Overall", value: overallText },
       ...(evmDataBlackout ? [{
@@ -14864,8 +15104,8 @@ async function qsLiqCheckBasic(net, token, provider) {
       // storage slot read), so it's a genuine negative — not "unknown".
       // ✅ NEW: onChain:true — this check always runs (no API dependency),
       // for both the "Detected" and "No" outcomes.
-      { type: (proxyControl && (proxyControl.upgradeable === true || proxyControl.type === "possible_custom")) || (isProxy && proxyControl?.type !== "clone") ? "warn" : "ok",
-        title: "Proxy", value: qsProxyCardValue(proxyControl, isProxy), onChain: true },
+      { type: qsProxyChipType(proxyControl, isProxy),
+        title: "Proxy", value: proxyShownValue, onChain: !/^Unknown\b/.test(proxyShownValue) },
       ...(proxyControl?.pendingOwner ? [{ type: "warn", title: "Pending Owner", value: `${qsShortAddr(proxyControl.pendingOwner)} (transfer not yet accepted)`, onChain: true }] : []),
       // ✅ NEW: onChain:true — Owner here is read directly via owner() and
       // never falls back to GoPlus on this site (unlike the bot), so it's
@@ -14874,11 +15114,12 @@ async function qsLiqCheckBasic(net, token, provider) {
       // ✅ NEW: onChain:true whenever ownerPct was actually computed — it's
       // a live balanceOf()/totalSupply() read, same as the bot's Dev/Owner
       // Holds field.
-      { type: holderConcType, title: "Holder Concentration", value: holderConcText, onChain: ownerPct != null },
-      { type: devHoldingPct == null ? "warn" : devHoldingPct >= 20 ? "bad" : devHoldingPct >= 5 ? "warn" : "ok",
+      { type: holderConcType, title: "Holder Concentration", value: holderConcText, onChain: ownerPct != null && !ownerBalReadFailed },
+      { type: devBalReadFailed || devHoldingPct == null ? "warn" : devHoldingPct >= 20 ? "bad" : devHoldingPct >= 5 ? "warn" : "ok",
         title: "Dev/Owner Holds",
-        value: devHoldingPct != null ? `${devHoldingPct.toFixed(1)}%` : (bestDevAddress ? "Unknown" : "No dev/deployer address identified"),
-        onChain: devHoldingPct != null },
+        value: devBalReadFailed ? `Unknown (balance could not be read · ${devRoleText})`
+          : devHoldingPct != null ? `${devHoldingPct.toFixed(1)}% (${devRoleText})` : (bestDevAddress ? `Unknown (${devRoleText})` : "No dev/deployer address identified"),
+        onChain: devHoldingPct != null && !devBalReadFailed },
       // ✅ NEW: title/tag now reflect whether this is CoinGecko's real
       // disclosed circulating supply (not on-chain, but real market data)
       // or our own on-chain owner-holding estimate (see above).
@@ -14958,7 +15199,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       // ✅ FIX: onChain flag set per the mintOnChain rule above — true for
       // both "Detected" (bytecode) and "Not detected" (bytecode searched,
       // found nothing), false for the GoPlus-only "Possibly" case.
-      { type: mintType, title: "Mint", value: mintText, onChain: mintOnChain },
+      { type: mintShown.type, title: "Mint", value: mintShown.value, onChain: mintOnChain },
       // ✅ FIX (real bug, not just wording): type was HARDCODED to "ok"
       // (green) regardless of pauseText's actual content — a token that IS
       // currently paused would still show a green dot next to "Detected
@@ -14966,7 +15207,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       // warn when merely pausable, ok only when no pause capability exists
       // at all. Always on-chain — bytecode selectors + a live paused()
       // eth_call, no API dependency.
-      { type: pauseType, title: "Pause", value: pauseText, onChain: true },
+      { type: pauseShown.type, title: "Pause", value: pauseShown.value, onChain: true },
       {
         type: cexListed ? "ok" : "warn",
         title: "CEX Listed",
@@ -15014,7 +15255,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         }];
       })(),
       ...((evmLiquidityControl?.liquidityControlStatus !== "not_applicable" || rep.liq?.any) ? [{
-        type: ["locked","burned"].includes(String(evmLiquidityControl?.liquidityControlStatus)) ? "ok" : "warn",
+        type: qsLiquidityControlChipType(evmLiquidityControl),
         title: "Liquidity Control",
         value: qsLiquidityControlDisplay(evmLiquidityControl),
         onChain: evmLiquidityControl?.onChainVerified === true
@@ -15039,15 +15280,8 @@ async function qsLiqCheckBasic(net, token, provider) {
       ] : []),
       // Honeypot is always explicit in the evidence grid. A missing GoPlus
       // verdict is warning/unknown, never a green "Not detected".
-      {
-        type: !goplus ? "warn" : (goplus.isHoneypot === true ? "bad" : (goplus.isHoneypotKnown === true ? "ok" : "warn")),
-        title: "Honeypot",
-        value: !goplus
-          ? "Unknown (GoPlus unavailable)"
-          : (goplus.isHoneypotKnown === true
-              ? (goplus.isHoneypot === true ? "⚠️ DETECTED" : "Not detected")
-              : "Unknown (not returned by GoPlus)")
-      },
+      // WS-1: five evidence states (see qsHoneypotView). Deep sell evidence is added after the Deep scan.
+      { type: honeypotShown.type, title: "Honeypot", value: honeypotShown.value, hpState: honeypotShown.state },
       ...(goplus ? [
         // ✅ FIX: same pattern already fixed for Solana's Transfer Fee — this
         // whole block only renders when goplus exists, so "Unknown" here
@@ -15069,7 +15303,7 @@ async function qsLiqCheckBasic(net, token, provider) {
           value: goplus.poolFeesPct.slice(0,4).map(v => `${Number(v).toFixed(Number(v)>=1?2:3).replace(/\.?0+$/, "")}%`).join(", ")
         }] : []),
         ...(goplus?.b20?.available ? [{
-          type:(goplus.b20.ownerChangeBalance || goplus.b20.cannotSell) ? "bad" : (goplus.b20.whitelist || goplus.b20.metadataModifiable || goplus.b20.cannotBuy) ? "warn" : "ok",
+          type:(goplus.b20.ownerChangeBalance || goplus.b20.cannotSell) ? "bad" : (goplus.b20.whitelist || goplus.b20.metadataModifiable || goplus.b20.cannotBuy || goplus.b20.mintable || goplus.b20.transferPausable || goplus.b20.blacklist) ? "warn" : "ok",
           title:"Advanced Controls (B20)",
           value:[
             goplus.b20.mintable ? "mint" : null,
@@ -15668,9 +15902,9 @@ async function qsLiqCheckBasic(net, token, provider) {
       // address when verified on-chain) instead of "Unknown" whenever
       // GoPlus alone didn't have data, since these 2 fields no longer
       // depend on GoPlus at all when the RPC call succeeds.
-      { type: effMintActive === null ? "warn" : (effMintActive ? "bad" : "ok"), title: "Mint Authority",
+      { type: effMintActive === null ? "warn" : (effMintActive ? "bad" : (mintInfo ? "ok" : "warn")), title: "Mint Authority",
         value: effMintActive === null ? "Unknown" : (effMintActive ? `Active (${effMintSource}${effMintAuthorityAddr ? ": " + qsShortAddr(effMintAuthorityAddr) : ""})` : `Renounced/None (verified ${effMintSource})`) },
-      { type: effFreezeActive === null ? "warn" : (effFreezeActive ? "bad" : "ok"), title: "Freeze Authority",
+      { type: effFreezeActive === null ? "warn" : (effFreezeActive ? "bad" : (mintInfo ? "ok" : "warn")), title: "Freeze Authority",
         value: effFreezeActive === null ? "Unknown" : (effFreezeActive ? `Active (${effFreezeSource}${effFreezeAuthorityAddr ? ": " + qsShortAddr(effFreezeAuthorityAddr) : ""})` : `Renounced/None (verified ${effFreezeSource})`) },
       ...(mintInfo?.tokenProgram === "Token-2022" ? [
         { type: permanentDelegateAddress ? "bad" : "ok", title: "Permanent Delegate",
@@ -15687,11 +15921,12 @@ async function qsLiqCheckBasic(net, token, provider) {
         { type: nonTransferable ? "bad" : "ok", title: "Non-Transferable",
           value: nonTransferable ? "🚨 Yes" : "No", onChain: true }
       ] : [
-        { type: !gp ? "warn" : (gp.closable ? "warn" : "ok"), title: "Closable", value: gp?.closable ? "Reported" : (gp ? "No" : "Unknown") },
-        { type: !gp ? "warn" : (gp.transferHookMalicious ? "bad" : gp.transferHookAttached ? "warn" : "ok"), title: "Transfer Hook",
-          value: gp?.transferHookMalicious ? "⚠️ Attached (flagged malicious)" : gp?.transferHookAttached ? "Attached (review it)" : (gp ? "None detected" : "Unknown") },
-        { type: !gp ? "warn" : ((gp?.transferFeePct || 0) > 5 ? "bad" : (gp?.transferFeePct || 0) > 0 ? "warn" : "ok"), title: "Transfer Fee",
-          value: !gp ? "Unknown" : (gp?.transferFeePct != null ? `${gp.transferFeePct.toFixed(2)}%` : "None detected") }
+        // WS-1 GREEN audit: without the on-chain mint read these three answers come from the provider only.
+        { type: !gp ? "warn" : (gp.closable ? "warn" : (mintInfo ? "ok" : "warn")), title: "Closable", value: gp?.closable ? "Reported" : (gp ? (mintInfo ? "No" : "No (reported by external security data · on-chain read unavailable)") : "Unknown") },
+        { type: !gp ? "warn" : (gp.transferHookMalicious ? "bad" : gp.transferHookAttached ? "warn" : (mintInfo ? "ok" : "warn")), title: "Transfer Hook",
+          value: gp?.transferHookMalicious ? "⚠️ Attached (flagged malicious)" : gp?.transferHookAttached ? "Attached (review it)" : (gp ? (mintInfo ? "None detected" : "None reported (external security data · on-chain read unavailable)") : "Unknown") },
+        { type: !gp ? "warn" : ((gp?.transferFeePct || 0) > 5 ? "bad" : (gp?.transferFeePct || 0) > 0 ? "warn" : (mintInfo ? "ok" : "warn")), title: "Transfer Fee",
+          value: !gp ? "Unknown" : (gp?.transferFeePct != null ? `${gp.transferFeePct.toFixed(2)}%` : (mintInfo ? "None detected" : "None reported (external security data · on-chain read unavailable)")) }
       ]),
       { type: !gp ? "warn" : (gp.trustedToken ? "ok" : "warn"), title: "Trusted Token",
         value: !gp ? "Unknown (GoPlus unavailable)" : (gp.trustedToken ? "Yes (GoPlus)" : "Not on GoPlus's trusted list") },
@@ -15789,7 +16024,7 @@ async function qsLiqCheckBasic(net, token, provider) {
           return "No/Unknown";
         })() },
       {
-        type: ["locked","burned"].includes(String((secureEval.liquidityControl || solLiquidityControl)?.liquidityControlStatus)) ? "ok" : "warn",
+        type: qsLiquidityControlChipType(secureEval.liquidityControl || solLiquidityControl),
         title: "Liquidity Control",
         value: qsLiquidityControlDisplay(secureEval.liquidityControl || solLiquidityControl),
         onChain: (secureEval.liquidityControl || solLiquidityControl)?.onChainVerified === true
@@ -15979,28 +16214,28 @@ async function qsLiqCheckBasic(net, token, provider) {
   function qsReviewSignalCopy(lang = currentLang){
     const en = {
       lowLiquidity: (veryLow, usd, pools) => `${veryLow ? "Very low" : "Low"} DEX liquidity — ~$${Math.round(usd).toLocaleString()}${pools > 0 ? ` across ${pools} active pool${pools === 1 ? "" : "s"}` : ""}.`,
-      taxBothUnknown: "Buy and sell tax status could not be confirmed by GoPlus.",
-      taxSellUnknown: "Sell tax status could not be confirmed by GoPlus.",
-      taxBuyUnknown: "Buy tax status could not be confirmed by GoPlus."
+      taxBothUnknown: "Buy and sell tax status could not be confirmed from the available security data.",
+      taxSellUnknown: "Sell tax status could not be confirmed from the available security data.",
+      taxBuyUnknown: "Buy tax status could not be confirmed from the available security data."
     };
     const local = {
       zh: {
         lowLiquidity: (veryLow, usd, pools) => `${veryLow ? "DEX 流动性非常低" : "DEX 流动性较低"} — 约 $${Math.round(usd).toLocaleString()}${pools > 0 ? `，分布在 ${pools} 个活跃池中` : ""}。`,
-        taxBothUnknown: "GoPlus 未能确认买入税和卖出税状态。",
-        taxSellUnknown: "GoPlus 未能确认卖出税状态。",
-        taxBuyUnknown: "GoPlus 未能确认买入税状态。"
+        taxBothUnknown: "未能根据现有安全数据确认买入税和卖出税状态。",
+        taxSellUnknown: "未能根据现有安全数据确认卖出税状态。",
+        taxBuyUnknown: "未能根据现有安全数据确认买入税状态。"
       },
       ar: {
         lowLiquidity: (veryLow, usd, pools) => `${veryLow ? "سيولة DEX منخفضة جدًا" : "سيولة DEX منخفضة"} — نحو $${Math.round(usd).toLocaleString()}${pools > 0 ? ` عبر ${pools} تجمع${pools === 1 ? " نشط" : "ات نشطة"}` : ""}.`,
-        taxBothUnknown: "تعذر على GoPlus تأكيد حالة ضريبة الشراء والبيع.",
-        taxSellUnknown: "تعذر على GoPlus تأكيد حالة ضريبة البيع.",
-        taxBuyUnknown: "تعذر على GoPlus تأكيد حالة ضريبة الشراء."
+        taxBothUnknown: "تعذر تأكيد حالة ضريبة الشراء والبيع من بيانات الأمان المتاحة.",
+        taxSellUnknown: "تعذر تأكيد حالة ضريبة البيع من بيانات الأمان المتاحة.",
+        taxBuyUnknown: "تعذر تأكيد حالة ضريبة الشراء من بيانات الأمان المتاحة."
       },
       ru: {
         lowLiquidity: (veryLow, usd, pools) => `${veryLow ? "Очень низкая DEX-ликвидность" : "Низкая DEX-ликвидность"} — около $${Math.round(usd).toLocaleString()}${pools > 0 ? ` в ${pools} активных пулах` : ""}.`,
-        taxBothUnknown: "GoPlus не удалось подтвердить статус налогов на покупку и продажу.",
-        taxSellUnknown: "GoPlus не удалось подтвердить статус налога на продажу.",
-        taxBuyUnknown: "GoPlus не удалось подтвердить статус налога на покупку."
+        taxBothUnknown: "Не удалось подтвердить статус налогов на покупку и продажу по доступным данным безопасности.",
+        taxSellUnknown: "Не удалось подтвердить статус налога на продажу по доступным данным безопасности.",
+        taxBuyUnknown: "Не удалось подтвердить статус налога на покупку по доступным данным безопасности."
       }
     };
     return { ...en, ...(local?.[lang] || {}) };
@@ -16176,10 +16411,10 @@ async function qsLiqCheckBasic(net, token, provider) {
     const suspiciousMarketWarn = rep?.meta?.suspiciousMarketPattern
       ? `<div style="margin-top:10px;padding:10px 12px;background:rgba(255,76,96,.11);border:1px solid rgba(255,76,96,.42);border-radius:10px;color:#ff7d8d;">
            <div style="font-size:12px;font-weight:900;letter-spacing:.01em;">🚨 Suspicious market pattern — strong warning</div>
-           <div style="margin-top:4px;font-size:11px;line-height:1.45;color:var(--muted);">Fresh token + sharp price move + limited liquidity + ${qsEscapeHtml(rep?.meta?.suspiciousMarketPatternDetail || "incomplete transparency")}. Pattern-based warning — not proof of a scam.</div>
+           <div style="margin-top:4px;font-size:11px;line-height:1.45;color:var(--muted);">Fresh token + sharp price move + limited liquidity + ${qsEscapeHtml(qsCustomerText(rep?.meta?.suspiciousMarketPatternDetail || "incomplete transparency"))}. Pattern-based warning — not proof of a scam.</div>
          </div>`
       : "";
-    const scoreReasonSuffix = (!issuerPresentation.authorityContext && rep?.meta?.scoreReasonSuffix) ? ` — ${qsEscapeHtml(rep.meta.scoreReasonSuffix)}` : "";
+    const scoreReasonSuffix = (!issuerPresentation.authorityContext && rep?.meta?.scoreReasonSuffix) ? ` — ${qsEscapeHtml(qsCustomerText(rep.meta.scoreReasonSuffix))}` : "";
     const issuerContextBanner = issuerPresentation.known
       ? `<div style="margin-top:10px;padding:9px 12px;background:rgba(255,190,70,.08);border:1px solid rgba(255,190,70,.28);border-radius:10px;font-size:11px;line-height:1.45;color:var(--muted);"><strong style="color:#ffd27a;">${qsEscapeHtml(tf("qs_issuer_context"))}</strong> ${qsEscapeHtml(issuerPresentation.banner)}</div>`
       : "";
@@ -16243,13 +16478,9 @@ async function qsLiqCheckBasic(net, token, provider) {
       </div>
     `;
 
+    _qsRenderedRep = rep;
     if (chipsWrap){
-      chipsWrap.innerHTML = (rep.mini || []).map(x => {
-        if (String(x?.title || "") === "Overall" && issuerPresentation.authorityContext) {
-          return qsMiniChip("warn", x.title, displayOverallText, x.onChain);
-        }
-        return qsMiniChip(x.type, x.title, x.value, x.onChain);
-      }).join("");
+      chipsWrap.innerHTML = qsChipsHtml(rep);
     }
     if (pairsWrap){
       qsRenderLiquidityTable(
@@ -16336,7 +16567,7 @@ async function qsLiqCheckBasic(net, token, provider) {
           <div style="padding:9px 0;${divider ? `border-top:1px solid ${divider};` : ""}">
             <div style="font-size:12px;line-height:1.5;color:var(--text);">
               <strong style="color:${accent};">${qsEscapeHtml(x.title)}</strong>
-              <span style="color:var(--muted);"> — ${qsEscapeHtml(x.raw)}</span>
+              <span style="color:var(--muted);"> — ${qsEscapeHtml(qsCustomerFlagText(rep, x.raw))}</span>
             </div>
             <div style="margin-top:3px;font-size:11.5px;line-height:1.45;color:var(--muted);">
               <span style="font-weight:800;color:${accent};">${qsEscapeHtml(whyLabel)}:</span>
