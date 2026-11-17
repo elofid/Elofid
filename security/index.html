@@ -5342,6 +5342,7 @@ const translations = {
     deep_progress_stages: "{done} / {total} stages",
     deep_reject_no_code: "Deep Scan not started — no token contract code was found.",
     deep_reject_invalid_erc20: "Deep Scan not started — the address did not validate as an ERC-20 token.",
+    deep_reject_chain_unavailable: "Deep Scan not started — the network could not be read right now.",
     deep_reject_market: "Deep Scan paused — protected market verification was unavailable.",
     deep_reject_score: "Deep Scan paused — the protected Quick Scan score was unavailable.",
     deep_reject_solana_data: "Deep Scan not started — the Solana Quick Scan returned no usable security or market data.",
@@ -6068,6 +6069,8 @@ const translations = {
     st_scanning_html: "<strong>Scanning…</strong><br>Checking contract, liquidity, and market data — usually a few seconds.",
     st_no_code: "No contract code detected.",
     st_not_erc20: "Contract found, but it does not validate as an ERC-20 token.",
+    st_chain_unavailable: "The network could not be read right now, so this address was not checked and nothing was scored. Please try again in a moment.",
+    st_erc20_unverified: "Contract code was found, but its token functions could not be read right now. Nothing was scored. Please try again in a moment.",
     st_market_engine_down: "Protected market engine temporarily unavailable. Please try again.",
     st_market_unverified_html: "<strong>Market verification unavailable.</strong><br>Provider data was collected, but Elofid did not reconcile cross-provider liquidity because the protected engine could not be reached.",
     st_score_engine_down: "Secure scoring engine temporarily unavailable. Please try again.",
@@ -6386,6 +6389,7 @@ const translations = {
     deep_progress_stages: "{done} / {total} 个阶段",
     deep_reject_no_code: "深度扫描未启动 — 未找到代币合约代码。",
     deep_reject_invalid_erc20: "深度扫描未启动 — 该地址未通过 ERC-20 代币验证。",
+    deep_reject_chain_unavailable: "深度扫描未启动 — 暂时无法读取网络。",
     deep_reject_market: "深度扫描已暂停 — 受保护的市场验证暂不可用。",
     deep_reject_score: "深度扫描已暂停 — 受保护的 Quick Scan 评分暂不可用。",
     deep_reject_solana_data: "深度扫描未启动 — Solana Quick Scan 未返回可用的安全或市场数据。",
@@ -7112,6 +7116,8 @@ const translations = {
     st_scanning_html: "<strong>扫描中…</strong><br>正在检查合约、流动性和市场数据，通常只需几秒。",
     st_no_code: "未检测到合约代码。",
     st_not_erc20: "已找到合约，但未通过 ERC-20 代币验证。",
+    st_chain_unavailable: "暂时无法读取网络，因此未检查该地址，也未评分。请稍后重试。",
+    st_erc20_unverified: "已找到合约代码，但暂时无法读取其代币函数。未进行评分。请稍后重试。",
     st_market_engine_down: "受保护的市场引擎暂时不可用。请重试。",
     st_market_unverified_html: "<strong>市场验证不可用。</strong><br>已收集数据源信息，但由于无法连接受保护引擎，Elofid 未核对跨数据源的流动性。",
     st_score_engine_down: "安全评分引擎暂时不可用。请重试。",
@@ -7430,6 +7436,7 @@ const translations = {
     deep_progress_stages: "{done} / {total} مراحل",
     deep_reject_no_code: "لم يبدأ الفحص العميق — لم يتم العثور على كود عقد للرمز.",
     deep_reject_invalid_erc20: "لم يبدأ الفحص العميق — لم يتم التحقق من العنوان كرمز ERC-20.",
+    deep_reject_chain_unavailable: "لم يبدأ الفحص العميق — تعذّرت قراءة الشبكة الآن.",
     deep_reject_market: "تم إيقاف الفحص العميق مؤقتًا — التحقق المحمي من السوق غير متاح.",
     deep_reject_score: "تم إيقاف الفحص العميق مؤقتًا — تقييم Quick Scan المحمي غير متاح.",
     deep_reject_solana_data: "لم يبدأ الفحص العميق — لم يُرجع Quick Scan على Solana بيانات أمان أو سوق قابلة للاستخدام.",
@@ -8156,6 +8163,8 @@ const translations = {
     st_scanning_html: "<strong>جارٍ الفحص…</strong><br>نتحقق من العقد والسيولة وبيانات السوق — يستغرق ذلك عادةً بضع ثوانٍ.",
     st_no_code: "لم يتم العثور على كود عقد.",
     st_not_erc20: "تم العثور على العقد، لكنه لم يجتز التحقق كتوكن ERC-20.",
+    st_chain_unavailable: "تعذّرت قراءة الشبكة الآن، لذلك لم يتم فحص هذا العنوان ولم يُمنح أي تقييم. يرجى المحاولة مرة أخرى بعد قليل.",
+    st_erc20_unverified: "تم العثور على كود العقد، لكن تعذّرت قراءة وظائف التوكن الآن. لم يُمنح أي تقييم. يرجى المحاولة مرة أخرى بعد قليل.",
     st_market_engine_down: "محرك السوق المحمي غير متاح مؤقتًا. يرجى المحاولة مرة أخرى.",
     st_market_unverified_html: "<strong>التحقق من السوق غير متاح.</strong><br>تم جمع بيانات المزودين، لكن Elofid لم يطابق السيولة بين المصادر لأنه تعذّر الوصول إلى المحرك المحمي.",
     st_score_engine_down: "محرك التقييم الآمن غير متاح مؤقتًا. يرجى المحاولة مرة أخرى.",
@@ -8474,6 +8483,7 @@ const translations = {
     deep_progress_stages: "{done} / {total} этапов",
     deep_reject_no_code: "Deep Scan не запущен — код токен-контракта не найден.",
     deep_reject_invalid_erc20: "Deep Scan не запущен — адрес не прошёл проверку как ERC-20 токен.",
+    deep_reject_chain_unavailable: "Deep Scan не запущен — сейчас не удалось прочитать сеть.",
     deep_reject_market: "Deep Scan приостановлен — защищённая проверка рынка недоступна.",
     deep_reject_score: "Deep Scan приостановлен — защищённый результат Quick Scan недоступен.",
     deep_reject_solana_data: "Deep Scan не запущен — Solana Quick Scan не вернул пригодных данных безопасности или рынка.",
@@ -9200,6 +9210,8 @@ const translations = {
     st_scanning_html: "<strong>Сканирование…</strong><br>Проверяем контракт, ликвидность и рыночные данные — обычно это занимает несколько секунд.",
     st_no_code: "Код контракта не обнаружен.",
     st_not_erc20: "Контракт найден, но не прошёл проверку как ERC-20 токен.",
+    st_chain_unavailable: "Сейчас не удалось прочитать сеть, поэтому адрес не проверен и оценка не выставлена. Попробуйте ещё раз чуть позже.",
+    st_erc20_unverified: "Код контракта найден, но функции токена сейчас прочитать не удалось. Оценка не выставлена. Попробуйте ещё раз чуть позже.",
     st_market_engine_down: "Защищённый рыночный движок временно недоступен. Попробуйте ещё раз.",
     st_market_unverified_html: "<strong>Проверка рынка недоступна.</strong><br>Данные провайдеров собраны, но Elofid не сверил ликвидность между источниками, так как защищённый движок недоступен.",
     st_score_engine_down: "Защищённый движок оценки временно недоступен. Попробуйте ещё раз.",
@@ -9716,6 +9728,21 @@ function cxMakeJsonRpcProvider(url, chainId) {
   return p;
 }
 
+// P1-A r2: per-scan RPC preference. A Quick Scan sets it only after its first RPC failed the ERC-20 probe and the RPC
+// that answered eth_getCode passed it. Only that network is affected, only until that scan ends, and the failing RPC
+// stays in the list (moved behind the working one). Healthy scans never set it, so their RPC order is unchanged.
+let _cxScanRpcPref = null;
+function cxScanRpcPrefer(net, url){ const tok = { net, url: String(url || "") }; _cxScanRpcPref = tok; return tok; }
+function cxScanRpcRelease(tok){ if (tok && _cxScanRpcPref === tok) _cxScanRpcPref = null; }
+function cxScanRpcReset(){ _cxScanRpcPref = null; }
+function cxScanRpcOrder(net, list){
+  const p = _cxScanRpcPref;
+  if (!p || p.net !== net || !p.url || !Array.isArray(list)) return list;
+  const i = list.indexOf(p.url);
+  if (i <= 0) return list;
+  return [p.url, ...list.slice(0, i), ...list.slice(i + 1)];
+}
+
 function buildRpcCandidates(net) {
   const chain = CHAINS[net];
   const custom = ($("#rpc-custom")?.value || "").trim();
@@ -9723,7 +9750,7 @@ function buildRpcCandidates(net) {
   const privInput = ($("#rpc-private")?.value || "").trim();
   const bestSaved = getSavedBestRpc(net);
   // Order: the user's own RPCs first, then the keyed proxy, then public RPCs.
-  return uniq([custom, privInput, privSaved, cxRpcProxyUrl(net), bestSaved, ...(chain?.publicRpcs || [])]);
+  return cxScanRpcOrder(net, uniq([custom, privInput, privSaved, cxRpcProxyUrl(net), bestSaved, ...(chain?.publicRpcs || [])]));
 }
 
 const _providerCache = new Map();
@@ -9764,9 +9791,11 @@ async function getCodeSafe(net, addr){
   for (const url of urls) {
     try {
       const code = await rpcRequest(url, "eth_getCode", [a, "latest"], 9000);
-      if (typeof code === "string") {
+      // P1-A: "0x" (no code) and full-byte hex are answers. null, "0x1", "0xzz" or any other string are not.
+      if (typeof code === "string" && /^0x(?:[0-9a-fA-F]{2})*$/.test(code)) {
         return { ok: true, url, code };
       }
+      last = new Error("eth_getCode returned a malformed result");
     } catch (e) { last = e; }
   }
   return { ok: false, url: "", err: last || new Error("eth_getCode failed"), code: "0x" };
@@ -9788,11 +9817,12 @@ function getReadProvider(net) {
   for (const u of list) {
     if (u && !candidates.includes(u)) candidates.push(u);
   }
-  const first = candidates[0] || "";
+  const ordered = cxScanRpcOrder(net, candidates);
+  const first = ordered[0] || "";
   if (!first) return null;
   try {
     const p = cxMakeJsonRpcProvider(first, chain.chainId);
-    p.__cxCandidates = candidates;
+    p.__cxCandidates = ordered;
     return p;
   } catch {
     return null;
@@ -11049,21 +11079,92 @@ function initPanels() {
 
   // v17 parity: bytecode alone is not enough (smart accounts can have code).
   // Require standard ERC-20 read behavior before assigning a Token Score.
-  async function qsProbeErc20Contract(token, provider){
-    if (!provider || !token) return false;
+  // P1-A: the probe has three outcomes. "ok" and "not_erc20" need answers the node actually gave (values, a revert,
+  // or empty return data). A provider error, rate limit, timeout or malformed answer is "unavailable" and is never
+  // reported as a non-token. ethers wraps provider errors of eth_call as CALL_EXCEPTION too, so the code alone is not
+  // enough: the RPC error message or the revert data decides.
+  function qsProbeErrorKind(e){
+    const code = String(e?.code || "");
+    const rpcMsg = String(e?.info?.error?.message || "");
+    if (code === "CALL_EXCEPTION") {
+      if (rpcMsg) return /revert/i.test(rpcMsg) ? "revert" : "unavailable";
+      // r2: revert data alone is not proof. It counts in two cases only:
+      // (1) no "info": ethers 6.7.1 attaches revert data (and the Contract layer then rebuilds the error without
+      //     "info") only after it found an RPC error message matching /revert/ next to hex data. Real geth/BSC shape.
+      // (2) data that carries at least a 4-byte selector (Error(string), Panic or a custom error).
+      // Empty "0x" data next to an RPC error object with no revert message is unavailable.
+      if (!e?.info && typeof e?.data === "string" && /^0x(?:[0-9a-fA-F]{2})*$/.test(e.data)) return "revert";
+      if (typeof e?.data === "string" && /^0x(?:[0-9a-fA-F]{2}){4,}$/.test(e.data)) return "revert";
+      return "unavailable";
+    }
+    if (code === "BAD_DATA" && e?.value === "0x") return "empty";
+    return "unavailable";
+  }
+  async function qsProbeErc20Once(token, provider){
+    if (!provider || !token) return { state: "unavailable", why: "no_provider" };
+    let c;
     try {
-      const c = new E.Contract(token, [
+      c = new E.Contract(token, [
         "function totalSupply() view returns (uint256)",
         "function balanceOf(address) view returns (uint256)",
         "function decimals() view returns (uint8)"
       ], provider);
-      const [supply, bal, dec] = await Promise.all([c.totalSupply(), c.balanceOf(token), c.decimals()]);
-      const supplyBI = _qsToBI(supply);
-      const balBI = _qsToBI(bal);
-      const d = Number(dec);
-      return supplyBI > 0n && balBI >= 0n && Number.isFinite(d) && d >= 0 && d <= 255;
-    } catch { return false; }
+    } catch { return { state: "unavailable", why: "contract_init" }; }
+    // Same three calls as before, issued together (same batching). The timeout adds no request.
+    let tmr = null;
+    const settled = await Promise.race([
+      Promise.allSettled([c.totalSupply(), c.balanceOf(token), c.decimals()]),
+      new Promise(r => { tmr = setTimeout(() => r(null), 15000); })
+    ]);
+    clearTimeout(tmr);
+    if (!settled) return { state: "unavailable", why: "timeout" };
+    const kinds = settled.map(x => x.status === "fulfilled" ? "value" : qsProbeErrorKind(x.reason));
+    const why = kinds.join(",");
+    if (kinds.includes("unavailable")) return { state: "unavailable", why };
+    if (kinds.every(k => k === "value")) {
+      const supplyBI = _qsToBI(settled[0].value);
+      const balBI = _qsToBI(settled[1].value);
+      const d = Number(settled[2].value);
+      const valid = supplyBI > 0n && balBI >= 0n && Number.isFinite(d) && d >= 0 && d <= 255;
+      return valid ? { state: "ok", why } : { state: "not_erc20", why: "invalid_values" };
+    }
+    return { state: "not_erc20", why };
   }
+  // The probe runs on the scan's read provider first (unchanged for healthy scans). Only when that answer is
+  // unavailable and eth_getCode was answered by a different RPC is the probe asked once more, on that RPC.
+  async function qsProbeErc20(net, token, provider, codeUrl){
+    const firstUrl = String(provider?.__cxCandidates?.[0] || "");
+    const first = await qsProbeErc20Once(token, provider);
+    if (first.state !== "unavailable") return { ...first, url: firstUrl };
+    if (codeUrl && codeUrl !== firstUrl && typeof getProviderForUrl === "function") {
+      let p2 = null;
+      try { p2 = getProviderForUrl(net, codeUrl); } catch {}
+      if (p2) {
+        const second = await qsProbeErc20Once(token, p2);
+        return { ...second, url: codeUrl, retriedOnCodeRpc: true, firstWhy: first.why };
+      }
+    }
+    return { ...first, url: firstUrl };
+  }
+  // A failed chain read is not a scan result: no score, no "Invalid", no cache, no history, no archive.
+  function qsShowChainReadUnavailable(st, out, kind){
+    _qsRenderedRep = null;
+    try { cxDeepCoreRejected(cxDeepTr("deep_reject_chain_unavailable")); } catch {}
+    cxQsSetScanning(false);
+    cxQsSetMode("input");
+    if (out) { out.className = "status info"; out.style.display = "block"; out.innerHTML = t(currentLang, "qs_ready_html") || "<strong>Ready.</strong>"; }
+    setStatus(st, "warn", tf(kind === "erc20" ? "st_erc20_unverified" : "st_chain_unavailable"));
+  }
+  // Negative EVM results cached before P-A carry no evidence marker and may come from a failed read. They are read
+  // again instead of shown. Healthy reports and new verified negatives are kept.
+  const QS_NEGATIVE_EVIDENCE = "p1a-v1";
+  function qsIsLegacyNegative(rep){
+    if (!rep || typeof rep !== "object") return false;
+    if (String(rep.net || "").toLowerCase() === "solana") return false;
+    const o = String(rep.overallText || "");
+    return (o === "Invalid" || o === "Not a token") && rep?.meta?.negativeEvidence !== QS_NEGATIVE_EVIDENCE;
+  }
+  function qsCacheRepUsable(rep){ return qsIsLegacyNegative(rep) ? null : (rep || null); }
 
   async function qsReadCodeWithFallback(net, address){
     if (!address) return "0x";
@@ -14056,7 +14157,14 @@ async function qsLiqCheckBasic(net, token, provider) {
 
   cxDeepEl("cx-deep-rerun")?.addEventListener("click",()=>{ if(_cxDeepLastRep) cxRunDeepScan(_cxDeepLastRep,{force:true}); else { const net=netFromSelect("#qs-net"), token=(cxDeepEl("qs-token")?.value||"").trim(); const valid=net==="solana"?qsIsSolanaAddr(token):qsIsAddr(token); if(valid) cxRunDeepScan({net,token,score:null,meta:{}},{force:true}); else cxDeepShowError(cxDeepTr("deep_error_run_quick_first")); } });
 
+  // P1-A r2: a new scan always starts with the normal RPC order, and a preference set by a scan ends with that scan.
   async function runQuickScan(){
+    const scanCtx = { tok: null };
+    if (typeof cxScanRpcReset === "function") cxScanRpcReset();
+    try { return await runQuickScanCore(scanCtx); }
+    finally { if (scanCtx.tok && typeof cxScanRpcRelease === "function") cxScanRpcRelease(scanCtx.tok); }
+  }
+  async function runQuickScanCore(scanCtx){
     const st = $("#qs-status");
     const out = $("#qs-out");
     const chipsWrap = $("#qs-risk");
@@ -14123,8 +14231,9 @@ async function qsLiqCheckBasic(net, token, provider) {
     const cache = loadQsCache();
     const ckey = qsCacheKey(net, token, useApis);
     const cached = cache?.[ckey];
+    if (cached?.rep && qsIsLegacyNegative(cached.rep)) { delete cache[ckey]; saveQsCache(cache); }
 
-    if (cached?.rep && cached?.ts && (qsNowTs() - cached.ts) < 600) {
+    if (cached?.rep && cached?.ts && (qsNowTs() - cached.ts) < 600 && !qsIsLegacyNegative(cached.rep)) {
       if (qsLower(cached.rep.token) === qsLower(token) && cached.rep.net === net) {
         clearStatus(st);
         render(cached.rep);
@@ -14136,7 +14245,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     }
 
     const cfg = QS_NET?.[net];
-    const read = getRP(net);
+    let read = getRP(net);
     if (!cfg || !read) {
       setStatus(st, "bad", "No network config / RPC available.");
       return;
@@ -14162,19 +14271,29 @@ async function qsLiqCheckBasic(net, token, provider) {
     };
 
     let code = "0x";
+    let codeReadOk = false;
+    let codeUrl = "";
     try {
       if (typeof getCodeSafe === "function") {
         const codeRes = await getCodeSafe(net, token);
-        code = codeRes?.code || "0x";
+        codeReadOk = codeRes?.ok === true;
+        code = codeReadOk ? codeRes.code : "0x";
+        codeUrl = String(codeRes?.url || "");
       } else {
-        code = await read.getCode(token);
+        const c0 = await read.getCode(token);
+        codeReadOk = typeof c0 === "string" && /^0x(?:[0-9a-fA-F]{2})*$/.test(c0);
+        code = codeReadOk ? c0 : "0x";
       }
     } catch {}
+    // P1-A: no RPC answered (transport, 429, RPC error, timeout, null or malformed) is not "no code".
+    if (!codeReadOk) { qsShowChainReadUnavailable(st, out, "code"); return; }
 
     const hasCode = !!(code && code !== "0x");
     if (!hasCode) {
       rep.score = 0;
       rep.overallText = "Invalid";
+      rep.meta.negativeEvidence = QS_NEGATIVE_EVIDENCE;
+      rep.meta.negativeBasis = { check: "eth_getCode", answer: "0x", rpc: codeUrl.startsWith(location.origin) ? "elofid-proxy" : "rpc" };
       rep.redFlags.push("No contract code (EOA or invalid address).");
       cxDeepCoreRejected(cxDeepTr("deep_reject_no_code"));
       rep.json = safeJson(rep);
@@ -14186,10 +14305,13 @@ async function qsLiqCheckBasic(net, token, provider) {
       return;
     }
 
-    const isErc20Token = await qsProbeErc20Contract(token, read);
-    if (!isErc20Token) {
+    const erc20Probe = await qsProbeErc20(net, token, read, codeUrl);
+    if (erc20Probe.state === "unavailable") { qsShowChainReadUnavailable(st, out, "erc20"); return; }
+    if (erc20Probe.state !== "ok") {
       rep.score = 0;
       rep.overallText = "Not a token";
+      rep.meta.negativeEvidence = QS_NEGATIVE_EVIDENCE;
+      rep.meta.negativeBasis = { check: "erc20_probe", answers: erc20Probe.why, retriedOnCodeRpc: !!erc20Probe.retriedOnCodeRpc };
       rep.redFlags.push("Contract bytecode exists, but required ERC-20 read methods could not be validated. Smart wallet / non-token contracts are not scored as tokens.");
       cxDeepCoreRejected(cxDeepTr("deep_reject_invalid_erc20"));
       rep.json = safeJson(rep);
@@ -14199,6 +14321,13 @@ async function qsLiqCheckBasic(net, token, provider) {
       setStatus(st, "warn", tf("st_not_erc20"));
       render(rep);
       return;
+    }
+
+    // P1-A r2: the first RPC did not answer the probe and the RPC that answered eth_getCode passed it. The rest of
+    // THIS scan reads from that RPC first. Healthy scans never reach this (retriedOnCodeRpc needs a failed first probe).
+    if (erc20Probe.retriedOnCodeRpc && erc20Probe.url && typeof cxScanRpcPrefer === "function") {
+      scanCtx.tok = cxScanRpcPrefer(net, erc20Probe.url);
+      read = getRP(net) || read;
     }
 
     // Archive only after on-chain ERC-20 validation. Invalid addresses, EOAs and
@@ -16776,7 +16905,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
-      const rep = cache?.[key]?.rep;
+      const rep = qsCacheRepUsable(cache?.[key]?.rep);
       if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const ok = await copyText(rep.json || safeJson(rep));
       setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? tf("st_copied_json") : tf("st_copy_failed"));
@@ -16793,7 +16922,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
-      const rep = cache?.[key]?.rep;
+      const rep = qsCacheRepUsable(cache?.[key]?.rep);
       if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const md = qsBuildMarkdownReport(rep);
       const ok = await copyText(md);
@@ -16811,7 +16940,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
-      const rep = cache?.[key]?.rep;
+      const rep = qsCacheRepUsable(cache?.[key]?.rep);
       if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const text = qsBuildXText(rep);
       const u = new URL("https://twitter.com/intent/tweet");
@@ -16830,7 +16959,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
-      const rep = cache?.[key]?.rep;
+      const rep = qsCacheRepUsable(cache?.[key]?.rep);
       if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const link = rep.shareLink || (isSol ? qsBuildShareLink(net, tokenVal) : qsBuildShareLink(net, qsNormAddr(tokenVal)));
       const text = qsBuildXText(rep,{includeLink:false});
@@ -16851,7 +16980,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
       const useApis = !!$("#api-use")?.checked;
       const key = isSol ? qsCacheKey(net, tokenVal, false) : qsCacheKey(net, qsNormAddr(tokenVal), useApis);
-      const rep = cache?.[key]?.rep;
+      const rep = qsCacheRepUsable(cache?.[key]?.rep);
       if (!rep) return setStatus($("#qs-status"), "warn", tf("st_run_scan_first"));
       const ok = await copyText(qsBuildXText(rep));
       setStatus($("#qs-status"), ok ? "ok" : "warn", ok ? tf("st_copied_xtext") : tf("st_copy_failed"));
@@ -17724,7 +17853,7 @@ async function monCheckAll(){
   for (const item of list) {
     try{
       const codeRes = await getCodeSafe(item.net, item.addr);
-      item.status = (codeRes.ok && codeRes.code && codeRes.code !== "0x") ? "code ✅" : "no code ❌";
+      item.status = !codeRes.ok ? "unavailable ⚠️" : (codeRes.code && codeRes.code !== "0x") ? "code ✅" : "no code ❌";
       item.lastSeen = nowTs();
     } catch {
       item.status = "error";
