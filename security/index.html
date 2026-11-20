@@ -5169,6 +5169,7 @@ const translations = {
     qs_share_no_strong: "No major positive signal highlighted",
     qs_share_no_review: "No major negative signal surfaced in this scan",
     qs_liq_none: "No/Unknown",
+    qs_liq_engine_detected: "Detected by the scoring engine · amount not available",
     qs_liq_very_low: "Very low (thin)",
     qs_liq_low: "Low",
     qs_liq_medium: "Medium",
@@ -5343,6 +5344,7 @@ const translations = {
     deep_reject_no_code: "Deep Scan not started — no token contract code was found.",
     deep_reject_invalid_erc20: "Deep Scan not started — the address did not validate as an ERC-20 token.",
     deep_reject_chain_unavailable: "Deep Scan not started — the network could not be read right now.",
+    deep_reject_market_unavailable: "Deep Scan not started — market data could not be read right now.",
     deep_reject_market: "Deep Scan paused — protected market verification was unavailable.",
     deep_reject_score: "Deep Scan paused — the protected Quick Scan score was unavailable.",
     deep_reject_solana_data: "Deep Scan not started — the Solana Quick Scan returned no usable security or market data.",
@@ -6071,6 +6073,8 @@ const translations = {
     st_not_erc20: "Contract found, but it does not validate as an ERC-20 token.",
     st_chain_unavailable: "The network could not be read right now, so this address was not checked and nothing was scored. Please try again in a moment.",
     st_erc20_unverified: "Contract code was found, but its token functions could not be read right now. Nothing was scored. Please try again in a moment.",
+    st_market_unavailable: "Market data could not be read right now, so this token was not scored. Please try again in a minute.",
+    st_market_cooldown: "Market data could not be read a moment ago. Please try again in a minute.",
     st_market_engine_down: "Protected market engine temporarily unavailable. Please try again.",
     st_market_unverified_html: "<strong>Market verification unavailable.</strong><br>Provider data was collected, but Elofid did not reconcile cross-provider liquidity because the protected engine could not be reached.",
     st_score_engine_down: "Secure scoring engine temporarily unavailable. Please try again.",
@@ -6216,6 +6220,7 @@ const translations = {
     qs_share_no_strong: "未突出显示主要正面信号",
     qs_share_no_review: "本次扫描未发现主要负面信号",
     qs_liq_none: "无/未知",
+    qs_liq_engine_detected: "评分引擎已检测到 · 金额不可用",
     qs_liq_very_low: "极低（流动性薄）",
     qs_liq_low: "低",
     qs_liq_medium: "中等",
@@ -6390,6 +6395,7 @@ const translations = {
     deep_reject_no_code: "深度扫描未启动 — 未找到代币合约代码。",
     deep_reject_invalid_erc20: "深度扫描未启动 — 该地址未通过 ERC-20 代币验证。",
     deep_reject_chain_unavailable: "深度扫描未启动 — 暂时无法读取网络。",
+    deep_reject_market_unavailable: "深度扫描未启动 — 暂时无法读取市场数据。",
     deep_reject_market: "深度扫描已暂停 — 受保护的市场验证暂不可用。",
     deep_reject_score: "深度扫描已暂停 — 受保护的 Quick Scan 评分暂不可用。",
     deep_reject_solana_data: "深度扫描未启动 — Solana Quick Scan 未返回可用的安全或市场数据。",
@@ -7118,6 +7124,8 @@ const translations = {
     st_not_erc20: "已找到合约，但未通过 ERC-20 代币验证。",
     st_chain_unavailable: "暂时无法读取网络，因此未检查该地址，也未评分。请稍后重试。",
     st_erc20_unverified: "已找到合约代码，但暂时无法读取其代币函数。未进行评分。请稍后重试。",
+    st_market_unavailable: "暂时无法读取市场数据，因此未对该代币评分。请一分钟后重试。",
+    st_market_cooldown: "刚才无法读取市场数据。请一分钟后重试。",
     st_market_engine_down: "受保护的市场引擎暂时不可用。请重试。",
     st_market_unverified_html: "<strong>市场验证不可用。</strong><br>已收集数据源信息，但由于无法连接受保护引擎，Elofid 未核对跨数据源的流动性。",
     st_score_engine_down: "安全评分引擎暂时不可用。请重试。",
@@ -7263,6 +7271,7 @@ const translations = {
     qs_share_no_strong: "لم يتم إبراز إشارة إيجابية رئيسية",
     qs_share_no_review: "لم يظهر في هذا الفحص تحذير سلبي رئيسي",
     qs_liq_none: "غير متوفر/غير معروف",
+    qs_liq_engine_detected: "اكتشفها محرك التقييم · المبلغ غير متاح",
     qs_liq_very_low: "منخفضة جدًا (رقيقة)",
     qs_liq_low: "منخفضة",
     qs_liq_medium: "متوسطة",
@@ -7437,6 +7446,7 @@ const translations = {
     deep_reject_no_code: "لم يبدأ الفحص العميق — لم يتم العثور على كود عقد للرمز.",
     deep_reject_invalid_erc20: "لم يبدأ الفحص العميق — لم يتم التحقق من العنوان كرمز ERC-20.",
     deep_reject_chain_unavailable: "لم يبدأ الفحص العميق — تعذّرت قراءة الشبكة الآن.",
+    deep_reject_market_unavailable: "لم يبدأ الفحص العميق — تعذّرت قراءة بيانات السوق الآن.",
     deep_reject_market: "تم إيقاف الفحص العميق مؤقتًا — التحقق المحمي من السوق غير متاح.",
     deep_reject_score: "تم إيقاف الفحص العميق مؤقتًا — تقييم Quick Scan المحمي غير متاح.",
     deep_reject_solana_data: "لم يبدأ الفحص العميق — لم يُرجع Quick Scan على Solana بيانات أمان أو سوق قابلة للاستخدام.",
@@ -8165,6 +8175,8 @@ const translations = {
     st_not_erc20: "تم العثور على العقد، لكنه لم يجتز التحقق كتوكن ERC-20.",
     st_chain_unavailable: "تعذّرت قراءة الشبكة الآن، لذلك لم يتم فحص هذا العنوان ولم يُمنح أي تقييم. يرجى المحاولة مرة أخرى بعد قليل.",
     st_erc20_unverified: "تم العثور على كود العقد، لكن تعذّرت قراءة وظائف التوكن الآن. لم يُمنح أي تقييم. يرجى المحاولة مرة أخرى بعد قليل.",
+    st_market_unavailable: "تعذّرت قراءة بيانات السوق الآن، لذلك لم يُمنح هذا التوكن أي تقييم. يرجى المحاولة مرة أخرى بعد دقيقة.",
+    st_market_cooldown: "تعذّرت قراءة بيانات السوق قبل لحظات. يرجى المحاولة مرة أخرى بعد دقيقة.",
     st_market_engine_down: "محرك السوق المحمي غير متاح مؤقتًا. يرجى المحاولة مرة أخرى.",
     st_market_unverified_html: "<strong>التحقق من السوق غير متاح.</strong><br>تم جمع بيانات المزودين، لكن Elofid لم يطابق السيولة بين المصادر لأنه تعذّر الوصول إلى المحرك المحمي.",
     st_score_engine_down: "محرك التقييم الآمن غير متاح مؤقتًا. يرجى المحاولة مرة أخرى.",
@@ -8310,6 +8322,7 @@ const translations = {
     qs_share_no_strong: "Значимый положительный сигнал не выделен",
     qs_share_no_review: "В этом скане не выявлен значимый негативный сигнал",
     qs_liq_none: "Нет/неизвестно",
+    qs_liq_engine_detected: "Обнаружено оценочным движком · сумма недоступна",
     qs_liq_very_low: "Очень низкая (тонкая)",
     qs_liq_low: "Низкая",
     qs_liq_medium: "Средняя",
@@ -8484,6 +8497,7 @@ const translations = {
     deep_reject_no_code: "Deep Scan не запущен — код токен-контракта не найден.",
     deep_reject_invalid_erc20: "Deep Scan не запущен — адрес не прошёл проверку как ERC-20 токен.",
     deep_reject_chain_unavailable: "Deep Scan не запущен — сейчас не удалось прочитать сеть.",
+    deep_reject_market_unavailable: "Deep Scan не запущен — сейчас не удалось прочитать рыночные данные.",
     deep_reject_market: "Deep Scan приостановлен — защищённая проверка рынка недоступна.",
     deep_reject_score: "Deep Scan приостановлен — защищённый результат Quick Scan недоступен.",
     deep_reject_solana_data: "Deep Scan не запущен — Solana Quick Scan не вернул пригодных данных безопасности или рынка.",
@@ -9212,6 +9226,8 @@ const translations = {
     st_not_erc20: "Контракт найден, но не прошёл проверку как ERC-20 токен.",
     st_chain_unavailable: "Сейчас не удалось прочитать сеть, поэтому адрес не проверен и оценка не выставлена. Попробуйте ещё раз чуть позже.",
     st_erc20_unverified: "Код контракта найден, но функции токена сейчас прочитать не удалось. Оценка не выставлена. Попробуйте ещё раз чуть позже.",
+    st_market_unavailable: "Сейчас не удалось прочитать рыночные данные, поэтому токен не получил оценку. Попробуйте ещё раз через минуту.",
+    st_market_cooldown: "Только что не удалось прочитать рыночные данные. Попробуйте ещё раз через минуту.",
     st_market_engine_down: "Защищённый рыночный движок временно недоступен. Попробуйте ещё раз.",
     st_market_unverified_html: "<strong>Проверка рынка недоступна.</strong><br>Данные провайдеров собраны, но Elofid не сверил ликвидность между источниками, так как защищённый движок недоступен.",
     st_score_engine_down: "Защищённый движок оценки временно недоступен. Попробуйте ещё раз.",
@@ -11253,6 +11269,24 @@ function initPanels() {
     return out;
   }
 
+  // P1-M: a failed factory, reserve or balance read is counted. The result shape is unchanged when nothing failed.
+  // (Metadata reads that fall back to decimals 18 are not counted here: that is M-F, a separate round.)
+  // A revert (or an empty answer) is the node's answer, not a read failure: only "unavailable" is counted, with the
+  // same rule P-A uses for the ERC-20 probe.
+  function qsLiqFail(rf, e){
+    if (rf && (typeof qsProbeErrorKind !== "function" || qsProbeErrorKind(e) === "unavailable")) rf.n++;
+  }
+  // readFailures = network reads classified "unavailable" (each network call has its own catch). unreadRows = rows that
+  // end in the outer catch ("pair read failed" / "pool read failed"): since every network call inside already has its
+  // own catch, those are local errors (parsing, formatting, ABI), not outages. Counted apart, never added together.
+  function qsLiqResult(any, rows, rf){
+    const n = Number(rf?.n) || 0;
+    const unread = rows.filter(r => r && /^(pair|pool) read failed$/.test(String(r.note || ""))).length;
+    const r = { any, hint: any ? "liquidity found" : "none", rows };
+    if (n > 0) r.readFailures = n;
+    if (unread > 0) r.unreadRows = unread;
+    return r;
+  }
   async function qsLiqCheckBasicBscFast(net, token, provider){
     const cfg = QS_NET?.[net];
     if (!cfg || !provider) return { any:false, hint:"none", rows:[] };
@@ -11260,6 +11294,7 @@ function initPanels() {
     const ZERO = "0x0000000000000000000000000000000000000000";
     const tok = qsSafeAddr(token);
     if (!tok) return { any:false, hint:"none", rows:[] };
+    const qsLiqRf = { n: 0 };
 
     const targets = [
       { label: "Wrapped", addr: qsSafeAddr(cfg.wrapped) },
@@ -11288,7 +11323,7 @@ function initPanels() {
           catch { return null; }
 
           let pair = ZERO;
-          try { pair = await fac.getPair(tok, t.addr); } catch {}
+          try { pair = await fac.getPair(tok, t.addr); } catch (e) { qsLiqFail(qsLiqRf, e); }
           if (!pair || pair === ZERO) return null;
 
           try {
@@ -11296,7 +11331,7 @@ function initPanels() {
             const [token0Raw, token1Raw, reservesRaw] = await Promise.all([
               p.token0().catch(() => tok),
               p.token1().catch(() => t.addr),
-              p.getReserves().catch(() => [0n, 0n])
+              p.getReserves().catch(e => { qsLiqFail(qsLiqRf, e); return [0n, 0n]; })
             ]);
             const token0 = token0Raw || tok;
             const token1 = token1Raw || t.addr;
@@ -11350,7 +11385,7 @@ function initPanels() {
             catch { return null; }
 
             let pool = ZERO;
-            try { pool = await fac3.getPool(tok, t.addr, fee); } catch {}
+            try { pool = await fac3.getPool(tok, t.addr, fee); } catch (e) { qsLiqFail(qsLiqRf, e); }
             if (!pool || pool === ZERO) return null;
 
             try {
@@ -11370,8 +11405,8 @@ function initPanels() {
               const c0 = new E.Contract(token0, QS_ERC20_META_ABI, provider);
               const c1 = new E.Contract(token1, QS_ERC20_META_ABI, provider);
               const [b0Raw, b1Raw] = await Promise.all([
-                c0.balanceOf(pool).catch(() => 0n),
-                c1.balanceOf(pool).catch(() => 0n)
+                c0.balanceOf(pool).catch(e => { qsLiqFail(qsLiqRf, e); return 0n; }),
+                c1.balanceOf(pool).catch(e => { qsLiqFail(qsLiqRf, e); return 0n; })
               ]);
               const b0 = _qsToBI(b0Raw), b1 = _qsToBI(b1Raw);
               const ok = (b0 > 0n && b1 > 0n);
@@ -11410,7 +11445,7 @@ function initPanels() {
     const results = await qsRunLimitedOrdered(tasks, 4);
     const rows = results.filter(Boolean);
     const any = rows.some(r => !!r?.ok);
-    return { any, hint: any ? "liquidity found" : "none", rows };
+    return qsLiqResult(any, rows, qsLiqRf);
   }
 
 async function qsLiqCheckBasic(net, token, provider) {
@@ -11422,6 +11457,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     const ZERO = "0x0000000000000000000000000000000000000000";
     const tok = qsSafeAddr(token);
     if (!tok) return { any:false, hint:"none", rows:[] };
+    const qsLiqRf = { n: 0 };
 
     const targets = [
       { label: "Wrapped", addr: qsSafeAddr(cfg.wrapped) },
@@ -11450,7 +11486,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
       for (const t of targets) {
         let pair = ZERO;
-        try { pair = await fac.getPair(tok, t.addr); } catch {}
+        try { pair = await fac.getPair(tok, t.addr); } catch (e) { qsLiqFail(qsLiqRf, e); }
         if (!pair || pair === ZERO) {
           continue;
         }
@@ -11459,7 +11495,7 @@ async function qsLiqCheckBasic(net, token, provider) {
           let token0 = tok, token1 = t.addr;
           try { token0 = await p.token0(); } catch {}
           try { token1 = await p.token1(); } catch {}
-          const [r0Raw, r1Raw] = await p.getReserves().then(x => [x[0], x[1]]).catch(()=>[0n,0n]);
+          const [r0Raw, r1Raw] = await p.getReserves().then(x => [x[0], x[1]]).catch(e=>{ qsLiqFail(qsLiqRf, e); return [0n,0n]; });
           const r0 = _qsToBI(r0Raw), r1 = _qsToBI(r1Raw);
           const m0 = await _qsGetErc20Meta(token0, provider).catch(()=>({decimals:18,symbol:qsShortAddr(token0)}));
           const m1 = await _qsGetErc20Meta(token1, provider).catch(()=>({decimals:18,symbol:qsShortAddr(token1)}));
@@ -11511,7 +11547,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       for (const t of targets) {
         for (const fee of feeTiers) {
           let pool = ZERO;
-          try { pool = await fac3.getPool(tok, t.addr, fee); } catch {}
+          try { pool = await fac3.getPool(tok, t.addr, fee); } catch (e) { qsLiqFail(qsLiqRf, e); }
           if (!pool || pool === ZERO) {
             continue;
           }
@@ -11525,8 +11561,8 @@ async function qsLiqCheckBasic(net, token, provider) {
             const c0 = new E.Contract(token0, QS_ERC20_META_ABI, provider);
             const c1 = new E.Contract(token1, QS_ERC20_META_ABI, provider);
             let b0 = 0n, b1 = 0n;
-            try { b0 = _qsToBI(await c0.balanceOf(pool)); } catch {}
-            try { b1 = _qsToBI(await c1.balanceOf(pool)); } catch {}
+            try { b0 = _qsToBI(await c0.balanceOf(pool)); } catch (e) { qsLiqFail(qsLiqRf, e); }
+            try { b1 = _qsToBI(await c1.balanceOf(pool)); } catch (e) { qsLiqFail(qsLiqRf, e); }
             const ok = (b0 > 0n && b1 > 0n);
             any = any || ok;
             rows.push({
@@ -11559,7 +11595,7 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
     }
 
-    return { any, hint: any ? "liquidity found" : "none", rows };
+    return qsLiqResult(any, rows, qsLiqRf);
   }
 
   function qsRenderLiquidityTable(container, liqRes, footerNote){
@@ -11718,6 +11754,8 @@ async function qsLiqCheckBasic(net, token, provider) {
     const pools=Number(rep?.meta?.liqActivePools ?? rep?.liq?.rows?.length ?? 0);
     const q=String(rep?.meta?.liqQuality||"unknown");
     const qKey=q==="tiny"?"qs_liq_very_low":q==="low"?"qs_liq_low":q==="medium"?"qs_liq_medium":q==="healthy"?"qs_liq_healthy":null;
+    // P1-M: set only on a degraded scan whose pool the engine recovered. No amount, no pool count, no quality word.
+    if (rep?.meta?.liquidityEngineDetected === true) return cxQsTr("qs_liq_engine_detected");
     const parts=[];
     if(qKey) parts.push(cxQsTr(qKey));
     if(Number.isFinite(usd) && usd>0) parts.push(`~$${Math.round(usd).toLocaleString("en-US")}`);
@@ -12454,23 +12492,108 @@ async function qsLiqCheckBasic(net, token, provider) {
     return qsSecureEngineEvaluate("market", { net, sources });
   }
 
+  // P1-M: outcome of one market-source call, written into an optional out object. The returned value is unchanged.
+  // state: ok | empty | stale | unavailable | unsupported. "empty" = the provider answered that it has no pool for this
+  // token (an answer, not proof that no pool exists anywhere). "unavailable" = any failure: HTTP error, timeout,
+  // network error or a malformed body.
+  function qsMarketSourceMark(out, state, reason){
+    if (out && typeof out === "object") { out.state = state; out.reason = reason || null; }
+  }
+  function qsMarketFailReason(e){
+    if (e?.name === "AbortError") return "timeout";
+    if (e instanceof SyntaxError) return "malformed";
+    return "network";
+  }
+  // Liquidity evidence of one scan. degraded = no source proved liquidity AND at least one source failed: the scan
+  // cannot tell "no pool" from "could not read". partial = liquidity proved, but a source failed.
+  function qsMarketClassify(x){
+    const st = o => (o && typeof o.state === "string") ? o.state : "unavailable";
+    const ds = st(x?.ds), gt = st(x?.gt);
+    // r2: "unread" = a pool was found but could not be evaluated for a local reason (no classified network failure).
+    // It is still not proof of "no liquidity", so it counts as a failure, but it is recorded apart from outages.
+    const onchain = x?.onchainThrew ? "unavailable" : (Number(x?.onchainFailures) > 0 ? "partial_failure" : (Number(x?.onchainUnread) > 0 ? "unread" : "ok"));
+    const failed = ds === "unavailable" || gt === "unavailable" || onchain !== "ok";
+    const positive = x?.positive === true;
+    return {
+      degraded: failed && !positive,
+      partial: failed && positive,
+      abnormal: failed,
+      record: { v: 1, positive, degraded: failed && !positive, partial: failed && positive,
+        dexscreener: { state: ds, reason: x?.ds?.reason ?? null }, geckoterminal: { state: gt, reason: x?.gt?.reason ?? null },
+        onchain: { state: onchain, readFailures: Number(x?.onchainFailures) || 0, unreadRows: Number(x?.onchainUnread) || 0 } }
+    };
+  }
+  // The scoring engine (v7.8) has its own server-side market fallback. When it found the pool, its answer moves
+  // liquidity control away from not_applicable AND carries a liquidity-based market cap (dexCap, only computed from a
+  // value > 0). The EVM answer has no liquidity amount, so no amount is ever shown from it.
+  // r2: judged against what the page SENT. The page's own liquidity control ("not_verified" once it listed any pool)
+  // and its own liquidityUsd come back in the answer: 0 gives a "liquidity value" reason, > 0 gives a cap. So the
+  // value reason is no longer accepted, and a cap only counts when the page did not send a positive value itself.
+  function qsEngineRecoveredLiquidity(ev, sent){
+    const lc = String(ev?.liquidityControl?.liquidityControlStatus || "");
+    const d = ev?.marketLiquidityDiagnostics;
+    const capKnown = !!d && typeof d === "object" && d.dexCap !== null && d.dexCap !== undefined && Number.isFinite(Number(d.dexCap));
+    const su = sent?.liquidityUsd, sentPositive = su !== null && su !== undefined && su !== "" && Number.isFinite(Number(su)) && Number(su) > 0;
+    return lc !== "" && lc !== "not_applicable" && capKnown && !sentPositive;
+  }
+  function qsMarketAnnotate(rep, value){
+    return rep?.meta?.marketSources?.partial === true ? `${value} • coverage incomplete` : value;
+  }
+  // 60 s marker for a report key whose market data could not be read. It holds no score and no report.
+  // Separate storage key (the report cache and its readers are untouched), expired entries pruned, at most 50 kept.
+  const QS_MARKET_MARKER_KEY = "elofid_sec_qs_market_unavailable_v1", QS_MARKET_MARKER_TTL = 60, QS_MARKET_MARKER_MAX = 50;
+  function qsMarketMarkerRead(){
+    try { const o = JSON.parse(localStorage.getItem(QS_MARKET_MARKER_KEY) || "{}"); return (o && typeof o === "object" && !Array.isArray(o)) ? o : {}; }
+    catch { return {}; }
+  }
+  function qsMarketMarkerActive(ckey){
+    const ts = Number(qsMarketMarkerRead()?.[ckey]?.ts), age = qsNowTs() - ts;
+    return Number.isFinite(ts) && age >= 0 && age < QS_MARKET_MARKER_TTL;
+  }
+  function qsMarketMarkerWrite(ckey){
+    try {
+      const now = qsNowTs(), o = qsMarketMarkerRead();
+      for (const k of Object.keys(o)) { const t = Number(o[k]?.ts); if (!Number.isFinite(t) || now - t >= QS_MARKET_MARKER_TTL || now - t < 0) delete o[k]; }
+      o[ckey] = { ts: now };
+      const keys = Object.keys(o).sort((a, b) => Number(o[b].ts) - Number(o[a].ts));
+      for (const k of keys.slice(QS_MARKET_MARKER_MAX)) delete o[k];
+      localStorage.setItem(QS_MARKET_MARKER_KEY, JSON.stringify(o));
+    } catch {}
+  }
+  // No score, no verdict, no report: the page goes back to its input state with a status line. Same pattern as the
+  // P-A unavailable network state.
+  function qsShowMarketUnavailable(st, out, cache, ckey, mode){
+    _qsRenderedRep = null;
+    try { cxDeepCoreRejected(cxDeepTr("deep_reject_market_unavailable")); } catch {}
+    cxQsSetScanning(false);
+    cxQsSetMode("input");
+    if (out) { out.className = "status info"; out.style.display = "block"; out.innerHTML = t(currentLang, "qs_ready_html") || "<strong>Ready.</strong>"; }
+    if (mode === "fresh") {
+      try { if (cache && ckey && cache[ckey]) { delete cache[ckey]; saveQsCache(cache); } } catch {}
+      qsMarketMarkerWrite(ckey);
+    }
+    setStatus(st, "warn", tf(mode === "fresh" ? "st_market_unavailable" : "st_market_cooldown"));
+  }
+
   // ✅ FIX: DexScreener's response includes baseToken.name/symbol, which
   // wasn't being captured — meaning if GoPlus Solana data is unavailable
   // for a token (common for very new/low-cap tokens GoPlus hasn't indexed
   // yet — this is a real coverage gap in a third-party service, not a bug),
   // the report had zero fallback and showed a bare "Token" placeholder even
   // though DexScreener clearly had the real name/symbol the whole time.
-  async function qsFetchDexScreener(net, token) {
+  async function qsFetchDexScreener(net, token, srcOut) {
     try {
       const chain = QS_DS_CHAIN[net];
-      if (!chain) return null;
+      if (!chain) { qsMarketSourceMark(srcOut, "unsupported", "chain"); return null; }
       const guarded = QS_NEW_EVM_MARKET_NETS.has(net);
       const key = `${chain}:${qsLower(token)}`;
       const now = Date.now();
       const cached = _qsDsMem.get(key);
-      if (guarded && cached && now - cached.ts < 120000) return cached.value;
+      if (guarded && cached && now - cached.ts < 120000) { qsMarketSourceMark(srcOut, "ok", "memo"); return cached.value; }
       if (guarded && Number(_qsDsCooldown.get(chain)||0) > now) {
-        return (cached && now - cached.ts < 1800000) ? qsDsStripVolatile(cached.value) : null;
+        const v = (cached && now - cached.ts < 1800000) ? qsDsStripVolatile(cached.value) : null;
+        qsMarketSourceMark(srcOut, v ? "stale" : "unavailable", "cooldown");
+        return v;
       }
 
       const url = `https://api.dexscreener.com/latest/dex/tokens/${token}`;
@@ -12485,13 +12608,49 @@ async function qsLiqCheckBasic(net, token, provider) {
         retry = Math.max(15, Math.min(90, retry));
         _qsDsCooldown.set(chain, Date.now() + retry*1000);
         console.warn(`DexScreener rate-limited (${chain}); cooldown ${retry}s activated`);
-        return (cached && now - cached.ts < 1800000) ? qsDsStripVolatile(cached.value) : null;
+        const v = (cached && now - cached.ts < 1800000) ? qsDsStripVolatile(cached.value) : null;
+        qsMarketSourceMark(srcOut, v ? "stale" : "unavailable", "http_429");
+        return v;
       }
-      if (!res.ok) return null;
+      if (!res.ok) { qsMarketSourceMark(srcOut, "unavailable", "http_" + res.status); return null; }
       const j = await res.json();
-      const pairs = Array.isArray(j?.pairs) ? j.pairs.filter(p => (p?.chainId || "").toLowerCase() === chain) : [];
-      if (!pairs.length) return null;
+      // P1-M: a 200 whose body is not a JSON object is a failure, not an answer. {"pairs":null} is the provider's
+      // normal answer for an unknown token and stays "empty".
+      if (!j || typeof j !== "object" || Array.isArray(j)) { qsMarketSourceMark(srcOut, "unavailable", "malformed"); return null; }
+      // P1-M r2: "empty" only for the provider's documented no-pool answers, {"pairs":null} and {"pairs":[]}. A body
+      // without "pairs", with an error field, or with "pairs" of any other type is a failure (a 200 can carry a
+      // rate-limit or error message).
+      if (!Object.prototype.hasOwnProperty.call(j, "pairs") || (j.pairs !== null && !Array.isArray(j.pairs)) || j.error != null || j.errors != null) { qsMarketSourceMark(srcOut, "unavailable", "malformed"); return null; }
+      // P1-M r3: every row is checked before it counts. A row that is not an object or has no chain id, or a row on
+      // the requested chain without a valid pool id, is malformed: it is dropped and the source is marked unavailable,
+      // never "empty" and never "ok". A well-formed row on another chain is a valid "no pool on this chain" answer.
+      // Pool id: EVM 0x + 40 hex (pair) or 0x + 64 hex (V4 / Infinity pool id), Solana base58 (32-44 characters).
+      // r4: rows on other chains need a well-formed id too before they count as a clean "not on this chain" answer.
+      // Solana: base58. A known EVM chain, or any id written as 0x…: EVM shape. Any other chain type (not one we scan):
+      // a plausible id of 16-128 letters, digits and _ - : . (no spaces, no punctuation). EVM rules are never applied
+      // to Solana or to unknown chain types.
+      const dsEvm = new Set([...Object.values(QS_DS_CHAIN).filter(c => c !== "solana"), "ethereum", "bsc", "polygon", "base", "arbitrum", "optimism", "avalanche", "linea", "scroll", "opbnb", "robinhood", "blast", "mantle", "zksync", "fantom", "cronos", "celo", "gnosis", "sonic", "berachain", "unichain", "abstract"]);
+      const dsRowIdOk = (c, a) => {
+        if (typeof a !== "string" || !a) return false;
+        if (c === "solana") return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(a);
+        if (dsEvm.has(c) || /^0x/i.test(a)) return /^0x(?:[0-9a-fA-F]{40}|[0-9a-fA-F]{64})$/.test(a);
+        return /^[A-Za-z0-9_\-:.]{16,128}$/.test(a);
+      };
+      let dsBadRows = 0;
+      const pairs = [];
+      for (const p of (Array.isArray(j.pairs) ? j.pairs : [])) {
+        if (!p || typeof p !== "object" || Array.isArray(p) || typeof p.chainId !== "string" || !p.chainId) { dsBadRows++; continue; }
+        const rowChain = p.chainId.toLowerCase();
+        if (!dsRowIdOk(rowChain, p.pairAddress)) { dsBadRows++; continue; }
+        if (rowChain !== chain) continue;
+        pairs.push(p);
+      }
+      if (!pairs.length) { qsMarketSourceMark(srcOut, dsBadRows ? "unavailable" : "empty", dsBadRows ? "malformed_row" : null); return null; }
       const safeNum = v => { const n = parseFloat(v); return Number.isFinite(n) ? n : null; };
+      // P1-M r4: liquidity amounts are read strictly. A finite number, or a string that is entirely a decimal number
+      // (sign, decimals and exponent allowed, surrounding spaces ignored). "5000junk", "0x10", "", booleans, null,
+      // arrays and objects give null instead of parseFloat's numeric prefix. Every valid value is unchanged.
+      const liqNum = v => { if (typeof v === "number") return Number.isFinite(v) ? v : null; if (typeof v !== "string") return null; const t = v.trim(); if (!/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(t)) return null; const n = Number(t); return Number.isFinite(n) ? n : null; };
       const sorted = [...pairs].sort((a,b)=>(b?.liquidity?.usd||0)-(a?.liquidity?.usd||0));
       const best = sorted[0]; // deepest pool remains the liquidity/LP anchor
       const activityScore = p => {
@@ -12511,7 +12670,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         dex: p?.dexId || "DEX",
         pairAddress: p?.pairAddress || "",
         quoteSymbol: p?.quoteToken?.symbol || "",
-        liquidityUsd: safeNum(p?.liquidity?.usd),
+        liquidityUsd: liqNum(p?.liquidity?.usd),
         volumeUsd24h: safeNum(p?.volume?.h24),
         priceChange24h: safeNum(p?.priceChange?.h24),
         txns24h: (p?.txns?.h24?.buys || 0) + (p?.txns?.h24?.sells || 0),
@@ -12522,7 +12681,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         priceUsd: safeNum(marketBest?.priceUsd ?? best?.priceUsd),
         priceChange24h: safeNum(marketBest?.priceChange?.h24),
         volumeUsd24h: safeNum(marketBest?.volume?.h24),
-        liquidityUsd: safeNum(best?.liquidity?.usd),
+        liquidityUsd: liqNum(best?.liquidity?.usd),
         txns24h: (marketBest?.txns?.h24?.buys || 0) + (marketBest?.txns?.h24?.sells || 0),
         marketPairAddress: marketBest?.pairAddress || null,
         marketDexId: marketBest?.dexId || null,
@@ -12537,9 +12696,12 @@ async function qsLiqCheckBasic(net, token, provider) {
         sumLiquidityUsd: allPairs.reduce((a,p)=>a+(Number(p?.liquidityUsd)||0),0),
         stale:false
       };
-      if (guarded) _qsDsMem.set(key, { ts:Date.now(), value });
+      // r3: a value built after dropping malformed rows is returned (valid rows only) but never memoised, and the source
+      // is marked unavailable.
+      if (guarded && !dsBadRows) _qsDsMem.set(key, { ts:Date.now(), value });
+      qsMarketSourceMark(srcOut, dsBadRows ? "unavailable" : "ok", dsBadRows ? "malformed_row" : null);
       return value;
-    } catch { return null; }
+    } catch (e) { qsMarketSourceMark(srcOut, "unavailable", qsMarketFailReason(e)); return null; }
   }
 
   // ✅ NEW: second liquidity-aggregator source, same role DexScreener
@@ -12550,24 +12712,36 @@ async function qsLiqCheckBasic(net, token, provider) {
   // DexScreener's response but present here). Free, no API key, 30
   // req/min. Shape matches qsFetchDexScreener's allPairs[] so it plugs
   // into the same merge/max-liquidity logic below.
-  async function qsFetchGeckoTerminal(net, token) {
+  async function qsFetchGeckoTerminal(net, token, srcOut) {
     try {
       const chain = QS_GT_CHAIN[net];
-      if (!chain) return null;
+      if (!chain) { qsMarketSourceMark(srcOut, "unsupported", "chain"); return null; }
       const addr = String(token || "").trim();
-      if (!addr) return null;
+      if (!addr) { qsMarketSourceMark(srcOut, "unsupported", "address"); return null; }
       const url = `https://api.geckoterminal.com/api/v2/networks/${chain}/tokens/${addr}/pools`;
       const ctrl = new AbortController();
       const tmr = setTimeout(() => ctrl.abort(), 8000);
-      let j = null;
+      let j = null, gtStatus = 0;
       try {
         const res = await fetch(url, { signal: ctrl.signal });
+        gtStatus = res.status;
         if (res.ok) j = await res.json();
         else console.error("GeckoTerminal call failed, status:", res.status);
       } finally { clearTimeout(tmr); }
-      if (!j || !Array.isArray(j.data) || !j.data.length) return null;
+      // P1-M: 404 = this token is not indexed by the provider (an answer, like an empty list). Any other error = unavailable.
+      if (!j) { qsMarketSourceMark(srcOut, gtStatus === 404 ? "empty" : "unavailable", gtStatus === 404 ? "not_indexed" : "http_" + gtStatus); return null; }
+      if (!Array.isArray(j.data) || j.error != null || j.errors != null) { qsMarketSourceMark(srcOut, "unavailable", "malformed"); return null; }
+      if (!j.data.length) { qsMarketSourceMark(srcOut, "empty", null); return null; }
+      // P1-M r3: every pool row is checked. Not an object, no attributes, or no valid pool id → malformed: dropped,
+      // and the source is marked unavailable (never "ok", and an all-malformed list is never "empty").
+      const gtIdOk = a => typeof a === "string" && (chain === "solana" ? /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(a) : /^0x(?:[0-9a-fA-F]{40}|[0-9a-fA-F]{64})$/.test(a));
+      let gtBadRows = 0;
+      const gtRows = j.data.filter(p => { const ok = !!p && typeof p === "object" && !Array.isArray(p) && !!p.attributes && typeof p.attributes === "object" && gtIdOk(p.attributes.address); if (!ok) gtBadRows++; return ok; });
+      if (!gtRows.length) { qsMarketSourceMark(srcOut, "unavailable", "malformed_row"); return null; }
       const safeNum = v => { const n = parseFloat(v); return Number.isFinite(n) ? n : null; };
-      const allPairs = j.data.slice(0,10).map(p => {
+      // P1-M r4: the pool amount is read strictly (see the DexScreener reader). Every valid value is unchanged.
+      const liqNum = v => { if (typeof v === "number") return Number.isFinite(v) ? v : null; if (typeof v !== "string") return null; const t = v.trim(); if (!/^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(t)) return null; const n = Number(t); return Number.isFinite(n) ? n : null; };
+      const allPairs = gtRows.slice(0,10).map(p => {
         const a = p?.attributes || {};
         const h24 = a?.transactions?.h24 || {};
         const buys = Number(h24?.buys) || 0, sells = Number(h24?.sells) || 0;
@@ -12575,7 +12749,7 @@ async function qsLiqCheckBasic(net, token, provider) {
           dex: p?.relationships?.dex?.data?.id || "DEX",
           pairAddress: a?.address || "",
           quoteSymbol: "",
-          liquidityUsd: safeNum(a?.reserve_in_usd),
+          liquidityUsd: liqNum(a?.reserve_in_usd),
           volumeUsd24h: safeNum(a?.volume_usd?.h24),
           priceChange24h: safeNum(a?.price_change_percentage?.h24),
           txns24h: buys + sells,
@@ -12585,7 +12759,8 @@ async function qsLiqCheckBasic(net, token, provider) {
       });
       const sorted = [...allPairs].sort((a,b)=>(b.liquidityUsd||0)-(a.liquidityUsd||0));
       const best = sorted[0] || null;
-      const allCreatedAtMs = j.data.map(p=>Date.parse(p?.attributes?.pool_created_at||"")).filter(n=>Number.isFinite(n)&&n>0);
+      const allCreatedAtMs = gtRows.map(p=>Date.parse(p?.attributes?.pool_created_at||"")).filter(n=>Number.isFinite(n)&&n>0);
+      qsMarketSourceMark(srcOut, gtBadRows ? "unavailable" : "ok", gtBadRows ? "malformed_row" : null);
       return {
         liquidityUsd: best?.liquidityUsd ?? null,
         pairAddress: best?.pairAddress || null,
@@ -12596,7 +12771,7 @@ async function qsLiqCheckBasic(net, token, provider) {
         sumLiquidityUsd: allPairs.reduce((a,p)=>a+(Number(p?.liquidityUsd)||0),0),
         stale:false
       };
-    } catch { return null; }
+    } catch (e) { qsMarketSourceMark(srcOut, "unavailable", qsMarketFailReason(e)); return null; }
   }
 
   // Liquidity reconciliation, fail-closed. Applied per pool, before any figure reaches the score.
@@ -14099,7 +14274,9 @@ async function qsLiqCheckBasic(net, token, provider) {
         poolCount:marketPairCount,
         liquidityUsd:cxDeepFinite(m?.liquidityUsdEst),
         earliestPairCreatedAt:cxDeepFinite(m?.deepMarketEarliestPoolMs??ds?.earliestPairCreatedAt),
-        pools:marketPools
+        pools:marketPools,
+        // P1-M: present only when a market source failed. An empty pool list is then "not read", not "no pool".
+        ...(m?.marketSources && typeof m.marketSources === "object" ? { sourceState: { liquidity: m.marketSources.degraded ? "unavailable" : "partial", engineRecovered: m.marketSources.engineRecovered === true } } : {})
       },
       evmCreation:net!=="solana"&&cr?{
         deployerAddress:cr.deployerAddress||null,creationTx:cr.creationTx||null,creationBlock:cxDeepFinite(cr.creationBlock),createdAt:cxDeepFinite(cr.createdAt)
@@ -14244,6 +14421,9 @@ async function qsLiqCheckBasic(net, token, provider) {
       }
     }
 
+    // P1-M: market data for this exact report key could not be read less than 60 s ago. No request, no score.
+    if (qsMarketMarkerActive(ckey)) { qsShowMarketUnavailable(st, out, null, ckey, "cooldown"); return; }
+
     const cfg = QS_NET?.[net];
     let read = getRP(net);
     if (!cfg || !read) {
@@ -14330,9 +14510,9 @@ async function qsLiqCheckBasic(net, token, provider) {
       read = getRP(net) || read;
     }
 
-    // Archive only after on-chain ERC-20 validation. Invalid addresses, EOAs and
-    // non-token contracts never enter the website archive path.
-    cxArchiveWebPing(net, token);
+    // Archive: only after on-chain ERC-20 validation (invalid addresses, EOAs and non-token contracts never enter the
+    // website archive path). P1-M: the ping is sent below, once the liquidity evidence is known. A degraded scan is
+    // queued only if the scoring engine proves it recovered the pool. The ping carries the address only.
 
     try {
       const meta = await cxReadWithFallback(net, async (read) => {
@@ -14390,13 +14570,14 @@ async function qsLiqCheckBasic(net, token, provider) {
       rep.meta = meta;
     } catch {}
 
+    let qsOnchainLiqThrew = false;
     try {
       const liqFn =
         window.CX?.modules?.qs?.qsLiqCheckBasic ||
         window.qsLiqCheckBasic ||
         qsLiqCheckBasic;
       rep.liq = await liqFn(net, token, read);
-    } catch {}
+    } catch { qsOnchainLiqThrew = true; }
     const totalRows = Array.isArray(rep?.liq?.rows) ? rep.liq.rows.length : 0;
     const activeRows = Array.isArray(rep?.liq?.rows) ? rep.liq.rows.filter(r => r?.ok).length : 0;
     const liqCoverageLow = totalRows > 0 && activeRows === 0;
@@ -14489,6 +14670,7 @@ async function qsLiqCheckBasic(net, token, provider) {
     } catch {}
 
     const explorerKey = (typeof qsExplorerKeyFor === "function") ? qsExplorerKeyFor(net)?.key : null;
+    const qsMarketSrc = { ds: {}, gt: {}, gtInfo: {} };
     const [
       cexSettled, priceSettled, ageSettled, holderSettled, goplusSettled, dexscreenerSettled, geckoterminalSettled, gtInfoSettled, controlSettled
     ] = await Promise.allSettled([
@@ -14497,8 +14679,8 @@ async function qsLiqCheckBasic(net, token, provider) {
       qsFetchContractAge(net, token, explorerKey),
       qsFetchHolderCount(net, token, explorerKey),
       qsFetchGoPlus(net, token),
-      qsFetchDexScreener(net, token),
-      qsFetchGeckoTerminal(net, token),
+      qsFetchDexScreener(net, token, qsMarketSrc.ds),
+      qsFetchGeckoTerminal(net, token, qsMarketSrc.gt),
       qsFetchGeckoTerminalTokenInfo(net, token),
       qsFetchEvmControlMeta(net, token)
     ]);
@@ -14662,6 +14844,27 @@ async function qsLiqCheckBasic(net, token, provider) {
         rep.liq.any = true;
       }
     }
+
+    // P1-M r2: proof of liquidity for M-B. Not rep.liq.any: a listed pool with a zero, missing or non-numeric amount,
+    // or an on-chain pair with a reserve on one side only, proves nothing. Proof = an amount > 0 reported by a market
+    // source (best pool or any listed pool), the protected market ticket's amount > 0, or an on-chain pool with both
+    // reserves > 0. rep.liq.any keeps its meaning for every existing reader (display, engine input).
+    // r3: every amount must come with a valid pool id (EVM 0x + 40/64 hex, Solana base58), as a second guard behind
+    // the fetchers' own row checks.
+    const qsLiqEvidence = (() => {
+      // r4: a number, or a string that is entirely a decimal number. Number("0x10") or a prefix of garbage never counts.
+      const amt = v => { const n = typeof v === "number" ? v : (typeof v === "string" && /^\s*[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?\s*$/.test(v) ? Number(v) : NaN); return Number.isFinite(n) && n > 0; };
+      const big = v => { try { return v !== undefined && v !== null && v !== "" && BigInt(String(v)) > 0n; } catch { return false; } };
+      const idOk = a => typeof a === "string" && (net === "solana" ? /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(a) : /^0x(?:[0-9a-fA-F]{40}|[0-9a-fA-F]{64})$/.test(a));
+      const fromSources = [dexscreener, geckoterminal].some(src => !!src && ((amt(src.liquidityUsd) && idOk(src.pairAddress)) || (Array.isArray(src.allPairs) && src.allPairs.some(p => amt(p?.liquidityUsd) && idOk(p?.pairAddress)))));
+      const fromTicket = QS_NEW_EVM_MARKET_NETS.has(net) && amt(newEvmMarketAgg?.liquidityUsd);
+      const fromChain = (Array.isArray(rep?.liq?.rows) ? rep.liq.rows : []).some(r => !!r && r.ok === true && idOk(r.addr) && big(r.raw0) && big(r.raw1));
+      return fromSources || fromTicket || fromChain;
+    })();
+    // P1-M: which liquidity sources answered. A failed read is not "no pool".
+    const qsMarket = qsMarketClassify({ ds: qsMarketSrc.ds, gt: qsMarketSrc.gt, onchainFailures: Number(rep?.liq?.readFailures || 0), onchainUnread: Number(rep?.liq?.unreadRows || 0), onchainThrew: qsOnchainLiqThrew, positive: qsLiqEvidence });
+    if (qsMarket.abnormal) rep.meta.marketSources = qsMarket.record;
+    if (!qsMarket.degraded) cxArchiveWebPing(net, token);
 
     // v22 parity: choose a V2-style LP only when it is actually appropriate.
     // Do not call ERC20 LP-burn methods on V3/V4 concentrated-liquidity pools.
@@ -15093,6 +15296,16 @@ async function qsLiqCheckBasic(net, token, provider) {
       return;
     }
 
+    // P1-M (owner decision 2026-11-18): a degraded scan keeps its score only if the scoring engine proved it found the
+    // pool itself. Otherwise: no score, no verdict, no report, no cache, no history, no archive, no exports.
+    if (qsMarket.degraded) {
+      const recovered = qsEngineRecoveredLiquidity(secureEval, { liquidityUsd: Number.isFinite(liquidityUsdForScore) ? liquidityUsdForScore : null });
+      rep.meta.marketSources = { ...qsMarket.record, engineRecovered: recovered };
+      if (!recovered) { qsShowMarketUnavailable(st, out, cache, ckey, "fresh"); return; }
+      rep.meta.liquidityEngineDetected = true;
+      cxArchiveWebPing(net, token);
+    }
+
     const contractScore = Number(secureEval.contractScore ?? 0);
     const marketScore = Number(secureEval.marketScore ?? 0);
     const uiConfidence = secureEval.dataCoverage || "low";
@@ -15305,7 +15518,8 @@ async function qsLiqCheckBasic(net, token, provider) {
         // left untagged rather than implying it's purely on-chain — the
         // per-row breakdown in the pools table below already marks which
         // rows came "via DexScreener".
-        value: (() => {
+        value: qsMarketAnnotate(rep, (() => {
+          if (rep?.meta?.liquidityEngineDetected === true) return "Detected by the scoring engine • amount not available";
           if (!rep.liq?.any) return "No/Unknown";
           const usd = rep?.meta?.liquidityUsdEst;
           const wrapped = Number(rep?.meta?.liqWrappedAmt || 0);
@@ -15323,7 +15537,7 @@ async function qsLiqCheckBasic(net, token, provider) {
           if (liqQuality === "low") return `Low${wTxt}`;
           if (liqQuality === "medium") return `Medium${wTxt}`;
           return `Healthy${wTxt}`;
-        })()
+        })())
       },
       // ✅ FIX: onChain flag set per the mintOnChain rule above — true for
       // both "Detected" (bytecode) and "Not detected" (bytecode searched,
@@ -15383,10 +15597,10 @@ async function qsLiqCheckBasic(net, token, provider) {
           value: hc.toLocaleString()
         }];
       })(),
-      ...((evmLiquidityControl?.liquidityControlStatus !== "not_applicable" || rep.liq?.any) ? [{
-        type: qsLiquidityControlChipType(evmLiquidityControl),
+      ...((evmLiquidityControl?.liquidityControlStatus !== "not_applicable" || rep.liq?.any || rep?.meta?.liquidityEngineDetected === true) ? [{
+        type: rep?.meta?.liquidityEngineDetected === true ? "warn" : qsLiquidityControlChipType(evmLiquidityControl),
         title: "Liquidity Control",
-        value: qsLiquidityControlDisplay(evmLiquidityControl),
+        value: rep?.meta?.liquidityEngineDetected === true ? "Not checked — market data incomplete" : qsLiquidityControlDisplay(evmLiquidityControl),
         onChain: evmLiquidityControl?.onChainVerified === true
       }] : []),
       ...(dsMarket ? [
